@@ -1,0 +1,161 @@
+{
+ "winner": "gemma4_e4b",
+ "results": {
+  "qwen3_4b": {
+   "n": 1500,
+   "json_valid_pct": 99.86666666666666,
+   "precision": 0.4983974358974359,
+   "recall": 0.622,
+   "f1_micro": 0.5533807829181494,
+   "f1_macro_tables": 0.580019162019162,
+   "auroc": 0.7668360000000001,
+   "ece_p_true": 0.3205593051601821,
+   "repair_acc_on_errors": 0.274,
+   "false_repair_rate": 0.6722488038277512,
+   "n_repairs_applied": 418,
+   "type_acc_on_detected": 0.6404109589041096,
+   "n_typed": 292,
+   "sec_per_cell": 0.2077974001566569,
+   "peak_vram_gib": 13.782812118530273,
+   "params_b": 4.022468096,
+   "per_table": {
+    "beers": {
+     "precision": 0.8125,
+     "recall": 0.39,
+     "f1": 0.527027027027027,
+     "n": 300
+    },
+    "flights": {
+     "precision": 0.2052401746724891,
+     "recall": 0.47,
+     "f1": 0.2857142857142857,
+     "n": 300
+    },
+    "hospital": {
+     "precision": 0.8620689655172413,
+     "recall": 1.0,
+     "f1": 0.9259259259259259,
+     "n": 300
+    },
+    "movies": {
+     "precision": 0.59,
+     "recall": 0.59,
+     "f1": 0.59,
+     "n": 300
+    },
+    "rayyan": {
+     "precision": 0.5038167938931297,
+     "recall": 0.66,
+     "f1": 0.5714285714285714,
+     "n": 300
+    }
+   },
+   "score": 0.5442584648076648,
+   "eligible": true
+  },
+  "qwen3_5_9b": {
+   "n": 1500,
+   "json_valid_pct": 99.33333333333333,
+   "precision": 0.5497076023391813,
+   "recall": 0.752,
+   "f1_micro": 0.6351351351351352,
+   "f1_macro_tables": 0.6429838038682074,
+   "auroc": 0.842514,
+   "ece_p_true": 0.1613724853524218,
+   "repair_acc_on_errors": 0.328,
+   "false_repair_rate": 0.6870229007633588,
+   "n_repairs_applied": 524,
+   "type_acc_on_detected": 0.6961325966850829,
+   "n_typed": 362,
+   "sec_per_cell": 0.29248219505945844,
+   "peak_vram_gib": 23.315478801727295,
+   "params_b": 8.953803264,
+   "per_table": {
+    "beers": {
+     "precision": 0.6956521739130435,
+     "recall": 0.64,
+     "f1": 0.6666666666666666,
+     "n": 300
+    },
+    "flights": {
+     "precision": 0.2909090909090909,
+     "recall": 0.48,
+     "f1": 0.3622641509433962,
+     "n": 300
+    },
+    "hospital": {
+     "precision": 0.819672131147541,
+     "recall": 1.0,
+     "f1": 0.9009009009009009,
+     "n": 300
+    },
+    "movies": {
+     "precision": 0.5284552845528455,
+     "recall": 0.65,
+     "f1": 0.5829596412556054,
+     "n": 300
+    },
+    "rayyan": {
+     "precision": 0.5439560439560439,
+     "recall": 0.99,
+     "f1": 0.7021276595744681,
+     "n": 300
+    }
+   },
+   "score": 0.608347721547283,
+   "eligible": true
+  },
+  "gemma4_e4b": {
+   "n": 1500,
+   "json_valid_pct": 100.0,
+   "precision": 0.6691042047531993,
+   "recall": 0.732,
+   "f1_micro": 0.6991404011461317,
+   "f1_macro_tables": 0.6917992225586114,
+   "auroc": 0.860257,
+   "ece_p_true": 0.17282173714177257,
+   "repair_acc_on_errors": 0.34,
+   "false_repair_rate": 0.3559322033898305,
+   "n_repairs_applied": 236,
+   "type_acc_on_detected": 0.7551020408163265,
+   "n_typed": 343,
+   "sec_per_cell": 0.24202697070439658,
+   "peak_vram_gib": 18.999781131744385,
+   "params_b": 7.941100832,
+   "per_table": {
+    "beers": {
+     "precision": 0.7010309278350515,
+     "recall": 0.68,
+     "f1": 0.6903553299492386,
+     "n": 300
+    },
+    "flights": {
+     "precision": 0.625,
+     "recall": 0.7,
+     "f1": 0.6603773584905661,
+     "n": 300
+    },
+    "hospital": {
+     "precision": 0.7575757575757576,
+     "recall": 1.0,
+     "f1": 0.8620689655172413,
+     "n": 300
+    },
+    "movies": {
+     "precision": 0.6493506493506493,
+     "recall": 0.5,
+     "f1": 0.5649717514124294,
+     "n": 300
+    },
+    "rayyan": {
+     "precision": 0.6046511627906976,
+     "recall": 0.78,
+     "f1": 0.6812227074235808,
+     "n": 300
+    }
+   },
+   "score": 0.6367967890234445,
+   "eligible": true
+  }
+ }
+}

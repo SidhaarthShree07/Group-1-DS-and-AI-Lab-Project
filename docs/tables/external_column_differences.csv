@@ -1,0 +1,68 @@
+dataset,source,column,error_cells,rows,error_rate_pct
+Tax,Raha,f_name,272,200000,0.136
+Tax,Raha,l_name,694,200000,0.347
+Tax,Raha,gender,0,200000,0.0
+Tax,Raha,area_code,0,200000,0.0
+Tax,Raha,phone,0,200000,0.0
+Tax,Raha,city,200,200000,0.1
+Tax,Raha,state,600,200000,0.3
+Tax,Raha,zip,31311,200000,15.6555
+Tax,Raha,marital_status,200,200000,0.1
+Tax,Raha,has_child,200,200000,0.1
+Tax,Raha,salary,0,200000,0.0
+Tax,Raha,rate,87342,200000,43.671
+Tax,Raha,single_exemp,200,200000,0.1
+Tax,Raha,married_exemp,0,200000,0.0
+Tax,Raha,child_exemp,200,200000,0.1
+Billionaire,ZeroED,Name,251,2614,9.6021
+Billionaire,ZeroED,Rank,211,2614,8.0719
+Billionaire,ZeroED,Year,190,2614,7.2686
+Billionaire,ZeroED,Company Founded,211,2614,8.0719
+Billionaire,ZeroED,Company Name,306,2614,11.7062
+Billionaire,ZeroED,Company Relationship,276,2614,10.5585
+Billionaire,ZeroED,Company Sector,245,2614,9.3726
+Billionaire,ZeroED,Company Type,413,2614,15.7995
+Billionaire,ZeroED,Demographics Age,214,2614,8.1867
+Billionaire,ZeroED,Demographics Gender,214,2614,8.1867
+Billionaire,ZeroED,Location Citizenship,246,2614,9.4109
+Billionaire,ZeroED,Location Country Code,253,2614,9.6787
+Billionaire,ZeroED,Location GDP,170,2614,6.5034
+Billionaire,ZeroED,Location Region,226,2614,8.6458
+Billionaire,ZeroED,Wealth Type,270,2614,10.329
+Billionaire,ZeroED,Wealth Worth In Billions,179,2614,6.8477
+Billionaire,ZeroED,Wealth How Category,248,2614,9.4874
+Billionaire,ZeroED,Wealth How From Emerging,183,2614,7.0008
+Billionaire,ZeroED,Wealth How Industry,273,2614,10.4438
+Billionaire,ZeroED,Wealth How Inherited,222,2614,8.4927
+Billionaire,ZeroED,Wealth How Was Founder,188,2614,7.192
+Billionaire,ZeroED,Wealth How Was Political,206,2614,7.8806
+Inpatient,BClean,prvdr_id,520,4017,12.945
+Inpatient,BClean,frst_nm,520,4017,12.945
+Inpatient,BClean,lst_nm,520,4017,12.945
+Inpatient,BClean,adrs_id,404,4017,10.0573
+Inpatient,BClean,adr_ln_1,401,4017,9.9826
+Inpatient,BClean,cty,400,4017,9.9577
+Inpatient,BClean,st,392,4017,9.7585
+Inpatient,BClean,zip,516,4017,12.8454
+Inpatient,BClean,org_pac_id,394,4017,9.8083
+Inpatient,BClean,phn_numbr,0,4017,0.0
+Inpatient,BClean,NPI,398,4017,9.9079
+Facilities,BClean,CCN,800,7992,10.01
+Facilities,BClean,Facility,798,7992,9.985
+Facilities,BClean,Address1,1100,7992,13.7638
+Facilities,BClean,City,1100,7992,13.7638
+Facilities,BClean,State,782,7992,9.7848
+Facilities,BClean,ZipCode,800,7992,10.01
+Facilities,BClean,County,794,7992,9.9349
+Facilities,BClean,PhoneNumber,800,7992,10.01
+Facilities,BClean,CMSRegion,578,7992,7.2322
+Facilities,BClean,Condition,766,7992,9.5846
+CleanMe_DE_slice,Clean Me If You Can,name,1836,5000,36.72
+CleanMe_DE_slice,Clean Me If You Can,road,1952,5000,39.04
+CleanMe_DE_slice,Clean Me If You Can,house_number,1011,5000,20.22
+CleanMe_DE_slice,Clean Me If You Can,postcode,993,5000,19.86
+CleanMe_DE_slice,Clean Me If You Can,locality,1083,5000,21.66
+CleanMe_DE_slice,Clean Me If You Can,region,4096,5000,81.92
+CleanMe_DE_slice,Clean Me If You Can,country,3643,5000,72.86
+CleanMe_DE_slice,Clean Me If You Can,country_code,4064,5000,81.28
+CleanMe_DE_slice,Clean Me If You Can,provenance_graph_iri,0,5000,0.0

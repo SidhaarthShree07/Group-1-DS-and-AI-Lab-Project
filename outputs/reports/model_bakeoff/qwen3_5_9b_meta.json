@@ -1,0 +1,11 @@
+{
+ "model": "qwen3_5_9b",
+ "loader": "AutoModelForCausalLM",
+ "n": 1500,
+ "seconds": 438.7232925891876,
+ "sec_per_cell": 0.29248219505945844,
+ "peak_vram_gib": 23.315478801727295,
+ "params_b": 8.953803264,
+ "transformers": "5.20.1",
+ "torch": "2.14.1+cu130"
+}

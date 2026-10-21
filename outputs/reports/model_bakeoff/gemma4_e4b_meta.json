@@ -1,0 +1,11 @@
+{
+ "model": "gemma4_e4b",
+ "loader": "AutoModelForCausalLM",
+ "n": 1500,
+ "seconds": 363.04045605659485,
+ "sec_per_cell": 0.24202697070439658,
+ "peak_vram_gib": 18.999781131744385,
+ "params_b": 7.941100832,
+ "transformers": "5.20.1",
+ "torch": "2.14.1+cu130"
+}

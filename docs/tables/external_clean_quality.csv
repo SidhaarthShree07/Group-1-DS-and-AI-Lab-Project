@@ -1,0 +1,6 @@
+dataset,blank_cells_in_clean,placeholder_token_cells_in_clean,nan_text_cells_in_clean,duplicate_rows_in_clean
+Tax,0,206,206,0
+Billionaire,0,0,200,0
+Inpatient,0,0,0,4
+Facilities,0,27,0,0
+CleanMe_DE_slice,0,0,0,0

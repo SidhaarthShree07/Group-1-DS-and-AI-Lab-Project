@@ -1,0 +1,6 @@
+dataset,source,rows,data_columns,cells,error_cells,error_rate_pct,rows_with_error,raw_changed_cells,missing_value,pattern_violation,rule_violation,format_artifact,notes
+Tax,Raha,200000,15,3000000,121219,4.04,103875,121219,0,2166,800,118253,
+Billionaire,ZeroED,2614,22,57508,5195,9.03,2273,5266,1386,3049,742,18,
+Inpatient,BClean,4017,11,44187,4465,10.1,2720,4465,1800,1684,981,0,
+Facilities,BClean,7992,10,79920,8318,10.41,5249,8318,3001,2384,2933,0,
+CleanMe_DE_slice,Clean Me If You Can,5000,9,45000,18678,41.51,5000,18935,12087,6292,295,4,"374,533 rows in the full slice; 5000 drawn with random.Random(42).sample over sorted ids"

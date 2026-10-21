@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 440" width="700" height="440" style="background-color:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+<rect width="700" height="440" fill="#ffffff" rx="12"/>
+<text x="350" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">ContextGuard Benchmark Error Type Distribution</text>
+<text x="350" y="60" text-anchor="middle" font-size="13" fill="#64748b">Verified Across 9 Audited Benchmark Tables (81,596 True Error Cells)</text>
+<g transform="translate(0, 20)">
+<path d="M 220 220 L 220.00 60.00 A 160 160 0 0 1 230.13 379.68 Z" fill="#2b5c8f" stroke="#ffffff" stroke-width="2"/>
+<path d="M 220 220 L 230.13 379.68 A 160 160 0 0 1 173.72 66.84 Z" fill="#d95f02" stroke="#ffffff" stroke-width="2"/>
+<path d="M 220 220 L 173.72 66.84 A 160 160 0 0 1 201.78 61.04 Z" fill="#7570b3" stroke="#ffffff" stroke-width="2"/>
+<path d="M 220 220 L 201.78 61.04 A 160 160 0 0 1 220.00 60.00 Z" fill="#1b9e77" stroke="#ffffff" stroke-width="2"/>
+</g>
+<g transform="translate(440, 130)">
+<rect x="0" y="0" width="22" height="22" rx="4" fill="#2b5c8f"/>
+<text x="32" y="16" font-size="15" font-weight="600" fill="#1e293b">Missing Values (~49%)</text>
+<text x="32" y="34" font-size="13" fill="#64748b">39,975 cells (48.99%)</text>
+<rect x="0" y="55" width="22" height="22" rx="4" fill="#d95f02"/>
+<text x="32" y="71" font-size="15" font-weight="600" fill="#1e293b">Pattern Violations (~46%)</text>
+<text x="32" y="89" font-size="13" fill="#64748b">37,810 cells (46.34%)</text>
+<rect x="0" y="110" width="22" height="22" rx="4" fill="#7570b3"/>
+<text x="32" y="126" font-size="15" font-weight="600" fill="#1e293b">Rule Violations (~3%)</text>
+<text x="32" y="144" font-size="13" fill="#64748b">2,329 cells (2.85%)</text>
+<rect x="0" y="165" width="22" height="22" rx="4" fill="#1b9e77"/>
+<text x="32" y="181" font-size="15" font-weight="600" fill="#1e293b">Outliers (~2%)</text>
+<text x="32" y="199" font-size="13" fill="#64748b">1,482 cells (1.82%)</text>
+</g>
+</svg>

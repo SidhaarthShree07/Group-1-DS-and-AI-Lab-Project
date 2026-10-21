@@ -1,0 +1,7 @@
+# Versions used for the reported model-comparison results (Python 3.12.3, CUDA 13 build of PyTorch)
+torch==2.14.1
+transformers==5.20.1
+accelerate==1.15.0
+pandas==3.0.6
+numpy==2.5.4
+scikit-learn==1.9.1

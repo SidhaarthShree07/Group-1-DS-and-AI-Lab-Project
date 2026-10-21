@@ -1,0 +1,30 @@
+# Data: only data/README.md and data/sample/ are tracked (course rule: no large datasets in git)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+*.zip
+*.tar.gz
+*.parquet
+
+# Models: weights live on the Hugging Face Hub, never in git
+models/checkpoints/*
+!models/checkpoints/.gitkeep
+*.safetensors
+*.pt
+*.pth
+*.bin
+
+# Python / environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# Secrets and OS files
+.env
+.DS_Store
+.vscode/
+.idea/

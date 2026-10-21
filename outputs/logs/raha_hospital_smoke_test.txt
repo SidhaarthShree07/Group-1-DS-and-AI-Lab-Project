@@ -1,0 +1,18 @@
+$ python scripts/run_raha_baseline.py
+raha/dataset.py:58: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  keep_default_na=False, low_memory=False).applymap(self.value_normalizer)
+raha/dataset.py:58: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  keep_default_na=False, low_memory=False).applymap(self.value_normalizer)
+I just load strategies' results as they have already been run on the dataset!
+raha/dataset.py:58: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  keep_default_na=False, low_memory=False).applymap(self.value_normalizer)
+raha/dataset.py:58: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  keep_default_na=False, low_memory=False).applymap(self.value_normalizer)
+Initializing Raha Detection for hospital (Seed: 42)...
+
+==================================================
+Raha Benchmark Results on Hospital (20 Labels, Seed 42):
+Precision: 0.7149
+Recall:    0.6110
+F1-Score:  0.6589
+==================================================
