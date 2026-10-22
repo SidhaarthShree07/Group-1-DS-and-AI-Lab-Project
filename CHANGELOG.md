@@ -11,3 +11,4 @@ All notable changes to this project are recorded here, one section per milestone
 - Added `docs/milestones/M1/slides/M1_slide_text.md`, the text of the 10-slide review deck.
 - Added `docs/Project_Proposal.pdf`, the problem statement as submitted to the course team.
 - Added the Milestone 1 review deck (`docs/milestones/M1/slides/ContextGuard_M1_Slides.pptx`) and a PDF copy.
+- Defined baseline B1 as HoloClean with constraints mined by TANE (one pipeline for all tables) in the report and the slide text record.
