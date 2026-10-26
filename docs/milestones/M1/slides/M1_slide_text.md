@@ -57,11 +57,11 @@ Repository: github.com/SidhaarthShree07/Group-1-DS-and-AI-Lab-Project
 - Raha + Baran end-to-end repair F1 (Table 7): Hospital 0.66, Flights 0.66, Beers 0.90, Rayyan 0.35, Tax 0.74.
 - dBoost alone, detection F1: Hospital 0.49, Flights 0.66, Beers 0.55.
 
-**How we measure:** a cell is an error if it differs from the clean value after Raha's normalisation; a repair counts only on an exact match. Raha and Baran get 20 labelled tuples per table, ContextGuard gets none on unseen tables. Results are mean ± std over 10 seeds (42 to 51), reported on our own splits.
+**How we measure:** a cell is an error if it differs from the clean value after Raha's normalisation; a repair counts only on an exact match. Raha and Baran get 20 labelled tuples per table, ContextGuard gets none on unseen tables. Results are mean ± std over 4 seeds (42, 1, 2, 3), reported on our own splits.
 
 **Baselines:** B1 HoloClean with rules mined by TANE, B2 dBoost, B3 Raha + Baran, B4 Gemma 4 E4B-it zero-shot, B5 Gemma 4 E4B-it with 3 examples.
 
-*Speaker notes:* These are the numbers we have to beat, taken from the original papers with 20 labels. We never present a paper's number as our own result: we rerun every baseline on our splits, with Raha's normalisation, exact-match repair, 20 labels for Raha and Baran on every table and none for ContextGuard on unseen tables, over ten seeds.
+*Speaker notes:* These are the numbers we have to beat, taken from the original papers with 20 labels. We never present a paper's number as our own result: we rerun every baseline on our splits, with Raha's normalisation, exact-match repair, 20 labels for Raha and Baran on every table and none for ContextGuard on unseen tables, over four seeds.
 
 ---
 

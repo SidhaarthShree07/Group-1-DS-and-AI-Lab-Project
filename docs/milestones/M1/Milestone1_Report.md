@@ -71,11 +71,11 @@ Targets are deliberately stated in general terms. Exact values are set after the
 | RQ3 | Does it generalise to tables it never saw? | F1 drops on unseen tables but stays above Raha with 20 labels and above a zero-shot LLM | In-domain versus unseen-table results |
 | RQ4 | Does validated cleaning improve a downstream model? | Training on cleaned data closes a measurable part of the gap between dirty and gold-clean training data | Downstream AUROC and F1 for dirty, cleaned and gold-clean data |
 
-**What evidence will show that the approach works.** (1) Per-table detection precision, recall and F1, and error-type macro-F1, for ContextGuard against baselines B1 to B5, as mean ± standard deviation over seeds (RQ1). (2) A precision–coverage curve and the false-repair rate at the chosen threshold, showing that confident repairs are rarely wrong (RQ2). (3) The same metrics on five tables never used in training, against a zero-shot LLM and against Raha with 20 labels (RQ3). (4) The share of the dirty-versus-clean gap closed on a downstream classifier (RQ4). (5) Candidate recall, the share of cells sent to the LLM and GPU-seconds per 1,000 rows (O4). Section 8 defines each metric, and the pilot in Section 9 shows that the first steps can already be measured.
+**What evidence will show that the approach works.** (1) Per-table detection precision, recall and F1, and error-type macro-F1, for ContextGuard against baselines B1 to B5, as mean ± standard deviation over seeds (RQ1). (2) A precision–coverage curve and the false-repair rate at the chosen threshold, showing that confident repairs are rarely wrong (RQ2). (3) The same metrics on five tables never used in training, against a zero-shot LLM and against Raha with 20 labels (RQ3). (4) The share of the dirty-versus-clean gap closed on a downstream classifier (RQ4). (5) Candidate recall, the share of cells sent to the LLM and GPU-seconds per 1,000 rows (O4). Section 8 defines each metric, Sections 8.5 to 8.7 add the experiments that isolate each component, the limits of the generalisation claim and the rules for judging mixed results, and the pilot in Section 9 shows that the first steps can already be measured.
 
 ## 5. Existing landscape: how the problem is addressed today
 
-Sections 5.1 and 5.2 summarise eight classical and learning-based systems from their original papers; 5.3 covers LLM-based work, 5.4 commercial and open-source tools, 5.5 the metrics and benchmarks used in this literature, and 5.6 the limitations that remain. Numbers are as reported by each paper; they use different tables, label budgets and metrics, so they are context and not a leaderboard.
+Sections 5.1 and 5.2 summarise eight classical and learning-based systems from their original papers; 5.3 covers LLM-based work, 5.4 commercial and open-source tools, 5.5 the metrics and benchmarks used in this literature, and 5.6 the limitations that remain, and 5.7 what the literature establishes, what is still unresolved and how this project addresses it. Numbers are as reported by each paper; they use different tables, label budgets and metrics, so they are context and not a leaderboard.
 
 ### 5.1 Rule- and constraint-based approaches
 
@@ -148,6 +148,36 @@ Descriptions below follow each product's official documentation (checked 19 Oct 
 4. **No calibrated confidence.** None of the LLM-based cleaners above report calibration, so "do not repair when unsure" cannot be measured.
 5. **Little downstream evidence.** CleanML and ActiveClean predate LLM cleaners, and most LLM papers stop at cell-level F1.
 
+### 5.7 What is established, what is still missing, and how this project addresses it
+
+Sections 5.1 to 5.6 describe the approaches one by one. This section compares them by the *kind* of limitation each has, because the limitations are different in nature, and then derives the research gap from them.
+
+| Family | What it does well (established) | Where it falls short | Kind of limitation |
+|---|---|---|---|
+| **Rule-based** (NADEEF, HoloClean, HyFD) | Precise and explainable when a correct rule exists; HoloClean reaches F1 0.83 on Hospital and 0.76 on Flights on the paper's own versions [1] | An error is found only if someone has written, or the system can mine, a rule that it violates; close to 0 F1 on Beers and Rayyan in Baran's comparison [5]; exact dependencies break on dirty data | **Coverage of expressible rules.** The method cannot judge a value that no rule talks about |
+| **Statistical** (dBoost, outlier detectors) | Cheap, needs no labels, good at numeric outliers and unusual formats | Treats rare as wrong: a rare value is often correct, and a wrong value that looks ordinary is missed; looks at one column at a time | **Rarity is a poor stand-in for wrongness.** It ignores the context of the row and the other columns |
+| **Learning-based** (Raha, Baran, ActiveClean) | Combine many weak signals and learn which to trust from about 20 labelled rows; Raha detection F1 0.72 to 0.99 and Baran repair F1 up to 0.90 on Beers [4][5] | A new table needs new labels, and nothing learned transfers to the next table; repair quality drops when detection is imperfect (Hospital 0.87 with perfect detection, 0.66 end to end) | **Per-table supervision.** The cost of labels is paid again for every dataset |
+| **LLM-based** (Jellyfish, Table-GPT, ZeroED, Cocoon, ForestED) | Understand values and context in language, work with few or no labels; Jellyfish shows that local, LoRA-tuned 7 to 13B models are viable [18] | Large hosted models or one LLM call per cell; mostly detection only; no calibrated confidence; weak use of evidence from other rows; results on different table versions, sometimes with test tables in the training data | **Cost and unmeasured reliability.** It is not known how often the model is confidently wrong |
+
+**How the limitations differ.** Rule-based methods fail where no rule exists, statistical methods fail because they use rarity instead of context, learning-based methods have the signals but need labels for every table, and LLM-based methods understand context but pay for it in cost and do not tell us how far to trust them. The first two lack context; the third needs supervision; the fourth lacks a measure of reliability.
+
+**What the studies have already established.**
+1. Many error types can be found by combining cheap signals and a small number of labels (Raha).
+2. Repair quality is limited by detection quality (Baran).
+3. Language models can detect and repair data errors, and small local models fine-tuned for data preparation are viable (Jellyfish, Table-GPT).
+4. The effect of cleaning on a downstream model is mixed and depends on the dataset and the method (CleanML).
+
+#### What remains unresolved, and how the project addresses each point
+
+| Gap | Open question | How the project addresses it | Measured by |
+|---|---|---|---|
+| **G1 Context** | Can a small open model, given evidence from the rest of the table rather than the cell alone, tell a genuine error from an unusual but valid value without labels for the new table? | Prompt with row, column profile, dependency evidence and similar rows; fine-tuning on instruction examples | O1, RQ1; experiments E1 and E2 (Section 8.5) |
+| **G2 Reliability** | Is the model's confidence good enough to decide which repairs to apply without review? None of the LLM cleaners in our review reports calibration (Section 5.6, item 4) | Calibrated confidence gate with separate thresholds for flagging and for applying a repair | O2, RQ2; precision–coverage curve; experiment E4 |
+| **G3 Transfer and use** | Do the results hold on tables from other domains, and does cleaning help a downstream model? | Test on five unseen tables and on a downstream classifier, reported together | O3, O5, RQ3, RQ4; Section 8.6 |
+| **G4 Cost against accuracy** | How much of the LLM work can candidate filtering remove before real errors are lost? | Cheap candidate stage; candidate recall and cost reported next to accuracy | O4; experiment E3 |
+
+The gap therefore follows from the comparison above: the rule-based and statistical families lack context (G1), the learning-based family needs labels per table (G3), and the LLM-based family does not measure reliability or the cost–accuracy trade-off (G2, G4).
+
 ## 6. Proposed contribution
 
 **Where the contribution lies.** The main contribution is performance and robustness: higher detection and repair quality, a repair step that is safe because of the confidence gate, and results on tables the model never saw. Efficiency (a cheap first stage, so the LLM reads only some cells) and usability (a review list and a change log) are supporting dimensions. The deployment context is also new for this task: a small open model running locally on one GPU, without sending data to a hosted service.
@@ -163,6 +193,20 @@ Descriptions below follow each product's official documentation (checked 19 Oct 
 | **Efficiency** | The cheap stage decides where to look, so only a minority of cells reach the LLM; the model runs locally on one GPU; cost is reported in GPU-seconds per 1,000 rows | O4 |
 | **Scalability** | Cost grows with the number of flagged cells, not the number of cells; the design target is tables of tens of thousands of rows on one GPU, measured in Milestone 5 | O4, O6 |
 | **Measurable added value** | Generalisation to unseen tables and the effect on a downstream model are reported together, which most cleaning papers do not do | O3, O5, RQ3, RQ4 |
+
+### 6.1 Why the approach is expected to work
+
+**Main goal and supporting benefits.** The main research goal is to improve the *reliability* of error detection and repair: finding more of the genuine errors and applying few wrong repairs, with a confidence that can be trusted. Lower computational cost (O4) and easier use (O6) are supporting benefits. They matter, but they must not be bought with lower reliability, and the results are judged on the main goal first (Section 8.7).
+
+Each of the three ideas rests on an assumption that the experiments in Section 8.5 are designed to test.
+
+| Idea | Why it is expected to help | Assumption behind the expectation | What could go wrong | How we find out |
+|---|---|---|---|---|
+| **Context in the prompt** (row, column profile, dependency evidence, similar rows) | Whether a value is wrong depends on its surroundings. In the Hospital example, `birminghxm` is spotted because the other rows with the same zip code say `birmingham`. The column profile shows what is normal, so an unusual value that fits its dependency group can be told apart from a real error | Errors leave a trace in the table itself (a broken pattern or a broken cross-column consistency), and the dirty table is mostly correct, so its majority values are a useful reference | Tables with little redundancy (Marketing's random category swaps) give little evidence; in heavily corrupted columns the majority itself may be wrong; a dependency can hold by coincidence and mislead | E2: the same model with and without each context block, per table and per error type |
+| **Candidate filtering** | About 9.5% of the cells in the five core tables are wrong, so reading every cell spends most of the compute on correct values. The cheap detectors (D3 to D6, dependency checks) look at different signals and are inexpensive | Most true errors trip at least one cheap detector, and the detectors miss different errors | An error that looks ordinary is never flagged and never reaches the model, so the filter sets a ceiling on recall for the whole system | E3: filtering alone, full pipeline and the model on all cells; candidate recall per table and type; a random sample of unflagged cells sent to the model to estimate what the filter loses |
+| **Fine-tuning** | The base model has not seen our four error types, our answer format or what typical errors look like. The zero-shot pilot gave an AUROC of 0.78 to 0.86 but a base-model repair accuracy of only about a third (`outputs/reports/model_bakeoff/README.md`) | Instruction examples from the training tables teach the task and how to read the table evidence, and this transfers to other tables | Overfitting to the error styles of the five training tables; injected errors differ from real ones | E1: the same model, prompt and candidates, before and after fine-tuning; unseen-table results |
+
+**Why the combination is expected to improve the overall result despite these limits.** Filtering costs some recall but removes most correct cells, so the model sees a smaller, harder set and can spend its capacity on the context of each cell. Context helps it separate real errors from unusual but valid values, which is where rules and statistics fail. Fine-tuning teaches the format and the types and gives the confidence that the gate needs. The expectation is not certain, and it has a clear test: the full pipeline must beat the cheap detectors alone, which shows the model adds value, and it should come close to the model on all cells at a fraction of the cost. If the filter loses more errors than the model adds, the candidate set is widened and this is reported as a result, not hidden.
 
 ## 7. Data availability
 
@@ -353,6 +397,21 @@ Outliers cannot be told apart from the other types by this method and are not as
 
 **Decision.** Tax's format artifacts are excluded from the training positives and from the type totals; they stay in the Raha-rule counts so baseline numbers remain comparable.
 
+### 7.8 What the labels establish, and their limits
+
+**What the labels establish.** A cell is labelled an error when its dirty value differs from the clean value after the normalisation of Section 7.2. This gives one consistent, repeatable rule that is comparable with the published baselines. It establishes that a dirty value *disagrees with a reference table*. It does not establish that the dirty value is wrong in a real-world sense, or that the clean value is the only valid one.
+
+| Limitation | Evidence from the audit | How it is handled | Effect on the conclusions |
+|---|---|---|---|
+| **Format-only differences** (`3` against `3.0`, leading zeros, `45.0` against `45`) | Tax: 118,253 of 121,219 error cells; Credit: 315,466 cells | Typed `format_artifact`; counted under the Raha rule so baseline numbers stay comparable, but excluded from training positives and from the type totals; strict and lenient counts are both reported | Conclusions about error detection use the cells without artifacts |
+| **The normalisation rule decides what counts** | Restaurant: 2 cells differ only by a double space, so 633 errors under the rule against 635 annotations | One rule for all methods; whitespace is collapsed, case and punctuation are kept strict; the strict and lenient counts are reported where they differ | A different rule would change the counts, so numbers are valid only under this rule |
+| **Incomplete or imputed clean files** | Missing cells in the clean files: Beers 1,072, Movies 2,680, Rayyan 1,609; Credit's clean income repeats the value 88.44070676 17,435 times | The cap on achievable recall is stated; the downstream test is repeated on Beers; Credit repairs are read as agreement with an imputation | Repair accuracy on these tables measures agreement with the reference, not truth |
+| **Incomplete annotations** | Flights: 904 changed cells have no entry in the annotation file; the external tables ship no error types | Unannotated Flights cells are typed `pattern_violation` by a documented rule; external tables are typed by a documented heuristic and labelled as such; type accuracy is computed only on annotated cells | Error-type results are reliable only for annotated cells |
+| **A differing value can still be valid** | A repair that is a valid alternative (another accepted spelling or format) but not identical to the clean value counts as wrong under exact match | Exact match stays the primary metric because it is comparable with the papers; in Milestone 5 a random sample of false repairs is reviewed by hand and classified as wrong, valid alternative or unclear | The reported false-repair rate is an upper bound on real harm; the reviewed share shows how large the gap is |
+| **Injected and real errors differ** | Some tables contain injected errors (Soccer was generated with the BART tool); the Germany address slice has real errors | Results are reported per table, so injected and real errors can be told apart | Strong results on injected errors must not be read as strong results on real data |
+
+**What this means for the conclusions.** The results will show how well the system reproduces the reference corrections on these tables under one fixed rule. They will not show that it finds every kind of genuine semantic error in real-world data, and the final report will state them that way. The manual review of false repairs gives a first estimate of how far the reference differs from real-world correctness.
+
 ## 8. Metrics, baselines and evaluation protocol
 
 ### 8.1 Metric definitions
@@ -371,7 +430,7 @@ All metrics are computed at the cell level, per table and as a macro-average ove
 | Cost | GPU-seconds per 1,000 rows | O4 |
 | Downstream gap closed | (cleaned − dirty) / (gold-clean − dirty), for the same classifier and seeds | RQ4 |
 
-**Protocol.** Learned methods are reported as mean ± standard deviation over several seeds, and stochastic baselines over 10 runs; confidence intervals come from bootstrap resampling of test cells. Raha and Baran receive 20 labelled tuples per table, including unseen tables, while ContextGuard receives none on unseen tables. Baselines are rerun on our splits; published numbers are context only.
+**Protocol.** Learned methods and stochastic baselines are reported as mean ± standard deviation over four fixed seeds (42, 1, 2, 3); confidence intervals come from bootstrap resampling of test cells. Raha and Baran receive 20 labelled tuples per table, including unseen tables, while ContextGuard receives none on unseen tables. Baselines are rerun on our splits; published numbers are context only.
 
 ### 8.2 Baselines B1–B5
 
@@ -457,7 +516,59 @@ All figures below were checked against the original papers, not secondary survey
    - **Unseen Tables:** Evaluated on 100% of held-out unseen tables (Restaurant, Marketing, Soccer, Billionaire, Clean-Me DE slice).
    - **Label Budget Fairness:** Baseline B3 receives 20 labeled tuples on all tables. ContextGuard receives **0 labels** on unseen tables. The 20 tuples labeled by B3 are strictly excluded from its scoring set.
 5. **Replication & Seeds:**
-   Stochastic runs are executed across 10 fixed random seeds (`seed \in [42..51]`). All metrics report **mean $\pm$ standard deviation**.
+   Stochastic runs and test samples use four fixed random seeds (42, 1, 2, 3), the same four samples as in the model comparison of Section 9. All metrics report **mean $\pm$ standard deviation**. With four seeds the standard deviation is only a rough measure of spread, so a difference smaller than one standard deviation is reported as no clear difference.
+
+### 8.5 Experiments that isolate each component
+
+Comparing the full system with the baselines shows whether it is better, not why. The experiments below change one thing at a time, with the same splits, seeds and metrics, so that each main idea is tested on its own. They are ordered by priority; combinations that do not test a main idea (for example every subset of detectors or of prompt blocks) are not planned.
+
+| # | Comparison | What differs | Question answered | Metrics | Priority |
+|---|---|---|---|---|---|
+| **E1** | Base model against the same model fine-tuned | Only the weights (the baseline is B4, zero-shot) | Does fine-tuning improve detection, repair and confidence? | Detection F1, repair accuracy, wrong-repair share, AUROC | 1 |
+| **E2** | With and without context | Prompt: (a) cell and row only, (b) plus column profile, (c) plus dependency evidence and similar rows (full prompt) | Does information from the rest of the table help tell errors from unusual but valid values? | Same, per table and per error type | 1 (a against c); b if time allows |
+| **E3** | Candidate filtering alone, full pipeline, and the model on all cells | (a) cheap detectors only, (b) detectors followed by the model, (c) the model on every cell of a sample of rows | Does the model add enough over the filter to justify its cost, and how much does filtering lose and save? | Detection F1, candidate recall, share of cells sent to the model, GPU-seconds per 1,000 rows | 1 |
+| **E4** | Repairs with and without the confidence gate | Apply every repair, or only those above the threshold | Does the gate make repairs safer, and at what loss of coverage? | Precision–coverage curve, wrong-repair share, ECE | 2 |
+| **E5** | Training with and without synthetic examples | Synthetic share set to 0 or to the 20% cap | Do synthetic errors help on the types that are rare in real tables? | Detection F1 per error type | 3, if time allows |
+
+E2 can be piloted early: the zero-shot model comparison scripts already build prompts, so a row-only prompt can be scored without any training. For the fine-tuned variants of E2, each prompt format gets its own training run. Each result is reported as mean ± standard deviation over the four seeds.
+
+### 8.6 What the generalisation tests establish
+
+Testing on a table that was not used in training is useful, but it shows less than the word "generalisation" suggests. The planned tests establish the following.
+
+| Test | What changes between training and test | A good result shows | It does not show |
+|---|---|---|---|
+| **Held-out rows of the training tables** (15%) | Only the rows; same tables, same kinds of error | The model learned the error patterns of these five tables | Anything about other tables |
+| **Unseen tables from other domains** (Restaurant, Marketing, Soccer, Billionaire, Germany address slice) | The domain, the columns and values, and the process that made the errors; the four-type error taxonomy stays the same | Transfer across tables and domains, within the variety these five tables cover | Handling of *new kinds* of error; five tables are a small sample of domains |
+| **Unseen error types** | Not covered by the unseen-table test, because every table uses the same four labelled types and the training data contains examples of all four | Only the exploratory leave-one-type-out check below | Cannot be claimed from the other two tests |
+
+As an exploratory check in Milestone 5, if time allows, one error type (for example outliers) is removed from the training data and the model is tested on that type. It is reported as exploratory, with its small sample stated. The final report will therefore say that the system generalises to *tables from other domains with the same four error types*, and will not say that it generalises to new kinds of error unless this check supports it.
+
+### 8.7 How the results will be judged
+
+The main goal is reliability of detection and repair (Section 6.1), so no single metric decides success. Every method, including the baselines, is shown on the same four axes:
+
+1. **Detection quality:** precision, recall and F1 (macro-F1 over tables).
+2. **Repair reliability:** the share of applied repairs that are wrong (false-repair rate).
+3. **Coverage:** the share of true errors that are actually repaired at the chosen threshold.
+4. **Cost:** the share of cells sent to the model and GPU-seconds per 1,000 rows.
+
+Repair reliability and coverage pull in opposite directions, so they are compared on the precision–coverage curve in two ways: at the coverage the best baseline reaches (is our wrong-repair share lower?) and at the wrong-repair share of the best baseline (is our coverage higher?). A system that repairs few cells very reliably is reliable but not very useful for cleaning large tables, so coverage is always shown next to reliability. A system that repairs many cells but changes correct values often has coverage at the expense of reliability, and counts as worse on the main goal. The detected-but-not-repaired cells go to the review list, so recall of detection also shows how much work is left for a person.
+
+#### How mixed results will be interpreted
+
+These interpretations are fixed in advance.
+
+| Outcome | What it would mean | Consequence for the objectives |
+|---|---|---|
+| Detection improves, repair reliability does not | The model finds errors but fixes them badly | O1 met, O2 not met. The tool is positioned as detect-and-review, and only repairs above a high threshold are applied. Repair confidence is investigated |
+| Repairs are very reliable but coverage is low | The gate is too strict, or the model is unsure on many cells | O2 met with limited usefulness. The threshold is tuned on validation data and the result is reported with its coverage |
+| Coverage is high but wrong repairs are frequent | Reliability has been traded for coverage | Counts as a failure of the main goal, whatever the coverage. The threshold is raised |
+| Detection and repair improve but cost is worse than the cheap baselines | Accuracy is bought with compute | O4 is judged against the model on every cell (B4, B5), the relevant comparison for cost. The result is stated as accuracy per GPU-second, with the trade-off explained |
+| The filter removes many true errors (low candidate recall) | The recall ceiling limits the whole pipeline | Reported honestly; the candidate set is widened and E3 shows what that costs |
+| Strong in-domain results, weaker on unseen tables | The model fits the training tables more than the task | Reported as limited transfer (Section 8.6); the claims are narrowed accordingly |
+
+Differences smaller than one standard deviation over the four seeds are reported as no clear difference. Exact numerical targets for each axis are fixed after the pilot runs in Milestone 3 and before the Milestone 5 evaluation, so that the rule for success is not chosen after seeing the results.
 
 ## 9. Feasibility and plan
 
@@ -471,7 +582,7 @@ All figures below were checked against the original papers, not secondary survey
 |---|---|---|
 | M2 Dataset preparation | 29 Oct | Verified sources, splits with leakage checks, data card, first instruction–response examples |
 | M3 Model architecture | 5 Nov | Pipeline end to end on a subset, input formats, justification, loss and metrics |
-| M4 Model training | 19 Nov | Fine-tuning runs, ablations, hyper-parameter experiments with several seeds |
+| M4 Model training | 19 Nov | Fine-tuning runs, component experiments E1 to E3 (Section 8.5), hyper-parameter experiments with four seeds |
 | M5 Evaluation and analysis | 26 Nov | Baseline comparison, precision–coverage curve, unseen tables, downstream experiment, error analysis |
 | M6 Deployment and documentation | 10 Dec | Gradio demo and API, model and data cards, final report |
 
@@ -481,6 +592,7 @@ All figures below were checked against the original papers, not secondary survey
 | Model over-flags rare but correct values | Low precision | Hard negatives in training; calibrate on validation data; raise the flag threshold |
 | Unclear licences (TableEG states none; Clean-Me data is ODbL share-alike) | Reproducibility and demo risk | Keep raw data out of the repo; cite each original source; download scripts only |
 | Credit's "clean" income values were imputed, and its dirty–clean gap may be small | RQ4 inconclusive | State the caveat; repeat the downstream test on Beers (ABV) |
+| Tables with little redundancy or many errors give the model weak or misleading context | Lower precision on those tables | Report per table; compare with and without context (E2); expect smaller gains there |
 | A new model family | Library problems | Keep the pipeline model-agnostic so another model can be swapped in |
 
 ---
