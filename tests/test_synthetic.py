@@ -24,7 +24,8 @@ class TestSyntheticGenerator(unittest.TestCase):
 
     def test_norm_raha_rule(self):
         """Verifies Raha ground-truth normalisation: HTML unescape, whitespace collapse, strip."""
-        self.assertEqual(norm("  A&nbsp; B  "), "A B")
+        self.assertEqual(norm("  A&amp;  B  "), "A& B")
+        self.assertEqual(norm("A&nbsp;B"), "A\xa0B")  # the rule collapses only tab, newline and space
         self.assertEqual(norm("test\t\n  value"), "test value")
         self.assertEqual(norm("clean"), "clean")
 
@@ -39,8 +40,8 @@ class TestSyntheticGenerator(unittest.TestCase):
     def test_numeric_columns(self):
         """Verifies detection of numeric columns."""
         df = pd.DataFrame({
-            "num": [str(i) for i in range(50)],
-            "text": [f"val_{i}" for i in range(50)],
+            "num": [str(i % 25) for i in range(100)],  # 25 distinct values: a key-like column (all distinct) is skipped by design
+            "text": [f"val_{i % 25}" for i in range(100)],
         })
         num_cols = numeric_columns(df)
         self.assertIn("num", num_cols)
