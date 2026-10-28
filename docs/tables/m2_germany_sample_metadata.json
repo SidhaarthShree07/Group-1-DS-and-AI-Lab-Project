@@ -1,0 +1,12 @@
+{
+  "source": "https://zenodo.org/records/20841898 (AddressTable.zip, de_slice/named)",
+  "sampling_method": "random.Random(42).sample over the sorted ids present in both files (same as the M1 audit)",
+  "seed": 42,
+  "sample_rows": 5000,
+  "raw_clean_sha256": "78c852e3a5680a7460732b67ab87d82484a718297190fa8852af73a80817a192",
+  "raw_dirty_sha256": "2ef8ab1424c8c357af1aeaecef12b376cb7f20616437035f2753d0b2f2ac86ef",
+  "sample_files": {
+    "germany_5000_clean.csv": "59c67f5f9129640f0f326f8bfcd51a827ad58ddb989f7e01ef0eb555697f6250",
+    "germany_5000_dirty.csv": "911a84bc537b269c0e3e5bf70802d405de6d3ad1c5c0feded45d6ba147fa4d84"
+  }
+}

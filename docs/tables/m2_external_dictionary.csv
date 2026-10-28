@@ -1,0 +1,68 @@
+table_name,column_name,data_type,semantic_meaning,example_value,missing_rate_percent
+tax,f_name,text/categorical,First name,Hovav,0.00%
+tax,l_name,text/categorical,Last name,Punter,0.00%
+tax,gender,text/categorical,Gender code,M,0.00%
+tax,area_code,numeric,Telephone area code,501,0.00%
+tax,phone,text/categorical,Telephone number,304-9763,0.00%
+tax,city,text/categorical,City,HASTY,0.00%
+tax,state,text/categorical,US state code,AR,0.00%
+tax,zip,numeric,ZIP code,72640,0.00%
+tax,marital_status,text/categorical,Marital status code,S,0.00%
+tax,has_child,text/categorical,Has a child (Y/N),N,0.00%
+tax,salary,numeric,Annual salary,50000,0.00%
+tax,rate,numeric,Tax rate,7,0.10%
+tax,single_exemp,numeric,Single exemption amount,20,0.00%
+tax,married_exemp,numeric,Married exemption amount,0,0.00%
+tax,child_exemp,numeric,Child exemption amount,0,0.00%
+inpatient,prvdr_id,numeric,Provider identifier,42101750,4.48%
+inpatient,frst_nm,text/categorical,Provider first name,JASON,4.48%
+inpatient,lst_nm,text/categorical,Provider last name,MORRIS,4.48%
+inpatient,adrs_id,text/categorical,Address identifier,LA706015724LA501XXDRXX500,4.48%
+inpatient,adr_ln_1,text/categorical,Street address line,501 DOCTOR MICHAEL DEBAKEY DR,4.48%
+inpatient,cty,text/categorical,City,LAKE CHARLES,4.48%
+inpatient,st,text/categorical,State code,LA,4.48%
+inpatient,zip,numeric,ZIP code,706015724,4.48%
+inpatient,org_pac_id,numeric,Organisation identifier,7719886779,4.48%
+inpatient,phn_numbr,numeric,Telephone number,3373128528,0.00%
+inpatient,NPI,numeric,National Provider Identifier,1861468068,4.48%
+facilities,CCN,text/categorical,CMS Certification Number of the facility,13025,3.75%
+facilities,Facility,text/categorical,Facility name,ENCOMPASS HEALTH LAKESHORE REHABILITATION HOSPITAL,3.75%
+facilities,Address1,text/categorical,Street address,3800 RIDGEWAY DRIVE,3.75%
+facilities,City,text/categorical,City,BIRMINGHAM,3.75%
+facilities,State,text/categorical,State code,AL,3.75%
+facilities,ZipCode,numeric,ZIP code,35209,3.75%
+facilities,County,text/categorical,County,Jefferson,3.75%
+facilities,PhoneNumber,text/categorical,Telephone number,(205) 868-2000,4.09%
+facilities,CMSRegion,numeric,CMS region number,4,3.75%
+facilities,Condition,text/categorical,Condition group the record refers to,All other conditions,3.75%
+billionaire,Name,text/categorical,Name of the person,Bill Gates,1.68%
+billionaire,Rank,numeric,Rank on the list,1,1.99%
+billionaire,Year,numeric,Year of the list,1996,2.26%
+billionaire,Company Founded,numeric,Year the company was founded,1975,4.09%
+billionaire,Company Name,text/categorical,Company name,Microsoft,3.25%
+billionaire,Company Relationship,text/categorical,Relation of the person to the company,founder,3.83%
+billionaire,Company Sector,text/categorical,Company sector,Software,2.79%
+billionaire,Company Type,text/categorical,Company type,new,2.91%
+billionaire,Demographics Age,numeric,Age,40,2.37%
+billionaire,Demographics Gender,text/categorical,Gender,male,3.33%
+billionaire,Location Citizenship,text/categorical,Country of citizenship,United States,1.80%
+billionaire,Location Country Code,text/categorical,Country code,USA,2.18%
+billionaire,Location GDP,numeric,GDP of the country,8100000000000.00,1.53%
+billionaire,Location Region,text/categorical,World region,North America,1.95%
+billionaire,Wealth Type,text/categorical,Type of wealth,founder non-finance,2.75%
+billionaire,Wealth Worth In Billions,numeric,Net worth in billions,18.5,1.38%
+billionaire,Wealth How Category,text/categorical,How the wealth was made: category,New Sectors,1.68%
+billionaire,Wealth How From Emerging,boolean,From an emerging market (TRUE/FALSE),TRUE,1.99%
+billionaire,Wealth How Industry,text/categorical,Industry of the wealth,Technology-Computer,1.53%
+billionaire,Wealth How Inherited,text/categorical,Inherited or not,not inherited,2.26%
+billionaire,Wealth How Was Founder,boolean,Was the founder (TRUE/FALSE),TRUE,1.91%
+billionaire,Wealth How Was Political,boolean,Wealth linked to politics (TRUE/FALSE),TRUE,3.56%
+germany,name,text/categorical,Name of the organisation or place,Musical Dome,0.00%
+germany,road,text/categorical,Street,Goldgasse,12.68%
+germany,house_number,numeric,House number,1,15.12%
+germany,postcode,numeric,Postal code,50668,17.92%
+germany,locality,text/categorical,Town or city,Köln,5.16%
+germany,region,text/categorical,Federal state,Nordrhein-Westfalen,69.66%
+germany,country,text/categorical,Country name,Deutschland,39.92%
+germany,country_code,text/categorical,Country code,de,81.28%
+germany,provenance_graph_iri,text/categorical,URL of the web page the record was taken from,https://www.musical1.de/event/moulin-rouge-das-musical-1730572200/,0.00%

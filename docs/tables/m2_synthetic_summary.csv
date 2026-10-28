@@ -1,0 +1,21 @@
+table,error_type,rows,cells,injected_cells,dependencies_used,example_column,example_clean,example_dirty,source,seed
+adult,missing_value,32561,488415,7384,,age,32,?,synthetic,42
+adult,pattern_violation,32561,488415,9798,,age,40,400,synthetic,42
+adult,rule_violation,32561,488415,987,education->education_num; education_num->education,education,Bachelors,7th-8th,synthetic,42
+adult,outliers,32561,488415,3301,,age,19,235,synthetic,42
+bike_day,missing_value,731,11696,121,,season,1,NULL,synthetic,42
+bike_day,pattern_violation,731,11696,177,,season,1,11,synthetic,42
+bike_day,rule_violation,731,11696,0,,,,,synthetic,42
+bike_day,outliers,731,11696,83,,temp,0.204348,4.26,synthetic,42
+bike_hour,missing_value,17379,295443,4196,,dteday,2011-01-02,?,synthetic,42
+bike_hour,pattern_violation,17379,295443,5558,,dteday,2011-01-04,2011-01-044,synthetic,42
+bike_hour,rule_violation,17379,295443,1487,dteday->season; dteday->yr; dteday->mnth; dteday->holiday; dteday->weekday; dteday->workingday,season,1,3,synthetic,42
+bike_hour,outliers,17379,295443,2797,,hr,10,141,synthetic,42
+wine_red,missing_value,1599,19188,313,,fixed acidity,7.3,N/A,synthetic,42
+wine_red,pattern_violation,1599,19188,353,,fixed acidity,6.6,6x6,synthetic,42
+wine_red,rule_violation,1599,19188,0,,,,,synthetic,42
+wine_red,outliers,1599,19188,364,,fixed acidity,6.4,30.74,synthetic,42
+wine_white,missing_value,4898,58776,908,,fixed acidity,5.6,,synthetic,42
+wine_white,pattern_violation,4898,58776,1190,,fixed acidity,6.4,66.4,synthetic,42
+wine_white,rule_violation,4898,58776,0,,,,,synthetic,42
+wine_white,outliers,4898,58776,1115,,fixed acidity,6.9,26.18,synthetic,42
