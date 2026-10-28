@@ -1,0 +1,10 @@
+table,split,entity_column,entities,rows,cells,error_cells,missing_value,pattern_violation,rule_violation,format_artifact
+tax,train,row,14000,14000,210000,8370,0,140,64,8166
+tax,val,row,3000,3000,45000,1895,0,32,19,1844
+tax,test,row,3000,3000,45000,1855,0,39,8,1808
+inpatient,train,NPI,274,2805,30855,3067,1249,1138,680,0
+inpatient,val,NPI,66,607,6677,695,270,285,140,0
+inpatient,test,NPI,71,605,6655,703,281,261,161,0
+facilities,train,CCN,621,5589,55890,5791,2056,1670,2065,0
+facilities,val,CCN,134,1206,12060,1250,468,349,433,0
+facilities,test,CCN,133,1197,11970,1277,477,365,435,0
