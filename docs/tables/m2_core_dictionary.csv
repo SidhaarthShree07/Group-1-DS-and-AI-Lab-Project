@@ -37,10 +37,10 @@ beers,state,categorical_text,Two-letter US state postal code abbreviation of bre
 rayyan,id,numeric_int,Bibliographic citation record primary key identifier in systematic review corpus,235295,0.00%
 rayyan,article_title,categorical_text,Full academic title of the published scientific article,Late repair of injuries of the bile ducts,0.10%
 rayyan,article_language,categorical_text,Three-letter ISO language code of the published paper (e.g. eng),eng,35.80%
-rayyan,journal_title,categorical_text,"Academic journal publication title (frequently paired with jounral_abbreviation; note occasional inversion in raw benchmark rows, e.g. row 0)",The Journal of infectious diseases,20.80%
-rayyan,jounral_abbreviation,categorical_text,Standardized ISO/NLM abbreviated journal title (header contains raw source typo 'jounral'; paired with journal_title; note occasional inversion in raw source),J. Infect. Dis.,52.90%
-rayyan,journal_issn,categorical_text,International Standard Serial Number (ISSN) identifying the publishing journal (e.g. print/electronic format),0035-9157 (Print) 0035-9157,31.60%
-rayyan,article_jvolumn,numeric_int,Journal volume number where the paper was published (header contains raw source typo 'jvolumn'),64,2.20%
+rayyan,journal_title,categorical_text,Journal name or its abbreviation (the benchmark holds either form in this column),Proc R Soc Med,20.80%
+rayyan,jounral_abbreviation,categorical_text,Journal name or its abbreviation (column name is misspelt in the source; the benchmark holds either form),Proceedings of the Royal Society of Medicine,52.90%
+rayyan,journal_issn,categorical_text,International Standard Serial Number of the publishing journal,0035-9157 (Print) 0035-9157,31.60%
+rayyan,article_jvolumn,numeric_int,Journal volume number where the paper was published,64,2.20%
 rayyan,article_jissue,numeric_int,Journal issue number within the publishing volume,12,5.30%
 rayyan,article_jcreated_at,temporal_text,Publication date or citation creation timestamp string,1/1/71,8.70%
 rayyan,article_pagination,categorical_text,Starting and ending page numbers of the article publication,1187-9,11.00%

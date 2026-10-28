@@ -42,42 +42,47 @@ TABLE_CONFIGS = [
         "name": "Beers",
         "raha_sub": "beers",
         "entity_key": "brewery_id",
-        "training_impact": "1,072 missing cells in clean ground truth (mostly unrecorded IBU); reported transparently without artificial imputation; 1,005 'N/A' errors recovered from Raha; ounces column exhibits 100% format error rate."
+        "training_impact": "1,072 missing cells in clean ground truth (mostly unrecorded IBU); these cells are labelled by the Raha rule like any other (an 'N/A' placeholder against an empty clean value is a missing-value error, and the repair target is the empty string); 1,005 'N/A' errors are present in the Raha copy; the ounces column exhibits a 100% format error rate."
     },
     {
         "id": "rayyan",
         "name": "Rayyan",
         "raha_sub": "rayyan",
         "entity_key": "id",
-        "training_impact": "1,609 clean missing cells in optional bibliographic attributes; unannotated clean blanks are audited and preserved; high rule violation share (619 / 948, 65.3%) trains journal title to abbreviation and ISSN functional dependencies."
+        "training_impact": "1,609 clean missing cells in optional bibliographic attributes; empty clean values are labelled by the Raha rule; high rule violation share (619 / 948, 65.3%) trains journal title to abbreviation and ISSN functional dependencies."
     },
     {
         "id": "movies",
         "name": "Movies",
         "raha_sub": "movies_1",
         "entity_key": "id",
-        "training_impact": "2,680 clean missing cells in optional metadata; RatingCount comma format differences (5,505 cells) and RatingValue float truncation (856 cells) recovered from Raha original; 669 format-only cells audited dynamically."
+        "training_impact": "2,680 clean missing cells (mostly Filming Locations, ReviewCount, Duration and RatingValue), labelled by the Raha rule; RatingCount comma format differences (5,505 cells) and RatingValue formatting differences (856 cells, 669 of them the same number written differently, such as 7.0 and 7) are annotated pattern errors in the Raha copy, which TableEG's copy lost in part (668 errors)."
     }
 ]
+
+
+def raha_file(repo_root: Path, sub: str, name: str) -> Path:
+    """Raha table file from a local Raha clone or from data/raw/raha (see scripts/download_data.py)."""
+    for base in (repo_root / "raha-master" / "datasets", repo_root / "data" / "raw" / "raha" / "datasets",
+                 repo_root / "data" / "raw" / "raha"):
+        if (base / sub / name).exists():
+            return base / sub / name
+    raise FileNotFoundError(f"Raha table {sub}/{name} not found; run scripts/download_data.py")
+
+
+def format_only(a: str, b: str) -> bool:
+    """Same number written differently (3 and 3.0, 379,998 and 379998, leading zeros)."""
+    a, b = a.replace(",", ""), b.replace(",", "")
+    try:
+        return a != b and float(a) == float(b)
+    except ValueError:
+        return False
 
 
 def load_csv(path: Path):
     with open(path, "r", encoding="utf-8-sig", errors="replace") as f:
         reader = list(csv.reader(f))
     return reader[0], reader[1:]
-
-
-def find_raha_file(repo_root: Path, subpath: str, filename: str) -> Path:
-    """Finds Raha benchmark dataset files looking in data/raw/raha first."""
-    candidates = [
-        repo_root / "data" / "raw" / "raha" / subpath / filename,
-        repo_root / "raha-master" / "datasets" / subpath / filename,
-        repo_root / "datasets" / subpath / filename
-    ]
-    for c in candidates:
-        if c.exists():
-            return c
-    raise FileNotFoundError(f"Missing {filename} in {subpath}")
 
 
 def build_quality_table(repo_root: Path):
@@ -88,8 +93,8 @@ def build_quality_table(repo_root: Path):
     for cfg in TABLE_CONFIGS:
         tname = cfg["name"]
         tid = cfg["id"]
-        c_p = find_raha_file(repo_root, cfg["raha_sub"], "clean.csv")
-        d_p = find_raha_file(repo_root, cfg["raha_sub"], "dirty.csv")
+        c_p = raha_file(repo_root, cfg["raha_sub"], "clean.csv")
+        d_p = raha_file(repo_root, cfg["raha_sub"], "dirty.csv")
         cells_p = repo_root / "data" / "processed" / "core" / f"{tid}_cells.csv"
 
         c_hdr, c_rows = load_csv(c_p)
@@ -138,22 +143,8 @@ def build_quality_table(repo_root: Path):
         # Header mismatches
         hdr_mismatches = sum(1 for c in range(n_cols) if c_hdr[c] != d_hdr[c])
 
-        # Format artifacts: changed cells under Raha normalization that are numerically equal floats
-        # Evaluates dynamically to 669 on Movies (RatingValue float precision/truncation differences)
-        import html
-        format_artifacts = 0
-        for r_idx in range(n_rows):
-            for c in data_cols:
-                cv = c_rows[r_idx][c].strip() if c < len(c_rows[r_idx]) else ""
-                dv = d_rows[r_idx][c].strip() if c < len(d_rows[r_idx]) else ""
-                cv_norm = re.sub(r"[\t\n ]+", " ", html.unescape(cv)).strip("\t\n ")
-                dv_norm = re.sub(r"[\t\n ]+", " ", html.unescape(dv)).strip("\t\n ")
-                if cv_norm != dv_norm:
-                    try:
-                        if float(cv_norm) == float(dv_norm):
-                            format_artifacts += 1
-                    except (ValueError, TypeError):
-                        pass
+        # Format artifacts: error cells where dirty and clean are the same number in another format
+        format_artifacts = sum(1 for c in cells if c["is_error"] == "True" and format_only(c["dirty_value"], c["clean_value"]))
 
         rows_out.append({
             "Table": tname,
@@ -245,10 +236,10 @@ def build_core_dictionary(repo_root: Path):
             "id": ("numeric_int", "Bibliographic citation record primary key identifier in systematic review corpus", "235295"),
             "article_title": ("categorical_text", "Full academic title of the published scientific article", "Late repair of injuries of the bile ducts"),
             "article_language": ("categorical_text", "Three-letter ISO language code of the published paper (e.g. eng)", "eng"),
-            "journal_title": ("categorical_text", "Academic journal publication title (frequently paired with jounral_abbreviation; note occasional inversion in raw benchmark rows, e.g. row 0)", "The Journal of infectious diseases"),
-            "jounral_abbreviation": ("categorical_text", "Standardized ISO/NLM abbreviated journal title (header contains raw source typo 'jounral'; paired with journal_title; note occasional inversion in raw source)", "J. Infect. Dis."),
-            "journal_issn": ("categorical_text", "International Standard Serial Number (ISSN) identifying the publishing journal (e.g. print/electronic format)", "0035-9157 (Print) 0035-9157"),
-            "article_jvolumn": ("numeric_int", "Journal volume number where the paper was published (header contains raw source typo 'jvolumn')", "64"),
+            "journal_title": ("categorical_text", "Journal name or its abbreviation (the benchmark holds either form in this column)", "Proc R Soc Med"),
+            "jounral_abbreviation": ("categorical_text", "Journal name or its abbreviation (column name is misspelt in the source; the benchmark holds either form)", "Proceedings of the Royal Society of Medicine"),
+            "journal_issn": ("categorical_text", "International Standard Serial Number of the publishing journal", "0035-9157 (Print) 0035-9157"),
+            "article_jvolumn": ("numeric_int", "Journal volume number where the paper was published", "64"),
             "article_jissue": ("numeric_int", "Journal issue number within the publishing volume", "12"),
             "article_jcreated_at": ("temporal_text", "Publication date or citation creation timestamp string", "1/1/71"),
             "article_pagination": ("categorical_text", "Starting and ending page numbers of the article publication", "1187-9"),
@@ -279,8 +270,8 @@ def build_core_dictionary(repo_root: Path):
     for cfg in TABLE_CONFIGS:
         tid = cfg["id"]
         tname = cfg["name"]
-        c_p = find_raha_file(repo_root, cfg["raha_sub"], "clean.csv")
-        d_p = find_raha_file(repo_root, cfg["raha_sub"], "dirty.csv")
+        c_p = raha_file(repo_root, cfg["raha_sub"], "clean.csv")
+        d_p = raha_file(repo_root, cfg["raha_sub"], "dirty.csv")
         c_hdr, c_rows = load_csv(c_p)
         d_hdr, d_rows = load_csv(d_p)
 
