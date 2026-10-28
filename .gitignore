@@ -1,6 +1,10 @@
 # Data: only data/README.md and data/sample/ are tracked (course rule: no large datasets in git)
 data/raw/*
 data/processed/*
+data/splits/*
+!data/splits/.gitkeep
+raha-master/
+TableEG/
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 *.zip

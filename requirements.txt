@@ -1,7 +1,12 @@
-# Versions used for the reported model-comparison results (Python 3.12.3, CUDA 13 build of PyTorch)
+# Versions used for the reported model-comparison results (Python 3.12.3, CUDA 13 build of PyTorch).
+# matplotlib, seaborn, remotezip and pytest are used by the Milestone 2 data pipeline (tested with pandas 3.1.0 as well).
 torch==2.14.1
 transformers==5.20.1
 accelerate==1.15.0
 pandas==3.0.6
 numpy==2.5.4
 scikit-learn==1.9.1
+matplotlib==3.11.2
+seaborn==0.13.2
+remotezip==0.12.6
+pytest==9.2.0
