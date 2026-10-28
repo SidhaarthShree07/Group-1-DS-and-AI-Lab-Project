@@ -1,0 +1,64 @@
+table_name,column_name,data_type,semantic_meaning,example_value,missing_rate_percent
+hospital,ProviderNumber,numeric_text,US CMS Medicare provider identification number uniquely identifying the hospital institution,10018,0.00%
+hospital,HospitalName,categorical_text,Official commercial and legal facility name of the hospital,callahan eye foundation hospital,0.00%
+hospital,Address1,categorical_text,Primary physical street address of the hospital facility,1720 university blvd,0.00%
+hospital,Address2,categorical_text,"Secondary street address line, building or suite specification",empty,0.00%
+hospital,Address3,categorical_text,Tertiary street address line (rarely populated),empty,0.00%
+hospital,City,categorical_text,Municipality or city where the hospital is located,birmingham,0.00%
+hospital,State,categorical_text,Two-letter US state postal code abbreviation,al,0.00%
+hospital,ZipCode,numeric_text,Five-digit US postal ZIP code,35233,0.00%
+hospital,CountyName,categorical_text,US administrative county or parish jurisdiction name,jefferson,0.00%
+hospital,PhoneNumber,numeric_text,Ten-digit telephone contact number for the facility,2053258100,0.00%
+hospital,HospitalType,categorical_text,Institutional operational classification (e.g. Acute Care Hospitals),acute care hospitals,0.00%
+hospital,HospitalOwner,categorical_text,"Legal ownership entity classification (e.g. Voluntary non-profit, Government)",voluntary non-profit - private,0.00%
+hospital,EmergencyService,categorical_text,Binary indicator (yes/no) of operational emergency room services,yes,0.00%
+hospital,Condition,categorical_text,Standardized CMS clinical disease or treatment diagnostic category,surgical infection prevention,0.00%
+hospital,MeasureCode,categorical_text,Standardized CMS clinical quality performance measure code,scip-card-2,0.00%
+hospital,MeasureName,categorical_text,Full descriptive title of the evaluated clinical performance measure,surgery patients who were taking heart drugs called beta blockers,0.00%
+hospital,Score,numeric_text,Clinical score or performance rate percentage achieved by facility,empty,0.00%
+hospital,Sample,numeric_text,Number of evaluated patient cases in the evaluation sample,empty,0.00%
+hospital,Stateavg,categorical_text,Statewide baseline comparative benchmark for the clinical measure,al_scip-card-2,0.00%
+flights,src,categorical_text,"Airline code or data source feed identifier (e.g. aa, ua, us)",aa,0.00%
+flights,flight,categorical_text,"Standardized flight route identifier combining carrier, flight number, origin, destination",AA-3859-IAH-ORD,0.00%
+flights,sched_dep_time,temporal_text,Scheduled departure timestamp (local time with a.m./p.m.),7:10 a.m.,33.54%
+flights,act_dep_time,temporal_text,Actual observed departure timestamp,7:16 a.m.,16.58%
+flights,sched_arr_time,temporal_text,Scheduled arrival timestamp (local time with a.m./p.m.),9:40 a.m.,32.95%
+flights,act_arr_time,temporal_text,Actual observed arrival timestamp,9:32 a.m.,16.67%
+beers,id,numeric_int,Unique database primary key identifier for the craft beer product,1436,0.00%
+beers,beer-name,categorical_text,Commercial brand name of the craft beer beverage,Pub Beer,0.00%
+beers,style,categorical_text,"Brewing style classification (e.g. American Pale Lager, IPA)",American Pale Lager,0.21%
+beers,ounces,numeric_text,Liquid volume measure of beverage container in fluid ounces,12.0 oz,0.00%
+beers,abv,numeric_float,Alcohol by volume percentage represented as decimal fraction,0.05,2.57%
+beers,ibu,numeric_int,International Bitterness Units rating,60,41.70%
+beers,brewery_id,numeric_int,Foreign key identifier linking beer to its manufacturing brewery,408,0.00%
+beers,brewery-name,categorical_text,Commercial trade name of the brewing company,10 Barrel Brewing Company,0.00%
+beers,city,categorical_text,Municipality or city where brewery is located,Bend,0.00%
+beers,state,categorical_text,Two-letter US state postal code abbreviation of brewery,OR,5.27%
+rayyan,id,numeric_int,Bibliographic citation record primary key identifier in systematic review corpus,235295,0.00%
+rayyan,article_title,categorical_text,Full academic title of the published scientific article,Late repair of injuries of the bile ducts,0.10%
+rayyan,article_language,categorical_text,Three-letter ISO language code of the published paper (e.g. eng),eng,35.80%
+rayyan,journal_title,categorical_text,Journal name or its abbreviation (the benchmark holds either form in this column),Proc R Soc Med,20.80%
+rayyan,jounral_abbreviation,categorical_text,Journal name or its abbreviation (column name is misspelt in the source; the benchmark holds either form),Proceedings of the Royal Society of Medicine,52.90%
+rayyan,journal_issn,categorical_text,International Standard Serial Number of the publishing journal,0035-9157 (Print) 0035-9157,31.60%
+rayyan,article_jvolumn,numeric_int,Journal volume number where the paper was published,64,2.20%
+rayyan,article_jissue,numeric_int,Journal issue number within the publishing volume,12,5.30%
+rayyan,article_jcreated_at,temporal_text,Publication date or citation creation timestamp string,1/1/71,8.70%
+rayyan,article_pagination,categorical_text,Starting and ending page numbers of the article publication,1187-9,11.00%
+rayyan,author_list,categorical_text,Serialized array of contributing scientific author names,"{""A. G. Parks"",""J. F. McPartlin""}",0.00%
+movies,Id,categorical_text,IMDb title identifier string (e.g. tt0054215),tt0054215,0.00%
+movies,Name,categorical_text,Official cinematic release title of the motion picture,Psycho,0.00%
+movies,Year,numeric_int,Four-digit calendar year of initial theatrical release,1960,0.00%
+movies,Release Date,temporal_text,Full formatted theatrical release date with country specification,8 September 1960 (USA),1.73%
+movies,Director,categorical_text,Full name(s) of the film director(s),Alfred Hitchcock,0.00%
+movies,Creator,categorical_text,Screenplay writer(s) or story creator(s),"Joseph Stefano,Robert Bloch",2.99%
+movies,Actors,categorical_text,Primary billed cast member names,"Anthony Perkins,Janet Leigh,Vera Miles",1.01%
+movies,Cast,categorical_text,Extended cast ensemble list,"Anthony Perkins,Vera Miles,John Gavin",1.01%
+movies,Language,categorical_text,Primary spoken dialogue language of the motion picture,English,0.00%
+movies,Country,categorical_text,Primary country of film origin and production,USA,0.00%
+movies,Duration,numeric_text,Total cinematic runtime duration in minutes,109 min,5.17%
+movies,RatingValue,numeric_float,IMDb average user rating score on a 1-10 decimal scale,8.6,3.44%
+movies,RatingCount,numeric_text,Total count of user ratings received with comma thousands separator,"379,998",3.14%
+movies,ReviewCount,categorical_text,Counts of user reviews and critic reviews,"976 user,290 critic",4.82%
+movies,Genre,categorical_text,Comma-separated list of cinematic genre classifications,"Horror,Mystery,Thriller",0.24%
+movies,Filming Locations,categorical_text,Real-world geographic production locations where scenes were filmed,"Title and Trust Building, 114 W. Adams Street, Phoenix, Arizona, USA",14.15%
+movies,Description,categorical_text,Plot synopsis or narrative summary of the film,"A Phoenix secretary steals $40,000 from a client and goes on the run.",0.00%

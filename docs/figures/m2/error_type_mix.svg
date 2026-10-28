@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 680" width="960" height="680" style="background-color:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+<rect width="960" height="680" fill="#ffffff" rx="8"/>
+<text x="480" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Error Type Mix Across Core Tables and Splits (Train / Val / Test)</text>
+<text x="480" y="62" text-anchor="middle" font-size="13" fill="#64748b">Verified Conservation of 18,414 Errors (Missing Value, Pattern Violation, Rule Violation, Outliers)</text>
+<rect x="220" y="80" width="16" height="16" rx="3" fill="#2563eb"/>
+<text x="242" y="93" font-size="12" font-weight="600" fill="#334155">Missing Value</text>
+<rect x="365" y="80" width="16" height="16" rx="3" fill="#f97316"/>
+<text x="387" y="93" font-size="12" font-weight="600" fill="#334155">Pattern Violation</text>
+<rect x="510" y="80" width="16" height="16" rx="3" fill="#8b5cf6"/>
+<text x="532" y="93" font-size="12" font-weight="600" fill="#334155">Rule Violation</text>
+<rect x="655" y="80" width="16" height="16" rx="3" fill="#10b981"/>
+<text x="677" y="93" font-size="12" font-weight="600" fill="#334155">Outliers</text>
+<g transform="translate(40, 125)">
+<rect x="0" y="0" width="880" height="92" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="20" y="24" font-size="14" font-weight="700" fill="#1e293b">Hospital</text>
+<text x="20" y="42" font-size="11" fill="#64748b">Total Errors: 509</text>
+<text x="155" y="28" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Train</text>
+<rect x="170.0" y="16" width="132.0" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="302.0" y="16" width="508.0" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="28" font-size="11" font-weight="600" fill="#334155">354 errs</text>
+<text x="155" y="52" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Val</text>
+<rect x="170.0" y="40" width="129.6" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="299.6" y="40" width="510.4" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="52" font-size="11" font-weight="600" fill="#334155">79 errs</text>
+<text x="155" y="76" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Test</text>
+<rect x="170.0" y="64" width="101.1" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="271.1" y="64" width="538.9" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="76" font-size="11" font-weight="600" fill="#334155">76 errs</text>
+</g>
+<g transform="translate(40, 229)">
+<rect x="0" y="0" width="880" height="92" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="20" y="24" font-size="14" font-weight="700" fill="#1e293b">Flights</text>
+<text x="20" y="42" font-size="11" fill="#64748b">Total Errors: 4,920</text>
+<text x="155" y="28" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Train</text>
+<rect x="170.0" y="16" width="304.2" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="474.2" y="16" width="181.1" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="655.3" y="16" width="154.7" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="28" font-size="11" font-weight="600" fill="#334155">3,480 errs</text>
+<text x="155" y="52" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Val</text>
+<rect x="170.0" y="40" width="285.9" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="455.9" y="40" width="217.8" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="673.7" y="40" width="136.3" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="52" font-size="11" font-weight="600" fill="#334155">723 errs</text>
+<text x="155" y="76" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Test</text>
+<rect x="170.0" y="64" width="299.0" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="469.0" y="64" width="203.5" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="672.5" y="64" width="137.5" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="76" font-size="11" font-weight="600" fill="#334155">717 errs</text>
+</g>
+<g transform="translate(40, 333)">
+<rect x="0" y="0" width="880" height="92" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="20" y="24" font-size="14" font-weight="700" fill="#1e293b">Beers</text>
+<text x="20" y="42" font-size="11" fill="#64748b">Total Errors: 4,362</text>
+<text x="155" y="28" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Train</text>
+<rect x="170.0" y="16" width="162.4" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="332.4" y="16" width="454.4" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="786.8" y="16" width="23.2" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="28" font-size="11" font-weight="600" fill="#334155">3,035 errs</text>
+<text x="155" y="52" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Val</text>
+<rect x="170.0" y="40" width="187.6" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="357.6" y="40" width="435.5" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="793.0" y="40" width="17.0" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="52" font-size="11" font-weight="600" fill="#334155">679 errs</text>
+<text x="155" y="76" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Test</text>
+<rect x="170.0" y="64" width="161.0" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="331.0" y="64" width="454.3" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="785.3" y="64" width="24.7" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="76" font-size="11" font-weight="600" fill="#334155">648 errs</text>
+</g>
+<g transform="translate(40, 437)">
+<rect x="0" y="0" width="880" height="92" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="20" y="24" font-size="14" font-weight="700" fill="#1e293b">Rayyan</text>
+<text x="20" y="42" font-size="11" fill="#64748b">Total Errors: 948</text>
+<text x="155" y="28" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Train</text>
+<rect x="170.0" y="16" width="46.5" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="216.5" y="16" width="173.3" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="389.8" y="16" width="420.2" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="28" font-size="11" font-weight="600" fill="#334155">661 errs</text>
+<text x="155" y="52" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Val</text>
+<rect x="170.0" y="40" width="59.0" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="229.0" y="40" width="167.9" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="397.0" y="40" width="413.0" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="52" font-size="11" font-weight="600" fill="#334155">141 errs</text>
+<text x="155" y="76" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Test</text>
+<rect x="170.0" y="64" width="61.4" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="231.4" y="64" width="166.6" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="397.9" y="64" width="412.1" height="16" fill="#8b5cf6" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="76" font-size="11" font-weight="600" fill="#334155">146 errs</text>
+</g>
+<g transform="translate(40, 541)">
+<rect x="0" y="0" width="880" height="92" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="20" y="24" font-size="14" font-weight="700" fill="#1e293b">Movies</text>
+<text x="20" y="42" font-size="11" fill="#64748b">Total Errors: 7,675</text>
+<text x="155" y="28" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Train</text>
+<rect x="170.0" y="16" width="9.3" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="179.3" y="16" width="630.7" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="28" font-size="11" font-weight="600" fill="#334155">5,460 errs</text>
+<text x="155" y="52" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Val</text>
+<rect x="170.0" y="40" width="5.5" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="175.5" y="40" width="634.5" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="52" font-size="11" font-weight="600" fill="#334155">1,054 errs</text>
+<text x="155" y="76" text-anchor="end" font-size="11" font-weight="600" fill="#475569">Test</text>
+<rect x="170.0" y="64" width="10.5" height="16" fill="#2563eb" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="180.5" y="64" width="629.5" height="16" fill="#f97316" stroke="#ffffff" stroke-width="0.5"/>
+<text x="820" y="76" font-size="11" font-weight="600" fill="#334155">1,161 errs</text>
+</g>
+</svg>
