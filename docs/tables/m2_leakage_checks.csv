@@ -1,0 +1,30 @@
+check,scope,result,detail
+row overlap,hospital,PASS,0 shared row keys
+entity overlap (clean key),hospital,PASS,0 of 45 entities in more than one split
+exact duplicate rows,hospital,PASS,0 val/test rows equal a train row
+row overlap,flights,PASS,0 shared row keys
+entity overlap (clean key),flights,PASS,0 of 100 entities in more than one split
+exact duplicate rows,flights,PASS,0 val/test rows equal a train row
+row overlap,beers,PASS,0 shared row keys
+entity overlap (clean key),beers,PASS,0 of 558 entities in more than one split
+exact duplicate rows,beers,PASS,0 val/test rows equal a train row
+row overlap,rayyan,PASS,0 shared row keys
+entity overlap (clean key),rayyan,PASS,0 of 1000 entities in more than one split
+exact duplicate rows,rayyan,PASS,0 val/test rows equal a train row
+row overlap,movies,PASS,0 shared row keys
+entity overlap (clean key),movies,PASS,0 of 7390 entities in more than one split
+exact duplicate rows,movies,PASS,0 val/test rows equal a train row
+row overlap,tax,PASS,0 shared row keys
+entity overlap (clean key),tax,PASS,0 of 20000 entities in more than one split
+exact duplicate rows,tax,PASS,0 val/test rows equal a train row
+row overlap,inpatient,PASS,0 shared row keys
+entity overlap (clean key),inpatient,PASS,0 of 411 entities in more than one split
+exact duplicate rows,inpatient,PASS,0 val/test rows equal a train row
+row overlap,facilities,PASS,0 shared row keys
+entity overlap (clean key),facilities,PASS,0 of 888 entities in more than one split
+exact duplicate rows,facilities,PASS,0 val/test rows equal a train row
+duplicate prompts,train/val,PASS,0 identical prompts
+duplicate prompts,train/test,PASS,0 identical prompts
+duplicate prompts,val/test,PASS,0 identical prompts
+unseen tables in examples,all,PASS,"0 examples from a non-training table, 0 prompts naming an unseen table"
+synthetic only in train,all,PASS,0 synthetic examples outside train

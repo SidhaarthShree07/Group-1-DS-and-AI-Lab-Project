@@ -2,7 +2,7 @@
 
 Cell-level error detection, typing and repair for relational tables: cheap detectors decide where to look, a fine-tuned open language model decides what is wrong, and a calibrated confidence gate decides what is changed automatically.
 
-DSAI Lab course project (IIT Madras BS in Data Science and Applications), Group 1. **Current stage: Milestone 1 (problem definition and literature review).** Sections below say plainly what exists today and what later milestones add.
+DSAI Lab course project (IIT Madras BS in Data Science and Applications), Group 1. **Current stage: Milestone 2 (dataset preparation).** Sections below say plainly what exists today and what later milestones add.
 
 ## 1. Overview
 
@@ -18,6 +18,8 @@ Existing cleaners cover part of the problem. Rule systems (NADEEF, HoloClean) ne
 |---|---|
 | Audit of the benchmark tables under Raha's ground-truth rule, with recovered errors that a public copy had lost | Done (Milestone 1) |
 | Zero-shot comparison of three open models on a fixed 1,500-cell test set, with mean ± std over three sampling seeds | Done (Milestone 1) |
+| Training-ready data: 73,979 instruction–response examples from eight benchmark and five synthetic tables, entity-aware splits, 29 leakage checks, rebuilt by one command | Done (Milestone 2) |
+| Input files of the baselines (HoloClean with mined constraints, dBoost, Raha + Baran) on the test split | Done (Milestone 2); first runs in Milestone 3 |
 | Cheap detectors (missing values, rare patterns, robust outliers, multivariate outliers, approximate dependencies, typos) | Planned, Milestone 3 |
 | LoRA fine-tuning for detection, typing and repair with JSON output | Planned, Milestones 3–4 |
 | Calibrated confidence gate (temperature scaling) with separate flag and auto-repair thresholds | Planned, Milestones 3–5 |
@@ -79,7 +81,15 @@ python scripts/model_bakeoff/run_model_seeds.py gemma4_e4b --seeds 1 2 3
 python scripts/model_bakeoff/score_seeds.py 1 2 3            # mean ± std over the seeds
 ```
 
-Pipeline, training and demo commands are added with the milestones that deliver them.
+**Data preparation (Milestone 2).** One command downloads every public source at a pinned version (checked by SHA-256), builds the tables, splits, synthetic data and the fine-tuning examples, and runs the leakage checks and tests:
+
+```bash
+bash scripts/build_all.sh            # add --skip-download if data/raw/ is already filled
+```
+
+TableEG's annotation files exist only on Google Drive (link in the TableEG README): copy its two zip files into `data/raw/tableeg/` once before the first run. The result is `data/processed/examples/{train,val,test}.jsonl` (about 137 MB, not in git; a 20-record sample is in `data/sample/`). Details and the rules behind them are in [`docs/milestones/M2/Milestone2_Report.md`](docs/milestones/M2/Milestone2_Report.md).
+
+Training and demo commands are added with the milestones that deliver them.
 
 ## 9. Results
 
@@ -102,11 +112,11 @@ The demo is built in Milestone 6; there are no screenshots yet.
 | Member | Area |
 |---|---|
 | Sidhaarth Shree ([@SidhaarthShree07](https://github.com/SidhaarthShree07)) | LLM, evaluation, integration, repository owner |
-| Jashan ([@jashantiwari044](https://github.com/jashantiwari044)) | Data audit of the benchmark tables |
-| Sahilpreet ([@23f3000115](https://github.com/23f3000115)) | Audit of the external datasets |
-| Aaradhya ([@adhi1911](https://github.com/adhi1911)) | Detectors and baselines |
+| Jashan ([@jashantiwari044](https://github.com/jashantiwari044)) | Benchmark tables: audit, entity-aware splits, description |
+| Sahilpreet ([@23f3000115](https://github.com/23f3000115)) | External datasets: audit, licences, synthetic data |
+| Aaradhya ([@adhi1911](https://github.com/adhi1911)) | Outlier and dependency analysis, baselines |
 
-Work is tracked per milestone in the worklog, [`docs/milestones/M1/Milestone1_Worklog.md`](docs/milestones/M1/Milestone1_Worklog.md).
+Work is tracked per milestone in the worklogs, [`docs/milestones/M1/Milestone1_Worklog.md`](docs/milestones/M1/Milestone1_Worklog.md) and [`docs/milestones/M2/Milestone2_Worklog.md`](docs/milestones/M2/Milestone2_Worklog.md).
 
 ## 12. References
 
@@ -126,13 +136,15 @@ Code is released under Apache-2.0 ([`LICENSE`](LICENSE)). Third-party data, mode
 
 ```
 app/          demo (Milestone 6)
-data/         README with sources and licences; raw/ and processed/ stay empty in git
-docs/         milestone reports, worklogs and tables
+data/         README with sources and licences, a 20-record sample; raw/, processed/ and splits/ stay empty in git
+docs/         milestone reports, worklogs, tables and figures
 models/       links to adapters on the Hugging Face Hub (no weights in git)
 notebooks/    exploration
 outputs/      reports, figures, logs, predictions
-scripts/      model_bakeoff/ (model comparison); data and baseline scripts follow
-src/          detectors, profiling, llm, evaluation, data, utils
+scripts/      download_data.py, build_all.sh (one-command data build), data audits, EDA, model_bakeoff/
+src/          data (loaders, splits, synthetic, leakage checks, baseline files), profiling (prompt context, dependencies),
+              llm (fine-tuning examples); detectors and evaluation follow in later milestones
+tests/        unit tests (pytest)
 ```
 
 Contribution rules, branches and conventions: [`CONTRIBUTING.md`](CONTRIBUTING.md). Changes per milestone: [`CHANGELOG.md`](CHANGELOG.md).
