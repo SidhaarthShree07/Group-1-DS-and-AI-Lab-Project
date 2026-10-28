@@ -1,0 +1,366 @@
+table,lhs,rhs,lhs_columns,lhs_distinct,g3,strength,majority_share_of_rhs,support
+hospital,zip,name,1,50,0.0218,0.9782,0.0363,0.974
+hospital,provider_number,name,1,47,0.0233,0.9767,0.0363,0.977
+hospital,name,emergency_service,1,47,0.0233,0.9767,0.7674,0.975
+hospital,address_1,name,1,55,0.0233,0.9767,0.0363,0.962
+hospital,zip,emergency_service,1,50,0.0233,0.9767,0.7674,0.974
+hospital,phone,name,1,53,0.0233,0.9767,0.0363,0.968
+hospital,phone,emergency_service,1,53,0.0233,0.9767,0.7674,0.968
+hospital,provider_number,emergency_service,1,47,0.0247,0.9753,0.7674,0.977
+hospital,name,provider_number,1,47,0.0247,0.9753,0.0407,0.975
+hospital,address_1,provider_number,1,55,0.0247,0.9753,0.0407,0.962
+hospital,address_1,emergency_service,1,55,0.0247,0.9753,0.7674,0.962
+hospital,city,emergency_service,1,47,0.0247,0.9753,0.7674,0.971
+hospital,zip,provider_number,1,50,0.0247,0.9753,0.0407,0.974
+hospital,county,emergency_service,1,44,0.0247,0.9753,0.7674,0.978
+hospital,phone,provider_number,1,53,0.0247,0.9753,0.0407,0.968
+hospital,phone,city,1,53,0.0247,0.9753,0.0756,0.968
+hospital,name,city,1,47,0.0262,0.9738,0.0756,0.975
+hospital,address_1,city,1,55,0.0262,0.9738,0.0756,0.962
+hospital,provider_number,city,1,47,0.0276,0.9724,0.0756,0.977
+hospital,zip,city,1,50,0.0276,0.9724,0.0756,0.974
+hospital,name,zip,1,47,0.0291,0.9709,0.0392,0.975
+hospital,phone,owner,1,53,0.0291,0.9709,0.3459,0.968
+hospital,provider_number,zip,1,47,0.0305,0.9695,0.0392,0.977
+hospital,address_1,zip,1,55,0.0305,0.9695,0.0392,0.962
+hospital,city,county,1,47,0.0305,0.9695,0.0756,0.971
+hospital,zip,owner,1,50,0.0305,0.9695,0.3459,0.974
+hospital,phone,zip,1,53,0.0305,0.9695,0.0392,0.968
+hospital,measure_code,state_average,1,47,0.0305,0.9695,0.0407,0.972
+hospital,state_average,measure_code,1,49,0.0305,0.9695,0.0407,0.967
+hospital,provider_number,owner,1,47,0.032,0.968,0.3459,0.977
+hospital,name,county,1,47,0.032,0.968,0.0756,0.975
+hospital,name,owner,1,47,0.032,0.968,0.3459,0.975
+hospital,address_1,county,1,55,0.032,0.968,0.0756,0.962
+hospital,address_1,phone,1,55,0.032,0.968,0.0392,0.962
+hospital,address_1,owner,1,55,0.032,0.968,0.3459,0.962
+hospital,measure_name,measure_code,1,52,0.032,0.968,0.0407,0.961
+hospital,measure_name,state_average,1,52,0.032,0.968,0.0407,0.961
+hospital,provider_number,county,1,47,0.0334,0.9666,0.0756,0.977
+hospital,provider_number,phone,1,47,0.0334,0.9666,0.0392,0.977
+hospital,name,phone,1,47,0.0334,0.9666,0.0392,0.975
+hospital,zip,county,1,50,0.0334,0.9666,0.0756,0.974
+hospital,zip,phone,1,50,0.0334,0.9666,0.0392,0.974
+hospital,phone,address_1,1,53,0.0334,0.9666,0.0392,0.968
+hospital,phone,county,1,53,0.0334,0.9666,0.0756,0.968
+hospital,provider_number,address_1,1,47,0.0349,0.9651,0.0392,0.977
+hospital,name,address_1,1,47,0.0349,0.9651,0.0392,0.975
+hospital,zip,address_1,1,50,0.0349,0.9651,0.0392,0.974
+hospital,measure_code,measure_name,1,47,0.0349,0.9651,0.0407,0.972
+hospital,measure_name,condition,1,52,0.0349,0.9651,0.3038,0.961
+hospital,state_average,condition,1,49,0.0349,0.9651,0.3038,0.967
+hospital,state_average,measure_name,1,49,0.0349,0.9651,0.0407,0.967
+hospital,measure_code,condition,1,47,0.0363,0.9637,0.3038,0.972
+hospital,"city, score",name,2,342,0.0392,0.9608,0.0363,0.667
+hospital,"city, score",phone,2,342,0.0422,0.9578,0.0392,0.667
+hospital,"city, score",provider_number,2,342,0.0436,0.9564,0.0407,0.667
+hospital,"city, score",address_1,2,342,0.048,0.952,0.0392,0.667
+hospital,"city, score",zip,2,342,0.048,0.952,0.0392,0.667
+hospital,city,owner,1,47,0.0552,0.9448,0.3459,0.971
+hospital,"county, score",owner,2,333,0.0581,0.9419,0.3459,0.68
+hospital,"county, score",name,2,333,0.0698,0.9302,0.0363,0.68
+hospital,"county, score",provider_number,2,333,0.0727,0.9273,0.0407,0.68
+hospital,"county, score",phone,2,333,0.0741,0.9259,0.0392,0.68
+hospital,"county, score",zip,2,333,0.077,0.923,0.0392,0.68
+hospital,"county, score",address_1,2,333,0.0785,0.9215,0.0392,0.68
+hospital,"city, owner",name,2,69,0.0872,0.9128,0.0363,0.942
+hospital,"city, owner",provider_number,2,69,0.0887,0.9113,0.0407,0.942
+hospital,"city, owner",phone,2,69,0.0901,0.9099,0.0392,0.942
+hospital,"city, owner",zip,2,69,0.0916,0.9084,0.0392,0.942
+hospital,"county, owner",name,2,68,0.0916,0.9084,0.0363,0.946
+hospital,"county, owner",provider_number,2,68,0.093,0.907,0.0407,0.946
+hospital,county,city,1,44,0.0945,0.9055,0.0756,0.978
+hospital,"county, owner",zip,2,68,0.0959,0.9041,0.0392,0.946
+hospital,"county, owner",phone,2,68,0.0974,0.9026,0.0392,0.946
+hospital,"city, owner",address_1,2,69,0.0988,0.9012,0.0392,0.942
+flights,"sched_arr_time, act_arr_time",flight,2,421,0.0351,0.9649,0.017,0.931
+flights,"sched_dep_time, act_arr_time",flight,2,407,0.0388,0.9612,0.017,0.931
+flights,"act_dep_time, sched_arr_time",flight,2,442,0.043,0.957,0.017,0.924
+flights,"sched_dep_time, act_arr_time",sched_arr_time,2,407,0.0485,0.9515,0.3186,0.931
+flights,sched_arr_time,sched_dep_time,1,175,0.0551,0.9449,0.3222,0.98
+flights,"sched_dep_time, act_dep_time",flight,2,375,0.0654,0.9346,0.017,0.94
+beers,brewery_id,brewery_name,1,397,0.0,1.0,0.0273,0.943
+beers,brewery_name,brewery_id,1,392,0.0101,0.9899,0.0225,0.946
+beers,city,state,1,362,0.0154,0.9846,0.118,0.934
+beers,brewery_id,city,1,397,0.0516,0.9484,0.0225,0.943
+beers,brewery_id,state,1,397,0.0516,0.9484,0.118,0.943
+beers,brewery_name,state,1,392,0.0522,0.9478,0.118,0.946
+beers,brewery_name,city,1,392,0.0599,0.9401,0.0225,0.946
+beers,"ounces, city",brewery_name,2,925,0.0979,0.9021,0.0273,0.657
+beers,"ounces, city",brewery_id,2,925,0.0985,0.9015,0.0225,0.657
+movies,"language, filming_locations",country,2,2895,0.0704,0.9296,0.7966,0.516
+movies,"country, filming_locations",language,2,2870,0.0771,0.9229,0.7809,0.522
+tax,f_name,gender,1,7532,0.0,1.0,0.5026,0.752
+tax,"area_code, salary",rate,2,4085,0.0,1.0,0.2056,0.905
+tax,"area_code, single_exemp",married_exemp,2,457,0.0,1.0,0.6359,1.0
+tax,"area_code, marital_status",married_exemp,2,545,0.0011,0.9989,0.6359,1.0
+tax,"area_code, married_exemp",single_exemp,2,456,0.0014,0.9986,0.6311,1.0
+tax,"state, single_exemp",married_exemp,2,104,0.0014,0.9986,0.6359,0.999
+tax,"state, marital_status",married_exemp,2,106,0.0018,0.9982,0.6359,1.0
+tax,"area_code, has_child",child_exemp,2,546,0.0019,0.9981,0.6321,0.999
+tax,"area_code, marital_status",single_exemp,2,545,0.0026,0.9974,0.6311,1.0
+tax,"state, salary",rate,2,1048,0.0026,0.9974,0.2056,1.0
+tax,area_code,state,1,273,0.0034,0.9966,0.0224,1.0
+tax,"state, married_exemp",single_exemp,2,96,0.0036,0.9964,0.6311,1.0
+tax,"state, has_child",child_exemp,2,106,0.0041,0.9959,0.6321,1.0
+tax,"state, marital_status",single_exemp,2,106,0.0045,0.9955,0.6311,1.0
+tax,"city, marital_status",single_exemp,2,8313,0.0596,0.9404,0.6311,0.571
+tax,"city, has_child",child_exemp,2,8341,0.0605,0.9395,0.6321,0.566
+tax,"city, marital_status",married_exemp,2,8313,0.0634,0.9366,0.6359,0.571
+tax,"rate, single_exemp",married_exemp,2,552,0.0716,0.9284,0.6359,1.0
+tax,"marital_status, rate",married_exemp,2,558,0.0728,0.9272,0.6359,1.0
+tax,"rate, married_exemp",single_exemp,2,551,0.0729,0.9271,0.6311,1.0
+tax,"has_child, rate",child_exemp,2,557,0.0739,0.9261,0.6321,1.0
+tax,"marital_status, rate",single_exemp,2,558,0.074,0.926,0.6311,1.0
+inpatient,phn_numbr,org_pac_id,1,1683,0.0499,0.9501,0.1643,0.589
+inpatient,phn_numbr,st,1,1683,0.0599,0.9401,0.1786,0.589
+inpatient,"lst_nm, adrs_id",org_pac_id,2,1038,0.0717,0.9283,0.1643,0.799
+inpatient,"adrs_id, NPI",org_pac_id,2,993,0.072,0.928,0.1643,0.817
+inpatient,"adrs_id, zip",org_pac_id,2,927,0.0734,0.9266,0.1643,0.813
+inpatient,"adr_ln_1, zip",org_pac_id,2,923,0.0738,0.9262,0.1643,0.815
+inpatient,"prvdr_id, adrs_id",org_pac_id,2,1046,0.0742,0.9258,0.1643,0.801
+inpatient,"zip, NPI",org_pac_id,2,923,0.0745,0.9255,0.1643,0.827
+inpatient,"prvdr_id, zip",org_pac_id,2,943,0.0752,0.9248,0.1643,0.821
+inpatient,"adrs_id, adr_ln_1",org_pac_id,2,886,0.0752,0.9248,0.1643,0.825
+inpatient,"adr_ln_1, zip",cty,2,923,0.0756,0.9244,0.1455,0.815
+inpatient,"lst_nm, zip",org_pac_id,2,979,0.0759,0.9241,0.1643,0.804
+inpatient,"prvdr_id, adr_ln_1",org_pac_id,2,1038,0.0763,0.9237,0.1643,0.809
+inpatient,"lst_nm, adr_ln_1",org_pac_id,2,1039,0.0763,0.9237,0.1643,0.803
+inpatient,"frst_nm, adrs_id",org_pac_id,2,1031,0.077,0.923,0.1643,0.807
+inpatient,"lst_nm, adr_ln_1",cty,2,1039,0.077,0.923,0.1455,0.803
+inpatient,"adrs_id, adr_ln_1",cty,2,886,0.077,0.923,0.1455,0.825
+inpatient,"adrs_id, zip",cty,2,927,0.077,0.923,0.1455,0.813
+inpatient,"adr_ln_1, NPI",org_pac_id,2,981,0.0774,0.9226,0.1643,0.821
+inpatient,"adrs_id, NPI",st,2,993,0.0781,0.9219,0.1786,0.817
+inpatient,"frst_nm, zip",org_pac_id,2,975,0.0791,0.9209,0.1643,0.813
+inpatient,phn_numbr,cty,1,1683,0.0795,0.9205,0.1455,0.589
+inpatient,"prvdr_id, lst_nm",NPI,2,793,0.0795,0.9205,0.1109,0.827
+inpatient,"lst_nm, adrs_id",st,2,1038,0.0795,0.9205,0.1786,0.799
+inpatient,"cty, zip",org_pac_id,2,796,0.0795,0.9205,0.1643,0.848
+inpatient,"lst_nm, adrs_id",cty,2,1038,0.0799,0.9201,0.1455,0.799
+inpatient,"lst_nm, zip",NPI,2,979,0.0799,0.9201,0.1109,0.804
+inpatient,"adr_ln_1, NPI",st,2,981,0.0799,0.9201,0.1786,0.821
+inpatient,"prvdr_id, adr_ln_1",cty,2,1038,0.0802,0.9198,0.1455,0.809
+inpatient,"adrs_id, cty",org_pac_id,2,841,0.0802,0.9198,0.1643,0.845
+inpatient,"prvdr_id, adr_ln_1",st,2,1038,0.0806,0.9194,0.1786,0.809
+inpatient,"lst_nm, adrs_id",NPI,2,1038,0.0806,0.9194,0.1109,0.799
+inpatient,"lst_nm, adr_ln_1",st,2,1039,0.0806,0.9194,0.1786,0.803
+inpatient,"lst_nm, zip",cty,2,979,0.0806,0.9194,0.1455,0.804
+inpatient,"adrs_id, NPI",cty,2,993,0.0806,0.9194,0.1455,0.817
+inpatient,"adrs_id, adr_ln_1",st,2,886,0.0809,0.9191,0.1786,0.825
+inpatient,"adr_ln_1, NPI",cty,2,981,0.0809,0.9191,0.1455,0.821
+inpatient,"prvdr_id, adrs_id",st,2,1046,0.0813,0.9187,0.1786,0.801
+inpatient,"frst_nm, adr_ln_1",org_pac_id,2,1014,0.0824,0.9176,0.1643,0.821
+inpatient,"lst_nm, adr_ln_1",NPI,2,1039,0.0824,0.9176,0.1109,0.803
+inpatient,"prvdr_id, adrs_id",cty,2,1046,0.0831,0.9169,0.1455,0.801
+inpatient,"zip, NPI",cty,2,923,0.0831,0.9169,0.1455,0.827
+inpatient,"prvdr_id, zip",cty,2,943,0.0834,0.9166,0.1455,0.821
+inpatient,"lst_nm, adr_ln_1",frst_nm,2,1039,0.0834,0.9166,0.1201,0.803
+inpatient,"adr_ln_1, zip",st,2,923,0.0834,0.9166,0.1786,0.815
+inpatient,"zip, NPI",st,2,923,0.0834,0.9166,0.1786,0.827
+inpatient,"prvdr_id, cty",org_pac_id,2,822,0.0838,0.9162,0.1643,0.847
+inpatient,"frst_nm, adr_ln_1",cty,2,1014,0.0841,0.9159,0.1455,0.821
+inpatient,"prvdr_id, cty",st,2,822,0.0845,0.9155,0.1786,0.847
+inpatient,"adr_ln_1, cty",org_pac_id,2,815,0.0845,0.9155,0.1643,0.857
+inpatient,"frst_nm, zip",cty,2,975,0.0848,0.9152,0.1455,0.813
+inpatient,"prvdr_id, zip",NPI,2,943,0.0852,0.9148,0.1109,0.821
+inpatient,"frst_nm, adrs_id",st,2,1031,0.0852,0.9148,0.1786,0.807
+inpatient,"lst_nm, adrs_id",frst_nm,2,1038,0.0852,0.9148,0.1201,0.799
+inpatient,"adrs_id, zip",st,2,927,0.0852,0.9148,0.1786,0.813
+inpatient,"prvdr_id, zip",st,2,943,0.0856,0.9144,0.1786,0.821
+inpatient,"frst_nm, adrs_id",cty,2,1031,0.0856,0.9144,0.1455,0.807
+inpatient,"adr_ln_1, org_pac_id",st,2,812,0.0856,0.9144,0.1786,0.851
+inpatient,"prvdr_id, org_pac_id",st,2,721,0.0859,0.9141,0.1786,0.857
+inpatient,"adr_ln_1, org_pac_id",cty,2,812,0.0859,0.9141,0.1455,0.851
+inpatient,"prvdr_id, lst_nm",frst_nm,2,793,0.0863,0.9137,0.1201,0.827
+inpatient,"lst_nm, zip",st,2,979,0.0863,0.9137,0.1786,0.804
+inpatient,"cty, NPI",org_pac_id,2,746,0.0863,0.9137,0.1643,0.87
+inpatient,"adrs_id, zip",adr_ln_1,2,927,0.0866,0.9134,0.0442,0.813
+inpatient,"prvdr_id, frst_nm",NPI,2,780,0.087,0.913,0.1109,0.836
+inpatient,"prvdr_id, adrs_id",NPI,2,1046,0.0873,0.9127,0.1109,0.801
+inpatient,"frst_nm, adr_ln_1",st,2,1014,0.0873,0.9127,0.1786,0.821
+inpatient,"prvdr_id, adr_ln_1",NPI,2,1038,0.0877,0.9123,0.1109,0.809
+inpatient,"prvdr_id, NPI",st,2,737,0.0877,0.9123,0.1786,0.847
+inpatient,"frst_nm, adrs_id",lst_nm,2,1031,0.0877,0.9123,0.1055,0.807
+inpatient,"lst_nm, cty",org_pac_id,2,815,0.0877,0.9123,0.1643,0.843
+inpatient,"adrs_id, cty",st,2,841,0.0877,0.9123,0.1786,0.845
+inpatient,"zip, org_pac_id",st,2,790,0.0877,0.9123,0.1786,0.845
+inpatient,"prvdr_id, lst_nm",org_pac_id,2,793,0.0881,0.9119,0.1643,0.827
+inpatient,"adrs_id, org_pac_id",st,2,816,0.0881,0.9119,0.1786,0.856
+inpatient,"zip, org_pac_id",cty,2,790,0.0881,0.9119,0.1455,0.845
+inpatient,"prvdr_id, cty",NPI,2,822,0.0884,0.9116,0.1109,0.847
+inpatient,"lst_nm, NPI",org_pac_id,2,723,0.0884,0.9116,0.1643,0.851
+inpatient,"adrs_id, org_pac_id",cty,2,816,0.0884,0.9116,0.1455,0.856
+inpatient,"prvdr_id, lst_nm",st,2,793,0.0888,0.9112,0.1786,0.827
+inpatient,"frst_nm, zip",st,2,975,0.0888,0.9112,0.1786,0.813
+inpatient,"adr_ln_1, cty",st,2,815,0.0888,0.9112,0.1786,0.857
+inpatient,"cty, NPI",st,2,746,0.0888,0.9112,0.1786,0.87
+inpatient,"prvdr_id, NPI",org_pac_id,2,737,0.0891,0.9109,0.1643,0.847
+inpatient,"frst_nm, zip",lst_nm,2,975,0.0891,0.9109,0.1055,0.813
+inpatient,"lst_nm, cty",st,2,815,0.0891,0.9109,0.1786,0.843
+inpatient,"frst_nm, lst_nm",NPI,2,712,0.0895,0.9105,0.1109,0.862
+inpatient,"lst_nm, NPI",frst_nm,2,723,0.0895,0.9105,0.1201,0.851
+inpatient,"org_pac_id, NPI",st,2,652,0.0895,0.9105,0.1786,0.879
+inpatient,"prvdr_id, frst_nm",lst_nm,2,780,0.0898,0.9102,0.1055,0.836
+inpatient,"frst_nm, zip",NPI,2,975,0.0898,0.9102,0.1109,0.813
+inpatient,"lst_nm, NPI",st,2,723,0.0898,0.9102,0.1786,0.851
+inpatient,"frst_nm, adr_ln_1",lst_nm,2,1014,0.0902,0.9098,0.1055,0.821
+inpatient,"adr_ln_1, zip",adrs_id,2,923,0.0902,0.9098,0.0485,0.815
+inpatient,"lst_nm, cty",NPI,2,815,0.0906,0.9094,0.1109,0.843
+inpatient,"lst_nm, zip",prvdr_id,2,979,0.0906,0.9094,0.1077,0.804
+inpatient,"cty, zip",st,2,796,0.0906,0.9094,0.1786,0.848
+inpatient,"lst_nm, adrs_id",adr_ln_1,2,1038,0.0909,0.9091,0.0442,0.799
+inpatient,"lst_nm, zip",frst_nm,2,979,0.0909,0.9091,0.1201,0.804
+inpatient,"frst_nm, adrs_id",NPI,2,1031,0.092,0.908,0.1109,0.807
+inpatient,"zip, NPI",prvdr_id,2,923,0.092,0.908,0.1077,0.827
+inpatient,"frst_nm, org_pac_id",st,2,688,0.0923,0.9077,0.1786,0.871
+inpatient,"frst_nm, NPI",lst_nm,2,707,0.0923,0.9077,0.1055,0.862
+inpatient,"lst_nm, adr_ln_1",adrs_id,2,1039,0.0923,0.9077,0.0485,0.803
+inpatient,"adrs_id, NPI",adr_ln_1,2,993,0.0923,0.9077,0.0442,0.817
+inpatient,"prvdr_id, frst_nm",st,2,780,0.0927,0.9073,0.1786,0.836
+inpatient,"prvdr_id, frst_nm",org_pac_id,2,780,0.0927,0.9073,0.1643,0.836
+inpatient,"prvdr_id, adrs_id",adr_ln_1,2,1046,0.0927,0.9073,0.0442,0.801
+inpatient,"st, zip",org_pac_id,2,762,0.0927,0.9073,0.1643,0.865
+inpatient,"frst_nm, NPI",st,2,707,0.093,0.907,0.1786,0.862
+inpatient,"cty, org_pac_id",st,2,621,0.093,0.907,0.1786,0.884
+inpatient,"lst_nm, org_pac_id",st,2,700,0.0934,0.9066,0.1786,0.861
+inpatient,"frst_nm, cty",st,2,788,0.0938,0.9062,0.1786,0.856
+inpatient,"prvdr_id, org_pac_id",NPI,2,721,0.0941,0.9059,0.1109,0.857
+inpatient,"frst_nm, adr_ln_1",NPI,2,1014,0.0941,0.9059,0.1109,0.821
+inpatient,"frst_nm, NPI",org_pac_id,2,707,0.0948,0.9052,0.1643,0.862
+inpatient,"prvdr_id, adrs_id",zip,2,1046,0.0952,0.9048,0.067,0.801
+inpatient,"frst_nm, lst_nm",org_pac_id,2,712,0.0952,0.9048,0.1643,0.862
+inpatient,"frst_nm, adrs_id",adr_ln_1,2,1031,0.0952,0.9048,0.0442,0.807
+inpatient,"adr_ln_1, st",org_pac_id,2,777,0.0952,0.9048,0.1643,0.87
+inpatient,"frst_nm, cty",org_pac_id,2,788,0.0955,0.9045,0.1643,0.856
+inpatient,"adrs_id, st",org_pac_id,2,792,0.0955,0.9045,0.1643,0.864
+inpatient,"frst_nm, lst_nm",st,2,712,0.0959,0.9041,0.1786,0.862
+inpatient,"lst_nm, org_pac_id",NPI,2,700,0.0959,0.9041,0.1109,0.861
+inpatient,"lst_nm, cty",frst_nm,2,815,0.0963,0.9037,0.1201,0.843
+inpatient,"prvdr_id, adr_ln_1",zip,2,1038,0.097,0.903,0.067,0.809
+inpatient,"prvdr_id, adr_ln_1",adrs_id,2,1038,0.0973,0.9027,0.0485,0.809
+inpatient,"adrs_id, cty",adr_ln_1,2,841,0.0973,0.9027,0.0442,0.845
+inpatient,"frst_nm, zip",prvdr_id,2,975,0.0988,0.9012,0.1077,0.813
+inpatient,"adr_ln_1, st",cty,2,777,0.0995,0.9005,0.1455,0.87
+facilities,"CCN, ZipCode",CMSRegion,2,1632,0.0562,0.9438,0.2118,0.83
+facilities,"CCN, Address1",CMSRegion,2,1800,0.0567,0.9433,0.2118,0.804
+facilities,"CCN, City",CMSRegion,2,1788,0.0573,0.9427,0.2118,0.808
+facilities,"CCN, Facility",CMSRegion,2,1628,0.0581,0.9419,0.2118,0.832
+facilities,"City, ZipCode",CMSRegion,2,1749,0.0587,0.9413,0.2118,0.812
+facilities,"Address1, PhoneNumber",CMSRegion,2,1749,0.059,0.941,0.2118,0.814
+facilities,"CCN, County",CMSRegion,2,1596,0.0592,0.9408,0.2118,0.843
+facilities,"Address1, ZipCode",CMSRegion,2,1764,0.0596,0.9404,0.2118,0.81
+facilities,"CCN, PhoneNumber",CMSRegion,2,1602,0.0598,0.9402,0.2118,0.838
+facilities,"Facility, Address1",CMSRegion,2,1767,0.0601,0.9399,0.2118,0.81
+facilities,"Facility, ZipCode",CMSRegion,2,1604,0.0601,0.9399,0.2118,0.835
+facilities,"Address1, City",CMSRegion,2,1772,0.0601,0.9399,0.2118,0.81
+facilities,"Facility, City",CMSRegion,2,1761,0.0603,0.9397,0.2118,0.811
+facilities,"City, PhoneNumber",CMSRegion,2,1752,0.0603,0.9397,0.2118,0.815
+facilities,"State, ZipCode",CMSRegion,2,1418,0.0608,0.9392,0.2118,0.869
+facilities,"Facility, PhoneNumber",CMSRegion,2,1586,0.061,0.939,0.2118,0.841
+facilities,"ZipCode, PhoneNumber",CMSRegion,2,1573,0.0614,0.9386,0.2118,0.842
+facilities,"ZipCode, County",CMSRegion,2,1553,0.0615,0.9385,0.2118,0.846
+facilities,"CCN, State",CMSRegion,2,1446,0.0621,0.9379,0.2118,0.867
+facilities,"Address1, County",CMSRegion,2,1725,0.0621,0.9379,0.2118,0.821
+facilities,"Address1, State",CMSRegion,2,1587,0.0623,0.9377,0.2118,0.845
+facilities,"State, PhoneNumber",CMSRegion,2,1380,0.0624,0.9376,0.2118,0.874
+facilities,"County, PhoneNumber",CMSRegion,2,1542,0.0624,0.9376,0.2118,0.853
+facilities,"Facility, County",CMSRegion,2,1554,0.063,0.937,0.2118,0.85
+facilities,"City, State",CMSRegion,2,1472,0.0633,0.9367,0.2118,0.849
+facilities,"City, County",CMSRegion,2,1590,0.0637,0.9363,0.2118,0.831
+facilities,"Facility, State",CMSRegion,2,1424,0.0639,0.9361,0.2118,0.869
+facilities,"State, County",CMSRegion,2,1138,0.0649,0.9351,0.2118,0.889
+facilities,"CCN, Address1",State,2,1800,0.0769,0.9231,0.095,0.804
+facilities,"Facility, Address1",State,2,1767,0.0771,0.9229,0.095,0.81
+facilities,"Facility, City",State,2,1761,0.0789,0.9211,0.095,0.811
+facilities,"CCN, City",State,2,1788,0.0798,0.9202,0.095,0.808
+facilities,"Address1, ZipCode",State,2,1764,0.0798,0.9202,0.095,0.81
+facilities,"Address1, City",State,2,1772,0.08,0.92,0.095,0.81
+facilities,"CCN, Facility",State,2,1628,0.0802,0.9198,0.095,0.832
+facilities,"Address1, PhoneNumber",State,2,1749,0.0803,0.9197,0.095,0.814
+facilities,"CCN, Address1",Facility,2,1800,0.0811,0.9189,0.0388,0.804
+facilities,"CCN, Address1",ZipCode,2,1800,0.0814,0.9186,0.0352,0.804
+facilities,"Facility, ZipCode",State,2,1604,0.0816,0.9184,0.095,0.835
+facilities,"Address1, County",State,2,1725,0.0816,0.9184,0.095,0.821
+facilities,"City, ZipCode",State,2,1749,0.0816,0.9184,0.095,0.812
+facilities,"Facility, Address1",ZipCode,2,1767,0.0818,0.9182,0.0352,0.81
+facilities,"Address1, City",ZipCode,2,1772,0.0819,0.9181,0.0352,0.81
+facilities,"CCN, ZipCode",State,2,1632,0.0823,0.9177,0.095,0.83
+facilities,"CCN, Address1",PhoneNumber,2,1800,0.0825,0.9175,0.0671,0.804
+facilities,"CCN, City",ZipCode,2,1788,0.0828,0.9172,0.0352,0.808
+facilities,"CCN, City",Facility,2,1788,0.0836,0.9164,0.0388,0.808
+facilities,"Address1, ZipCode",Facility,2,1764,0.0836,0.9164,0.0388,0.81
+facilities,"Facility, Address1",PhoneNumber,2,1767,0.0837,0.9163,0.0671,0.81
+facilities,"Facility, City",ZipCode,2,1761,0.0837,0.9163,0.0352,0.811
+facilities,"Facility, PhoneNumber",State,2,1586,0.0837,0.9163,0.095,0.841
+facilities,"Address1, ZipCode",County,2,1764,0.0837,0.9163,0.0376,0.81
+facilities,"CCN, Facility",ZipCode,2,1628,0.0839,0.9161,0.0352,0.832
+facilities,"Address1, PhoneNumber",ZipCode,2,1749,0.0839,0.9161,0.0352,0.814
+facilities,"City, PhoneNumber",State,2,1752,0.0839,0.9161,0.095,0.815
+facilities,"CCN, Address1",County,2,1800,0.0841,0.9159,0.0376,0.804
+facilities,"Facility, County",State,2,1554,0.0841,0.9159,0.095,0.85
+facilities,"Address1, ZipCode",City,2,1764,0.0841,0.9159,0.037,0.81
+facilities,"Address1, ZipCode",PhoneNumber,2,1764,0.0841,0.9159,0.0671,0.81
+facilities,"Facility, Address1",County,2,1767,0.0843,0.9157,0.0376,0.81
+facilities,"CCN, County",State,2,1596,0.0845,0.9155,0.095,0.843
+facilities,"Address1, City",Facility,2,1772,0.0845,0.9155,0.0388,0.81
+facilities,"CCN, Address1",City,2,1800,0.0846,0.9154,0.037,0.804
+facilities,"CCN, PhoneNumber",State,2,1602,0.0846,0.9154,0.095,0.838
+facilities,"Facility, Address1",City,2,1767,0.0846,0.9154,0.037,0.81
+facilities,"Address1, PhoneNumber",Facility,2,1749,0.0846,0.9154,0.0388,0.814
+facilities,"City, ZipCode",County,2,1749,0.0846,0.9154,0.0376,0.812
+facilities,"CCN, ZipCode",Facility,2,1632,0.085,0.915,0.0388,0.83
+facilities,"Address1, City",County,2,1772,0.085,0.915,0.0376,0.81
+facilities,"City, County",State,2,1590,0.085,0.915,0.095,0.831
+facilities,"CCN, Facility",PhoneNumber,2,1628,0.0853,0.9147,0.0671,0.832
+facilities,"CCN, City",Address1,2,1788,0.0853,0.9147,0.0352,0.808
+facilities,"CCN, ZipCode",PhoneNumber,2,1632,0.0855,0.9145,0.0671,0.83
+facilities,"CCN, City",PhoneNumber,2,1788,0.0857,0.9143,0.0671,0.808
+facilities,"Facility, City",Address1,2,1761,0.0859,0.9141,0.0352,0.811
+facilities,"Facility, City",County,2,1761,0.0859,0.9141,0.0376,0.811
+facilities,"Address1, PhoneNumber",County,2,1749,0.0859,0.9141,0.0376,0.814
+facilities,"CCN, City",County,2,1788,0.0861,0.9139,0.0376,0.808
+facilities,"ZipCode, County",State,2,1553,0.0864,0.9136,0.095,0.846
+facilities,"Address1, City",PhoneNumber,2,1772,0.0866,0.9134,0.0671,0.81
+facilities,"Facility, ZipCode",County,2,1604,0.0873,0.9127,0.0376,0.835
+facilities,"ZipCode, PhoneNumber",State,2,1573,0.0873,0.9127,0.095,0.842
+facilities,"Facility, Address1",CCN,2,1767,0.0877,0.9123,0.0392,0.81
+facilities,"Facility, City",PhoneNumber,2,1761,0.0877,0.9123,0.0671,0.811
+facilities,"Facility, ZipCode",PhoneNumber,2,1604,0.0877,0.9123,0.0671,0.835
+facilities,"Facility, PhoneNumber",ZipCode,2,1586,0.0877,0.9123,0.0352,0.841
+facilities,"CCN, PhoneNumber",ZipCode,2,1602,0.0879,0.9121,0.0352,0.838
+facilities,"CCN, PhoneNumber",Facility,2,1602,0.088,0.912,0.0388,0.838
+facilities,"CCN, Facility",County,2,1628,0.0886,0.9114,0.0376,0.832
+facilities,"CCN, ZipCode",County,2,1632,0.0886,0.9114,0.0376,0.83
+facilities,"City, PhoneNumber",County,2,1752,0.0886,0.9114,0.0376,0.815
+facilities,"Address1, City",CCN,2,1772,0.0887,0.9113,0.0392,0.81
+facilities,"Address1, ZipCode",CCN,2,1764,0.0887,0.9113,0.0392,0.81
+facilities,"Facility, City",CCN,2,1761,0.0889,0.9111,0.0392,0.811
+facilities,"County, PhoneNumber",State,2,1542,0.0891,0.9109,0.095,0.853
+facilities,"Address1, PhoneNumber",City,2,1749,0.0893,0.9107,0.037,0.814
+facilities,"City, PhoneNumber",ZipCode,2,1752,0.0893,0.9107,0.0352,0.815
+facilities,"Facility, PhoneNumber",County,2,1586,0.09,0.91,0.0376,0.841
+facilities,"Address1, County",ZipCode,2,1725,0.09,0.91,0.0352,0.821
+facilities,"Address1, PhoneNumber",CCN,2,1749,0.09,0.91,0.0392,0.814
+facilities,"Facility, ZipCode",CCN,2,1604,0.0904,0.9096,0.0392,0.835
+facilities,"City, PhoneNumber",Address1,2,1752,0.0905,0.9095,0.0352,0.815
+facilities,"CCN, County",ZipCode,2,1596,0.0909,0.9091,0.0352,0.843
+facilities,"ZipCode, PhoneNumber",Facility,2,1573,0.0913,0.9087,0.0388,0.842
+facilities,"CCN, PhoneNumber",County,2,1602,0.0916,0.9084,0.0376,0.838
+facilities,"City, PhoneNumber",Facility,2,1752,0.0916,0.9084,0.0388,0.815
+facilities,"Facility, PhoneNumber",CCN,2,1586,0.0918,0.9082,0.0392,0.841
+facilities,"Address1, County",Facility,2,1725,0.0918,0.9082,0.0388,0.821
+facilities,"CCN, County",Facility,2,1596,0.092,0.908,0.0388,0.843
+facilities,"CCN, County",PhoneNumber,2,1596,0.092,0.908,0.0671,0.843
+facilities,"ZipCode, PhoneNumber",County,2,1573,0.092,0.908,0.0376,0.842
+facilities,"Address1, County",PhoneNumber,2,1725,0.0927,0.9073,0.0671,0.821
+facilities,"Facility, County",ZipCode,2,1554,0.0938,0.9062,0.0352,0.85
+facilities,"Address1, County",City,2,1725,0.0938,0.9062,0.037,0.821
+facilities,"City, PhoneNumber",CCN,2,1752,0.0943,0.9057,0.0392,0.815
+facilities,"ZipCode, PhoneNumber",CCN,2,1573,0.0952,0.9048,0.0392,0.842
+facilities,"City, ZipCode",Address1,2,1749,0.0959,0.9041,0.0352,0.812
+facilities,"Facility, County",PhoneNumber,2,1554,0.0966,0.9034,0.0671,0.85
+facilities,"City, ZipCode",Facility,2,1749,0.0968,0.9032,0.0388,0.812
+facilities,"Address1, County",CCN,2,1725,0.0973,0.9027,0.0392,0.821
+facilities,"City, ZipCode",PhoneNumber,2,1749,0.0982,0.9018,0.0671,0.812
+facilities,"City, ZipCode",CCN,2,1749,0.0998,0.9002,0.0392,0.812

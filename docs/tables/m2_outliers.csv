@@ -1,0 +1,12 @@
+table,column,cells_used,numeric_cells,true_errors,true_errors_numeric,mad_flagged,mad_tp,mad_fp,mad_precision,mad_recall_all_errors,mad_recall_numeric_errors,if_flagged,if_tp,if_fp,if_precision,if_recall_all_errors,if_recall_numeric_errors
+beers,abv,1686,1163,487,0,22,0,22,0.0,0.0,0.0,56,0,56,0.0,0.0,0.0
+beers,ibu,1686,1008,678,0,4,0,4,0.0,0.0,0.0,51,0,51,0.0,0.0,0.0
+rayyan,article_jvolumn,700,686,14,0,40,0,40,0.0,0.0,0.0,34,0,34,0.0,0.0,0.0
+rayyan,article_jissue,700,666,34,0,34,0,34,0.0,0.0,0.0,34,0,34,0.0,0.0,0.0
+movies,year,5172,5030,142,0,194,0,194,0.0,0.0,0.0,223,0,223,0.0,0.0,0.0
+movies,rating_value,5172,4870,615,475,52,5,47,0.0962,0.0081,0.0105,216,16,200,0.0741,0.026,0.0337
+tax,salary,14000,14000,0,0,0,0,0,0.0,0.0,0.0,680,0,680,0.0,0.0,0.0
+tax,rate,8024,8011,0,0,0,0,0,0.0,0.0,0.0,391,0,391,0.0,0.0,0.0
+tax,single_exemp,14000,13980,20,0,0,0,0,0.0,0.0,0.0,646,0,646,0.0,0.0,0.0
+tax,married_exemp,14000,14000,0,0,0,0,0,0.0,0.0,0.0,627,0,627,0.0,0.0,0.0
+tax,child_exemp,14000,13983,17,0,0,0,0,0.0,0.0,0.0,622,0,622,0.0,0.0,0.0
