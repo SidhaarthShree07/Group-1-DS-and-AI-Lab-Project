@@ -1,319 +1,300 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 920" width="1000" height="920" style="background-color:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-<rect width="1000" height="920" fill="#ffffff" rx="8"/>
-<text x="500" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Per-Column Error Rate Distribution Across Core Benchmark Tables</text>
-<text x="500" y="62" text-anchor="middle" font-size="13" fill="#64748b">Verified on 193,986 cells across Hospital, Flights, Beers, Rayyan, and Movies (18,414 Total Errors)</text>
-<g transform="translate(40, 95)">
-<rect x="0" y="0" width="920" height="419" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
-<rect x="0" y="0" width="8" height="419" fill="#2563eb" rx="2"/>
-<text x="20" y="20" font-size="15" font-weight="700" fill="#1e293b">Hospital <tspan font-size="12" font-weight="500" fill="#64748b">(19 columns · 509 errors · table avg: 2.7%)</tspan></text>
-<line x1="220" y1="28" x2="800" y2="28" stroke="#cbd5e1" stroke-width="1"/>
-<line x1="220.0" y1="28" x2="220.0" y2="411" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="220.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">0%</text>
-<line x1="365.0" y1="28" x2="365.0" y2="411" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="365.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">25%</text>
-<line x1="510.0" y1="28" x2="510.0" y2="411" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="510.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">50%</text>
-<line x1="655.0" y1="28" x2="655.0" y2="411" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="655.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">75%</text>
-<line x1="800.0" y1="28" x2="800.0" y2="411" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="800.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">100%</text>
-<text x="210" y="55" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ProviderNumber</text>
-<rect x="220" y="44" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="44" width="16.2" height="14" fill="#2563eb" rx="3"/>
-<text x="244.24" y="55" font-size="11" font-weight="600" fill="#475569">2.8% (28)</text>
-<text x="210" y="75" text-anchor="end" font-size="11" font-weight="500" fill="#334155">HospitalName</text>
-<rect x="220" y="64" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="64" width="13.9" height="14" fill="#2563eb" rx="3"/>
-<text x="241.92" y="75" font-size="11" font-weight="600" fill="#475569">2.4% (24)</text>
-<text x="210" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Address1</text>
-<rect x="220" y="84" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="84" width="18.0" height="14" fill="#2563eb" rx="3"/>
-<text x="245.98" y="95" font-size="11" font-weight="600" fill="#475569">3.1% (31)</text>
-<text x="210" y="115" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Address2</text>
-<rect x="220" y="104" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="115" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="135" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Address3</text>
-<rect x="220" y="124" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="135" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="155" text-anchor="end" font-size="11" font-weight="500" fill="#334155">City</text>
-<rect x="220" y="144" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="144" width="19.1" height="14" fill="#2563eb" rx="3"/>
-<text x="247.14" y="155" font-size="11" font-weight="600" fill="#475569">3.3% (33)</text>
-<text x="210" y="175" text-anchor="end" font-size="11" font-weight="500" fill="#334155">State</text>
-<rect x="220" y="164" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="164" width="15.1" height="14" fill="#2563eb" rx="3"/>
-<text x="243.08" y="175" font-size="11" font-weight="600" fill="#475569">2.6% (26)</text>
-<text x="210" y="195" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ZipCode</text>
-<rect x="220" y="184" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="184" width="17.4" height="14" fill="#2563eb" rx="3"/>
-<text x="245.4" y="195" font-size="11" font-weight="600" fill="#475569">3.0% (30)</text>
-<text x="210" y="215" text-anchor="end" font-size="11" font-weight="500" fill="#334155">CountyName</text>
-<rect x="220" y="204" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="204" width="22.6" height="14" fill="#2563eb" rx="3"/>
-<text x="250.62" y="215" font-size="11" font-weight="600" fill="#475569">3.9% (39)</text>
-<text x="210" y="235" text-anchor="end" font-size="11" font-weight="500" fill="#334155">PhoneNumber</text>
-<rect x="220" y="224" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="224" width="19.7" height="14" fill="#2563eb" rx="3"/>
-<text x="247.72" y="235" font-size="11" font-weight="600" fill="#475569">3.4% (34)</text>
-<text x="210" y="255" text-anchor="end" font-size="11" font-weight="500" fill="#334155">HospitalType</text>
-<rect x="220" y="244" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="244" width="18.6" height="14" fill="#2563eb" rx="3"/>
-<text x="246.56" y="255" font-size="11" font-weight="600" fill="#475569">3.2% (32)</text>
-<text x="210" y="275" text-anchor="end" font-size="11" font-weight="500" fill="#334155">HospitalOwner</text>
-<rect x="220" y="264" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="264" width="15.7" height="14" fill="#2563eb" rx="3"/>
-<text x="243.66" y="275" font-size="11" font-weight="600" fill="#475569">2.7% (27)</text>
-<text x="210" y="295" text-anchor="end" font-size="11" font-weight="500" fill="#334155">EmergencyService</text>
-<rect x="220" y="284" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="284" width="15.7" height="14" fill="#2563eb" rx="3"/>
-<text x="243.66" y="295" font-size="11" font-weight="600" fill="#475569">2.7% (27)</text>
-<text x="210" y="315" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Condition</text>
-<rect x="220" y="304" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="304" width="18.6" height="14" fill="#2563eb" rx="3"/>
-<text x="246.56" y="315" font-size="11" font-weight="600" fill="#475569">3.2% (32)</text>
-<text x="210" y="335" text-anchor="end" font-size="11" font-weight="500" fill="#334155">MeasureCode</text>
-<rect x="220" y="324" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="324" width="16.8" height="14" fill="#2563eb" rx="3"/>
-<text x="244.82" y="335" font-size="11" font-weight="600" fill="#475569">2.9% (29)</text>
-<text x="210" y="355" text-anchor="end" font-size="11" font-weight="500" fill="#334155">MeasureName</text>
-<rect x="220" y="344" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="344" width="20.9" height="14" fill="#2563eb" rx="3"/>
-<text x="248.88" y="355" font-size="11" font-weight="600" fill="#475569">3.6% (36)</text>
-<text x="210" y="375" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Score</text>
-<rect x="220" y="364" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="364" width="13.3" height="14" fill="#2563eb" rx="3"/>
-<text x="241.34" y="375" font-size="11" font-weight="600" fill="#475569">2.3% (23)</text>
-<text x="210" y="395" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Sample</text>
-<rect x="220" y="384" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="384" width="18.0" height="14" fill="#2563eb" rx="3"/>
-<text x="245.98" y="395" font-size="11" font-weight="600" fill="#475569">3.1% (31)</text>
-<text x="210" y="415" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Stateavg</text>
-<rect x="220" y="404" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="404" width="15.7" height="14" fill="#2563eb" rx="3"/>
-<text x="243.66" y="415" font-size="11" font-weight="600" fill="#475569">2.7% (27)</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 986" width="1000" height="986" style="background-color:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+<rect width="1000" height="986" fill="#ffffff"/>
+<text x="500" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Where the errors are: error rate per column, all five core tables</text>
+<text x="500" y="60" text-anchor="middle" font-size="13" fill="#64748b">Share of cells in each column that are errors (number of error cells in brackets). 193,986 cells in total, 18,414 errors.</text>
+<text x="500" y="80" text-anchor="middle" font-size="12" fill="#64748b">Reading guide: a long bar means the column is a good place to look for errors; an empty bar means the column has no errors.</text>
+<g transform="translate(20, 100)">
+<rect x="0" y="0" width="470" height="419" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="0" y="0" width="6" height="419" fill="#2563eb" rx="2"/>
+<text x="16" y="20" font-size="15" font-weight="700" fill="#1e293b">Hospital</text>
+<text x="458" y="20" text-anchor="end" font-size="11" fill="#64748b">19 columns, 509 errors, 2.7% of cells</text>
+<line x1="160.0" y1="30" x2="160.0" y2="411" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="160.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">0%</text>
+<line x1="270.0" y1="30" x2="270.0" y2="411" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="270.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">50%</text>
+<line x1="380.0" y1="30" x2="380.0" y2="411" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="380.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">100%</text>
+<text x="152" y="57" text-anchor="end" font-size="11" font-weight="500" fill="#334155">CountyName</text>
+<rect x="160" y="46" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="46" width="8.6" height="14" fill="#2563eb" rx="3"/>
+<text x="174.58" y="57" font-size="10.5" font-weight="600" fill="#475569">3.9% (39)</text>
+<text x="152" y="76" text-anchor="end" font-size="11" font-weight="500" fill="#334155">MeasureName</text>
+<rect x="160" y="65" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="65" width="7.9" height="14" fill="#2563eb" rx="3"/>
+<text x="173.92" y="76" font-size="10.5" font-weight="600" fill="#475569">3.6% (36)</text>
+<text x="152" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">PhoneNumber</text>
+<rect x="160" y="84" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="84" width="7.5" height="14" fill="#2563eb" rx="3"/>
+<text x="173.48" y="95" font-size="10.5" font-weight="600" fill="#475569">3.4% (34)</text>
+<text x="152" y="114" text-anchor="end" font-size="11" font-weight="500" fill="#334155">City</text>
+<rect x="160" y="103" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="103" width="7.3" height="14" fill="#2563eb" rx="3"/>
+<text x="173.26" y="114" font-size="10.5" font-weight="600" fill="#475569">3.3% (33)</text>
+<text x="152" y="133" text-anchor="end" font-size="11" font-weight="500" fill="#334155">HospitalType</text>
+<rect x="160" y="122" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="122" width="7.0" height="14" fill="#2563eb" rx="3"/>
+<text x="173.04" y="133" font-size="10.5" font-weight="600" fill="#475569">3.2% (32)</text>
+<text x="152" y="152" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Condition</text>
+<rect x="160" y="141" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="141" width="7.0" height="14" fill="#2563eb" rx="3"/>
+<text x="173.04" y="152" font-size="10.5" font-weight="600" fill="#475569">3.2% (32)</text>
+<text x="152" y="171" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Address1</text>
+<rect x="160" y="160" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="160" width="6.8" height="14" fill="#2563eb" rx="3"/>
+<text x="172.82" y="171" font-size="10.5" font-weight="600" fill="#475569">3.1% (31)</text>
+<text x="152" y="190" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Sample</text>
+<rect x="160" y="179" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="179" width="6.8" height="14" fill="#2563eb" rx="3"/>
+<text x="172.82" y="190" font-size="10.5" font-weight="600" fill="#475569">3.1% (31)</text>
+<text x="152" y="209" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ZipCode</text>
+<rect x="160" y="198" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="198" width="6.6" height="14" fill="#2563eb" rx="3"/>
+<text x="172.6" y="209" font-size="10.5" font-weight="600" fill="#475569">3.0% (30)</text>
+<text x="152" y="228" text-anchor="end" font-size="11" font-weight="500" fill="#334155">MeasureCode</text>
+<rect x="160" y="217" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="217" width="6.4" height="14" fill="#2563eb" rx="3"/>
+<text x="172.38" y="228" font-size="10.5" font-weight="600" fill="#475569">2.9% (29)</text>
+<text x="152" y="247" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ProviderNumber</text>
+<rect x="160" y="236" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="236" width="6.2" height="14" fill="#2563eb" rx="3"/>
+<text x="172.16" y="247" font-size="10.5" font-weight="600" fill="#475569">2.8% (28)</text>
+<text x="152" y="266" text-anchor="end" font-size="11" font-weight="500" fill="#334155">HospitalOwner</text>
+<rect x="160" y="255" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="255" width="5.9" height="14" fill="#2563eb" rx="3"/>
+<text x="171.94" y="266" font-size="10.5" font-weight="600" fill="#475569">2.7% (27)</text>
+<text x="152" y="285" text-anchor="end" font-size="11" font-weight="500" fill="#334155">EmergencyService</text>
+<rect x="160" y="274" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="274" width="5.9" height="14" fill="#2563eb" rx="3"/>
+<text x="171.94" y="285" font-size="10.5" font-weight="600" fill="#475569">2.7% (27)</text>
+<text x="152" y="304" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Stateavg</text>
+<rect x="160" y="293" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="293" width="5.9" height="14" fill="#2563eb" rx="3"/>
+<text x="171.94" y="304" font-size="10.5" font-weight="600" fill="#475569">2.7% (27)</text>
+<text x="152" y="323" text-anchor="end" font-size="11" font-weight="500" fill="#334155">State</text>
+<rect x="160" y="312" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="312" width="5.7" height="14" fill="#2563eb" rx="3"/>
+<text x="171.72" y="323" font-size="10.5" font-weight="600" fill="#475569">2.6% (26)</text>
+<text x="152" y="342" text-anchor="end" font-size="11" font-weight="500" fill="#334155">HospitalName</text>
+<rect x="160" y="331" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="331" width="5.3" height="14" fill="#2563eb" rx="3"/>
+<text x="171.28" y="342" font-size="10.5" font-weight="600" fill="#475569">2.4% (24)</text>
+<text x="152" y="361" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Score</text>
+<rect x="160" y="350" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="350" width="5.1" height="14" fill="#2563eb" rx="3"/>
+<text x="171.06" y="361" font-size="10.5" font-weight="600" fill="#475569">2.3% (23)</text>
+<text x="152" y="380" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Address2</text>
+<rect x="160" y="369" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="380" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="399" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Address3</text>
+<rect x="160" y="388" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="399" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
 </g>
-<g transform="translate(40, 526)">
-<rect x="0" y="0" width="920" height="159" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
-<rect x="0" y="0" width="8" height="159" fill="#d97706" rx="2"/>
-<text x="20" y="20" font-size="15" font-weight="700" fill="#1e293b">Flights <tspan font-size="12" font-weight="500" fill="#64748b">(6 columns · 4,920 errors · table avg: 34.5%)</tspan></text>
-<line x1="220" y1="28" x2="800" y2="28" stroke="#cbd5e1" stroke-width="1"/>
-<line x1="220.0" y1="28" x2="220.0" y2="151" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="220.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">0%</text>
-<line x1="365.0" y1="28" x2="365.0" y2="151" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="365.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">25%</text>
-<line x1="510.0" y1="28" x2="510.0" y2="151" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="510.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">50%</text>
-<line x1="655.0" y1="28" x2="655.0" y2="151" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="655.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">75%</text>
-<line x1="800.0" y1="28" x2="800.0" y2="151" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="800.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">100%</text>
-<text x="210" y="55" text-anchor="end" font-size="11" font-weight="500" fill="#334155">src</text>
-<rect x="220" y="44" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="55" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="75" text-anchor="end" font-size="11" font-weight="500" fill="#334155">flight</text>
-<rect x="220" y="64" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="75" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">sched_dep_time</text>
-<rect x="220" y="84" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="84" width="222.4" height="14" fill="#d97706" rx="3"/>
-<text x="450.38215488215485" y="95" font-size="11" font-weight="600" fill="#475569">38.3% (911)</text>
-<text x="210" y="115" text-anchor="end" font-size="11" font-weight="500" fill="#334155">act_dep_time</text>
-<rect x="220" y="104" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="104" width="380.3" height="14" fill="#d97706" rx="3"/>
-<text x="608.3198653198654" y="115" font-size="11" font-weight="600" fill="#475569">65.6% (1,558)</text>
-<text x="210" y="135" text-anchor="end" font-size="11" font-weight="500" fill="#334155">sched_arr_time</text>
-<rect x="220" y="124" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="124" width="268.5" height="14" fill="#d97706" rx="3"/>
-<text x="496.51851851851853" y="135" font-size="11" font-weight="600" fill="#475569">46.3% (1,100)</text>
-<text x="210" y="155" text-anchor="end" font-size="11" font-weight="500" fill="#334155">act_arr_time</text>
-<rect x="220" y="144" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="144" width="329.8" height="14" fill="#d97706" rx="3"/>
-<text x="557.7895622895622" y="155" font-size="11" font-weight="600" fill="#475569">56.9% (1,351)</text>
+<g transform="translate(510, 776)">
+<rect x="0" y="0" width="470" height="172" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="0" y="0" width="6" height="172" fill="#d97706" rx="2"/>
+<text x="16" y="20" font-size="15" font-weight="700" fill="#1e293b">Flights</text>
+<text x="458" y="20" text-anchor="end" font-size="11" fill="#64748b">6 columns, 4,920 errors, 34.5% of cells</text>
+<line x1="160.0" y1="30" x2="160.0" y2="164" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="160.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">0%</text>
+<line x1="270.0" y1="30" x2="270.0" y2="164" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="270.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">50%</text>
+<line x1="380.0" y1="30" x2="380.0" y2="164" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="380.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">100%</text>
+<text x="152" y="57" text-anchor="end" font-size="11" font-weight="500" fill="#334155">act_dep_time</text>
+<rect x="160" y="46" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="46" width="144.3" height="14" fill="#d97706" rx="3"/>
+<text x="298.25925925925924" y="57" text-anchor="end" font-size="10.5" font-weight="700" fill="#ffffff">65.6% (1,558)</text>
+<text x="152" y="76" text-anchor="end" font-size="11" font-weight="500" fill="#334155">act_arr_time</text>
+<rect x="160" y="65" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="65" width="125.1" height="14" fill="#d97706" rx="3"/>
+<text x="279.0925925925926" y="76" text-anchor="end" font-size="10.5" font-weight="700" fill="#ffffff">56.9% (1,351)</text>
+<text x="152" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">sched_arr_time</text>
+<rect x="160" y="84" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="84" width="101.9" height="14" fill="#d97706" rx="3"/>
+<text x="267.85185185185185" y="95" font-size="10.5" font-weight="600" fill="#475569">46.3% (1,100)</text>
+<text x="152" y="114" text-anchor="end" font-size="11" font-weight="500" fill="#334155">sched_dep_time</text>
+<rect x="160" y="103" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="103" width="84.4" height="14" fill="#d97706" rx="3"/>
+<text x="250.35185185185185" y="114" font-size="10.5" font-weight="600" fill="#475569">38.3% (911)</text>
+<text x="152" y="133" text-anchor="end" font-size="11" font-weight="500" fill="#334155">src</text>
+<rect x="160" y="122" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="133" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="152" text-anchor="end" font-size="11" font-weight="500" fill="#334155">flight</text>
+<rect x="160" y="141" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="152" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
 </g>
-<g transform="translate(40, 697)">
-<rect x="0" y="0" width="920" height="239" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
-<rect x="0" y="0" width="8" height="239" fill="#059669" rx="2"/>
-<text x="20" y="20" font-size="15" font-weight="700" fill="#1e293b">Beers <tspan font-size="12" font-weight="500" fill="#64748b">(10 columns · 4,362 errors · table avg: 18.1%)</tspan></text>
-<line x1="220" y1="28" x2="800" y2="28" stroke="#cbd5e1" stroke-width="1"/>
-<line x1="220.0" y1="28" x2="220.0" y2="231" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="220.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">0%</text>
-<line x1="365.0" y1="28" x2="365.0" y2="231" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="365.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">25%</text>
-<line x1="510.0" y1="28" x2="510.0" y2="231" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="510.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">50%</text>
-<line x1="655.0" y1="28" x2="655.0" y2="231" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="655.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">75%</text>
-<line x1="800.0" y1="28" x2="800.0" y2="231" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="800.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">100%</text>
-<text x="210" y="55" text-anchor="end" font-size="11" font-weight="500" fill="#334155">id</text>
-<rect x="220" y="44" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="55" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="75" text-anchor="end" font-size="11" font-weight="500" fill="#334155">beer-name</text>
-<rect x="220" y="64" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="75" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">style</text>
-<rect x="220" y="84" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="95" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="115" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ounces</text>
-<rect x="220" y="104" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="104" width="580.0" height="14" fill="#059669" rx="3"/>
-<text x="808.0" y="115" font-size="11" font-weight="600" fill="#475569">100.0% (2,410)</text>
-<text x="210" y="135" text-anchor="end" font-size="11" font-weight="500" fill="#334155">abv</text>
-<rect x="220" y="124" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="124" width="166.8" height="14" fill="#059669" rx="3"/>
-<text x="394.78008298755185" y="135" font-size="11" font-weight="600" fill="#475569">28.8% (693)</text>
-<text x="210" y="155" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ibu</text>
-<rect x="220" y="144" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="144" width="241.9" height="14" fill="#059669" rx="3"/>
-<text x="469.86721991701245" y="155" font-size="11" font-weight="600" fill="#475569">41.7% (1,005)</text>
-<text x="210" y="175" text-anchor="end" font-size="11" font-weight="500" fill="#334155">brewery_id</text>
-<rect x="220" y="164" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="175" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="195" text-anchor="end" font-size="11" font-weight="500" fill="#334155">brewery-name</text>
-<rect x="220" y="184" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="195" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="215" text-anchor="end" font-size="11" font-weight="500" fill="#334155">city</text>
-<rect x="220" y="204" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="204" width="30.6" height="14" fill="#059669" rx="3"/>
-<text x="258.5643153526971" y="215" font-size="11" font-weight="600" fill="#475569">5.3% (127)</text>
-<text x="210" y="235" text-anchor="end" font-size="11" font-weight="500" fill="#334155">state</text>
-<rect x="220" y="224" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="224" width="30.6" height="14" fill="#059669" rx="3"/>
-<text x="258.5643153526971" y="235" font-size="11" font-weight="600" fill="#475569">5.3% (127)</text>
+<g transform="translate(20, 533)">
+<rect x="0" y="0" width="470" height="248" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="0" y="0" width="6" height="248" fill="#059669" rx="2"/>
+<text x="16" y="20" font-size="15" font-weight="700" fill="#1e293b">Beers</text>
+<text x="458" y="20" text-anchor="end" font-size="11" fill="#64748b">10 columns, 4,362 errors, 18.1% of cells</text>
+<line x1="160.0" y1="30" x2="160.0" y2="240" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="160.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">0%</text>
+<line x1="270.0" y1="30" x2="270.0" y2="240" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="270.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">50%</text>
+<line x1="380.0" y1="30" x2="380.0" y2="240" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="380.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">100%</text>
+<text x="152" y="57" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ounces</text>
+<rect x="160" y="46" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="46" width="220.0" height="14" fill="#059669" rx="3"/>
+<text x="374.0" y="57" text-anchor="end" font-size="10.5" font-weight="700" fill="#ffffff">100.0% (2,410)</text>
+<text x="152" y="76" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ibu</text>
+<rect x="160" y="65" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="65" width="91.7" height="14" fill="#059669" rx="3"/>
+<text x="257.7427385892116" y="76" font-size="10.5" font-weight="600" fill="#475569">41.7% (1,005)</text>
+<text x="152" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">abv</text>
+<rect x="160" y="84" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="84" width="63.3" height="14" fill="#059669" rx="3"/>
+<text x="229.26141078838174" y="95" font-size="10.5" font-weight="600" fill="#475569">28.8% (693)</text>
+<text x="152" y="114" text-anchor="end" font-size="11" font-weight="500" fill="#334155">city</text>
+<rect x="160" y="103" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="103" width="11.6" height="14" fill="#059669" rx="3"/>
+<text x="177.59336099585062" y="114" font-size="10.5" font-weight="600" fill="#475569">5.3% (127)</text>
+<text x="152" y="133" text-anchor="end" font-size="11" font-weight="500" fill="#334155">state</text>
+<rect x="160" y="122" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="122" width="11.6" height="14" fill="#059669" rx="3"/>
+<text x="177.59336099585062" y="133" font-size="10.5" font-weight="600" fill="#475569">5.3% (127)</text>
+<text x="152" y="152" text-anchor="end" font-size="11" font-weight="500" fill="#334155">id</text>
+<rect x="160" y="141" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="152" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="171" text-anchor="end" font-size="11" font-weight="500" fill="#334155">beer-name</text>
+<rect x="160" y="160" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="171" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="190" text-anchor="end" font-size="11" font-weight="500" fill="#334155">style</text>
+<rect x="160" y="179" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="190" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="209" text-anchor="end" font-size="11" font-weight="500" fill="#334155">brewery_id</text>
+<rect x="160" y="198" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="209" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="228" text-anchor="end" font-size="11" font-weight="500" fill="#334155">brewery-name</text>
+<rect x="160" y="217" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="228" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
 </g>
-<g transform="translate(40, 948)">
-<rect x="0" y="0" width="920" height="259" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
-<rect x="0" y="0" width="8" height="259" fill="#7c3aed" rx="2"/>
-<text x="20" y="20" font-size="15" font-weight="700" fill="#1e293b">Rayyan <tspan font-size="12" font-weight="500" fill="#64748b">(11 columns · 948 errors · table avg: 8.6%)</tspan></text>
-<line x1="220" y1="28" x2="800" y2="28" stroke="#cbd5e1" stroke-width="1"/>
-<line x1="220.0" y1="28" x2="220.0" y2="251" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="220.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">0%</text>
-<line x1="365.0" y1="28" x2="365.0" y2="251" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="365.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">25%</text>
-<line x1="510.0" y1="28" x2="510.0" y2="251" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="510.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">50%</text>
-<line x1="655.0" y1="28" x2="655.0" y2="251" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="655.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">75%</text>
-<line x1="800.0" y1="28" x2="800.0" y2="251" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="800.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">100%</text>
-<text x="210" y="55" text-anchor="end" font-size="11" font-weight="500" fill="#334155">id</text>
-<rect x="220" y="44" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="55" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="75" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_title</text>
-<rect x="220" y="64" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="64" width="8.1" height="14" fill="#7c3aed" rx="3"/>
-<text x="236.12" y="75" font-size="11" font-weight="600" fill="#475569">1.4% (14)</text>
-<text x="210" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_language</text>
-<rect x="220" y="84" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="95" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="115" text-anchor="end" font-size="11" font-weight="500" fill="#334155">journal_title</text>
-<rect x="220" y="104" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="104" width="5.2" height="14" fill="#7c3aed" rx="3"/>
-<text x="233.22" y="115" font-size="11" font-weight="600" fill="#475569">0.9% (9)</text>
-<text x="210" y="135" text-anchor="end" font-size="11" font-weight="500" fill="#334155">jounral_abbreviation</text>
-<rect x="220" y="124" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="135" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="155" text-anchor="end" font-size="11" font-weight="500" fill="#334155">journal_issn</text>
-<rect x="220" y="144" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="144" width="7.0" height="14" fill="#7c3aed" rx="3"/>
-<text x="234.96" y="155" font-size="11" font-weight="600" fill="#475569">1.2% (12)</text>
-<text x="210" y="175" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_jvolumn</text>
-<rect x="220" y="164" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="164" width="12.8" height="14" fill="#7c3aed" rx="3"/>
-<text x="240.76" y="175" font-size="11" font-weight="600" fill="#475569">2.2% (22)</text>
-<text x="210" y="195" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_jissue</text>
-<rect x="220" y="184" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="184" width="30.7" height="14" fill="#7c3aed" rx="3"/>
-<text x="258.74" y="195" font-size="11" font-weight="600" fill="#475569">5.3% (53)</text>
-<text x="210" y="215" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_jcreated_at</text>
-<rect x="220" y="204" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="204" width="418.8" height="14" fill="#7c3aed" rx="3"/>
-<text x="646.76" y="215" font-size="11" font-weight="600" fill="#475569">72.2% (722)</text>
-<text x="210" y="235" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_pagination</text>
-<rect x="220" y="224" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="224" width="18.6" height="14" fill="#7c3aed" rx="3"/>
-<text x="246.56" y="235" font-size="11" font-weight="600" fill="#475569">3.2% (32)</text>
-<text x="210" y="255" text-anchor="end" font-size="11" font-weight="500" fill="#334155">author_list</text>
-<rect x="220" y="244" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="244" width="48.7" height="14" fill="#7c3aed" rx="3"/>
-<text x="276.72" y="255" font-size="11" font-weight="600" fill="#475569">8.4% (84)</text>
+<g transform="translate(510, 495)">
+<rect x="0" y="0" width="470" height="267" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="0" y="0" width="6" height="267" fill="#7c3aed" rx="2"/>
+<text x="16" y="20" font-size="15" font-weight="700" fill="#1e293b">Rayyan</text>
+<text x="458" y="20" text-anchor="end" font-size="11" fill="#64748b">11 columns, 948 errors, 8.6% of cells</text>
+<line x1="160.0" y1="30" x2="160.0" y2="259" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="160.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">0%</text>
+<line x1="270.0" y1="30" x2="270.0" y2="259" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="270.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">50%</text>
+<line x1="380.0" y1="30" x2="380.0" y2="259" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="380.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">100%</text>
+<text x="152" y="57" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_jcreated_at</text>
+<rect x="160" y="46" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="46" width="158.8" height="14" fill="#7c3aed" rx="3"/>
+<text x="312.84000000000003" y="57" text-anchor="end" font-size="10.5" font-weight="700" fill="#ffffff">72.2% (722)</text>
+<text x="152" y="76" text-anchor="end" font-size="11" font-weight="500" fill="#334155">author_list</text>
+<rect x="160" y="65" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="65" width="18.5" height="14" fill="#7c3aed" rx="3"/>
+<text x="184.48" y="76" font-size="10.5" font-weight="600" fill="#475569">8.4% (84)</text>
+<text x="152" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_jissue</text>
+<rect x="160" y="84" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="84" width="11.7" height="14" fill="#7c3aed" rx="3"/>
+<text x="177.66" y="95" font-size="10.5" font-weight="600" fill="#475569">5.3% (53)</text>
+<text x="152" y="114" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_pagination</text>
+<rect x="160" y="103" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="103" width="7.0" height="14" fill="#7c3aed" rx="3"/>
+<text x="173.04" y="114" font-size="10.5" font-weight="600" fill="#475569">3.2% (32)</text>
+<text x="152" y="133" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_jvolumn</text>
+<rect x="160" y="122" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="122" width="4.8" height="14" fill="#7c3aed" rx="3"/>
+<text x="170.84" y="133" font-size="10.5" font-weight="600" fill="#475569">2.2% (22)</text>
+<text x="152" y="152" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_title</text>
+<rect x="160" y="141" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="141" width="3.1" height="14" fill="#7c3aed" rx="3"/>
+<text x="169.08" y="152" font-size="10.5" font-weight="600" fill="#475569">1.4% (14)</text>
+<text x="152" y="171" text-anchor="end" font-size="11" font-weight="500" fill="#334155">journal_issn</text>
+<rect x="160" y="160" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="160" width="2.6" height="14" fill="#7c3aed" rx="3"/>
+<text x="168.64" y="171" font-size="10.5" font-weight="600" fill="#475569">1.2% (12)</text>
+<text x="152" y="190" text-anchor="end" font-size="11" font-weight="500" fill="#334155">journal_title</text>
+<rect x="160" y="179" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="179" width="2.0" height="14" fill="#7c3aed" rx="3"/>
+<text x="168.0" y="190" font-size="10.5" font-weight="600" fill="#475569">0.9% (9)</text>
+<text x="152" y="209" text-anchor="end" font-size="11" font-weight="500" fill="#334155">id</text>
+<rect x="160" y="198" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="209" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="228" text-anchor="end" font-size="11" font-weight="500" fill="#334155">article_language</text>
+<rect x="160" y="217" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="228" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="247" text-anchor="end" font-size="11" font-weight="500" fill="#334155">jounral_abbreviation</text>
+<rect x="160" y="236" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="247" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
 </g>
-<g transform="translate(40, 1219)">
-<rect x="0" y="0" width="920" height="379" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
-<rect x="0" y="0" width="8" height="379" fill="#dc2626" rx="2"/>
-<text x="20" y="20" font-size="15" font-weight="700" fill="#1e293b">Movies <tspan font-size="12" font-weight="500" fill="#64748b">(17 columns · 7,675 errors · table avg: 6.1%)</tspan></text>
-<line x1="220" y1="28" x2="800" y2="28" stroke="#cbd5e1" stroke-width="1"/>
-<line x1="220.0" y1="28" x2="220.0" y2="371" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="220.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">0%</text>
-<line x1="365.0" y1="28" x2="365.0" y2="371" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="365.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">25%</text>
-<line x1="510.0" y1="28" x2="510.0" y2="371" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="510.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">50%</text>
-<line x1="655.0" y1="28" x2="655.0" y2="371" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="655.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">75%</text>
-<line x1="800.0" y1="28" x2="800.0" y2="371" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="800.0" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">100%</text>
-<text x="210" y="55" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Id</text>
-<rect x="220" y="44" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="44" width="14.9" height="14" fill="#dc2626" rx="3"/>
-<text x="242.91204330175913" y="55" font-size="11" font-weight="600" fill="#475569">2.6% (190)</text>
-<text x="210" y="75" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Name</text>
-<rect x="220" y="64" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="64" width="2.9" height="14" fill="#dc2626" rx="3"/>
-<text x="229.3342354533153" y="75" font-size="11" font-weight="600" fill="#475569">0.2% (17)</text>
-<text x="210" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Year</text>
-<rect x="220" y="84" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="84" width="14.9" height="14" fill="#dc2626" rx="3"/>
-<text x="242.91204330175913" y="95" font-size="11" font-weight="600" fill="#475569">2.6% (190)</text>
-<text x="210" y="115" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Release Date</text>
-<rect x="220" y="104" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="104" width="14.9" height="14" fill="#dc2626" rx="3"/>
-<text x="242.91204330175913" y="115" font-size="11" font-weight="600" fill="#475569">2.6% (190)</text>
-<text x="210" y="135" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Director</text>
-<rect x="220" y="124" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="124" width="3.4" height="14" fill="#dc2626" rx="3"/>
-<text x="231.37483085250338" y="135" font-size="11" font-weight="600" fill="#475569">0.6% (43)</text>
-<text x="210" y="155" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Creator</text>
-<rect x="220" y="144" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="144" width="10.1" height="14" fill="#dc2626" rx="3"/>
-<text x="238.12449255751014" y="155" font-size="11" font-weight="600" fill="#475569">1.7% (129)</text>
-<text x="210" y="175" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Actors</text>
-<rect x="220" y="164" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="175" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="195" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Cast</text>
-<rect x="220" y="184" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="195" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="215" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Language</text>
-<rect x="220" y="204" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="215" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="235" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Country</text>
-<rect x="220" y="224" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="235" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="255" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Duration</text>
-<rect x="220" y="244" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="244" width="14.7" height="14" fill="#dc2626" rx="3"/>
-<text x="242.6765899864682" y="255" font-size="11" font-weight="600" fill="#475569">2.5% (187)</text>
-<text x="210" y="275" text-anchor="end" font-size="11" font-weight="500" fill="#334155">RatingValue</text>
-<rect x="220" y="264" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="264" width="67.2" height="14" fill="#dc2626" rx="3"/>
-<text x="295.1826792963464" y="275" font-size="11" font-weight="600" fill="#475569">11.6% (856)</text>
-<text x="210" y="295" text-anchor="end" font-size="11" font-weight="500" fill="#334155">RatingCount</text>
-<rect x="220" y="284" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="284" width="432.1" height="14" fill="#dc2626" rx="3"/>
-<text x="660.0568335588634" y="295" font-size="11" font-weight="600" fill="#475569">74.5% (5,505)</text>
-<text x="210" y="315" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ReviewCount</text>
-<rect x="220" y="304" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="315" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="335" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Genre</text>
-<rect x="220" y="324" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="324" width="14.1" height="14" fill="#dc2626" rx="3"/>
-<text x="242.127198917456" y="335" font-size="11" font-weight="600" fill="#475569">2.4% (180)</text>
-<text x="210" y="355" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Filming Locations</text>
-<rect x="220" y="344" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<text x="228.0" y="355" font-size="11" font-weight="600" fill="#475569">0.0% (0)</text>
-<text x="210" y="375" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Description</text>
-<rect x="220" y="364" width="580" height="14" fill="#e2e8f0" rx="3"/>
-<rect x="220" y="364" width="14.8" height="14" fill="#dc2626" rx="3"/>
-<text x="242.7550744248985" y="375" font-size="11" font-weight="600" fill="#475569">2.5% (188)</text>
+<g transform="translate(510, 100)">
+<rect x="0" y="0" width="470" height="381" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="0" y="0" width="6" height="381" fill="#dc2626" rx="2"/>
+<text x="16" y="20" font-size="15" font-weight="700" fill="#1e293b">Movies</text>
+<text x="458" y="20" text-anchor="end" font-size="11" fill="#64748b">17 columns, 7,675 errors, 6.1% of cells</text>
+<line x1="160.0" y1="30" x2="160.0" y2="373" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="160.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">0%</text>
+<line x1="270.0" y1="30" x2="270.0" y2="373" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="270.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">50%</text>
+<line x1="380.0" y1="30" x2="380.0" y2="373" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="380.0" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">100%</text>
+<text x="152" y="57" text-anchor="end" font-size="11" font-weight="500" fill="#334155">RatingCount</text>
+<rect x="160" y="46" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="46" width="163.9" height="14" fill="#dc2626" rx="3"/>
+<text x="317.8836265223275" y="57" text-anchor="end" font-size="10.5" font-weight="700" fill="#ffffff">74.5% (5,505)</text>
+<text x="152" y="76" text-anchor="end" font-size="11" font-weight="500" fill="#334155">RatingValue</text>
+<rect x="160" y="65" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="65" width="25.5" height="14" fill="#dc2626" rx="3"/>
+<text x="191.4830852503383" y="76" font-size="10.5" font-weight="600" fill="#475569">11.6% (856)</text>
+<text x="152" y="95" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Id</text>
+<rect x="160" y="84" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="84" width="5.7" height="14" fill="#dc2626" rx="3"/>
+<text x="171.65629228687416" y="95" font-size="10.5" font-weight="600" fill="#475569">2.6% (190)</text>
+<text x="152" y="114" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Year</text>
+<rect x="160" y="103" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="103" width="5.7" height="14" fill="#dc2626" rx="3"/>
+<text x="171.65629228687416" y="114" font-size="10.5" font-weight="600" fill="#475569">2.6% (190)</text>
+<text x="152" y="133" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Release Date</text>
+<rect x="160" y="122" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="122" width="5.7" height="14" fill="#dc2626" rx="3"/>
+<text x="171.65629228687416" y="133" font-size="10.5" font-weight="600" fill="#475569">2.6% (190)</text>
+<text x="152" y="152" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Description</text>
+<rect x="160" y="141" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="141" width="5.6" height="14" fill="#dc2626" rx="3"/>
+<text x="171.59675236806495" y="152" font-size="10.5" font-weight="600" fill="#475569">2.5% (188)</text>
+<text x="152" y="171" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Duration</text>
+<rect x="160" y="160" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="160" width="5.6" height="14" fill="#dc2626" rx="3"/>
+<text x="171.56698240866035" y="171" font-size="10.5" font-weight="600" fill="#475569">2.5% (187)</text>
+<text x="152" y="190" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Genre</text>
+<rect x="160" y="179" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="179" width="5.4" height="14" fill="#dc2626" rx="3"/>
+<text x="171.35859269282815" y="190" font-size="10.5" font-weight="600" fill="#475569">2.4% (180)</text>
+<text x="152" y="209" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Creator</text>
+<rect x="160" y="198" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="198" width="3.8" height="14" fill="#dc2626" rx="3"/>
+<text x="169.8403247631935" y="209" font-size="10.5" font-weight="600" fill="#475569">1.7% (129)</text>
+<text x="152" y="228" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Director</text>
+<rect x="160" y="217" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="217" width="2.0" height="14" fill="#dc2626" rx="3"/>
+<text x="168.0" y="228" font-size="10.5" font-weight="600" fill="#475569">0.6% (43)</text>
+<text x="152" y="247" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Name</text>
+<rect x="160" y="236" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<rect x="160" y="236" width="2.0" height="14" fill="#dc2626" rx="3"/>
+<text x="168.0" y="247" font-size="10.5" font-weight="600" fill="#475569">0.2% (17)</text>
+<text x="152" y="266" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Actors</text>
+<rect x="160" y="255" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="266" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="285" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Cast</text>
+<rect x="160" y="274" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="285" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="304" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Language</text>
+<rect x="160" y="293" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="304" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="323" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Country</text>
+<rect x="160" y="312" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="323" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="342" text-anchor="end" font-size="11" font-weight="500" fill="#334155">ReviewCount</text>
+<rect x="160" y="331" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="342" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
+<text x="152" y="361" text-anchor="end" font-size="11" font-weight="500" fill="#334155">Filming Locations</text>
+<rect x="160" y="350" width="220" height="14" fill="#e2e8f0" rx="3"/>
+<text x="168.0" y="361" font-size="10.5" font-weight="600" fill="#475569">0.0% (0)</text>
 </g>
 </svg>
