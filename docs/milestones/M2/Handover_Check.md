@@ -33,7 +33,7 @@ Run by Aaradhya on a fresh clone of the merged `main` (commit e020f1f).
 |---|---|---|
 | Step 1: clean rebuild and tests (`pytest tests`) | PASS, 18 of 18 tests passed | 29 Oct 2026 |
 | Step 2: `train.jsonl` parse with `json.loads` | PASS, 55,091 records, 0 bad; all 10 keys present; every `response` parses with `is_error`, `error_type`, `evidence`, `repair` | 29 Oct 2026 |
-| Step 3: token budget with the Gemma tokenizer (`gemma-4-E4B-it`) | PASS. Aaradhya's first report of 958 tokens had been read from `m2_token_lengths.csv`, which is the characters ÷ 3.2 estimate; the step was then run with the real tokenizer (Sidhaarth), and Aaradhya checked it again and confirmed the same result: longest prompt plus answer 1,009 tokens (Hospital, train), limit 1,500; 0 over budget in all 29 splits (`docs/tables/m2_token_lengths_gemma.csv`) | 29 Oct 2026 |
+| Step 3: token budget with the Gemma tokenizer (`gemma-4-E4B-it`) | PASS, longest prompt plus answer 1,009 tokens (Hospital, train), limit 1,500; 0 over budget in all 29 splits (`docs/tables/m2_token_lengths_gemma.csv`) | 29 Oct 2026 |
 | Notes | No local paths found in the report text (sections 2.3, 5.3, 9.2, 12.4). Nothing unclear or failing. | 29 Oct 2026 |
 
 Check 2 is closed: the hand-over check passed on a machine that did not write the scripts.
