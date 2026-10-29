@@ -1,93 +1,108 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" style="background-color:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
 <rect width="960" height="540" fill="#ffffff" rx="8"/>
 <text x="480" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Value Length Character Distributions Across Core Tables</text>
-<text x="480" y="62" text-anchor="middle" font-size="13" fill="#64748b">Comparison of dirty-cell string lengths: Quantiles (p25, Median, p75, p95) and Bucket Breakdown</text>
+<text x="480" y="62" text-anchor="middle" font-size="13" fill="#64748b">How long are the cell values? Box = middle half of cells (p25 to p75), bar inside = median, line = up to p95, dot = longest cell</text>
 <g transform="translate(50, 90)">
 <rect width="400" height="390" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
-<text x="200" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Character Length Quantiles (log scale)</text>
-<line x1="50.0" y1="50" x2="50.0" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
-<text x="50.0" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">1</text>
-<line x1="114.32631622608143" y1="50" x2="114.32631622608143" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
-<text x="114.32631622608143" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">5</text>
-<line x1="142.03015269187082" y1="50" x2="142.03015269187082" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
-<text x="142.03015269187082" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">10</text>
-<line x1="178.65263245216286" y1="50" x2="178.65263245216286" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
-<text x="178.65263245216286" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">25</text>
-<line x1="206.35646891795224" y1="50" x2="206.35646891795224" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
-<text x="206.35646891795224" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">50</text>
-<line x1="234.06030538374165" y1="50" x2="234.06030538374165" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
-<text x="234.06030538374165" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">100</text>
-<line x1="270.68278514403363" y1="50" x2="270.68278514403363" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
-<text x="270.68278514403363" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">250</text>
-<line x1="326.09045807561245" y1="50" x2="326.09045807561245" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
-<text x="326.09045807561245" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">1000</text>
-<line x1="362.7129378359045" y1="50" x2="362.7129378359045" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
-<text x="362.7129378359045" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">2500</text>
-<text x="40" y="94" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Hospital</text>
-<line x1="114.32631622608143" y1="90" x2="204.72488778754513" y2="90" stroke="#2563eb" stroke-width="2"/>
-<rect x="114.32631622608143" y="80" width="48.91208588790887" height="20" fill="#2563eb" fill-opacity="0.3" stroke="#2563eb" stroke-width="1.5" rx="3"/>
-<line x1="133.1115093973682" y1="80" x2="133.1115093973682" y2="100" stroke="#2563eb" stroke-width="3"/>
-<circle cx="258.4315300708381" cy="90" r="3" fill="#2563eb"/>
-<text x="380" y="94" font-size="10" font-weight="500" fill="#64748b">med=8, p95=48</text>
-<text x="40" y="146" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Flights</text>
-<line x1="137.81908384877505" y1="142" x2="158.23585815046897" y2="142" stroke="#d97706" stroke-width="2"/>
-<rect x="137.81908384877505" y="132" width="8.020443978533763" height="20" fill="#d97706" fill-opacity="0.3" stroke="#d97706" stroke-width="1.5" rx="3"/>
-<line x1="137.81908384877505" y1="132" x2="137.81908384877505" y2="152" stroke="#d97706" stroke-width="3"/>
-<circle cx="184.5847110429271" cy="142" r="3" fill="#d97706"/>
-<text x="380" y="146" font-size="10" font-weight="500" fill="#64748b">med=9, p95=15</text>
-<text x="40" y="198" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Beers</text>
-<line x1="93.90954192438753" y1="194" x2="178.65263245216286" y2="194" stroke="#059669" stroke-width="2"/>
-<rect x="93.90954192438753" y="184" width="58.60683487850511" height="20" fill="#059669" fill-opacity="0.3" stroke="#059669" stroke-width="1.5" rx="3"/>
-<line x1="121.61337839017692" y1="184" x2="121.61337839017692" y2="204" stroke="#059669" stroke-width="3"/>
-<circle cx="207.92404973447145" cy="194" r="3" fill="#059669"/>
-<text x="380" y="198" font-size="10" font-weight="500" fill="#64748b">med=6, p95=25</text>
-<text x="40" y="250" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Rayyan</text>
-<line x1="77.70383646578941" y1="246" x2="239.64633689955133" y2="246" stroke="#7c3aed" stroke-width="2"/>
-<rect x="77.70383646578941" y="236" width="87.81908384877502" height="20" fill="#7c3aed" fill-opacity="0.3" stroke="#7c3aed" stroke-width="1.5" rx="3"/>
-<line x1="121.61337839017692" y1="236" x2="121.61337839017692" y2="256" stroke="#7c3aed" stroke-width="3"/>
-<circle cx="332.94216910902304" cy="246" r="3" fill="#7c3aed"/>
-<text x="380" y="250" font-size="10" font-weight="500" fill="#64748b">med=6, p95=115</text>
-<text x="40" y="302" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Movies</text>
-<line x1="121.61337839017692" y1="298" x2="261.160077139992" y2="298" stroke="#dc2626" stroke-width="2"/>
-<rect x="121.61337839017692" y="288" width="58.606834878505126" height="20" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-width="1.5" rx="3"/>
-<line x1="152.51637680289264" y1="288" x2="152.51637680289264" y2="308" stroke="#dc2626" stroke-width="3"/>
-<circle cx="361.742002944843" cy="298" r="3" fill="#dc2626"/>
-<text x="380" y="302" font-size="10" font-weight="500" fill="#64748b">med=13, p95=197</text>
+<text x="200" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Characters per cell (log scale)</text>
+<line x1="70.0" y1="50" x2="70.0" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
+<text x="70.0" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">1</text>
+<line x1="113.21924371439846" y1="50" x2="113.21924371439846" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
+<text x="113.21924371439846" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">5</text>
+<line x1="131.8327588398507" y1="50" x2="131.8327588398507" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
+<text x="131.8327588398507" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">10</text>
+<line x1="156.43848742879692" y1="50" x2="156.43848742879692" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
+<text x="156.43848742879692" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">25</text>
+<line x1="175.05200255424916" y1="50" x2="175.05200255424916" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
+<text x="175.05200255424916" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">50</text>
+<line x1="193.6655176797014" y1="50" x2="193.6655176797014" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
+<text x="193.6655176797014" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">100</text>
+<line x1="218.2712462686476" y1="50" x2="218.2712462686476" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
+<text x="218.2712462686476" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">250</text>
+<line x1="255.49827651955212" y1="50" x2="255.49827651955212" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
+<text x="255.49827651955212" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">1000</text>
+<line x1="280.1040051084983" y1="50" x2="280.1040051084983" y2="350" stroke="#e2e8f0" stroke-dasharray="2,2"/>
+<text x="280.1040051084983" y="365" text-anchor="middle" font-size="9" fill="#94a3b8">2500</text>
+<text x="60" y="94" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Hospital</text>
+<line x1="113.21924371439846" y1="90" x2="173.9557839822569" y2="90" stroke="#2563eb" stroke-width="2"/>
+<rect x="113.21924371439846" y="80" width="32.86280770593876" height="20" fill="#2563eb" fill-opacity="0.3" stroke="#2563eb" stroke-width="1.5" rx="3"/>
+<line x1="125.84054537635676" y1="80" x2="125.84054537635676" y2="100" stroke="#2563eb" stroke-width="3"/>
+<circle cx="210.03993426634435" cy="90" r="3" fill="#2563eb"/>
+<text x="297" y="94" font-size="10" font-weight="500" fill="#64748b">median 8, p95 48</text>
+<text x="60" y="146" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Flights</text>
+<line x1="129.00344696089573" y1="142" x2="142.7209671948463" y2="142" stroke="#d97706" stroke-width="2"/>
+<rect x="129.00344696089573" y="132" width="5.388735798077363" height="20" fill="#d97706" fill-opacity="0.3" stroke="#d97706" stroke-width="1.5" rx="3"/>
+<line x1="129.00344696089573" y1="132" x2="129.00344696089573" y2="152" stroke="#d97706" stroke-width="3"/>
+<circle cx="160.42410273196666" cy="142" r="3" fill="#d97706"/>
+<text x="297" y="146" font-size="10" font-weight="500" fill="#64748b">median 9, p95 15</text>
+<text x="60" y="198" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Beers</text>
+<line x1="99.50172348044786" y1="194" x2="156.43848742879692" y2="194" stroke="#059669" stroke-width="2"/>
+<rect x="99.50172348044786" y="184" width="39.376467183995615" height="20" fill="#059669" fill-opacity="0.3" stroke="#059669" stroke-width="1.5" rx="3"/>
+<line x1="118.11523860590012" y1="184" x2="118.11523860590012" y2="204" stroke="#059669" stroke-width="3"/>
+<circle cx="176.105220915348" cy="194" r="3" fill="#059669"/>
+<text x="297" y="198" font-size="10" font-weight="500" fill="#64748b">median 6, p95 25</text>
+<text x="60" y="250" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Rayyan</text>
+<line x1="88.61351512545225" y1="246" x2="197.41863260438606" y2="246" stroke="#7c3aed" stroke-width="2"/>
+<rect x="88.61351512545225" y="236" width="59.003446960895744" height="20" fill="#7c3aed" fill-opacity="0.3" stroke="#7c3aed" stroke-width="1.5" rx="3"/>
+<line x1="118.11523860590012" y1="236" x2="118.11523860590012" y2="256" stroke="#7c3aed" stroke-width="3"/>
+<circle cx="260.1017698701248" cy="246" r="3" fill="#7c3aed"/>
+<text x="297" y="250" font-size="10" font-weight="500" fill="#64748b">median 6, p95 115</text>
+<text x="60" y="302" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Movies</text>
+<line x1="118.11523860590012" y1="298" x2="211.87317682843212" y2="298" stroke="#dc2626" stroke-width="2"/>
+<rect x="118.11523860590012" y="288" width="39.37646718399563" height="20" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-width="1.5" rx="3"/>
+<line x1="138.87819066444348" y1="288" x2="138.87819066444348" y2="308" stroke="#dc2626" stroke-width="3"/>
+<circle cx="279.45165822856643" cy="298" r="3" fill="#dc2626"/>
+<text x="297" y="302" font-size="10" font-weight="500" fill="#64748b">median 13, p95 197</text>
 </g>
 <g transform="translate(490, 90)">
 <rect width="420" height="390" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>
-<text x="210" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Length Category Proportions (%)</text>
+<text x="210" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Share of cells by length (characters)</text>
 <text x="70" y="86" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Hospital</text>
 <rect x="80" y="70" width="115.32" height="24" fill="#38bdf8" stroke="#ffffff" stroke-width="0.5"/>
+<text x="137.7" y="86" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">41%</text>
 <rect x="195.31578947368422" y="70" width="91.10" height="24" fill="#34d399" stroke="#ffffff" stroke-width="0.5"/>
+<text x="240.9" y="86" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">33%</text>
 <rect x="286.4189473684211" y="70" width="52.99" height="24" fill="#fbbf24" stroke="#ffffff" stroke-width="0.5"/>
+<text x="312.9" y="86" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">19%</text>
 <rect x="339.4126315789474" y="70" width="9.98" height="24" fill="#f87171" stroke="#ffffff" stroke-width="0.5"/>
 <rect x="349.38947368421054" y="70" width="8.86" height="24" fill="#a78bfa" stroke="#ffffff" stroke-width="0.5"/>
 <rect x="358.2463157894737" y="70" width="1.75" height="24" fill="#c084fc" stroke="#ffffff" stroke-width="0.5"/>
 <text x="70" y="138" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Flights</text>
 <rect x="80" y="122" width="45.41" height="24" fill="#94a3b8" stroke="#ffffff" stroke-width="0.5"/>
+<text x="102.7" y="138" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">16%</text>
 <rect x="125.40965207631874" y="122" width="5.87" height="24" fill="#38bdf8" stroke="#ffffff" stroke-width="0.5"/>
 <rect x="131.28226711560043" y="122" width="222.10" height="24" fill="#34d399" stroke="#ffffff" stroke-width="0.5"/>
+<text x="242.3" y="138" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">79%</text>
 <rect x="353.3810325476992" y="122" width="6.62" height="24" fill="#fbbf24" stroke="#ffffff" stroke-width="0.5"/>
 <text x="70" y="190" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Beers</text>
 <rect x="80" y="174" width="2.25" height="24" fill="#94a3b8" stroke="#ffffff" stroke-width="0.5"/>
 <rect x="82.2539419087137" y="174" width="135.17" height="24" fill="#38bdf8" stroke="#ffffff" stroke-width="0.5"/>
+<text x="149.8" y="190" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">48%</text>
 <rect x="217.42074688796683" y="174" width="82.68" height="24" fill="#34d399" stroke="#ffffff" stroke-width="0.5"/>
+<text x="258.8" y="190" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">30%</text>
 <rect x="300.096265560166" y="174" width="56.78" height="24" fill="#fbbf24" stroke="#ffffff" stroke-width="0.5"/>
+<text x="328.5" y="190" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">20%</text>
 <rect x="356.8746887966805" y="174" width="3.13" height="24" fill="#f87171" stroke="#ffffff" stroke-width="0.5"/>
 <text x="70" y="242" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Rayyan</text>
 <rect x="80" y="226" width="42.81" height="24" fill="#94a3b8" stroke="#ffffff" stroke-width="0.5"/>
+<text x="101.4" y="242" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">15%</text>
 <rect x="122.81454545454545" y="226" width="73.46" height="24" fill="#38bdf8" stroke="#ffffff" stroke-width="0.5"/>
+<text x="159.5" y="242" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">26%</text>
 <rect x="196.2763636363636" y="226" width="90.13" height="24" fill="#34d399" stroke="#ffffff" stroke-width="0.5"/>
+<text x="241.3" y="242" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">32%</text>
 <rect x="286.41090909090906" y="226" width="17.08" height="24" fill="#fbbf24" stroke="#ffffff" stroke-width="0.5"/>
 <rect x="303.49090909090904" y="226" width="17.87" height="24" fill="#f87171" stroke="#ffffff" stroke-width="0.5"/>
 <rect x="321.35999999999996" y="226" width="33.07" height="24" fill="#a78bfa" stroke="#ffffff" stroke-width="0.5"/>
+<text x="337.9" y="242" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">12%</text>
 <rect x="354.4254545454545" y="226" width="5.57" height="24" fill="#c084fc" stroke="#ffffff" stroke-width="0.5"/>
 <text x="70" y="294" text-anchor="end" font-size="12" font-weight="600" fill="#334155">Movies</text>
 <rect x="80" y="278" width="6.21" height="24" fill="#94a3b8" stroke="#ffffff" stroke-width="0.5"/>
 <rect x="86.2115736687097" y="278" width="54.70" height="24" fill="#38bdf8" stroke="#ffffff" stroke-width="0.5"/>
+<text x="113.6" y="294" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">20%</text>
 <rect x="140.90774496537452" y="278" width="92.98" height="24" fill="#34d399" stroke="#ffffff" stroke-width="0.5"/>
+<text x="187.4" y="294" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">33%</text>
 <rect x="233.89190479980897" y="278" width="66.01" height="24" fill="#fbbf24" stroke="#ffffff" stroke-width="0.5"/>
+<text x="266.9" y="294" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">24%</text>
 <rect x="299.9012974607976" y="278" width="25.01" height="24" fill="#f87171" stroke="#ffffff" stroke-width="0.5"/>
 <rect x="324.9125208946908" y="278" width="12.01" height="24" fill="#a78bfa" stroke="#ffffff" stroke-width="0.5"/>
 <rect x="336.92111756746" y="278" width="23.08" height="24" fill="#c084fc" stroke="#ffffff" stroke-width="0.5"/>

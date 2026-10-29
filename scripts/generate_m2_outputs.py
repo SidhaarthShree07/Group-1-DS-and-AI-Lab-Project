@@ -337,59 +337,60 @@ def generate_figure_1_error_rate_per_column(repo_root: Path):
         col_rates = [(c, col_err[c] / col_tot[c] * 100, col_err[c], col_tot[c]) for c in col_tot]
         table_data.append((cfg["name"], col_rates))
 
-    # SVG layout: 1000 x 880
+    # Two-column layout: every table gets its own panel, so none is cut off. Height is computed from the panels.
     width = 1000
-    height = 920
-    svg = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" style="background-color:#ffffff; font-family:-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Helvetica, Arial, sans-serif;">',
-        f'<rect width="{width}" height="{height}" fill="#ffffff" rx="8"/>',
-        f'<text x="500" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Per-Column Error Rate Distribution Across Core Benchmark Tables</text>',
-        f'<text x="500" y="62" text-anchor="middle" font-size="13" fill="#64748b">Verified on 193,986 cells across Hospital, Flights, Beers, Rayyan, and Movies (18,414 Total Errors)</text>'
-    ]
-
-    # Render each table in a structured block
-    y_cursor = 95
+    col_w, gap, x0, top = 470, 20, 20, 100
+    bar_left, bar_w = 160, 220
     panel_colors = ["#2563eb", "#d97706", "#059669", "#7c3aed", "#dc2626"]
-
+    sizes = [24 + 22 + len(cols) * 19 + 12 for _, cols in table_data]
+    # place panels greedily in the shorter column (largest first)
+    order = sorted(range(len(table_data)), key=lambda i: -sizes[i])
+    col_y = [top, top]
+    place = {}
+    for i in order:
+        c = 0 if col_y[0] <= col_y[1] else 1
+        place[i] = (c, col_y[c])
+        col_y[c] += sizes[i] + 14
+    height = max(col_y) + 24
+    font = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    svg = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" style="background-color:#ffffff; font-family:{font};">',
+        f'<rect width="{width}" height="{height}" fill="#ffffff"/>',
+        '<text x="500" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Where the errors are: error rate per column, all five core tables</text>',
+        '<text x="500" y="60" text-anchor="middle" font-size="13" fill="#64748b">Share of cells in each column that are errors (number of error cells in brackets). 193,986 cells in total, 18,414 errors.</text>',
+        '<text x="500" y="80" text-anchor="middle" font-size="12" fill="#64748b">Reading guide: a long bar means the column is a good place to look for errors; an empty bar means the column has no errors.</text>',
+    ]
     for idx, (tname, cols) in enumerate(table_data):
         color = panel_colors[idx % len(panel_colors)]
-        block_h = 24 + len(cols) * 20 + 15
-        
-        # Panel header
-        svg.append(f'<g transform="translate(40, {y_cursor})">')
-        svg.append(f'<rect x="0" y="0" width="920" height="{block_h}" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>')
-        svg.append(f'<rect x="0" y="0" width="8" height="{block_h}" fill="{color}" rx="2"/>')
-        
-        # Title
-        avg_rate = sum(c[1] for c in cols) / len(cols) if cols else 0
-        tot_err = sum(c[2] for c in cols)
-        svg.append(f'<text x="20" y="20" font-size="15" font-weight="700" fill="#1e293b">{tname} <tspan font-size="12" font-weight="500" fill="#64748b">({len(cols)} columns · {tot_err:,} errors · table avg: {avg_rate:.1f}%)</tspan></text>')
-        
-        # Grid header
-        bar_left = 220
-        max_bar_w = 580
-        svg.append(f'<line x1="{bar_left}" y1="28" x2="{bar_left+max_bar_w}" y2="28" stroke="#cbd5e1" stroke-width="1"/>')
-        for pct in [0, 25, 50, 75, 100]:
-            x_pct = bar_left + (pct / 100.0) * max_bar_w
-            svg.append(f'<line x1="{x_pct}" y1="28" x2="{x_pct}" y2="{block_h-8}" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2"/>')
-            svg.append(f'<text x="{x_pct}" y="25" text-anchor="middle" font-size="10" fill="#94a3b8">{pct}%</text>')
-
-        # Render rows
-        row_y = 44
+        c, y = place[idx]
+        px = x0 + c * (col_w + gap)
+        block_h = sizes[idx]
+        cols = sorted(cols, key=lambda r: -r[1])  # worst column first
+        svg.append(f'<g transform="translate({px}, {y})">')
+        svg.append(f'<rect x="0" y="0" width="{col_w}" height="{block_h}" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>')
+        svg.append(f'<rect x="0" y="0" width="6" height="{block_h}" fill="{color}" rx="2"/>')
+        tot_err = sum(r[2] for r in cols)
+        tot_cells = sum(r[3] for r in cols)
+        svg.append(f'<text x="16" y="20" font-size="15" font-weight="700" fill="#1e293b">{tname}</text>')
+        svg.append(f'<text x="{col_w - 12}" y="20" text-anchor="end" font-size="11" fill="#64748b">{len(cols)} columns, {tot_err:,} errors, {tot_err / tot_cells * 100:.1f}% of cells</text>')
+        for pct in (0, 50, 100):
+            xp = bar_left + pct / 100.0 * bar_w
+            svg.append(f'<line x1="{xp}" y1="30" x2="{xp}" y2="{block_h - 8}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2,2"/>')
+            svg.append(f'<text x="{xp}" y="38" text-anchor="middle" font-size="9" fill="#94a3b8">{pct}%</text>')
+        row_y = 46
         for cname, rate, err_cnt, tot_cnt in cols:
-            bar_w = (rate / 100.0) * max_bar_w
-            svg.append(f'<text x="210" y="{row_y+11}" text-anchor="end" font-size="11" font-weight="500" fill="#334155">{cname}</text>')
-            svg.append(f'<rect x="{bar_left}" y="{row_y}" width="{max_bar_w}" height="14" fill="#e2e8f0" rx="3"/>')
-            if bar_w > 0:
-                svg.append(f'<rect x="{bar_left}" y="{row_y}" width="{max_bar_w*min(1.0, max(0.005, rate/100.0)):.1f}" height="14" fill="{color}" rx="3"/>')
-            
-            # Label
+            w = rate / 100.0 * bar_w
+            svg.append(f'<text x="{bar_left - 8}" y="{row_y + 11}" text-anchor="end" font-size="11" font-weight="500" fill="#334155">{cname}</text>')
+            svg.append(f'<rect x="{bar_left}" y="{row_y}" width="{bar_w}" height="14" fill="#e2e8f0" rx="3"/>')
+            if rate > 0:
+                svg.append(f'<rect x="{bar_left}" y="{row_y}" width="{max(2.0, w):.1f}" height="14" fill="{color}" rx="3"/>')
             lbl = f"{rate:.1f}% ({err_cnt:,})"
-            svg.append(f'<text x="{bar_left + bar_w + 8}" y="{row_y+11}" font-size="11" font-weight="600" fill="#475569">{lbl}</text>')
-            row_y += 20
-
+            if rate > 55:
+                svg.append(f'<text x="{bar_left + w - 6}" y="{row_y + 11}" text-anchor="end" font-size="10.5" font-weight="700" fill="#ffffff">{lbl}</text>')
+            else:
+                svg.append(f'<text x="{bar_left + max(2.0, w) + 6}" y="{row_y + 11}" font-size="10.5" font-weight="600" fill="#475569">{lbl}</text>')
+            row_y += 19
         svg.append('</g>')
-        y_cursor += block_h + 12
 
     svg.append('</svg>')
     with open(out_svg, "w", encoding="utf-8") as f:
@@ -460,20 +461,20 @@ def generate_figure_2_value_length_distribution(repo_root: Path):
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" style="background-color:#ffffff; font-family:-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Helvetica, Arial, sans-serif;">',
         f'<rect width="{width}" height="{height}" fill="#ffffff" rx="8"/>',
         f'<text x="480" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Value Length Character Distributions Across Core Tables</text>',
-        f'<text x="480" y="62" text-anchor="middle" font-size="13" fill="#64748b">Comparison of dirty-cell string lengths: Quantiles (p25, Median, p75, p95) and Bucket Breakdown</text>'
+        f'<text x="480" y="62" text-anchor="middle" font-size="13" fill="#64748b">How long are the cell values? Box = middle half of cells (p25 to p75), bar inside = median, line = up to p95, dot = longest cell</text>'
     ]
 
     # Left Panel: Percentile Box / Range plot (X: 50 to 450)
     svg.append('<g transform="translate(50, 90)">')
     svg.append('<rect width="400" height="390" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>')
-    svg.append('<text x="200" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Character Length Quantiles (log scale)</text>')
+    svg.append('<text x="200" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Characters per cell (log scale)</text>')
     
     # Grid lines for log scale: 1, 5, 10, 25, 50, 100, 250, 1000, 2500
     grid_vals = [1, 5, 10, 25, 50, 100, 250, 1000, 2500]
     min_log = 0.0 # log10(1)
     max_log = math.log10(3000)
-    plot_w = 320
-    plot_x0 = 50
+    plot_w = 215
+    plot_x0 = 70
 
     def val_to_x(v):
         v_clamped = max(1, v)
@@ -506,7 +507,7 @@ def generate_figure_2_value_length_distribution(repo_root: Path):
         # Max dot
         svg.append(f'<circle cx="{x_max}" cy="{y_pos}" r="3" fill="{col}"/>')
         # Value label
-        svg.append(f'<text x="{plot_x0 + plot_w + 10}" y="{y_pos+4}" font-size="10" font-weight="500" fill="#64748b">med={st["p50"]}, p95={st["p95"]}</text>')
+        svg.append(f'<text x="{plot_x0 + plot_w + 12}" y="{y_pos+4}" font-size="10" font-weight="500" fill="#64748b">median {st["p50"]}, p95 {st["p95"]}</text>')
         y_pos += 52
 
     svg.append('</g>')
@@ -514,7 +515,7 @@ def generate_figure_2_value_length_distribution(repo_root: Path):
     # Right Panel: Bucket Composition Stacked Chart (X: 490 to 910)
     svg.append('<g transform="translate(490, 90)">')
     svg.append('<rect width="420" height="390" fill="#f8fafc" rx="6" stroke="#e2e8f0" stroke-width="1"/>')
-    svg.append('<text x="210" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Length Category Proportions (%)</text>')
+    svg.append('<text x="210" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Share of cells by length (characters)</text>')
 
     bucket_colors = {
         "0 (empty)": "#94a3b8",
@@ -541,6 +542,8 @@ def generate_figure_2_value_length_distribution(repo_root: Path):
             seg_w = (cnt / tot) * bar_w
             if seg_w > 0:
                 svg.append(f'<rect x="{cur_x}" y="{y_bar}" width="{seg_w:.2f}" height="24" fill="{bucket_colors[b_name]}" stroke="#ffffff" stroke-width="0.5"/>')
+                if seg_w >= 26:
+                    svg.append(f'<text x="{cur_x + seg_w / 2:.1f}" y="{y_bar + 16}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">{cnt / tot * 100:.0f}%</text>')
                 cur_x += seg_w
         y_bar += 52
 
