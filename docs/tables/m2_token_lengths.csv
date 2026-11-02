@@ -21,7 +21,7 @@ inpatient,train,6134,472,529,612,estimate (characters / 3.2),1500,0
 inpatient,val,1390,465,492,511,estimate (characters / 3.2),1500,0
 inpatient,test,1406,467,492,513,estimate (characters / 3.2),1500,0
 facilities,train,11582,455,509,562,estimate (characters / 3.2),1500,0
-facilities,val,2500,461,585,611,estimate (characters / 3.2),1500,0
+facilities,val,2500,460,585,611,estimate (characters / 3.2),1500,0
 facilities,test,2554,459,555,577,estimate (characters / 3.2),1500,0
 adult,train,5436,489,625,659,estimate (characters / 3.2),1500,0
 bike_day,train,100,468,542,550,estimate (characters / 3.2),1500,0

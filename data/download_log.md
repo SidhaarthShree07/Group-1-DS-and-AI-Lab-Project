@@ -49,10 +49,12 @@ Error cells follow Raha's rule (unescape HTML, collapse `[
 | Dataset | Error cells | Rate | Rows with an error | Missing | Pattern | Rule | Format artifact |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Tax | 121,219 | 4.04% | 103,875 | 0 | 2,166 | 800 | 118,253 |
-| Billionaire | 5,195 | 9.03% | 2,273 | 1,386 | 3,049 | 742 | 18 |
-| Inpatient (10%) | 4,465 | 10.10% | 2,720 | 1,800 | 1,684 | 981 | 0 |
-| Facilities (10%) | 8,318 | 10.41% | 5,249 | 3,001 | 2,384 | 2,933 | 0 |
-| Clean Me If You Can, DE slice (5,000 rows, seed 42) | 18,678 | 41.51% | 5,000 | 12,087 | 6,292 | 295 | 4 |
+| Billionaire | 5,195 | 9.03% | 2,273 | 1,386 | 2,335 | 1,456 | 18 |
+| Inpatient (10%) | 4,465 | 10.10% | 2,720 | 1,800 | 1,209 | 1,456 | 0 |
+| Facilities (10%) | 8,318 | 10.41% | 5,249 | 3,001 | 1,786 | 3,531 | 0 |
+| Clean Me If You Can, DE slice (5,000 rows, seed 42) | 18,678 | 41.51% | 5,000 | 12,087 | 6,161 | 426 | 4 |
+
+Types were updated on 2 Nov 2026 with the extended rule of `src/data/load_external.py::classify` (a value in the wrong column of its row, or a well-formed value that is a different value, is a rule violation; report Section 14.1). The Tax row is the whole 200,000-row table counted with the first version of the rule (`scripts/external_inventory.py`, Milestone 1); the 20,000-row sample used in Milestone 2 has 175 pattern and 127 rule violations (`docs/tables/m2_external_splits.csv`). `docs/tables/external_inventory.csv` is the Milestone 1 output and keeps the first version's counts.
 
 Per-column counts: `docs/tables/external_column_differences.csv`. Billionaire has 5,195 errors under Raha's rule; plain string comparison gives 5,266 because 71 cells differ only in whitespace or HTML entities.
 

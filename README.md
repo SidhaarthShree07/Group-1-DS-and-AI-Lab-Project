@@ -87,7 +87,21 @@ python scripts/model_bakeoff/score_seeds.py 1 2 3            # mean ± std over 
 bash scripts/build_all.sh            # add --skip-download if data/raw/ is already filled
 ```
 
-TableEG's annotation files exist only on Google Drive (link in the TableEG README): copy its two zip files into `data/raw/tableeg/` once before the first run. The result is `data/processed/examples/{train,val,test}.jsonl` (about 137 MB, not in git; a 20-record sample is in `data/sample/`). Details and the rules behind them are in [`docs/milestones/M2/Milestone2_Report.md`](docs/milestones/M2/Milestone2_Report.md).
+**The one manual step: TableEG's annotation files.** They exist only on [Google Drive](https://drive.google.com/drive/folders/10LdB9LGgymbI6W8D2936uRF6eFRL24xy) (the link is also in the TableEG README). Download the folder; it arrives as two files named `TableEG-<date>-001.zip` and `TableEG-<date>-002.zip` (about 840 MB together). Put both, unchanged, into `data/raw/tableeg/` (create the folder if it is missing). `scripts/download_data.py` finds `TableEG*.zip` there and extracts the five annotation files it needs (Hospital, Flights, Beers, Rayyan, Movies) to `data/raw/tableeg/source/`; if the zips are missing it prints where to get them and stops. Nothing else has to be downloaded by hand.
+
+**How to check that the build is correct.** The result is `data/processed/examples/{train,val,test}.jsonl` (about 137 MB, not in git; a 20-record sample is in `data/sample/`). A correct build ends with `Milestone 2 data build finished` and shows:
+
+| Check | Expected |
+|---|---|
+| Records in `train.jsonl`, `val.jsonl`, `test.jsonl` | 55,091, 9,341, 9,547 (`wc -l`) |
+| `shasum -a 256` of the three files starts with | `99e3cdf9` (train), `e8f75de3` (val), `16c3dee4` (test) |
+| Core error cells | 18,414 (Hospital 509, Flights 4,920, Beers 4,362, Rayyan 948, Movies 7,675) |
+| `python src/data/check_leakage.py` | 29 of 29 checks `PASS` (`docs/tables/m2_leakage_checks.csv`) |
+| `python scripts/check_examples.py` | 73,979 of 73,979 examples consistent, no answer revealed (`docs/tables/m2_example_checks.csv`) |
+| `python -m pytest -q tests` | 18 passed |
+| `docs/tables/m2_token_lengths_gemma.csv` (needs `--tokenizer google/gemma-4-E4B-it`) | longest prompt plus answer 1,009 tokens, limit 1,500 |
+
+`scripts/audit_labels.py` writes the audit of the rule-assigned error types and three samples for hand review, with the reviewers' verdicts (`docs/tables/m2_label_audit_*.csv`). Details and the rules behind everything are in [`docs/milestones/M2/Milestone2_Report.md`](docs/milestones/M2/Milestone2_Report.md) (Sections 4.3, 9.3 and 14).
 
 Training and demo commands are added with the milestones that deliver them.
 

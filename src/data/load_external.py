@@ -9,8 +9,10 @@ slice of Clean Me If You Can for unseen-table testing. Raw files come from scrip
 For every table the script
   1. checks the SHA-256 of the raw files against the values in data/download_log.md,
   2. aligns clean and dirty columns and counts error cells with the Raha rule (the same rule as scripts/data_inventory.py),
-  3. types each changed cell with the documented heuristic of scripts/external_inventory.py
-     (missing_value, format_artifact, rule_violation, pattern_violation),
+  3. types each changed cell with a documented heuristic (missing_value, format_artifact, rule_violation,
+     pattern_violation): the Milestone 1 heuristic of scripts/external_inventory.py, extended in the November 2026
+     revision so that a value that sits in the wrong column of its own row, and a well-formed value that is a different
+     value, count as rule violations (see classify),
   4. writes data/processed/external/<table>_cells.csv (one row per cell: dirty value, clean value, is_error, type),
   5. for the training tables only: splits 70 / 15 / 15 (seed 42, by entity where the table repeats an entity) into
      data/splits/external/<table>/{train,val,test}{,_clean,_cells}.csv, the same layout as the core tables,
@@ -25,6 +27,7 @@ from __future__ import annotations
 import argparse
 import collections
 import csv
+import difflib
 import hashlib
 import html
 import json
@@ -32,6 +35,9 @@ import random
 import re
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from src.profiling.context import shape  # noqa: E402  (one pattern notation for the whole project)
 
 csv.field_size_limit(10**9)
 SEED = 42
@@ -118,14 +124,33 @@ def is_artifact(a: str, b: str) -> bool:
     return False
 
 
-def classify(a: str, b: str, clean_values: set) -> str:
-    """a = normalised clean value, b = normalised dirty value (a != b). Heuristic of scripts/external_inventory.py."""
+def classify(a: str, b: str, clean_values: set, other_clean: frozenset = frozenset()) -> str:
+    """a = normalised clean value, b = normalised dirty value (a != b); the type of one changed cell.
+
+    The Milestone 1 heuristic (scripts/external_inventory.py) plus two rules added in the November 2026 revision, after
+    the review of the audit sample showed that a swapped or substituted value was typed `pattern`:
+      missing  a placeholder replaced a real value;
+      format   the same number in another format (not a label);
+      rule     the dirty value is another valid value of the column (unless it is the clean value with something added
+               or dropped, such as `900 MAIN ST` and `900 MAIN ST 1ST FLR`, which is an edit); or it is the clean value
+               of ANOTHER column of the same row (`other_clean`: a value in the wrong place, such as first and last name
+               swapped); or it has the same character pattern as the clean value (or is a digit string that differs in
+               length by one, as when a leading zero was lost) but is not a small edit of it (similarity below 0.6: a
+               well-formed value that does not belong, such as a valid 5-digit zip code that contradicts city and state);
+      pattern  anything else (a typo, a dropped or added character, a changed format).
+    """
     if b.lower() in MISSING and a.lower() not in MISSING:
         return "missing_value"
     if is_artifact(a, b):
         return "format_artifact"
-    if b in clean_values:
+    edit = len(a) >= 3 and len(b) >= 3 and (a in b or b in a)  # the clean value with something added or dropped
+    if b in clean_values and not edit:
         return "rule_violation"  # a valid value of this column in the wrong place
+    if len(b) >= 3 and b in other_clean:
+        return "rule_violation"  # the value belongs to another column of this row
+    same_form = shape(a) == shape(b) or (a.isdigit() and b.isdigit() and abs(len(a) - len(b)) <= 1)
+    if same_form and difflib.SequenceMatcher(None, a, b).ratio() < 0.6:
+        return "rule_violation"  # well formed, but a different value
     return "pattern_violation"
 
 
@@ -181,7 +206,7 @@ def build_cells(header, clean, dirty, skip=()):
         for j in cols:
             a, b = norm(cr[j]), norm(dr[j])
             err = a != b
-            etype = classify(a, b, clean_values[j]) if err else ""
+            etype = classify(a, b, clean_values[j], frozenset(norm(cr[k]) for k in cols if k != j)) if err else ""
             if err:
                 counts[etype] += 1
                 per_col[header[j]] += 1

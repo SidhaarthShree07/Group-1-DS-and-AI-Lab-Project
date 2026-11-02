@@ -3,7 +3,7 @@
 # Stops at the first failing step (including a failing leakage check). Run from the repository root:
 #   bash scripts/build_all.sh [--skip-download]
 # Steps: download -> core tables -> core splits -> external tables and splits -> synthetic tables -> description and EDA
-#        -> baseline files -> fine-tuning examples -> leakage checks -> tests.
+#        -> baseline files -> fine-tuning examples -> leakage checks -> example checks -> label audit -> tests.
 set -euo pipefail
 PY="${PYTHON:-python}"
 
@@ -19,5 +19,7 @@ $PY scripts/eda_analysis.py
 $PY src/data/export_baselines.py
 $PY src/llm/build_examples.py
 $PY src/data/check_leakage.py
+$PY scripts/check_examples.py
+$PY scripts/audit_labels.py
 $PY -m pytest -q tests
 echo "Milestone 2 data build finished: data/processed/examples/{train,val,test}.jsonl"

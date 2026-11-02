@@ -1,10 +1,10 @@
 # ContextGuard: Milestone 2 Report
 ## Dataset Preparation
 
-**Course:** DSAI Lab Project, IIT Madras BS in Data Science and Applications · **Group 1** · **Submitted:** 29 Oct 2026
+**Course:** DSAI Lab Project, IIT Madras BS in Data Science and Applications · **Group 1** · **Submitted:** 29 Oct 2026 · **Revision:** Section 14 added in November 2026
 **Team:** Sidhaarth Shree, Jashan, Sahilpreet, Aaradhya · **Repository:** https://github.com/SidhaarthShree07/Group-1-DS-and-AI-Lab-Project
 
-**Contents:** 1 Introduction · 2 Dataset identification · 3 Dataset description · 4 Data governance · 5 Exploratory data analysis · 6 Data preprocessing · 7 Dataset integration · 8 Data augmentation · 9 Dataset splitting · 10 Final prepared dataset · 11 Challenges encountered · 12 Deliverables produced · 13 Summary and next steps · Team sign-off
+**Contents:** 1 Introduction · 2 Dataset identification · 3 Dataset description · 4 Data governance · 5 Exploratory data analysis · 6 Data preprocessing · 7 Dataset integration · 8 Data augmentation · 9 Dataset splitting · 10 Final prepared dataset · 11 Challenges encountered · 12 Deliverables produced · 13 Summary and next steps · 14 Revision: reliability checks · Team sign-off
 
 **In one paragraph.** This milestone turns the benchmark tables into a training-ready dataset: eight benchmark tables and five synthetic tables, split without leakage, turned into 73,979 instruction–response examples (55,091 for training) that another team can use for fine-tuning without further preparation. One command (`bash scripts/build_all.sh`) rebuilds every file from the public sources, and 29 automated leakage checks pass.
 
@@ -147,7 +147,7 @@ In accordance with course guidelines, three raw representative records per core 
 | Germany (sample) | 5,000 | 9 | 45,000 | 18,678 | 4 | 18,674 | 41.51% |
 
 - **Format.** Each table is a CSV pair (clean and dirty). The dirty BClean files carry a leading unnamed index column 0, 1, 2, …; it is checked and dropped.
-- **Target variables.** `is_error`, `error_type` (missing, pattern, rule, outlier) and `repair`, as for the core tables. External tables ship no error types, so a documented heuristic types each changed cell: a placeholder against a real value is *missing*; the same number in another format is a *format artifact*; a value that is valid elsewhere in the column is a *rule* violation; any other new string is a *pattern* violation.
+- **Target variables.** `is_error`, `error_type` (missing, pattern, rule, outlier) and `repair`, as for the core tables. External tables ship no error types, so a documented heuristic types each changed cell: a placeholder against a real value is *missing*; the same number in another format is a *format artifact*; a value that is valid elsewhere in the column, the clean value of another column of the same row (a swapped value) or a well-formed value that is a different value (a valid zip code that does not fit the row) is a *rule* violation, unless it is only the clean value with something added or dropped, which is an edit; any other new string (a typo, a dropped or added character, a changed format) is a *pattern* violation. The rule was extended in the November 2026 revision (Section 14.1).
 - **Features and schema.** One row per column in [`m2_external_dictionary.csv`](../../tables/m2_external_dictionary.csv): name, type, meaning, an example and the missing rate in the dirty file.
 - **Sample records** (Tax, Apache-2.0; selected columns, dirty against clean):
 
@@ -232,7 +232,7 @@ Our data quality audit (logged in `docs/tables/m2_core_quality.csv`) evaluated c
 
 **Reproducibility and compliance.**
 - Every source is downloaded from its owner at a pinned version and checked by SHA-256 (`scripts/download_data.py`). Raw data are never committed. The repository holds scripts, counts, checksums, the data dictionaries and a 20-record sample.
-- **One command rebuilds everything:** `bash scripts/build_all.sh` runs download, core tables, splits, external tables, synthetic data, description, baseline files, examples, leakage checks and tests, and stops at the first failure. It was run from a clean tree and produced byte-identical example files on two independent runs. The only manual step: TableEG's annotation files exist only on Google Drive, so its zip files are copied into `data/raw/tableeg/` first.
+- **One command rebuilds everything:** `bash scripts/build_all.sh` runs download, core tables, splits, external tables, synthetic data, description, baseline files, examples, leakage checks and tests, and stops at the first failure. It was run from a clean tree and produced byte-identical example files on independent runs. The only manual step: TableEG's annotation files exist only on Google Drive, so its zip files are copied into `data/raw/tableeg/` first (link, file names and the checks for a finished build: Section 14.5 and `README.md`).
 - Library versions are in `requirements.txt`. Licences and attributions are in `THIRD_PARTY.md` and `data/README.md`.
 
 ## 5. Exploratory data analysis
@@ -269,11 +269,11 @@ Figure 2 shows how long the cell values are, because long cells decide how much 
 
 | Table | Missing or placeholder cells (dirty) | Exact duplicate rows (dirty / clean) | Error types: missing / pattern / rule | Columns with most true errors |
 |---|---:|---|---|---|
-| Tax (sample) | 19 | 0 / 0 | 0 / 211 / 91 | `l_name` 77, `state` 64, `zip` 36 |
-| Inpatient | 1,800 | 0 / 4 | 1,800 / 1,684 / 981 | `frst_nm` 520, `prvdr_id` 520, `lst_nm` 520 |
-| Facilities | 3,027 | 41 / 0 | 3,001 / 2,384 / 2,933 | `Address1` 1,100, `City` 1,100, `PhoneNumber` 800 |
-| Billionaire | 1,386 | 0 / 0 | 1,386 / 3,049 / 742 | `Company Type` 413, `Company Name` 306 |
-| Germany | 12,087 | 0 / 0 | 12,087 / 6,292 / 295 | `region` 4,096, `country_code` 4,064, `country` 3,643 |
+| Tax (sample) | 19 | 0 / 0 | 0 / 175 / 127 | `l_name` 77, `state` 64, `zip` 36 |
+| Inpatient | 1,800 | 0 / 4 | 1,800 / 1,209 / 1,456 | `frst_nm` 520, `prvdr_id` 520, `lst_nm` 520 |
+| Facilities | 3,027 | 41 / 0 | 3,001 / 1,786 / 3,531 | `Address1` 1,100, `City` 1,100, `PhoneNumber` 800 |
+| Billionaire | 1,386 | 0 / 0 | 1,386 / 2,335 / 1,456 | `Company Type` 413, `Company Name` 306 |
+| Germany | 12,087 | 0 / 0 | 12,087 / 6,161 / 426 | `region` 4,096, `country_code` 4,064, `country` 3,643 |
 
 - **Class distribution.** Inpatient and Facilities have all three typed kinds of error in comparable shares; Tax has almost no true errors and no missing-value errors; Germany has 41.5% error cells, mostly missing values, because many web-extracted fields are empty.
 - **Duplicates.** The dirty Facilities file has 41 exact duplicate rows that the clean file does not; they are kept (we do not alter benchmark rows).
@@ -394,7 +394,7 @@ ContextGuard applies strict, reproducible preprocessing steps via `src/data/load
 | Source | Names | Mapped to |
 |---|---|---|
 | TableEG annotation files (core tables) | `missing_value`, `pattern_violation`, `rule_violation`, `outliers` | missing, pattern, rule, outlier |
-| Documented heuristic for unannotated cells and for the external tables | `missing_value`, `format_artifact`, `rule_violation`, `pattern_violation` | missing, (skipped), rule, pattern |
+| Documented heuristic for unannotated cells and for the external tables (Section 14.1) | `missing_value`, `format_artifact`, `rule_violation`, `pattern_violation` | missing, (skipped), rule, pattern |
 | Synthetic recipes | the four names above | same mapping; `source=synthetic` |
 
 **Deduplication after merging.** No prompt appears twice across train, validation and test (checked, Section 9). Duplicate rows inside a benchmark table (41 in the dirty Facilities file) are kept; benchmark rows are not altered.
@@ -516,15 +516,15 @@ Beers is a training table (O1, O2) and also the second downstream check (O5, ABV
 
 | Split | Source | Examples | Wrong | Correct | Missing | Pattern | Rule | Outlier | Hard negatives |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Train | benchmark | 44,077 | 22,025 | 22,052 | 5,856 | 11,694 | 4,475 | 0 | 5,609 |
+| Train | benchmark | 44,077 | 22,025 | 22,052 | 5,856 | 10,936 | 5,233 | 0 | 5,609 |
 | Train | synthetic | 11,014 | 5,507 | 5,507 | 1,101 | 1,377 | 1,377 | 1,652 | 987 |
-| **Train total** | | **55,091** | **27,532** | **27,559** | **6,957** | **13,071** | **5,852** | **1,652** | **6,596** |
-| Validation | benchmark | 9,341 | 4,669 | 4,672 | 1,282 | 2,469 | 918 | 0 | 1,254 |
-| Test (sampled) | benchmark | 9,547 | 4,772 | 4,775 | 1,289 | 2,542 | 941 | 0 | 1,323 |
-| **All splits** | | **73,979** | **36,973** | **37,006** | **9,528** | **18,082** | **7,711** | **1,652** | **9,173** |
+| **Train total** | | **55,091** | **27,532** | **27,559** | **6,957** | **12,313** | **6,610** | **1,652** | **6,596** |
+| Validation | benchmark | 9,341 | 4,669 | 4,672 | 1,282 | 2,283 | 1,104 | 0 | 1,254 |
+| Test (sampled) | benchmark | 9,547 | 4,772 | 4,775 | 1,289 | 2,377 | 1,106 | 0 | 1,323 |
+| **All splits** | | **73,979** | **36,973** | **37,006** | **9,528** | **16,973** | **8,820** | **1,652** | **9,173** |
 
 - **Features.** Each record has 8 metadata fields, a prompt and a response. The prompt describes the row (6 to 19 columns per table) and three context blocks.
-- **Class distribution.** Wrong and correct examples are balanced by construction. Among wrong training examples: pattern 47%, missing 25%, rule 21%, outlier 6% (all synthetic). Counts per table and split are in `m2_final_dataset_summary.csv`.
+- **Class distribution.** Wrong and correct examples are balanced by construction. Among wrong training examples: pattern 45%, missing 25%, rule 24%, outlier 6% (all synthetic). Counts per table and split are in `m2_final_dataset_summary.csv`.
 - **Size.** The training file is about 102 MB of text; the three files together about 137 MB (release asset, not in git).
 - **Full test set.** The sampled test set is for quick checks. For the final evaluation (Milestone 5) the script writes every cell of the test split with `--full-test`.
 - **Readiness.** The dataset is ready for a fine-tuning run: the files exist, parse, fit the token budget, are reproducible from one command and pass all leakage checks. The token count with the Gemma tokenizer and the build on the final merged repository have both been done (Handover_Check.md).
@@ -556,7 +556,8 @@ Beers is a training table (O1, O2) and also the second downstream check (O5, ABV
 | 20-record sample | `data/sample/m2_examples_sample.jsonl` |
 | Download and one-command rebuild | `scripts/download_data.py`, `scripts/build_all.sh` |
 | Preprocessing scripts | `src/data/load_core.py`, `split.py`, `load_external.py`, `synthetic.py`, `check_leakage.py`, `export_baselines.py`; `src/profiling/context.py`, `dependencies.py`; `src/llm/build_examples.py` |
-| Tests | `tests/test_context.py`, `tests/test_data_pipeline.py` |
+| Tests | `tests/test_context.py`, `tests/test_data_pipeline.py`, `tests/test_synthetic.py` |
+| Data-quality checks (Section 14) | `scripts/check_examples.py`, `scripts/audit_labels.py`; `docs/tables/m2_example_checks.csv`, `m2_label_audit_summary.csv`, `m2_label_audit_sample.csv` |
 | Documentation | this report, `data/README.md`, `THIRD_PARTY.md` |
 | Data dictionary | `docs/tables/m2_core_dictionary.csv`, `m2_external_dictionary.csv`; record schema in Section 3 |
 | Baseline inputs | `data/processed/baselines/` (Section 12.4) |
@@ -616,6 +617,70 @@ Test rows and scoring rows: Hospital 159 / 139, Flights 365 / 345, Beers 361 / 3
 
 **Milestone 3 (5 Nov).** Build the cheap detectors and measure candidate recall; fix the model input format and the loss; run experiment E2 (with and without context) on the zero-shot model; run the baselines B1 to B3 on the files in `data/processed/baselines/`; set the numerical targets after the pilot.
 
+## 14. Revision after review (November 2026)
+
+After the submission the course team asked for five checks before model development. This section answers each one. One change was made to the data: the rule that types the errors of the external tables was improved (14.1), so the error type of 2,230 cells and the three example files changed. The number of examples, the error cells, the splits, the prompts, the repairs and every `is_error` label are unchanged. New files: `scripts/audit_labels.py`, `scripts/check_examples.py` (both run at the end of `build_all.sh`) and the tables `m2_label_audit_*.csv` and `m2_example_checks.csv`.
+
+### 14.1 Are the error labels correct?
+
+Whether a cell is an error never depends on a heuristic: it is the Raha comparison of the dirty and the clean value (Section 6.1). A rare value that is correct is labelled correct (6,596 of the 27,559 correct training examples are such *hard negatives*, Section 6.2). Only the error *type* is sometimes assigned by a rule:
+
+| Tables | Error type comes from | How reliable |
+|---|---|---|
+| Hospital, Flights, Beers, Rayyan, Movies | TableEG annotation files (a deterministic rule for the 1,005 + 904 cells TableEG omitted) | Annotators' classification; Hospital typos are labelled `rule` (Section 4.3) |
+| Tax, Inpatient, Facilities (training); Billionaire, Germany (unseen test) | our rule `src/data/load_external.py::classify`: a placeholder is `missing`; a value valid elsewhere in the column, the clean value of another column of the same row (a swap), or a well-formed but different value is `rule`; a typo or a dropped, added or changed character is `pattern` | **Heuristic: audited below** |
+| Synthetic tables | exact (we made the error) | reliable, but simple (14.2) |
+
+**What we did.** We audited every cell that our rule typed `pattern` or `rule` (8,284 cells) and checked samples by hand, before and after correcting the rule:
+
+| Step | Cells | Result |
+|---|---:|---|
+| Audit of all rule-typed cells (`scripts/audit_labels.py`) | 8,284 | 4,432 confirmed by independent evidence (a small edit, an exact swap, or a dependency of the table); 3,852 not confirmed, which does not mean wrong |
+| First review (Sahilpreet, confirmed by Jashan) | 6 | wrong type: swapped first and last names, and well-formed zip codes that do not fit the row. The rule was corrected |
+| Sample 1, two reviewers who agreed on every cell | 80 | 78 correct; 2 more wrong types, both edge cases (an address with a floor added, a zip whose clean value lost its leading zero). Corrected |
+| Sample 2, fresh cells drawn after the correction | 80 | **0 wrong** |
+| Sample 3, simple random sample after the correction | 150 | **0 wrong** |
+
+In total 2,230 cells changed their type (1,117 in the training tables, 1,113 in the unseen tables); no cell changed its error status or its repair.
+
+**What this means.** After the correction, 230 fresh cells were read and none had a wrong type, so what may be left are isolated edge cases (for example a state code changed by one letter into another valid code, `MN` to `MI`). With 95% confidence, at most 2.0% of the 8,284 rule-typed cells (about 166) are affected, which is below 0.6% of the 31,499 error cells in the eight benchmark training tables. The 3,852 cells the audit could not confirm are not wrong cells: its tests are strict (it asks for a dependency of the table or an exact swap), and of the 112 of them in the samples, 110 were judged correct and 2 were the edge cases that were corrected. The samples are in `docs/tables/m2_label_audit_sample.csv`, `m2_label_audit_holdout.csv` and `m2_label_audit_random.csv`, with the verdict of the reviewers for every cell. Sample 1 was read by two reviewers, samples 2 and 3 by one.
+
+**Handling.** (1) `is_error` and the repair do not use the rule, so detection and repair results are not affected. (2) Error-type results for the heuristic tables are reported separately from the annotated tables and marked as heuristic; cells the audit could not confirm are not used as evidence for a type claim. (3) If a review ever finds the wrong type in more than one in five of the cells of a group, that group's types are left out of type scoring or merged.
+
+### 14.2 Limits of artificial errors, and the real-data test
+
+The synthetic examples are 11,014 of the 55,091 training examples (19.99%, `source=synthetic`, removable). Their recipes are simpler than real errors: a typo is one changed character, an outlier is a number moved more than five interquartile ranges beyond the range. For outliers the risk is largest: all 1,652 outlier training examples are synthetic, because the benchmark tables contain no outlier error.
+
+How we test real errors: (1) **every validation and test example is real**: synthetic data is in training only (leakage check, Section 9.3). (2) The experiment **with and without synthetic training data (E5)** is required for the outlier type and compared on the real tables. (3) Outlier results are **reported separately by source**, on Credit (1,283 outlier cells), Soccer (199, created by the BART tool) and Movies' `rating_value` (real numeric errors), always with the number of errors. (4) In Milestone 5 a sample of the model's outlier flags and misses on real tables is read by hand. (5) We claim outlier detection only if recall on real outlier cells is shown with its count and interval; otherwise the report will say it was learned from synthetic data and not shown to transfer.
+
+### 14.3 Evaluation under real error rates
+
+Training uses one correct example per error, so a balanced test hides false alarms. Real error rates are lower and differ by table: Hospital 2.5%, Flights 32.7%, Beers 18.0%, Rayyan 8.9%, Movies 6.2% (test splits); Restaurant 0.48%, Soccer 3.98%, Billionaire 9.03%, Germany sample 41.5% (unseen). A model with 90% recall that flags 10% of correct cells has 90% precision on a balanced set, but 49% at a 9.5% error rate and 19% at Hospital's 2.5%.
+
+Protocol, fixed before any result: (1) three test conditions reported separately: the balanced sample (quick check), the **full test split of each core table at its natural rate** (`--full-test`, 29,324 cells), and the **unseen tables at their natural rate**. (2) Metrics that expose false alarms: false-alarm rate, false alarms per 1,000 cells, precision and recall at the natural rate, area under the precision-recall curve, false-repair rate and calibration error, with bootstrap intervals (four seeds for learned models). (3) **No single score:** every metric is given per table and per error type with the number of errors behind it; entries with fewer than 30 errors are marked, and the worst table is shown beside the average. (4) Confidence is fitted on the balanced validation split and shifted by the log-odds of the real error rate; a full-rate validation export is added at the start of Milestone 3. (5) The whole pipeline, including candidate filtering, is scored on all cells (E3).
+
+### 14.4 Quality of the training examples
+
+`scripts/check_examples.py` goes back to the split files for each of the 73,979 examples and checks that the marked cell and the header value are the dirty value of that cell, that `is_error` and `error_type` agree in the answer, the record and the ground truth, that the repair is the clean value (or `null` for a correct cell), that the value shown in the prompt is not the repair, and that the answer has exactly the four keys. **All 73,979 pass** (`docs/tables/m2_example_checks.csv`).
+
+Example (`hospital:val:103:name`): the cell `name` of row 103 holds `huntsvxlle hospxtal`; the prompt says `zip='35801' -> name is 'huntsville hospital' in 27 of 28 rows`; the answer is `error`, type `rule`, repair `huntsville hospital`.
+
+The prompt builder receives the dirty table only and never opens the clean file; the clean value is used only to write the answer. The repair text also appears elsewhere in the prompt for 14,403 of the 36,973 error examples (39%), always from other rows of the dirty table (a dependency majority or a similar row). That evidence is intended and exists at use time too. It allows the shortcut "copy the group majority", which only works where tables repeat their entities; Rayyan, Movies and the unseen tables, and experiment E2 (with and without context), show whether the model really reads context.
+
+### 14.5 Can another team member rebuild everything?
+
+Already in place: pinned sources with SHA-256 (`scripts/download_data.py`), one command (`bash scripts/build_all.sh`) that stops at the first failure, byte-identical files on independent builds, and Aaradhya's run on a fresh clone (29 October 2026: 18 of 18 tests, 55,091 records parsed, longest example 1,009 Gemma tokens). That run used the files before the correction of 14.1; it is repeated on the revised `main`. Added: `README.md` now gives the Google Drive link for TableEG's two zip files, their names, the target folder (`data/raw/tableeg/`) and a table of checks for a finished build. The full procedure was run again on a clean copy on 2 November 2026 (`Handover_Check.md`, Check 3) with these checksums:
+
+| File | Records | SHA-256 (first 16 characters) |
+|---|---:|---|
+| `train.jsonl` | 55,091 | `99e3cdf9ae32a582` |
+| `val.jsonl` | 9,341 | `e8f75de3056a2563` |
+| `test.jsonl` | 9,547 | `16c3dee475969666` |
+
+A finished build also shows 29 of 29 leakage checks `PASS`, 73,979 of 73,979 examples passing `check_examples.py`, and 18 tests passing.
+
+---
+
 ## Team sign-off
 
 We confirm that we have read the final version of this report, that the sections we own are accurate, that every number in them comes from a script in the repository, and that the report is ready for submission.
@@ -627,4 +692,4 @@ We confirm that we have read the final version of this report, that the sections
 | Sahilpreet | 23f3000115 | 2.2, 3.2, 4.1, 5.2, 8, 12.3 | 29 Oct 2026 | confirmed in writing |
 | Aaradhya | adhi1911 | 2.3, 5.3, 9.2, 12.4 | 29 Oct 2026 | confirmed in writing |
 
-A name is entered with a date only after that member has confirmed in writing; the page is final when no entry says pending.
+A name is entered with a date only after that member has confirmed in writing; the page is final when no entry says pending. The confirmations above refer to the version submitted on 29 October 2026; Section 14 (revision, owned by Sidhaarth Shree) and the changes it brings (the type rule for the external tables, and the revised `pattern` and `rule` counts in Sections 3.2, 5.2 and 10) are to be confirmed by the team again.

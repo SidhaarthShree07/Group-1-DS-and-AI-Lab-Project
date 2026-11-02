@@ -29,7 +29,7 @@ The three example files are not in git because of their size; they are published
 
 ## How an error is defined
 
-A cell is an error when its dirty value differs from its clean value after Raha's normalisation, in this order: unescape HTML entities, collapse runs of tab, newline and space into one space, strip tab, newline and space from both ends. The clean value is the gold repair. Error types (missing value, pattern violation, rule violation, outlier) come from the annotation files released with TableEG where they exist.
+A cell is an error when its dirty value differs from its clean value after Raha's normalisation, in this order: unescape HTML entities, collapse runs of tab, newline and space into one space, strip tab, newline and space from both ends. The clean value is the gold repair. Error types (missing value, pattern violation, rule violation, outlier) come from the annotation files released with TableEG where they exist. For Tax, Inpatient, Facilities, Billionaire and Germany, which have no annotations, a documented heuristic types the errors (`src/data/load_external.py::classify`, audited in report Section 14.1).
 
 ## Known differences between copies
 

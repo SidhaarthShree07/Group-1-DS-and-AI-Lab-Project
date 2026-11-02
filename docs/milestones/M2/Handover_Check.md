@@ -37,3 +37,22 @@ Run by Aaradhya on a fresh clone of the merged `main` (commit e020f1f).
 | Notes | No local paths found in the report text (sections 2.3, 5.3, 9.2, 12.4). Nothing unclear or failing. | 29 Oct 2026 |
 
 Check 2 is closed: the hand-over check passed on a machine that did not write the scripts.
+
+## Check 3: clean rebuild after the review comments (run on 2 Nov 2026)
+
+A copy of the repository without data was filled with `bash scripts/build_all.sh` (TableEG's two zip files copied into `data/raw/tableeg/` first, as in the README). The build now also runs `scripts/check_examples.py` and `scripts/audit_labels.py` (report Section 14), and it uses the extended rule that types the errors of the external tables (report Section 14.1: a value in the wrong column of its row, or a well-formed value that is a different value, is a `rule` violation). The example files therefore differ from the ones checked in Check 1 and Check 2 in the `error_type` of 1,117 training-table cells (and in the training answers that carry it); counts, splits, prompts and repairs are unchanged.
+
+| Step | Result |
+|---|---|
+| Download and SHA-256 of all sources | all verified |
+| Core error cells | 18,414, as in Milestone 1 |
+| Examples | 55,091 train, 9,341 validation, 9,547 test |
+| `train.jsonl`, `val.jsonl`, `test.jsonl` SHA-256 start with | `99e3cdf9`, `e8f75de3`, `16c3dee4` (new; the earlier files started with `481cb218`, `a64e9150`, `d5afa8d8`) |
+| Tables that do not depend on the type rule (`m2_core_*`, `m2_dependencies`, `m2_outliers`, the leakage table and others) | byte-identical to the previous build |
+| Tables that depend on the type rule (`m2_external_splits`, `m2_external_sources`, `m2_final_dataset_summary`, `m2_token_lengths`) | updated |
+| Leakage checks | 29 of 29 pass |
+| `scripts/check_examples.py` (target cell, label, repair, no answer in the prompt) | 73,979 of 73,979 examples pass every check |
+| `scripts/audit_labels.py` | runs; 8,284 rule-typed `pattern` and `rule` cells, 3,852 not confirmed; three samples for hand review (report Section 14.1) |
+| Tests | 18 pass |
+
+Check 2 (Aaradhya) was run on the files before the change; a repeat on the revised `main` is requested (the commands and the expected checksums are in `README.md`).
