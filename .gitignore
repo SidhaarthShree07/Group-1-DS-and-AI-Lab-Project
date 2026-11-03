@@ -3,6 +3,10 @@ data/raw/*
 data/processed/*
 data/splits/*
 !data/splits/.gitkeep
+data/subsets/*
+!data/subsets/.gitkeep
+outputs/runs/*
+!outputs/runs/.gitkeep
 raha-master/
 TableEG/
 !data/raw/.gitkeep
@@ -32,3 +36,6 @@ env/
 .DS_Store
 .vscode/
 .idea/
+
+# Local review folders (temporary, untracked)
+Jashan_M3_Files_For_Sid/

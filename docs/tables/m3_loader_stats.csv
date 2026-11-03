@@ -1,0 +1,3 @@
+split,total_examples,min_seq_len,median_seq_len,p95_seq_len,max_seq_len,max_prompt_len,max_answer_len,exceeded_max_len,max_len_limit
+train,55091,408,544,712,1020,923,169,0,1536
+val,9341,405,545,711,985,900,133,0,1536

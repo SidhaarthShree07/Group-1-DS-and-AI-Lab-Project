@@ -1,0 +1,5 @@
+table,val_rows,val_cells,val_errors,val_error_rate_pct,subset_rows,subset_cells,subset_errors,subset_error_rate_pct,subset_missing,subset_pattern,subset_rule,subset_outlier,delta_rate_pct
+hospital,153,2907,79,2.72,100,1900,51,2.68,0,14,37,0,-0.03
+flights,360,2160,723,33.47,100,600,207,34.5,98,66,43,0,1.03
+beers,363,3630,679,18.71,100,1000,190,19.0,54,131,5,0,0.29
+Total,876,8697,1481,17.03,300,3500,448,12.8,152,211,85,0,-4.23
