@@ -36,6 +36,3 @@ env/
 .DS_Store
 .vscode/
 .idea/
-
-# Local review folders (temporary, untracked)
-Jashan_M3_Files_For_Sid/
