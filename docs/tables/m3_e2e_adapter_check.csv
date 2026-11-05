@@ -1,0 +1,3 @@
+model,precision,recall,f1,f1_hospital,f1_flights,f1_beers,false_alarms_per_1000,repair_accuracy,false_repair_rate,pr_auc,ece
+"zero-shot, full prompt",0.7026,0.4799,0.5703,0.5732,0.639,0.493,29.8165,0.1384,0.4786,0.796,0.1467
+after 100 LoRA steps (smoke adapter),0.5318,0.5603,0.5457,0.2941,0.7816,0.5263,72.4115,0.2835,0.7267,0.8726,0.3093

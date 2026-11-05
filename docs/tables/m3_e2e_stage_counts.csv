@@ -1,0 +1,4 @@
+table,rows,cells,errors,candidates,errors_in_candidates,model_calls,invalid_answers,rules_proposed,rules_kept
+beers,100,1000,190,271,72,271,0,11,7
+flights,100,600,207,171,147,171,0,5,5
+hospital,100,1900,51,323,45,323,0,11,7

@@ -1,0 +1,15 @@
+stage,seconds
+load model,7.48
+stage 0 hospital,24.88
+stage 1 hospital,0.43
+stage 2 hospital,0.97
+stage 3 hospital,99.34
+stage 0 flights,12.64
+stage 1 flights,0.07
+stage 2 flights,0.12
+stage 3 flights,54.15
+stage 0 beers,22.33
+stage 1 beers,0.14
+stage 2 beers,0.13
+stage 3 beers,75.42
+scoring,1.62

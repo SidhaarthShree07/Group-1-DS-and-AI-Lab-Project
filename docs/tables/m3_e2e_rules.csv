@@ -1,0 +1,28 @@
+table,kind,columns,rule,support,flagged_share,kept,reason
+hospital,pattern,provider_number,^\d{5}$|^\d{4}[a-z]\d{2}$,0.95,0.05,True,holds on the dirty table
+hospital,allowed_values,state,al|xl,1.0,0.0,True,holds on the dirty table
+hospital,range,zip,35233.0..36116.0,1.0,0.0,True,holds on the dirty table
+hospital,pattern,phone,^\d{10}$,0.97,0.03,True,holds on the dirty table
+hospital,allowed_values,emergency_service,yes|yxs|yex,1.0,0.0,True,holds on the dirty table
+hospital,allowed_values,type,acute care hospitals|acute care hospitaxs|acuxe care hospixals|acutexcarexhospitals|acute care hoxpitalx,1.0,0.0,True,holds on the dirty table
+hospital,allowed_values,owner,voluntary non-profit - …|government - hospital d…|government - state|gxvernment - hxspital d…,0.17,0.83,False,"holds for 17.0% of values, below 95%"
+hospital,pattern,score,^\d{2}%$,0.68,0.32,False,"holds for 68.0% of values, below 95%"
+hospital,pattern,sample,^\d+ patients$,0.93,0.07,False,"holds for 93.0% of values, below 95%"
+hospital,pattern,state_average,^[a-z]{2}_[a-z0-9-]+$,0.99,0.01,True,holds on the dirty table
+hospital,determines,state|state_average,,0.07,0.93,False,strength 0.07 below 0.9
+flights,pattern,flight,"^(AA|UA)-\d{1,4}-[A-Z]{3}-[A-Z]{3}$",1.0,0.0,True,holds on the dirty table
+flights,pattern,sched_dep_time,"^\d{1,2}:\d{2} (\s*[ap]\.m\.?)$",0.95,0.03,True,holds on the dirty table
+flights,pattern,act_dep_time,"^\d{1,2}:\d{2} (\s*[ap]\.m\.?)$",0.956,0.04,True,holds on the dirty table
+flights,pattern,sched_arr_time,"^\d{1,2}:\d{2} (\s*[ap]\.m\.?)$",0.95,0.03,True,holds on the dirty table
+flights,pattern,act_arr_time,"^\d{1,2}:\d{2} (\s*[ap]\.m\.?)$",0.989,0.01,True,holds on the dirty table
+beers,pattern,id,"^\d{3,4}$",0.99,0.01,True,holds on the dirty table
+beers,pattern,beer_name,^[A-Za-z\s\(\)\[\]]+$,0.75,0.25,False,"holds for 75.0% of values, below 95%"
+beers,pattern,style,^[A-Za-z\s/\(\)\[\]]+$,0.9596,0.04,True,holds on the dirty table
+beers,pattern,ounces,^\d+\.\d+\s*(oz\.?|ounce)$,0.95,0.05,True,holds on the dirty table
+beers,pattern,abv,"^\d\.\d{2,3}$",0.6667,0.33,False,"holds for 66.7% of values, below 95%"
+beers,range,ibu,0.0..200.0,1.0,0.0,True,holds on the dirty table
+beers,range,brewery_id,1.0..1000.0,1.0,0.0,True,holds on the dirty table
+beers,pattern,brewery_name,^[A-Za-z\s\(\)\[\]]+$,0.9,0.1,False,"holds for 90.0% of values, below 95%"
+beers,pattern,city,^[A-Za-z\s]+$,0.97,0.03,True,holds on the dirty table
+beers,pattern,state,^[A-Z]{2}$,1.0,0.0,True,holds on the dirty table
+beers,allowed_values,ounces,12.0 oz.|12.0 oz|16.0 oz|12.0 ounce|16.0 oz.,0.93,0.07,False,"holds for 93.0% of values, below 95%"

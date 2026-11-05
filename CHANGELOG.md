@@ -2,6 +2,15 @@
 
 All notable changes to this project are recorded here, one section per milestone.
 
+## [Unreleased] — Milestone 3 (model architecture)
+- Added `docs/milestones/M3/Milestone3_Report.md` and PDF (the TA's 16-section outline, team sign-off page), `Milestone3_Worklog.md`, the review deck (`ContextGuard_M3_Slides.pptx` and PDF) in `docs/milestones/M3/slides/`, the AI usage disclosure (report, last section before the sign-off), and the architecture and model diagrams in `docs/figures/m3/`.
+- Stage 0 (detector D7): `src/detectors/llm_rules.py`, rules proposed by the base model and checked on the dirty table, with `tests/test_llm_rules.py`.
+- Stage 1: detectors D1 to D6 and the candidate stage in `src/detectors/`, `scripts/evaluate_candidates.py`, `docs/tables/m3_candidate_recall.csv`, `m3_detector_cost.csv` (Aaradhya); first simplified baseline runs `scripts/run_baselines.py`, `docs/tables/m3_baselines_first_run.csv`.
+- Model: `src/llm/dataset.py` (training data loader with the tokenizer's chat template and answer-only labels, Jashan), `src/llm/train_lora.py` (LoRA training), `src/llm/infer.py` (inference with P(error) from the first answer token).
+- Evaluation: `src/evaluation/parse.py`, `metrics.py`, `calibrate.py` with tests (Sahilpreet); format-only cells are left out of every metric.
+- Pipeline: `scripts/run_pipeline.py` (all five stages on a subset), `scripts/score_run.py`; the subset `src/data/make_subset.py` and `configs/m3_smoke.yaml` (Jashan); results of the end-to-end run, of experiment E2 and of the run with the smoke adapter in `docs/tables/m3_e2e_*.csv` and `m3_e2_context.csv`; the LoRA smoke run in `docs/tables/m3_lora_smoke.csv`.
+- `.gitignore`: subsets, run outputs and predictions are not committed.
+
 ## [Unreleased] — Milestone 2 (dataset preparation)
 - Added `docs/milestones/M2/Milestone2_Report.md` (13-section report with a team sign-off page), `Milestone2_Worklog.md`, `Handover_Check.md` (hand-over check, passed), the PDF of the report, and the review deck (`ContextGuard_M2_Slides.pptx` and PDF) in `docs/milestones/M2/slides/`.
 - Core tables: `src/data/load_core.py` (pinned sources, SHA-256, Raha rule, error types), `src/data/split.py` (70 / 15 / 15 split by entity, seed 42, grouped on the clean key), `scripts/generate_m2_outputs.py` (quality table, data dictionary, figures; Figure 1 now shows all five tables, Figure 2 labels no longer clipped), `docs/tables/m2_core_*.csv`, `docs/figures/m2/`.
