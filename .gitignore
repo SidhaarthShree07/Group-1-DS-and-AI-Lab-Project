@@ -3,6 +3,10 @@ data/raw/*
 data/processed/*
 data/splits/*
 !data/splits/.gitkeep
+data/subsets/*
+!data/subsets/.gitkeep
+outputs/runs/*
+!outputs/runs/.gitkeep
 raha-master/
 TableEG/
 !data/raw/.gitkeep
