@@ -5,8 +5,7 @@ data/splits/*
 !data/splits/.gitkeep
 data/subsets/*
 !data/subsets/.gitkeep
-outputs/runs/*
-!outputs/runs/.gitkeep
+external_data/
 raha-master/
 TableEG/
 !data/raw/.gitkeep
@@ -23,6 +22,12 @@ models/checkpoints/*
 *.pth
 *.bin
 
+# Run outputs, predictions and temporary logs (summary tables go to docs/tables/m3_*.csv)
+outputs/runs/*
+!outputs/runs/.gitkeep
+outputs/predictions/*
+!outputs/predictions/.gitkeep
+
 # Python / environments
 __pycache__/
 *.py[cod]
@@ -31,8 +36,10 @@ venv/
 env/
 .ipynb_checkpoints/
 
-# Secrets and OS files
+# Secrets, local notes and OS files
 .env
 .DS_Store
 .vscode/
 .idea/
+*.swp
+*~
