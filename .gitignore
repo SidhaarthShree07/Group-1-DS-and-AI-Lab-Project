@@ -2,8 +2,8 @@
 data/raw/*
 data/processed/*
 data/splits/*
-data/subsets/*
 !data/splits/.gitkeep
+data/subsets/*
 !data/subsets/.gitkeep
 external_data/
 raha-master/
@@ -24,6 +24,7 @@ models/checkpoints/*
 
 # Run outputs, predictions and temporary logs (summary tables go to docs/tables/m3_*.csv)
 outputs/runs/*
+!outputs/runs/.gitkeep
 outputs/predictions/*
 !outputs/predictions/.gitkeep
 
