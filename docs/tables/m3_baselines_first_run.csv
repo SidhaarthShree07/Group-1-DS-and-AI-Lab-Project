@@ -1,0 +1,16 @@
+baseline,table,total_test_rows,scored_rows,runtime_sec,status,detected_cells,tp,fp,precision,recall,f1,repair_accuracy,notes
+B1_dc_violation_check,hospital,159,139,0.076,completed,806,56,750,0.0695,0.8485,0.1284,-,Violation check of 67 mined denial constraints; HoloClean not yet run
+B2_dBoost_one_setting,hospital,159,139,3.241,completed,1275,59,1216,0.0463,0.8939,0.088,-,dBoost one setting (0.5 0.5); grid not yet done
+B3_Raha_reduced_strategies,hospital,159,139,0.711,completed,17,17,0,1.0,0.2576,0.4096,-,Raha reduced strategy set; Baran not yet run
+B1_dc_violation_check,flights,365,345,0.028,completed,478,202,276,0.4226,0.2966,0.3486,-,Violation check of 7 mined denial constraints; HoloClean not yet run
+B2_dBoost_one_setting,flights,365,345,0.213,completed,1291,558,733,0.4322,0.8194,0.5659,-,dBoost one setting (0.5 0.5); grid not yet done
+B3_Raha_reduced_strategies,flights,365,345,1.383,completed,596,559,37,0.9379,0.8209,0.8755,-,Raha reduced strategy set; Baran not yet run
+B1_dc_violation_check,beers,361,341,0.05,completed,384,42,342,0.1094,0.0685,0.0843,-,Violation check of 9 mined denial constraints; HoloClean not yet run
+B2_dBoost_one_setting,beers,361,341,0.421,completed,1693,613,1080,0.3621,1.0,0.5317,-,dBoost one setting (0.5 0.5); grid not yet done
+B3_Raha_reduced_strategies,beers,361,341,1.326,completed,572,562,10,0.9825,0.9168,0.9485,-,Raha reduced strategy set; Baran not yet run
+B1_dc_violation_check,rayyan,150,130,0.0,completed (0 constraints),0,0,0,0.0,0.0,0.0,-,No denial constraints mined
+B2_dBoost_one_setting,rayyan,150,130,0.251,completed,572,40,532,0.0699,0.3053,0.1138,-,dBoost one setting (0.5 0.5); grid not yet done
+B3_Raha_reduced_strategies,rayyan,150,130,0.466,completed,16,16,0,1.0,0.1221,0.2177,-,Raha reduced strategy set; Baran not yet run
+B1_dc_violation_check,movies,1109,1089,0.014,completed,357,0,357,0.0,0.0,0.0,-,Violation check of 1 mined denial constraints; HoloClean not yet run
+B2_dBoost_one_setting,movies,1109,1089,0.867,completed,0,0,0,0.0,0.0,0.0,-,dBoost one setting (0.5 0.5); grid not yet done
+B3_Raha_reduced_strategies,movies,1109,1089,3.946,completed,258,85,173,0.3295,0.0742,0.1212,-,Raha reduced strategy set; Baran not yet run

@@ -1,0 +1,7 @@
+detector,total_runtime_sec,sec_per_1k_rows,peak_memory_mb
+D1 (Missing),0.642,0.0925,0.17
+D2 (Pattern),2.194,0.3158,3.06
+D3 (Robust z),1.475,0.2122,1.33
+D4 (Isolation Forest),5.522,0.7947,1.41
+D5 (Dependencies),12.594,1.8126,1.44
+D6 (Typo / Distance),32.43,4.6675,0.57

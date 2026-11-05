@@ -1,0 +1,9 @@
+table,rows,columns,total_cells,candidate_cells,pass_through_pct,true_errors,candidates_tp,candidate_recall_pct,recall_missing_pct,recall_pattern_pct,recall_rule_pct,recall_outlier_pct,missing_errors,pattern_errors,rule_errors,outlier_errors
+hospital,153,19,2907,471,16.2,79,65,82.28,-,68.75,85.71,-,0,16,63,0
+flights,360,6,2160,434,20.09,723,429,59.34,100.0,38.62,7.14,-,323,246,154,0
+beers,363,10,3630,909,25.04,679,252,37.11,100.0,8.87,66.67,-,199,462,18,0
+rayyan,150,11,1650,838,50.79,141,66,46.81,100.0,72.97,28.57,-,13,37,91,0
+movies,1109,17,18853,9224,48.93,1054,451,42.79,100.0,42.3,-,-,9,1045,0,0
+tax,3000,15,45000,3290,7.31,51,46,90.2,-,100.0,79.17,-,0,27,24,0
+inpatient,607,11,6677,1021,15.29,695,548,78.85,100.0,82.2,51.71,-,270,191,234,0
+facilities,1206,10,12060,3796,31.48,1250,1179,94.32,100.0,99.62,86.54,-,468,262,520,0
