@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="IBM Plex Sans, Helvetica, Arial, sans-serif">
+  <title>ContextGuard system architecture: five stages from the dirty CSV to the cleaned CSV and change log</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#334155;stroke-width:1.4}
+      .llm{fill:#e6f4f1;stroke:#0e7a63;stroke-width:1.6}
+      .gate{fill:#fdf3e2;stroke:#c27c0e;stroke-width:1.6}
+      .io{fill:#121b2d}
+      .t{font-size:15px;font-weight:700;fill:#121b2d}
+      .s{font-size:12px;fill:#334155}
+      .w{font-size:14px;font-weight:700;fill:#ffffff}
+      .ws{font-size:12px;fill:#dbe3ef}
+      .n{font-size:11.5px;fill:#566073;font-style:italic}
+      .lab{font-size:11.5px;fill:#0e7a63}
+      line,path.f{stroke:#334155;stroke-width:1.6;fill:none}
+    </style>
+  </defs>
+
+  <!-- input -->
+  <rect class="io" x="20" y="40" width="160" height="70" rx="8"/>
+  <text class="w" x="100" y="70" text-anchor="middle">Dirty table (CSV)</text>
+  <text class="ws" x="100" y="90" text-anchor="middle">uploaded by the user</text>
+
+  <!-- stage 0 -->
+  <rect class="llm" x="230" y="20" width="230" height="110" rx="8"/>
+  <text class="t" x="245" y="45">Stage 0 · rules (D7)</text>
+  <text class="s" x="245" y="66">Gemma 4 E4B-it, zero-shot, per table</text>
+  <text class="s" x="245" y="84">proposes pattern, value, range and</text>
+  <text class="s" x="245" y="100">dependency rules; each is checked on</text>
+  <text class="s" x="245" y="116">the dirty table; only kept rules flag cells</text>
+
+  <!-- stage 1 -->
+  <rect class="box" x="510" y="20" width="230" height="110" rx="8"/>
+  <text class="t" x="525" y="45">Stage 1 · cheap detectors</text>
+  <text class="s" x="525" y="66">D1 missing · D2 rare pattern · D3 MAD</text>
+  <text class="s" x="525" y="84">D4 Isolation Forest · D5 dependencies</text>
+  <text class="s" x="525" y="100">D6 edit distance · D7 kept rules</text>
+  <text class="s" x="525" y="116">any flag → candidate cell (CPU only)</text>
+
+  <!-- stage 2 -->
+  <rect class="box" x="790" y="20" width="190" height="110" rx="8"/>
+  <text class="t" x="805" y="45">Stage 2 · context</text>
+  <text class="s" x="805" y="66">per candidate cell, from</text>
+  <text class="s" x="805" y="84">the dirty table only: row,</text>
+  <text class="s" x="805" y="100">column profile, dependency</text>
+  <text class="s" x="805" y="116">evidence, similar rows</text>
+
+  <!-- stage 3 -->
+  <rect class="llm" x="560" y="210" width="420" height="120" rx="8"/>
+  <text class="t" x="575" y="236">Stage 3 · Gemma 4 E4B-it + LoRA adapters</text>
+  <text class="s" x="575" y="258">chat template · prompt ≤ 1,500 tokens · greedy decoding</text>
+  <text class="s" x="575" y="276">answer starts with {"is_error": → P(error) from the first token</text>
+  <text class="s" x="575" y="294">JSON answer: is_error · error_type · evidence · repair</text>
+  <text class="n" x="575" y="316">base weights frozen; only the LoRA adapters are trained (M4)</text>
+
+  <!-- stage 4 -->
+  <rect class="gate" x="230" y="210" width="280" height="120" rx="8"/>
+  <text class="t" x="245" y="236">Stage 4 · parse, calibrate, gate</text>
+  <text class="s" x="245" y="258">JSON schema check (invalid → review)</text>
+  <text class="s" x="245" y="276">temperature scaling + error-rate shift</text>
+  <text class="s" x="245" y="294">P ≥ repair threshold → repair</text>
+  <text class="s" x="245" y="312">P ≥ flag threshold → review; else keep</text>
+
+  <!-- outputs -->
+  <rect class="io" x="20" y="210" width="160" height="120" rx="8"/>
+  <text class="w" x="100" y="246" text-anchor="middle">Outputs</text>
+  <text class="ws" x="100" y="268" text-anchor="middle">cleaned table</text>
+  <text class="ws" x="100" y="286" text-anchor="middle">change log</text>
+  <text class="ws" x="100" y="304" text-anchor="middle">review list</text>
+
+  <!-- arrows: main flow -->
+  <line x1="180" y1="75" x2="228" y2="75" marker-end="url(#a)"/>
+  <line x1="460" y1="75" x2="508" y2="75" marker-end="url(#a)"/>
+  <line x1="740" y1="75" x2="788" y2="75" marker-end="url(#a)"/>
+  <path class="f" d="M885,130 L885,170 L770,170 L770,208" marker-end="url(#a)"/>
+  <line x1="560" y1="270" x2="512" y2="270" marker-end="url(#a)"/>
+  <line x1="230" y1="270" x2="182" y2="270" marker-end="url(#a)"/>
+  <!-- the dirty table also feeds stages 1 and 2 -->
+  <path class="f" d="M100,110 L100,160 L625,160 L625,132" marker-end="url(#a)" stroke-dasharray="5 4"/>
+  <text class="lab" x="300" y="154">the dirty table feeds every stage; the clean table is never read</text>
+
+  <!-- labels on arrows -->
+  <text class="lab" x="468" y="64">rules</text>
+  <text class="lab" x="745" y="66">cells</text>
+  <text class="lab" x="790" y="185">prompts</text>
+  <text class="lab" x="516" y="262">answers</text>
+  <text class="lab" x="186" y="262">decisions</text>
+
+  <!-- training path -->
+  <rect class="box" x="560" y="390" width="420" height="140" rx="8"/>
+  <text class="t" x="575" y="415">Training path (offline, M2 data → M4 runs)</text>
+  <text class="s" x="575" y="437">train.jsonl 55,091 · val.jsonl 9,341 (balanced, entity-split)</text>
+  <text class="s" x="575" y="455">loader: same chat template as inference; prompt and padding → label −100</text>
+  <text class="s" x="575" y="473">loss: cross-entropy on answer tokens · AdamW · cosine schedule</text>
+  <text class="s" x="575" y="491">LoRA r 16, α 32 on attention and MLP projections</text>
+  <text class="s" x="575" y="509">validation data → early stopping, temperature, gate thresholds</text>
+  <path class="f" d="M770,390 L770,332" marker-end="url(#a)"/>
+  <text class="lab" x="778" y="365">adapter</text>
+  <path class="f" d="M560,500 L370,500 L370,332" marker-end="url(#a)" stroke-dasharray="5 4"/>
+  <text class="lab" x="380" y="492">fitted on validation data</text>
+
+  <!-- evaluation -->
+  <rect class="box" x="20" y="390" width="300" height="140" rx="8"/>
+  <text class="t" x="35" y="415">Evaluation (not part of the app)</text>
+  <text class="s" x="35" y="437">every cell at the natural error rate</text>
+  <text class="s" x="35" y="455">per table and error type: precision, recall,</text>
+  <text class="s" x="35" y="473">F1, false alarms, repair accuracy,</text>
+  <text class="s" x="35" y="491">false repairs, PR-AUC, ECE,</text>
+  <text class="s" x="35" y="509">candidate recall and pass-through</text>
+  <path class="f" d="M100,332 L100,388" marker-end="url(#a)"/>
+</svg>

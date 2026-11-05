@@ -1,0 +1,4 @@
+context,model_calls,precision,recall,f1,false_alarms_per_1000,repair_accuracy,false_repair_rate,pr_auc,ece,f1_beers,f1_flights,f1_hospital
+row only,760,0.4607,0.4978,0.4785,85.5177,0.0446,0.7176,0.7949,0.3734,0.5208,0.7152,0.2136
+row + column profile,760,0.438,0.5045,0.4689,95.0197,0.0603,0.6429,0.7224,0.3489,0.4775,0.6946,0.2405
+full prompt (+ dependency evidence and similar rows),760,0.7026,0.4799,0.5703,29.8165,0.1384,0.4786,0.796,0.1476,0.493,0.639,0.5732

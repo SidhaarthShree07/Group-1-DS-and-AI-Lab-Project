@@ -2,7 +2,7 @@
 
 Cell-level error detection, typing and repair for relational tables: cheap detectors decide where to look, a fine-tuned open language model decides what is wrong, and a calibrated confidence gate decides what is changed automatically.
 
-DSAI Lab course project (IIT Madras BS in Data Science and Applications), Group 1. **Current stage: Milestone 2 (dataset preparation).** Sections below say plainly what exists today and what later milestones add.
+DSAI Lab course project (IIT Madras BS in Data Science and Applications), Group 1. **Current stage: Milestone 3 (model architecture and end-to-end pipeline).** Sections below say plainly what exists today and what later milestones add.
 
 ## 1. Overview
 
@@ -19,10 +19,12 @@ Existing cleaners cover part of the problem. Rule systems (NADEEF, HoloClean) ne
 | Audit of the benchmark tables under Raha's ground-truth rule, with recovered errors that a public copy had lost | Done (Milestone 1) |
 | Zero-shot comparison of three open models on a fixed 1,500-cell test set, with mean ± std over three sampling seeds | Done (Milestone 1) |
 | Training-ready data: 73,979 instruction–response examples from eight benchmark and five synthetic tables, entity-aware splits, 29 leakage checks, rebuilt by one command | Done (Milestone 2) |
-| Input files of the baselines (HoloClean with mined constraints, dBoost, Raha + Baran) on the test split | Done (Milestone 2); first runs in Milestone 3 |
-| Cheap detectors (missing values, rare patterns, robust outliers, multivariate outliers, approximate dependencies, typos) | Planned, Milestone 3 |
-| LoRA fine-tuning for detection, typing and repair with JSON output | Planned, Milestones 3–4 |
-| Calibrated confidence gate (temperature scaling) with separate flag and auto-repair thresholds | Planned, Milestones 3–5 |
+| Input files of the baselines (HoloClean with mined constraints, dBoost, Raha + Baran) on the test split | Done (Milestone 2); simplified first runs in Milestone 3 (HoloClean and Baran not yet run) |
+| Cheap detectors (missing values, rare patterns, robust outliers, multivariate outliers, approximate dependencies, typos) and the candidate stage | Done (Milestone 3) |
+| Stage 0: data rules proposed by the base model and checked on the dirty table (D7) | Built (Milestone 3); kept only if experiment E6 shows a gain |
+| Complete five-stage pipeline run end to end on a 300-row validation subset | Done (Milestone 3) |
+| LoRA fine-tuning for detection, typing and repair with JSON output | Training data loader and a 100-step smoke run done (Milestone 3); full training Milestone 4 |
+| Calibrated confidence gate (temperature scaling) with separate flag and auto-repair thresholds | Implemented and tested (Milestone 3); fitted on validation data in Milestone 4 |
 | Baseline comparison (rule-based, dBoost, Raha + Baran, zero-shot and few-shot LLM) | Planned, Milestone 5 |
 | Gradio demo and API that return a cleaned CSV, a change log and a review list | Planned, Milestone 6 |
 
@@ -38,7 +40,7 @@ flowchart LR
     E -->|uncertain| G[Human review list]
 ```
 
-Only the candidate cells reach the language model, so cost grows with the number of flagged cells, not with the table size. The model answers in JSON; P(is_error) is read from the logits of the first answer token and calibrated on validation data. (Design status: the architecture is fixed for planning; its components are built in Milestones 3–4.)
+Only the candidate cells reach the language model, so cost grows with the number of flagged cells, not with the table size. The model answers in JSON; P(is_error) is read from the logits of the first answer token and calibrated on validation data. (Status: every stage is built and was run end to end in Milestone 3; a stage 0 that proposes data rules runs before the detectors. The full architecture is in [`docs/milestones/M3/Milestone3_Report.md`](docs/milestones/M3/Milestone3_Report.md), Section 2.)
 
 ## 5. Dataset details
 
@@ -103,7 +105,17 @@ bash scripts/build_all.sh            # add --skip-download if data/raw/ is alrea
 
 `scripts/audit_labels.py` writes the audit of the rule-assigned error types and three samples for hand review, with the reviewers' verdicts (`docs/tables/m2_label_audit_*.csv`). Details and the rules behind everything are in [`docs/milestones/M2/Milestone2_Report.md`](docs/milestones/M2/Milestone2_Report.md) (Sections 4.3, 9.3 and 14).
 
-Training and demo commands are added with the milestones that deliver them.
+**Pipeline on the subset (Milestone 3).** Needs a CUDA GPU and the built data. Build the 300-row validation subset, run all stages, score the run, and run the LoRA smoke test:
+
+```bash
+python src/data/make_subset.py                                   # data/subsets/m3 (100 validation rows of Hospital, Flights, Beers)
+python scripts/run_pipeline.py --model <Gemma 4 E4B-it> --out outputs/runs/m3_e2e_full --d7
+python scripts/score_run.py outputs/runs/m3_e2e_full
+python src/llm/train_lora.py --model <Gemma 4 E4B-it> --out outputs/runs/m3_lora_smoke --max-steps 100
+python -m pytest -q tests                                        # 93 tests (one skips until the subset is built)
+```
+
+Results and the commands of every run are in [`docs/milestones/M3/Milestone3_Report.md`](docs/milestones/M3/Milestone3_Report.md) (Section 3.6). Full training and demo commands are added with the milestones that deliver them.
 
 ## 9. Results
 
@@ -115,7 +127,7 @@ Zero-shot comparison of base models (no fine-tuning yet), three fresh samples of
 | Qwen3.5-9B | 0.642 ± 0.008 | 0.838 ± 0.001 | 0.317 ± 0.008 | 0.701 ± 0.003 | 0.603 ± 0.005 |
 | **Gemma 4 E4B-it** | **0.698 ± 0.011** | **0.864 ± 0.004** | **0.357 ± 0.014** | **0.393 ± 0.022** | **0.645 ± 0.007** |
 
-Gemma 4 E4B-it won on all three seeds. These are zero-shot numbers on one prompt and are not results of ContextGuard; fine-tuning may change the order. Method, caveats and bootstrap intervals: [`outputs/reports/model_bakeoff/README.md`](outputs/reports/model_bakeoff/README.md). Baseline and ContextGuard results are reported from Milestone 5.
+Gemma 4 E4B-it won on all three seeds. These are zero-shot numbers on one prompt and are not results of ContextGuard; fine-tuning may change the order. Method, caveats and bootstrap intervals: [`outputs/reports/model_bakeoff/README.md`](outputs/reports/model_bakeoff/README.md). First pipeline results (zero-shot, not yet fine-tuned) are in the Milestone 3 report, Section 3.6. Baseline and ContextGuard results are reported from Milestone 5.
 
 ## 10. Demo screenshots
 
@@ -130,7 +142,7 @@ The demo is built in Milestone 6; there are no screenshots yet.
 | Sahilpreet ([@23f3000115](https://github.com/23f3000115)) | External datasets: audit, licences, synthetic data |
 | Aaradhya ([@adhi1911](https://github.com/adhi1911)) | Outlier and dependency analysis, baselines |
 
-Work is tracked per milestone in the worklogs, [`docs/milestones/M1/Milestone1_Worklog.md`](docs/milestones/M1/Milestone1_Worklog.md) and [`docs/milestones/M2/Milestone2_Worklog.md`](docs/milestones/M2/Milestone2_Worklog.md).
+Work is tracked per milestone in the worklogs, [`docs/milestones/M1/Milestone1_Worklog.md`](docs/milestones/M1/Milestone1_Worklog.md), [`docs/milestones/M2/Milestone2_Worklog.md`](docs/milestones/M2/Milestone2_Worklog.md) and [`docs/milestones/M3/Milestone3_Worklog.md`](docs/milestones/M3/Milestone3_Worklog.md).
 
 ## 12. References
 

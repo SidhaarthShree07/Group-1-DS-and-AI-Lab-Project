@@ -1,0 +1,13 @@
+table,error_type,n_errors,is_low_sample,tp,fp,fn,precision,recall,f1,successful_repairs,repair_accuracy,executed_repairs,incorrect_repairs,false_repair_rate
+beers,missing,54,False,54,2,0,0.9643,1.0,0.9818,1,0.0185,1,0,0.0
+beers,pattern,131,False,15,22,116,0.4054,0.1145,0.1786,9,0.0687,34,17,0.5
+beers,rule,5,True,0,1,5,0.0,0.0,0.0,1,0.2,1,1,1.0
+beers,outlier,0,True,0,0,0,0.0,0.0,0.0,0,0.0,0,0,0.0
+flights,missing,98,False,85,0,13,1.0,0.8673,0.929,0,0.0,0,0,0.0
+flights,pattern,66,False,7,5,59,0.5833,0.1061,0.1795,8,0.1212,6,2,0.3333
+flights,rule,43,False,3,6,40,0.3333,0.0698,0.1154,2,0.0465,8,1,0.125
+flights,outlier,0,True,0,0,0,0.0,0.0,0.0,0,0.0,0,0,0.0
+hospital,missing,0,True,0,10,0,0.0,0.0,0.0,0,0.0,0,0,0.0
+hospital,pattern,14,True,8,70,6,0.1026,0.5714,0.1739,6,0.4286,76,46,0.6053
+hospital,rule,37,False,12,6,25,0.6667,0.3243,0.4364,35,0.9459,14,0,0.0
+hospital,outlier,0,True,0,0,0,0.0,0.0,0.0,0,0.0,0,0,0.0
