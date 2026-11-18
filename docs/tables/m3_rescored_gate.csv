@@ -1,0 +1,5 @@
+table,gate_repaired_right,gate_repaired_wrong,gate_repaired_no_change,repaired_right,repaired_wrong_error,repaired_wrong_correct_cell,review_error,review_correct_cell,kept_missed_error,kept_correct,total_cells,total_errors,precision,recall,f1,repair_accuracy,false_repair_rate,false_repair_rate_gate,false_alarms_per_1000,review_share
+beers,11,15,5,11,0,0,59,19,120,791,1000,190,0.7865,0.3684,0.5018,0.0579,0.0,0.5769,23.46,0.078
+flights,10,1,1,7,0,0,93,5,107,388,600,207,0.9524,0.4831,0.641,0.0338,0.0,0.0909,12.72,0.1633
+hospital,41,41,3,41,1,0,3,57,6,1792,1900,51,0.4412,0.8824,0.5882,0.8039,0.0238,0.5,30.83,0.0316
+Total,62,57,9,59,1,0,155,81,233,2971,3500,448,0.7264,0.4799,0.578,0.1317,0.0167,0.479,26.54,0.0674

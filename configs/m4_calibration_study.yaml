@@ -1,0 +1,13 @@
+note: Calibration study parameters only. The ContextGuard production pipeline uses
+  raw P(error) at 0.5 (flag) / 0.8 (repair) plus the token repair-confidence gate
+  at 0.9.
+study_fitted_flag_threshold: 0.3775
+study_fitted_repair_threshold: 0.6475
+pipeline_flag_threshold: 0.5
+pipeline_repair_threshold: 0.8
+pipeline_repair_confidence_gate: 0.9
+cap_met: true
+max_false_repair_rate: 0.1
+temperature: 0.8261
+calibration_method: temperature_scaling_and_em_prior_shift
+reference: Saerens et al. (2002)
