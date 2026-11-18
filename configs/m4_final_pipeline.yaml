@@ -1,0 +1,34 @@
+# ContextGuard M4: the final pipeline configuration.
+# Chosen on validation data (the M3 subset and the validation splits), then run on the test
+# splits (scripts/run_m4_final_eval.sh). No human input per table: every option below is generic.
+#
+# Command (one table set):
+#   python scripts/run_pipeline.py --model <gemma-4-E4B-it> --adapter <m4_f1_full>/adapter \
+#          --d7-format-mix --d5-entity-consensus --evidence-threshold 0.5 --skip-missing-keys --weighted-majority \
+#          --repair-conf 0.9 --validate \
+#          --source data/splits/core --split test --out outputs/runs/<run-id>
+
+stage_0:
+  enabled: false              # LLM-proposed rules: candidate recall +0.45 points only (E6)
+stage_1:
+  detectors: ["d1", "d2", "d3", "d4", "d5", "d5_entity_consensus", "d6", "d7_format_mix"]
+  # d7_format_mix: numeric columns that mix plain numbers with unit/percent/placeholder values, or write one unit in
+  # several ways; generic, computed from the dirty table only (precision 1.00 on all splits of the five core tables)
+  # d5_entity_consensus: D5 extension for multi-source tables; finds the entity key from the data and flags cells that
+  # differ from the reliability-weighted consensus of the entity (silent when every row is its own object)
+stage_2:
+  context_blocks: ["profile", "dependencies", "similar"]
+  evidence_threshold: 0.5     # only for the detected entity key; every other dependency keeps the training bar 0.9
+  skip_missing_keys: true     # no group keyed by an empty value
+  weighted_majority: true     # reliability-weighted consensus of related rows (truth discovery)
+stage_3:
+  model: "google/gemma-4-E4B-it"
+  adapter: "m4_f1_full/adapter"   # best validation loss, step 1,200 of 1,722 (lr 2e-4, rank 16, alpha 32, dropout 0.05)
+  decoding: "greedy"
+stage_4:
+  flag_threshold: 0.5         # on P(error) from the first answer token
+  repair_threshold: 0.8       # on P(error)
+  repair_confidence: 0.9      # minimum token probability of the repair value itself (fixed in advance, not tuned)
+stage_4b:
+  validation_layer: true      # TA enhancement: independent rules (configs/validation/<table>.yaml);
+                              # a table without rules sends every repair to review

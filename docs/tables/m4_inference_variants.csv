@@ -1,0 +1,6 @@
+run,configuration,precision,recall,f1,f1_hospital,f1_flights,f1_beers,repair_accuracy_model,false_alarms_per_1000_correct,candidate_recall,pass_through,gate_repairs_right,gate_repairs_wrong,validated_repairs_right,validated_repairs_wrong,review,repair_accuracy_applied,false_repair_rate_applied
+m4_e1_ft,"fine-tuned, D1-D6 (E1)",0.9041,0.5893,0.7135,0.8491,0.7946,0.5455,0.3571,9.2,0.5893,0.2171,156,113,144,5,136,0.3214,0.0336
+m4_v_rc,+ repair-confidence gate,0.9041,0.5893,0.7135,0.8491,0.7946,0.5455,0.3571,9.2,0.5893,0.2171,125,2,119,0,166,0.2656,0.0
+m4_v_d7,+ format detector,0.9317,0.8527,0.8904,0.8491,0.7946,0.9948,0.6205,9.2,0.8527,0.2509,274,113,262,5,136,0.5848,0.0187
+m4_v_d7_ctx,+ format detector + entity evidence,0.9475,0.846,0.8939,0.8491,0.8,0.9948,0.7656,6.9,0.8527,0.2509,330,36,328,17,49,0.7321,0.0493
+m4_v_d7_ctx_rc,+ format detector + entity evidence + repair-confidence gate (final),0.9475,0.846,0.8939,0.8491,0.8,0.9948,0.7656,6.9,0.8527,0.2509,313,8,311,4,79,0.6942,0.0127

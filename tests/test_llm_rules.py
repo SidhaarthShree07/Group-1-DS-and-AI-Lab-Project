@@ -52,3 +52,13 @@ def test_only_kept_rules_flag_cells():
     flags = set(zip(detect_with(rules, table())["row"], detect_with(rules, table())["column"]))
     assert (3, "zip") in flags and (7, "score") in flags
     assert not any(col == "city" for _, col in flags)  # the hallucinated city rule was dropped
+
+
+def test_prompt_can_ask_for_format_and_range_rules_only():
+    from src.detectors.llm_rules import FORMAT_AND_RANGE_KINDS
+    text = build_prompt("toy", table(), FORMAT_AND_RANGE_KINDS)
+    assert "two kinds" in text and '"pattern"' in text and '"range"' in text
+    assert "allowed_values" not in text and "determines" not in text
+    rules = parse_rules('[{"kind": "allowed_values", "column": "state", "values": ["al"]},'
+                        ' {"kind": "pattern", "column": "zip", "regex": "^[0-9]{5}$"}]', set(FORMAT_AND_RANGE_KINDS))
+    assert [r["kind"] for r in rules] == ["pattern"]
