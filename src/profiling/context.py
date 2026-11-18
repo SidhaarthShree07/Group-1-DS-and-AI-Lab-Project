@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import collections
 import html
+import itertools
 import re
 from typing import Dict, List, Optional, Sequence, Set
 
@@ -65,10 +66,29 @@ def to_float(value: str) -> Optional[float]:
         return None
 
 
+def differ_only_in_format(a: str, b: str) -> bool:
+    """True for two different strings that hold the same numbers, e.g. '12.0 oz.' and '12.0 oz'."""
+    numbers_a = re.findall(r"\d+(?:\.\d+)?", a)
+    numbers_b = re.findall(r"\d+(?:\.\d+)?", b)
+    return bool(numbers_a) and [float(x) for x in numbers_a] == [float(x) for x in numbers_b] and a != b
+
+
 class TableContext:
     """Statistics of one dirty table (a split of it, or an uploaded file)."""
 
-    def __init__(self, name: str, dirty: pd.DataFrame, key_share: float = 0.6):
+    def __init__(self, name: str, dirty: pd.DataFrame, key_share: float = 0.6, evidence_threshold: float = 0.9,
+                 skip_missing_keys: bool = False, weighted_majority: bool = False):
+        """With the defaults the prompts are exactly the ones the model was trained on. The three options were added
+        in M4 for inference only:
+          evidence_threshold  lowest dependency strength shown as evidence for the entity column (training: 0.9).
+                              In Flights the sources disagree, so flight -> time holds for only 56 to 77% of the
+                              rows and the flight's other rows were never shown to the model.
+          skip_missing_keys   rows that share an empty value are not related, so an empty key never forms a group.
+          weighted_majority   the group majority counts each row by its reliability (see row_reliability), and
+                              similar rows are listed most reliable first."""
+        self.evidence_threshold = evidence_threshold
+        self.skip_missing_keys = skip_missing_keys
+        self.weighted_majority = weighted_majority
         self.name = name
         self.df = dirty.map(norm).reset_index(drop=True)
         self.cols: List[str] = list(self.df.columns)
@@ -77,6 +97,8 @@ class TableContext:
         self._profile: Dict[str, dict] = {}
         self._index: Dict[str, dict] = {}
         self._fd: Optional[Dict[tuple, float]] = None
+        self._entity_key: Optional[str] = None
+        self._entity_key_checked = False
 
     # ---- statistics ------------------------------------------------------------------------
     def profile(self, col: str) -> dict:
@@ -136,11 +158,31 @@ class TableContext:
         fd = self.dependencies()
         determined_by, determines = [], []
         best = None
-        for s, a in sorted(((s, a) for (a, b), s in fd.items() if b == col and s >= 0.9), reverse=True)[:2]:
+        determinants = sorted(((s, a) for (a, b), s in fd.items() if b == col and s >= 0.9), reverse=True)
+        entity_col = self.entity_key() if self.evidence_threshold < 0.9 else None
+        if entity_col and entity_col != col and fd.get((entity_col, col), 0.0) >= self.evidence_threshold:
+            # the entity column goes first, even when conflicting sources weaken its dependency
+            determinants = [(fd[(entity_col, col)], entity_col)] + [(s, a) for s, a in determinants if a != entity_col]
+        if self.skip_missing_keys:
+            determinants = [(s, a) for s, a in determinants if self.df.at[i, a].lower() not in MISSING]
+        for s, a in determinants[:2]:
             rows = self.rows_with(a, self.df.at[i, a])
             if len(rows) >= 2:
                 cnt = collections.Counter(self.df.at[r, col] for r in rows)
                 majority, k = cnt.most_common(1)[0]
+                if self.weighted_majority:
+                    weights = self.row_reliability(rows, exclude=(a, col))
+                    votes = collections.defaultdict(float)
+                    for r in rows:
+                        if self.df.at[r, col].lower() not in MISSING:
+                            votes[self.df.at[r, col]] += weights[r]
+                    if votes:
+                        majority = max(votes, key=votes.get)
+                        k = cnt[majority]
+                    rows = sorted(rows, key=lambda r: -weights[r])
+                weak_entity_evidence = a == entity_col and fd.get((a, col), 0.0) < 0.9
+                if weak_entity_evidence and differ_only_in_format(majority, self.df.at[i, col]):
+                    continue  # the other rows only write the same number differently: nothing new to show
                 determined_by.append({"col": a, "key": self.df.at[i, a], "majority": majority, "k": k, "n": len(rows)})
                 best = best or (a, rows)
         rows_same = self.rows_with(col, val)
@@ -160,6 +202,39 @@ class TableContext:
         return {"value": val, "profile": prof, "determined_by": determined_by, "determines": determines,
                 "similar": similar, "shape": shape(val), "occurs": int(prof["counts"].get(val, 0)),
                 "max_chars": max_chars}
+
+    def entity_key(self) -> Optional[str]:
+        """The column naming the real-world object that several rows describe (`flight` in Flights), or None.
+
+        No column names are used. Two columns that are each repeated (2 to 50% distinct values) but together
+        identify almost every row form a (source, entity) pair, e.g. (src, flight); this is a unique column
+        combination as in HyUCC (Papenbrock & Naumann 2017). Of the columns found in such pairs, the entity is the
+        one that determines the other columns best: a flight fixes its times, a source does not. A table with one
+        row per object has no such pair."""
+        if self._entity_key_checked:
+            return self._entity_key
+        strength, n = self.dependencies(), self.n
+        repeated_cols = [c for c in self.cols
+                         if n and 2 <= self.df[c].nunique() <= 0.5 * n
+                         and (self.df[c].str.lower().isin(MISSING)).mean() < 0.05]
+        pair_members = set()
+        for a, b in itertools.combinations(repeated_cols, 2):
+            if len(self.df[[a, b]].drop_duplicates()) >= 0.98 * n:
+                pair_members.update((a, b))
+
+        def determines_others(col: str) -> float:
+            return sum(strength.get((col, other), 0.0) for other in self.cols if other != col)
+
+        self._entity_key = max(sorted(pair_members), key=determines_others) if pair_members else None
+        self._entity_key_checked = True
+        return self._entity_key
+
+    def row_reliability(self, rows: List[int], exclude=()) -> Dict[int, float]:
+        """How much to trust each row of a group: the share of its columns (other than `exclude`) that hold the
+        group's most common value, with add-one smoothing. Rows that agree with the group elsewhere count more."""
+        cols = [c for c in self.cols if c not in exclude]
+        group_majority = {c: collections.Counter(self.df.at[r, c] for r in rows).most_common(1)[0][0] for c in cols}
+        return {r: (sum(self.df.at[r, c] == group_majority[c] for c in cols) + 1) / (len(cols) + 2) for r in rows}
 
     # ---- prompt -----------------------------------------------------------------------------
     def prompt(self, i: int, col: str, blocks: Sequence[str] = ALL_BLOCKS, max_chars: int = 40,

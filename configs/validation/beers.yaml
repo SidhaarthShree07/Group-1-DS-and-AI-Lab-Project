@@ -1,0 +1,24 @@
+# Independent rules for the repair validation layer (Milestone 4 enhancement).
+# Beers (Craft Beers dataset): one row per beer, joined with its brewery.
+table: beers
+missing_tokens: [""]
+
+columns:
+  id: {pattern: '^\d+$', source: "dataset definition: the beer id is a positive integer"}
+  ounces: {pattern: '^\d+(\.\d+)?$', range: {min: 8, max: 32},
+           source: "US beer cans and bottles hold 8.4 to 32 fluid ounces; the value is a number of ounces"}
+  abv: {pattern: '^0?\.\d+$', range: {min: 0.001, max: 0.20}, missing_ok: true,
+        source: "alcohol by volume as a fraction; beer is below 20% ABV"}
+  ibu: {pattern: '^\d+$', range: {min: 0, max: 200}, missing_ok: true,
+        source: "International Bitterness Units are whole numbers, in practice 0 to about 150"}
+  brewery_id: {pattern: '^\d+$', source: "dataset definition: the brewery id is a non-negative integer"}
+  state: {allowed_ref: us_states, case: upper, source: "USPS two-letter state codes"}
+
+relations:
+  - kind: fd
+    lhs: [brewery_id]
+    rhs: [brewery_name, city, state]
+    source: "dataset definition: the brewery columns come from one brewery record per brewery id"
+  - kind: unique
+    columns: [id]
+    source: "dataset definition: one row per beer id"

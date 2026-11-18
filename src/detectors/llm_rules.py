@@ -35,6 +35,15 @@ MAX_FLAGGED = 0.10
 MIN_STRENGTH = 0.90
 MAX_RULES = 15
 KINDS = {"pattern", "allowed_values", "range", "determines"}
+# In M4 the model is asked only for format and range rules: in M3 its "allowed values" rules copied typos of the
+# dirty table into the allowed list, and a check on the dirty table cannot catch that.
+FORMAT_AND_RANGE_KINDS = ("pattern", "range")
+KIND_PROMPT_LINES = {
+    "pattern": '- {{"kind": "pattern", "column": "<column>", "regex": "<Python regular expression for the whole value>"}}',
+    "allowed_values": '- {{"kind": "allowed_values", "column": "<column>", "values": ["<value>", ...]}}  (only for columns with few distinct values)',
+    "range": '- {{"kind": "range", "column": "<column>", "min": <number>, "max": <number>}}  (only for numeric columns)',
+    "determines": '- {{"kind": "determines", "columns": ["<column A>", "<column B>"]}}  (equal A values must have equal B values)',
+}
 
 PROMPT = """You are given the columns of a data table and a profile of its values. Some values may be wrong.
 Propose at most {max_rules} rules that correct values of this table must follow. Use only these four kinds:
@@ -62,14 +71,22 @@ def column_summary(ctx: TableContext, col: str) -> str:
     return f"- {col}: " + "; ".join(parts)
 
 
-def build_prompt(table: str, dirty: pd.DataFrame) -> str:
+def build_prompt(table: str, dirty: pd.DataFrame, kinds=tuple(KIND_PROMPT_LINES)) -> str:
+    """The stage 0 prompt. `kinds` limits the rule kinds the model is asked for."""
     ctx = TableContext(table, dirty)
     cols = "\n".join(column_summary(ctx, c) for c in ctx.cols)
-    return PROMPT.format(max_rules=MAX_RULES, table=table, rows=ctx.n, columns=cols)
+    template = PROMPT
+    if tuple(kinds) != tuple(KIND_PROMPT_LINES):
+        number_word = {1: "one", 2: "two", 3: "three"}.get(len(kinds), str(len(kinds)))
+        head = f"Use only these {number_word} kinds:"
+        all_lines = "\n".join(KIND_PROMPT_LINES.values())
+        chosen_lines = "\n".join(KIND_PROMPT_LINES[k] for k in kinds)
+        template = template.replace("Use only these four kinds:", head).replace(all_lines, chosen_lines)
+    return template.format(max_rules=MAX_RULES, table=table, rows=ctx.n, columns=cols)
 
 
-def parse_rules(text: str) -> List[Dict]:
-    """The JSON list from the model's answer; malformed entries are dropped, never repaired."""
+def parse_rules(text: str, kinds=KINDS) -> List[Dict]:
+    """The JSON list from the model's answer; malformed entries and kinds outside `kinds` are dropped."""
     m = re.search(r"\[[\s\S]*\]", text or "")
     if not m:
         return []
@@ -79,7 +96,7 @@ def parse_rules(text: str) -> List[Dict]:
         return []
     rules = []
     for r in items if isinstance(items, list) else []:
-        if not isinstance(r, dict) or r.get("kind") not in KINDS:
+        if not isinstance(r, dict) or r.get("kind") not in KINDS or r.get("kind") not in kinds:
             continue
         if r["kind"] == "determines":
             cols = r.get("columns")

@@ -1,0 +1,5 @@
+table,gate_repairs,validated,rejected,unvalidated,no_change,existing_applied,existing_correct,existing_incorrect,enhanced_applied,enhanced_correct,enhanced_incorrect,incorrect_blocked,correct_rejected,existing_review,enhanced_review,existing_false_repair_rate,enhanced_false_repair_rate,validation_seconds,ms_per_repair
+beers,71,69,0,2,0,71,69,2,69,69,0,2,0,5,7,0.0282,0.0,0.068,0.96
+flights,106,7,99,0,0,106,12,94,7,7,0,94,5,35,134,0.8868,0.0,0.149,1.41
+hospital,238,40,188,10,0,238,38,200,40,38,2,198,0,16,214,0.8403,0.05,0.773,3.25
+all,415,116,287,12,0,415,119,296,116,114,2,294,5,56,355,0.7133,0.0172,0.99,2.39
