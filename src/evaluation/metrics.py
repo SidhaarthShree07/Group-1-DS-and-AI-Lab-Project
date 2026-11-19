@@ -831,3 +831,557 @@ def score(
         metrics["bootstrap_95ci"] = None
 
     return metrics
+
+
+OUTCOME_COLUMNS = [
+    "table",
+    "gate_repaired_right",
+    "gate_repaired_wrong",
+    "gate_repaired_no_change",
+    "repaired_right",
+    "repaired_wrong_error",
+    "repaired_wrong_correct_cell",
+    "review_error",
+    "review_correct_cell",
+    "kept_missed_error",
+    "kept_correct",
+    "total_cells",
+    "total_errors",
+    "precision",
+    "recall",
+    "f1",
+    "repair_accuracy",
+    "false_repair_rate",
+    "false_repair_rate_gate",
+    "false_alarms_per_1000",
+    "review_share",
+]
+
+
+def _parse_decision(raw_decision: str) -> str:
+    """Parse a raw decision string to exactly one of 'repair', 'review', 'keep'.
+
+    Decision taxonomy (order matters: check for 'review' and 'flag' before 'repair'
+    so that 'review (repair rejected by validation)' and
+    'review (repair cannot be validated)' are classified as 'review', not 'repair').
+
+    - 'repair'   : raw_decision == 'repair' exactly (after strip/lower)
+    - 'review'   : raw_decision starts with 'review' or contains 'flag'
+    - 'keep'     : everything else
+    """
+    d = raw_decision.strip().lower()
+    if d.startswith("review") or "flag" in d:
+        return "review"
+    if d == "repair":
+        return "repair"
+    return "keep"
+
+
+def score_decisions(
+    predictions: Union[Sequence[Dict[str, Any]], str, Path, Any],
+    cells: Union[Sequence[Dict[str, Any]], str, Path, Any],
+    output_csv_path: Optional[Union[str, Path]] = None,
+) -> Dict[str, Any]:
+    """Score gate-level decisions against ground-truth cells (Milestone 4).
+
+    Produces two sets of decision columns:
+      * ``gate_decision`` — the M4 gate output *before* validation
+        (uses the ``gate_decision`` field when present, falls back to inferring
+        from the model's raw ``decision`` field treating any non-keep/non-review
+        value as the gate's raw repair signal).
+      * ``decision``      — the pipeline's final decision *after* validation
+        (uses the ``decision`` field, which may be
+        'repair', 'keep', 'flag for review',
+        'review (repair rejected by validation)', or
+        'review (repair cannot be validated)').
+
+    Decision parsing rules (applied to both fields independently):
+    - 'repair'  : decision string is exactly 'repair' (strip/lower).
+    - 'review'  : starts with 'review' OR contains 'flag' — this correctly
+                  classifies 'flag for review', 'review (repair rejected …)',
+                  and 'review (repair cannot be validated)' as review, not repair.
+    - 'keep'    : everything else.
+
+    No-Op Rule: A proposed repair equal to the dirty value (under norm) counts
+    as 'not an error' / kept rather than a repair — applied independently to
+    both gate_decision and decision columns.
+
+    7 outcome buckets (gate + validation combined ``decision``):
+        1. repaired right (true error correctly repaired)
+        2. repaired wrong (error) (true error changed to incorrect value)
+        3. repaired wrong (correct cell) (correct cell erroneously changed)
+        4. review (error) (true error routed to human review)
+        5. review (correct cell) (correct cell routed to human review)
+        6. kept (missed error) (true error unflagged / kept)
+        7. kept (correct) (correct cell kept untouched)
+
+    Gate-only columns (gate_repaired_right, gate_repaired_wrong, gate_repaired_no_change)
+    are computed separately from the ``gate_decision`` field for TA cross-check.
+
+    Args:
+        predictions: Predictions list/DataFrame/path with 'decision' and optional
+            'gate_decision', 'repair' fields.
+        cells: Ground-truth cells list/DataFrame/path.
+        output_csv_path: Optional path to export outcomes.csv.
+
+    Returns:
+        Dictionary with outcome_table (list of dicts), per-table metrics, total metrics,
+        and model_proposals metrics.
+    """
+    raw_cells = _load_records(cells)
+    raw_preds = _load_records(predictions)
+
+    has_table_in_cells = any("table" in c and c["table"] is not None for c in raw_cells)
+    has_table_in_preds = any("table" in p and p["table"] is not None for p in raw_preds)
+    include_table = has_table_in_cells and has_table_in_preds
+
+    pred_map: Dict[Tuple[Any, ...], Dict[str, Any]] = {}
+    for p in raw_preds:
+        k = _make_cell_key(p, include_table)
+        pred_map[k] = p
+
+    # Per-table counters
+    table_names: List[str] = sorted(
+        list({str(c.get("table", "default")).strip() for c in raw_cells})
+    )
+    counts: Dict[str, Dict[str, int]] = {
+        t: {
+            "repaired_right": 0,
+            "repaired_wrong_error": 0,
+            "repaired_wrong_correct_cell": 0,
+            "review_error": 0,
+            "review_correct_cell": 0,
+            "kept_missed_error": 0,
+            "kept_correct": 0,
+            "total_cells": 0,
+            "total_errors": 0,
+            # Gate-only counters (before validation layer)
+            "gate_repaired_right": 0,
+            "gate_repaired_wrong": 0,
+            "gate_repaired_no_change": 0,
+        }
+        for t in table_names
+    }
+
+    # Model proposal counters (model level, before gate)
+    model_props: Dict[str, Dict[str, int]] = {
+        t: {
+            "proposals_total": 0,
+            "proposals_repairs": 0,
+            "proposals_no_op": 0,
+            "successful_repairs": 0,
+            "false_repairs": 0,
+        }
+        for t in table_names
+    }
+
+    format_artifacts_skipped = 0
+
+    for c in raw_cells:
+        if str(c.get("error_type", "")).strip() == "format_artifact":
+            format_artifacts_skipped += 1
+            continue
+
+        k = _make_cell_key(c, include_table)
+        d_val = c.get("dirty_value", "")
+        c_val = c.get("clean_value", "")
+        t_name = str(c.get("table", "default")).strip()
+        cnt = counts[t_name]
+        m_cnt = model_props[t_name]
+
+        norm_d = norm(d_val)
+        norm_c = norm(c_val)
+        gold_is_error = norm_d != norm_c
+
+        cnt["total_cells"] += 1
+        if gold_is_error:
+            cnt["total_errors"] += 1
+
+        pred = pred_map.get(k)
+        decision = "keep"
+        gate_decision_resolved = "keep"
+        pred_repair = None
+        has_repair_proposal = False
+
+        if pred is not None:
+            # Model-level proposal tally
+            is_err_pred = bool(pred.get("is_error", False)) and bool(pred.get("valid_json", False))
+            raw_rep = pred.get("repair")
+            if is_err_pred:
+                m_cnt["proposals_total"] += 1
+                if raw_rep is not None and str(raw_rep).strip() != "":
+                    if norm(raw_rep) == norm_d:
+                        m_cnt["proposals_no_op"] += 1
+                    else:
+                        m_cnt["proposals_repairs"] += 1
+                        if norm(raw_rep) == norm_c and gold_is_error:
+                            m_cnt["successful_repairs"] += 1
+                        else:
+                            m_cnt["false_repairs"] += 1
+
+            raw_decision = str(pred.get("decision", "keep")).strip().lower()
+            pred_repair = pred.get("repair")
+
+            # --- Gate decision (before validation) ---
+            # Prefer the explicit gate_decision field written by run_pipeline.py.
+            # Fall back to inferring from raw model decision: treat anything that
+            # the validation layer could have changed ('review (repair …)') back to
+            # 'repair' as the gate having originally said 'repair'.
+            raw_gate_str = pred.get("gate_decision")
+            if raw_gate_str is not None:
+                gate_raw = str(raw_gate_str).strip().lower()
+            else:
+                # Infer gate decision: validation converts 'repair' → 'review (repair …)'
+                # so any review-of-repair string was originally a gate repair.
+                gate_raw = raw_decision
+                if gate_raw.startswith("review (repair"):
+                    gate_raw = "repair"
+
+            # Apply no-op rule to gate decision
+            if _parse_decision(gate_raw) == "repair":
+                if pred_repair is not None and norm(pred_repair) == norm_d:
+                    gate_decision_resolved = "keep"  # no-op → keep
+                    cnt["gate_repaired_no_change"] += 1
+                else:
+                    gate_decision_resolved = "repair"
+            elif _parse_decision(gate_raw) == "review":
+                gate_decision_resolved = "review"
+            else:
+                gate_decision_resolved = "keep"
+
+            # --- Final decision (gate + validation) ---
+            # Apply _parse_decision which correctly classifies:
+            #   'repair'                                 → 'repair'
+            #   'review (repair rejected by validation)' → 'review'
+            #   'review (repair cannot be validated)'    → 'review'
+            #   'flag for review'                        → 'review'
+            #   'keep'                                   → 'keep'
+            if _parse_decision(raw_decision) == "repair":
+                if pred_repair is not None and norm(pred_repair) == norm_d:
+                    decision = "keep"  # no-op → keep
+                else:
+                    decision = "repair"
+            elif _parse_decision(raw_decision) == "review":
+                decision = "review"
+            else:
+                decision = "keep"
+
+        # Categorize cell by final combined decision (gate + validation) → 7 bins
+        if decision == "repair":
+            if not gold_is_error:
+                cnt["repaired_wrong_correct_cell"] += 1
+            else:
+                if pred_repair is not None and norm(pred_repair) == norm_c:
+                    cnt["repaired_right"] += 1
+                else:
+                    cnt["repaired_wrong_error"] += 1
+        elif decision == "review":
+            if gold_is_error:
+                cnt["review_error"] += 1
+            else:
+                cnt["review_correct_cell"] += 1
+        else:  # decision == "keep"
+            if gold_is_error:
+                cnt["kept_missed_error"] += 1
+            else:
+                cnt["kept_correct"] += 1
+
+        # Gate-only 3-bin tally (before validation layer)
+        if gate_decision_resolved == "repair":
+            if gold_is_error:
+                if pred_repair is not None and norm(pred_repair) == norm_c:
+                    cnt["gate_repaired_right"] += 1
+                else:
+                    cnt["gate_repaired_wrong"] += 1
+            else:
+                cnt["gate_repaired_wrong"] += 1  # false alarm on clean cell
+        # (review and keep at gate level are not separately tallied here)
+
+    # Tally metrics per table and total
+    def _compute_metrics_row(t_name: str, c: Dict[str, int]) -> Dict[str, Any]:
+        rr = c["repaired_right"]
+        rwe = c["repaired_wrong_error"]
+        rwcc = c["repaired_wrong_correct_cell"]
+        re = c["review_error"]
+        rcc = c["review_correct_cell"]
+        kme = c["kept_missed_error"]
+        kc = c["kept_correct"]
+        tot_cells = c["total_cells"]
+        tot_errors = c["total_errors"]
+        tot_correct = tot_cells - tot_errors
+        g_rr = c.get("gate_repaired_right", 0)
+        g_rw = c.get("gate_repaired_wrong", 0)
+        g_nc = c.get("gate_repaired_no_change", 0)
+
+        # Sanity check conservation
+        sum_7 = rr + rwe + rwcc + re + rcc + kme + kc
+        if sum_7 != tot_cells:
+            raise ValueError(f"Outcome conservation failed for {t_name}: {sum_7} != {tot_cells}")
+
+        tp = rr + rwe + re
+        fp = rwcc + rcc
+        fn = kme
+        executed_repairs = rr + rwe + rwcc
+        total_review = re + rcc
+
+        prec = _safe_div(tp, tp + fp)
+        rec = _safe_div(tp, tp + fn)
+        f1 = _safe_div(2.0 * prec * rec, prec + rec)
+        repair_acc = _safe_div(rr, tot_errors)
+        false_repair_rate = _safe_div(rwe + rwcc, executed_repairs)
+        # Gate-only false-repair rate (before validation)
+        gate_exec = g_rr + g_rw
+        false_repair_rate_gate = _safe_div(g_rw, gate_exec)
+        false_alarms_per_1000 = _safe_div(fp, tot_correct) * 1000.0
+        review_share = _safe_div(total_review, tot_cells)
+
+        return {
+            "table": t_name,
+            "gate_repaired_right": g_rr,
+            "gate_repaired_wrong": g_rw,
+            "gate_repaired_no_change": g_nc,
+            "repaired_right": rr,
+            "repaired_wrong_error": rwe,
+            "repaired_wrong_correct_cell": rwcc,
+            "review_error": re,
+            "review_correct_cell": rcc,
+            "kept_missed_error": kme,
+            "kept_correct": kc,
+            "total_cells": tot_cells,
+            "total_errors": tot_errors,
+            "precision": round(prec, 4),
+            "recall": round(rec, 4),
+            "f1": round(f1, 4),
+            "repair_accuracy": round(repair_acc, 4),
+            "false_repair_rate": round(false_repair_rate, 4),
+            "false_repair_rate_gate": round(false_repair_rate_gate, 4),
+            "false_alarms_per_1000": round(false_alarms_per_1000, 2),
+            "review_share": round(review_share, 4),
+        }
+
+    outcome_rows: List[Dict[str, Any]] = []
+    for t in table_names:
+        outcome_rows.append(_compute_metrics_row(t, counts[t]))
+
+    # Total row
+    total_counts = {
+        k: sum(counts[t][k] for t in table_names)
+        for k in counts[table_names[0]].keys()
+    }
+    total_row = _compute_metrics_row("Total", total_counts)
+    outcome_rows.append(total_row)
+
+    # Model proposals summary row
+    model_proposals_summary = {
+        "proposals_total": sum(model_props[t]["proposals_total"] for t in table_names),
+        "proposals_repairs": sum(model_props[t]["proposals_repairs"] for t in table_names),
+        "proposals_no_op": sum(model_props[t]["proposals_no_op"] for t in table_names),
+        "successful_repairs": sum(model_props[t]["successful_repairs"] for t in table_names),
+        "false_repairs": sum(model_props[t]["false_repairs"] for t in table_names),
+        "by_table": model_props,
+    }
+
+    # Export to CSV if requested
+    if output_csv_path is not None:
+        out_p = Path(output_csv_path)
+        out_p.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_p, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=OUTCOME_COLUMNS)
+            w.writeheader()
+            for r in outcome_rows:
+                w.writerow(r)
+
+    return {
+        "outcome_table": outcome_rows,
+        "by_table": {r["table"]: r for r in outcome_rows if r["table"] != "Total"},
+        "total": total_row,
+        "model_proposals": model_proposals_summary,
+        "format_artifacts_skipped": format_artifacts_skipped,
+    }
+
+
+def score_flags(
+    flagged_cells: Union[Iterable[Tuple[Any, ...]], Iterable[Dict[str, Any]], Any],
+    cells: Union[Sequence[Dict[str, Any]], str, Path, Any],
+    exclude_rows: Optional[Union[Sequence[int], Sequence[Tuple[str, int]]]] = None,
+    output_csv_path: Optional[Union[str, Path]] = None,
+) -> Dict[str, Any]:
+    """Score baseline error flags with standardized normalisation and exclusions (Milestone 4).
+
+    Ensures that baselines (HoloClean, Raha, Baran, dBoost) use the identical evaluation
+    protocol as ContextGuard:
+        - Raha canonical normalization: norm(dirty) != norm(clean)
+        - Format artifacts excluded from scoring
+        - Optional exclude_rows (e.g. 20 labeled tuples for semi-supervised baselines)
+
+    Args:
+        flagged_cells: Sequence/set of flagged cells. Can be tuples (row, col) or
+            (table, row, col), or dicts containing 'row', 'column', and optional 'table'.
+        cells: Ground-truth cells list/DataFrame/path.
+        exclude_rows: Set/sequence of row indices (or (table, row) tuples) to exclude.
+        output_csv_path: Optional path to export summary CSV.
+
+    Returns:
+        Dictionary shaped like score()["detection"] with keys:
+        n_cells, n_errors, tp, fp, tn, fn, precision, recall, f1,
+        false_alarms_per_1000, per_table, excluded_rows_count.
+    """
+    raw_cells = _load_records(cells)
+    has_table_in_cells = any("table" in c and c["table"] is not None for c in raw_cells)
+    # Determine distinct table names for per-table scoped exclusions
+    _all_table_names = sorted(list({str(c.get("table", "default")).strip() for c in raw_cells}))
+    _multi_table = len(_all_table_names) > 1
+
+    # Process exclude_rows
+    # An integer-only entry must be scoped per-table when multiple tables are present
+    # to avoid silently dropping that row in EVERY table.
+    excluded_int_rows: set = set()   # bare ints → only effective when single-table
+    excluded_table_rows: set = set() # (table, row) tuples → always effective
+    if exclude_rows is not None:
+        for ex in exclude_rows:
+            if isinstance(ex, tuple) and len(ex) == 2:
+                excluded_table_rows.add((str(ex[0]).strip().lower(), int(ex[1])))
+            else:
+                excluded_int_rows.add(int(ex))
+
+    if _multi_table and excluded_int_rows:
+        raise ValueError(
+            f"Bare integer in exclude_rows ({sorted(excluded_int_rows)}) is ambiguous when multiple tables "
+            f"are present ({_all_table_names}). Pass (table_name, row_idx) tuples instead."
+        )
+
+    def _is_excluded(t_name: str, row_int: int) -> bool:
+        """Return True if this (table, row) should be excluded from scoring."""
+        if (t_name.lower(), row_int) in excluded_table_rows:
+            return True
+        if not _multi_table and row_int in excluded_int_rows:
+            return True
+        return False
+
+    # Process flagged cells into set of lookup keys
+    flagged_set = set()
+    if hasattr(flagged_cells, "to_dict"):
+        flagged_cells = flagged_cells.to_dict(orient="records")
+
+    for fc in flagged_cells:
+        if isinstance(fc, dict):
+            r = int(fc["row"])
+            c = str(fc["column"])
+            t = str(fc.get("table", "")).strip().lower() if has_table_in_cells and "table" in fc else None
+            flagged_set.add((t, r, c) if t is not None else (r, c))
+        elif isinstance(fc, (list, tuple)):
+            if len(fc) == 3:
+                flagged_set.add((str(fc[0]).strip().lower(), int(fc[1]), str(fc[2])))
+            elif len(fc) == 2:
+                flagged_set.add((int(fc[0]), str(fc[1])))
+            else:
+                raise ValueError(f"Invalid flagged cell tuple: {fc}")
+        else:
+            raise TypeError(f"Unsupported flagged cell type: {type(fc)}")
+
+    table_names = sorted(list({str(c.get("table", "default")).strip() for c in raw_cells}))
+    per_table_stats: Dict[str, Dict[str, int]] = {
+        t: {"tp": 0, "fp": 0, "tn": 0, "fn": 0, "n_cells": 0, "n_errors": 0}
+        for t in table_names
+    }
+
+    excluded_count = 0
+    format_artifacts_skipped = 0
+
+    for c in raw_cells:
+        if str(c.get("error_type", "")).strip() == "format_artifact":
+            format_artifacts_skipped += 1
+            continue
+
+        r = int(c["row"])
+        col = str(c["column"])
+        t_name = str(c.get("table", "default")).strip()
+
+        # Check exclusion
+        if _is_excluded(t_name, r):
+            excluded_count += 1
+            continue
+
+        norm_d = norm(c.get("dirty_value", ""))
+        norm_c = norm(c.get("clean_value", ""))
+        gold_is_error = norm_d != norm_c
+
+        # Check if flagged
+        is_flagged = (r, col) in flagged_set or (t_name.lower(), r, col) in flagged_set
+
+        st = per_table_stats[t_name]
+        st["n_cells"] += 1
+        if gold_is_error:
+            st["n_errors"] += 1
+
+        if is_flagged and gold_is_error:
+            st["tp"] += 1
+        elif is_flagged and not gold_is_error:
+            st["fp"] += 1
+        elif not is_flagged and not gold_is_error:
+            st["tn"] += 1
+        elif not is_flagged and gold_is_error:
+            st["fn"] += 1
+
+    per_table_results: Dict[str, Dict[str, Any]] = {}
+    total_tp = sum(s["tp"] for s in per_table_stats.values())
+    total_fp = sum(s["fp"] for s in per_table_stats.values())
+    total_tn = sum(s["tn"] for s in per_table_stats.values())
+    total_fn = sum(s["fn"] for s in per_table_stats.values())
+    total_cells = sum(s["n_cells"] for s in per_table_stats.values())
+    total_errors = sum(s["n_errors"] for s in per_table_stats.values())
+    total_correct = total_cells - total_errors
+
+    for t, s in per_table_stats.items():
+        prec = _safe_div(s["tp"], s["tp"] + s["fp"])
+        rec = _safe_div(s["tp"], s["tp"] + s["fn"])
+        f1 = _safe_div(2.0 * prec * rec, prec + rec)
+        fa1k = _safe_div(s["fp"], s["n_cells"] - s["n_errors"]) * 1000.0
+        per_table_results[t] = {
+            "tp": s["tp"],
+            "fp": s["fp"],
+            "tn": s["tn"],
+            "fn": s["fn"],
+            "precision": round(prec, 4),
+            "recall": round(rec, 4),
+            "f1": round(f1, 4),
+            "false_alarms_per_1000": round(fa1k, 2),
+            "n_cells": s["n_cells"],
+            "n_errors": s["n_errors"],
+        }
+
+    overall_prec = _safe_div(total_tp, total_tp + total_fp)
+    overall_rec = _safe_div(total_tp, total_tp + total_fn)
+    overall_f1 = _safe_div(2.0 * overall_prec * overall_rec, overall_prec + overall_rec)
+    overall_fa1k = _safe_div(total_fp, total_correct) * 1000.0
+    macro_f1 = sum(r["f1"] for r in per_table_results.values()) / len(per_table_results) if per_table_results else 0.0
+
+    result = {
+        "tp": total_tp,
+        "fp": total_fp,
+        "tn": total_tn,
+        "fn": total_fn,
+        "precision": round(overall_prec, 4),
+        "recall": round(overall_rec, 4),
+        "f1": round(overall_f1, 4),
+        "macro_f1_tables": round(macro_f1, 4),
+        "false_alarms_per_1000": round(overall_fa1k, 2),
+        "n_cells": total_cells,
+        "n_errors": total_errors,
+        "per_table": per_table_results,
+        "excluded_rows_count": excluded_count,
+        "format_artifacts_skipped": format_artifacts_skipped,
+    }
+
+    if output_csv_path is not None:
+        out_p = Path(output_csv_path)
+        out_p.parent.mkdir(parents=True, exist_ok=True)
+        rows = [{"table": t, **res} for t, res in per_table_results.items()]
+        rows.append({"table": "Total", **{k: v for k, v in result.items() if k not in ("per_table",)}})
+        with open(out_p, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+            w.writeheader()
+            w.writerows(rows)
+
+    return result
+

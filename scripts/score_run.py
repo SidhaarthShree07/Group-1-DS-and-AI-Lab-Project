@@ -20,7 +20,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.run_pipeline import load_table  # noqa: E402
-from src.evaluation.metrics import score  # noqa: E402
+from src.evaluation.metrics import score, score_decisions  # noqa: E402
 
 
 def main() -> int:
@@ -52,6 +52,7 @@ def main() -> int:
     cells.to_csv(run / "cells.csv", index=False)
     m = score(preds, cells.to_dict(orient="records"), cands.to_dict(orient="records"),
               output_csv_path=run / "metrics_by_table_type.csv", n_bootstrap=200)
+    score_decisions(preds, cells.to_dict(orient="records"), output_csv_path=run / "outcomes.csv")
     keep = {k: m[k] for k in ("n_cells", "detection", "macro_f1_tables", "per_table", "repair", "false_repair",
                               "false_alarm", "pr_auc", "ece", "candidates", "format_artifacts_skipped")}
     keep["error_types_macro_f1"] = m["error_types"].get("macro_f1")
