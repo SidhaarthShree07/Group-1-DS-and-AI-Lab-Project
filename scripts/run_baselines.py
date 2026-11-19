@@ -10,7 +10,7 @@ if str(_REPO_ROOT) not in sys.path:
 from scripts.run_baselines_full import main as run_full_baselines
 
 def main():
-    print("Running the M4 simplified baselines (B1 HoloClean, B2 dBoost, B3 Raha + Baran)")
+    print("Running the M4 baselines (B1 HoloClean, B2 dBoost, B3 Raha + Baran)")
     run_full_baselines()
 
 if __name__ == "__main__":

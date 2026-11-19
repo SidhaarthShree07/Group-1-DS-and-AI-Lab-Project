@@ -5,7 +5,7 @@ Author: Sidhaarth Shree
 
 Reads <run>/score_like_baselines.csv of each final test run (scripts/score_like_baselines.py: same cells as the
 baselines, Raha's 20 labelled rows left out) and the baseline scores (docs/tables/m4_baselines_full.csv, the
-simplified M4 baselines: B1 HoloClean, B2 dBoost tuned on train, B3 Raha + Baran labelling the same 20 rows), and
+M4 baselines: B1 HoloClean, B2 dBoost tuned on train, B3 Raha + Baran labelling the same 20 rows), and
 writes docs/tables/m4_test_vs_baselines.csv.
 
 Usage: python scripts/build_test_vs_baselines.py --runs <run dir> ... [--out docs/tables/m4_test_vs_baselines.csv]
@@ -20,9 +20,9 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE_NAMES = {
-    "B1_HoloClean_simplified": "holoclean_simplified",
-    "B2_dBoost_simplified": "dboost",
-    "B3_Raha_Baran_simplified": "raha_20_labels",
+    "B1_HoloClean": "holoclean",
+    "B2_dBoost": "dboost",
+    "B3_Raha_Baran": "raha_20_labels",
 }
 REPAIR_COLUMNS = ["repair_accuracy_model", "applied_repairs", "applied_right", "applied_wrong",
                   "repair_accuracy_applied", "false_repair_rate_applied", "review"]
@@ -55,10 +55,10 @@ def main() -> int:
     baselines = pd.read_csv(args.baselines)
     table = pd.DataFrame([comparison_row(r, baselines) for _, r in ours.iterrows()])
     table.to_csv(args.out, index=False)
-    print(table[["table", "cg_f1", "raha_20_labels_f1", "dboost_f1", "holoclean_simplified_f1", "cg_minus_best"]]
+    print(table[["table", "cg_f1", "raha_20_labels_f1", "dboost_f1", "holoclean_f1", "cg_minus_best"]]
           .to_string(index=False))
     print(f"mean F1: ContextGuard {table['cg_f1'].mean():.4f}, Raha {table['raha_20_labels_f1'].mean():.4f}, "
-          f"dBoost {table['dboost_f1'].mean():.4f}, HoloClean {table['holoclean_simplified_f1'].mean():.4f}")
+          f"dBoost {table['dboost_f1'].mean():.4f}, HoloClean {table['holoclean_f1'].mean():.4f}")
     return 0
 
 

@@ -30,5 +30,5 @@ stage_4:
   repair_threshold: 0.8       # on P(error)
   repair_confidence: 0.9      # minimum token probability of the repair value itself (fixed in advance, not tuned)
 stage_4b:
-  validation_layer: true      # TA enhancement: independent rules (configs/validation/<table>.yaml);
+  validation_layer: true      # course team enhancement: independent rules (configs/validation/<table>.yaml);
                               # a table without rules sends every repair to review

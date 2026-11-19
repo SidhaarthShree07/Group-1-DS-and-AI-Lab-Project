@@ -283,7 +283,7 @@ class TestGateLevelScoring:
         assert csv_path.exists()
 
     def test_score_decisions_no_op_rule(self):
-        """Verify TA Point 5 no-op rule: a repair proposing the old value counts as kept / not an error."""
+        """Verify the no-op rule: a repair proposing the old value counts as kept / not an error."""
         cells = [
             {"table": "T1", "row": "0", "column": "c1", "dirty_value": "BOSTON", "clean_value": "BOSTON"},
         ]

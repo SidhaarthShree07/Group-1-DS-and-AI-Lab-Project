@@ -10,3 +10,7 @@ matplotlib==3.11.2
 seaborn==0.13.2
 remotezip==0.12.6
 pytest==9.2.0
+# Added in Milestone 4: LoRA fine-tuning and inference (peft) and the validation rule files (PyYAML).
+# peft: the version used on the GPU machine was not recorded; use a release that supports Gemma 4.
+peft
+pyyaml==6.0.3

@@ -3,7 +3,7 @@
 
 Author: Sahilpreet
 
-Directly answers TA Point 5:
+Answers the 140 against 128 repairs question of the M3 review:
 - Calls score_decisions on the real m4_e1_base run directory.
 - The gate column (gate_decision field) gives the pre-validation gate output.
 - Real M3 gate numbers:

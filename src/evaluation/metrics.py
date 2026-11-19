@@ -916,7 +916,7 @@ def score_decisions(
         7. kept (correct) (correct cell kept untouched)
 
     Gate-only columns (gate_repaired_right, gate_repaired_wrong, gate_repaired_no_change)
-    are computed separately from the ``gate_decision`` field for TA cross-check.
+    are computed separately from the ``gate_decision`` field, as a cross-check.
 
     Args:
         predictions: Predictions list/DataFrame/path with 'decision' and optional
