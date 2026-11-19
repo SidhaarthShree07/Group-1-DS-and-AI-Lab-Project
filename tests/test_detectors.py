@@ -83,3 +83,15 @@ def test_detectors_never_read_clean_files(monkeypatch):
         for det in (d1_missing.detect, d2_pattern.detect, d3_robust_z.detect, d4_multivariate.detect, d5_fd.detect, d6_typo.detect):
             res = det(df)
             assert isinstance(res, pd.DataFrame)
+
+def test_d2_detects_pattern_shape_anomaly():
+    df = pd.DataFrame({
+        "phone": ["(555) 019-2834"] * 30 + ["INVALID_PHONE"] * 2,
+        "clean_num": [100] * 32
+    })
+    res = d2_pattern.detect(df)
+    assert not res.empty
+    phone_hits = res[res["column"] == "phone"]
+    clean_hits = res[res["column"] == "clean_num"]
+    assert len(phone_hits) == 2
+    assert len(clean_hits) == 0

@@ -1,0 +1,11 @@
+criterion,metric,without_stage0,with_stage0,delta,threshold,status
+1_unique_recall,overall_candidate_recall_pct,58.93,59.38,+0.45,>= 2.0 pct overall,FAIL
+1_unique_recall,hospital_candidate_recall_pct,88.24,92.16,+3.92,>= 5.0 pct on single table,FAIL
+1_unique_recall,beers_candidate_recall_pct,37.89,37.89,+0.00,>= 5.0 pct on single table,FAIL
+1_unique_recall,flights_candidate_recall_pct,71.01,71.01,+0.00,>= 5.0 pct on single table,FAIL
+2_safety,repair_accuracy_pct,35.71,36.16,+0.45,must not fall,PASS
+2_safety,false_repairs_count,132,132,0,must not rise,PASS
+2_safety,false_alarms_count,28,28,0,must not rise,PASS
+3_compute,model_calls,760,762,+2 (+0.26%),<= 10% increase,PASS
+4_clean_validity,valid_kept_rules_pct,-,100.0,-,>= 90% valid,PASS
+verdict,pipeline_decision,-,-,-,all 4 criteria must pass,DROP_STAGE0
