@@ -1,0 +1,20 @@
+table,rule,clean_support,valid,flagged,true_errors,precision,new_errors
+hospital,provider_number pattern ^\d{5}$|^\d{4}[a-z]\d{2}$,1.0,True,5,5,1.0,0
+hospital,state allowed_values al|xl,1.0,True,0,0,0.0,0
+hospital,zip range 35233.0..36116.0,1.0,True,0,0,0.0,0
+hospital,phone pattern ^\d{10}$,1.0,True,3,3,1.0,0
+hospital,emergency_service allowed_values yes|yxs|yex,1.0,True,0,0,0.0,0
+hospital,type allowed_values acute care hospitals|acute care hospitaxs|acuxe care hospixals|acutexcarexhospitals|acute care hoxpitalx,1.0,True,0,0,0.0,0
+hospital,state_average pattern ^[a-z]{2}_[a-z0-9-]+$,1.0,True,1,1,1.0,0
+flights,"flight pattern ^(AA|UA)-\d{1,4}-[A-Z]{3}-[A-Z]{3}$",1.0,True,0,0,0.0,0
+flights,"sched_dep_time pattern ^\d{1,2}:\d{2} (\s*[ap]\.m\.?)$",1.0,True,3,3,1.0,0
+flights,"act_dep_time pattern ^\d{1,2}:\d{2} (\s*[ap]\.m\.?)$",1.0,True,4,4,1.0,0
+flights,"sched_arr_time pattern ^\d{1,2}:\d{2} (\s*[ap]\.m\.?)$",1.0,True,3,3,1.0,0
+flights,"act_arr_time pattern ^\d{1,2}:\d{2} (\s*[ap]\.m\.?)$",1.0,True,1,1,1.0,0
+beers,"id pattern ^\d{3,4}$",0.99,True,1,0,0.0,0
+beers,style pattern ^[A-Za-z\s/\(\)\[\]]+$,0.9596,False,4,0,0.0,0
+beers,ounces pattern ^\d+\.\d+\s*(oz\.?|ounce)$,0.0,False,5,5,1.0,0
+beers,ibu range 0.0..200.0,1.0,True,0,0,0.0,0
+beers,brewery_id range 1.0..1000.0,1.0,True,0,0,0.0,0
+beers,city pattern ^[A-Za-z\s]+$,0.97,False,3,0,0.0,0
+beers,state pattern ^[A-Z]{2}$,1.0,True,0,0,0.0,0

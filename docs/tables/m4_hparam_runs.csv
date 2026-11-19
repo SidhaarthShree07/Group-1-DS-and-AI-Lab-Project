@@ -1,0 +1,14 @@
+run,learning_rate,rank,seed,batch,schedule,weight_decay,dropout,synthetic,best_val_loss,best_step,fixed_val_loss,stopped_early,stop_reason,minutes
+m4_e5_no_synthetic,2.0e-04,16,42,32,cosine,0.0,0.05,False,0.0545,200,0.0504,False,max steps reached,42.53
+m4_f1_full,2.0e-04,16,42,32,cosine,0.0,0.05,True,0.0442,1200,0.043,True,early stop: 3 evaluations without improvement,357.02
+m4_h0_ref,2.0e-04,16,42,32,cosine,0.0,0.05,True,0.0647,200,0.0507,False,max steps reached,42.88
+m4_h1_lr1e-4,1.0e-04,16,42,32,cosine,0.0,0.05,True,0.0671,200,0.0541,False,max steps reached,43.27
+m4_h2_lr4e-4,4.0e-04,16,42,32,cosine,0.0,0.05,True,0.0624,200,0.0489,False,max steps reached,43.3
+m4_h3_r8,2.0e-04,8,42,32,cosine,0.0,0.05,True,0.0661,200,0.0528,False,max steps reached,43.15
+m4_h4_r32,2.0e-04,32,42,32,cosine,0.0,0.05,True,0.0631,200,0.0501,False,max steps reached,43.61
+m4_h5_batch16,2.0e-04,16,42,16,cosine,0.0,0.05,True,0.0616,400,0.0483,False,max steps reached,40.8
+m4_h6_constant,2.0e-04,16,42,32,constant,0.0,0.05,True,0.0627,200,0.05,False,max steps reached,36.25
+m4_h7_wd0.01,2.0e-04,16,42,32,cosine,0.01,0.05,True,0.0641,200,0.0507,False,max steps reached,20.6
+m4_h8_dropout0.1,2.0e-04,16,42,32,cosine,0.0,0.1,True,0.0648,200,0.0504,False,max steps reached,20.61
+m4_s1_seed7,2.0e-04,16,7,32,cosine,0.0,0.05,True,0.0619,200,0.0484,False,max steps reached,43.27
+m4_s2_seed123,2.0e-04,16,123,32,cosine,0.0,0.05,True,0.0481,200,0.0491,False,max steps reached,43.15

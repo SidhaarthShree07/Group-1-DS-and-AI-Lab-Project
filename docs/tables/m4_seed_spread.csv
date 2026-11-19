@@ -1,0 +1,4 @@
+metric,runs,mean,std,min,max,range
+fixed_val_loss_1024,"m4_h0_ref, m4_s1_seed7, m4_s2_seed123",0.0494,0.0012,0.0484,0.0507,0.0023
+best_val_loss,"m4_h0_ref, m4_s1_seed7, m4_s2_seed123",0.0582,0.0089,0.0481,0.0647,0.0166
+best_step,"m4_h0_ref, m4_s1_seed7, m4_s2_seed123",200.0,0.0,200.0,200.0,0.0
