@@ -1,0 +1,60 @@
+# Author: Jashan Tiwari
+# ContextGuard Milestone 4 Master Training Configuration Template
+# Based on configs/m3_smoke.yaml and Milestone 4 Plan (Decision D12, D13, D14).
+
+run_id: "m4_template"
+seed: 42
+output_dir: "outputs/runs/m4_template"
+
+paths:
+  train_file: "data/processed/examples/train.jsonl"
+  val_file: "data/processed/examples/val.jsonl"
+  subsets_dir: "data/subsets/m3"
+  subset_tables:
+    - "hospital"
+    - "flights"
+    - "beers"
+
+model:
+  name: "google/gemma-4-E4B-it"
+  max_len: 1536
+  torch_dtype: "bfloat16"
+  gradient_checkpointing: true
+
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+training:
+  optimizer: "adamw_torch"
+  learning_rate: 2.0e-4
+  lr_scheduler_type: "cosine"
+  warmup_ratio: 0.03
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 8
+  effective_batch_size: 32
+  max_steps: 200
+  n_train: 6400
+  n_val: 512
+  eval_steps: 25
+  save_steps: 50
+  early_stopping_patience: 3
+  loss_mask_prompt: true
+  ignore_index: -100
+
+inference:
+  do_sample: false
+  max_new_tokens: 160
+  confidence_prefix: '{"is_error":'
+  temperature: 1.0

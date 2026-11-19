@@ -1,0 +1,5 @@
+table,rule,clean_support,valid,flagged,true_errors,precision,new_errors
+hospital,state pattern al,1.0,True,2,2,1.0,2
+hospital,emergency_service pattern yes,1.0,True,2,2,1.0,0
+beers,abv pattern ^(\d+\.?\d*)\s*%?$,1.0,True,0,0,0.0,0
+beers,ibu range 0.0..500.0,1.0,True,0,0,0.0,0

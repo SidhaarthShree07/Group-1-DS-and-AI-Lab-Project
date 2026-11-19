@@ -1,0 +1,52 @@
+# Author: Jashan Tiwari
+# ContextGuard M4 Training Run: m4_h5_batch16
+run_id: m4_h5_batch16
+seed: 42
+output_dir: outputs/runs/m4_h5_batch16
+paths:
+  train_file: data/processed/examples/train.jsonl
+  val_file: data/processed/examples/val.jsonl
+model:
+  name: google/gemma-4-E4B-it
+  max_len: 1536
+  torch_dtype: bfloat16
+  gradient_checkpointing: true
+  memory_fraction: 0.45
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+  bias: none
+  task_type: CAUSAL_LM
+training:
+  optimizer: adamw_torch
+  learning_rate: 0.0002
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  weight_decay: 0.0
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  effective_batch_size: 16
+  max_steps: 400
+  epochs: 0.0
+  n_train: 6400
+  n_val: 256
+  eval_steps: 50
+  save_steps: 1000
+  early_stopping_patience: 0
+  exclude_synthetic: false
+  loss_mask_prompt: true
+  ignore_index: -100
+inference:
+  do_sample: false
+  max_new_tokens: 160
+  confidence_prefix: '{"is_error":'
+  temperature: 1.0
