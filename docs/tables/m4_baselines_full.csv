@@ -1,0 +1,16 @@
+baseline,table,total_test_rows,scored_rows,runtime_sec,status,detected_cells,tp,fp,precision,recall,f1,executed_repairs,successful_repairs,repair_accuracy,false_repair_rate,notes
+B1_HoloClean_simplified,hospital,159,139,0.079,completed,67,56,11,0.8358,0.8485,0.8421,67,56,0.8485,0.1642,Simplified DC violation check with modal voting across 67 DCs; scored via score_flags
+B2_dBoost_simplified,hospital,159,139,4.174,completed,14,14,0,1.0,0.2121,0.35,0,0,0.0,0.0,Simplified dBoost best config tuned on train split (--statistical 0.5 --gaussian 3.0); scored via score_flags
+B3_Raha_Baran_simplified,hospital,159,139,0.209,completed,14,14,0,1.0,0.2121,0.35,14,4,0.0606,0.7143,Simplified Raha detection with 20-tuple Baran value transfer; scored via score_flags
+B1_HoloClean_simplified,flights,365,345,0.023,completed,79,33,46,0.4177,0.0485,0.0868,79,31,0.0455,0.6076,Simplified DC violation check with modal voting across 7 DCs; scored via score_flags
+B2_dBoost_simplified,flights,365,345,1.187,completed,1291,558,733,0.4322,0.8194,0.5659,0,0,0.0,0.0,Simplified dBoost best config tuned on train split (--statistical 0.5 --histogram 0.5 0.5); scored via score_flags
+B3_Raha_Baran_simplified,flights,365,345,0.317,completed,598,574,24,0.9599,0.8429,0.8976,598,72,0.1057,0.8796,Simplified Raha detection with 20-tuple Baran value transfer; scored via score_flags
+B1_HoloClean_simplified,beers,361,341,0.036,completed,105,38,67,0.3619,0.062,0.1058,105,38,0.062,0.6381,Simplified DC violation check with modal voting across 9 DCs; scored via score_flags
+B2_dBoost_simplified,beers,361,341,2.543,completed,1669,613,1056,0.3673,1.0,0.5372,0,0,0.0,0.0,Simplified dBoost best config tuned on train split (--statistical 0.5 --histogram 0.5 0.5); scored via score_flags
+B3_Raha_Baran_simplified,beers,361,341,0.363,completed,505,505,0,1.0,0.8238,0.9034,505,328,0.5351,0.3505,Simplified Raha detection with 20-tuple Baran value transfer; scored via score_flags
+B1_HoloClean_simplified,rayyan,150,130,0.0,completed (0 constraints),0,0,0,0.0,0.0,0.0,0,0,0.0,0.0,No denial constraints mined
+B2_dBoost_simplified,rayyan,150,130,1.354,completed,605,110,495,0.1818,0.8397,0.2989,0,0,0.0,0.0,Simplified dBoost best config tuned on train split (--statistical 0.8 --histogram 0.8 0.8); scored via score_flags
+B3_Raha_Baran_simplified,rayyan,150,130,0.124,completed,9,1,8,0.1111,0.0076,0.0143,9,0,0.0,1.0,Simplified Raha detection with 20-tuple Baran value transfer; scored via score_flags
+B1_HoloClean_simplified,movies,1109,1089,0.018,completed,95,0,95,0.0,0.0,0.0,95,0,0.0,1.0,Simplified DC violation check with modal voting across 1 DCs; scored via score_flags
+B2_dBoost_simplified,movies,1109,1089,19.389,completed,3301,938,2363,0.2842,0.8192,0.422,0,0,0.0,0.0,Simplified dBoost best config tuned on train split (--statistical 0.8 --histogram 0.8 0.8); scored via score_flags
+B3_Raha_Baran_simplified,movies,1109,1089,0.798,completed,0,0,0,0.0,0.0,0.0,0,0,0.0,0.0,Simplified Raha detection with 20-tuple Baran value transfer; scored via score_flags

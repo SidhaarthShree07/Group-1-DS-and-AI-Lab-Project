@@ -1,0 +1,16 @@
+table,column,error_type,missed_count,sample_dirty,sample_clean,closest_detector,detection_rationale
+flights,act_dep_time,pattern_violation,43,6:09 a.m.,6:08 a.m.,D6_typo,Edit distance = 1; missed by frequency threshold.
+flights,act_dep_time,rule_violation,29,3:50 p.m.,3:27 p.m.,D6_typo,Edit distance = 2; missed by frequency threshold.
+flights,act_arr_time,rule_violation,21,12:37 p.m.,12:50 p.m.,D6_typo,Edit distance = 2; missed by frequency threshold.
+flights,act_arr_time,rule_violation,14,5:52 a.m.,5:50 a.m.,D6_typo,Edit distance = 1; missed by frequency threshold.
+flights,act_dep_time,rule_violation,13,8:07 a.m.,7:49 a.m.,D6_typo,Edit distance = 3; missed by frequency threshold.
+beers,ounces,pattern_violation,13,12.0 oz. Alumi-Tek,12,none,No detector is close; would need a domain rule.
+flights,act_dep_time,rule_violation,12,12:14 p.m.,12:13 p.m.,D6_typo,Edit distance = 1; missed by frequency threshold.
+flights,act_dep_time,pattern_violation,8,2:01 p.m.,1:48 p.m.,D6_typo,Edit distance = 3; missed by frequency threshold.
+flights,act_dep_time,pattern_violation,5,12:11 a.m.,11:55 p.m.,none,No detector is close; would need a domain rule.
+flights,sched_arr_time,pattern_violation,5,5:50 a.m. Dec 02,5:50 a.m.,none,No detector is close; would need a domain rule.
+hospital,sample,pattern_violation,3,619 paxienxs,619 patients,D6_typo,Edit distance = 2; missed by frequency threshold.
+hospital,sample,pattern_violation,2,87 patientx,87 patients,D6_typo,Edit distance = 1; missed by frequency threshold.
+flights,sched_dep_time,pattern_violation,2,8:35aDec 1,8:35 a.m.,D3_robust_z,Modified Z-score = 1407.18 (near outlier threshold).
+hospital,measure_name,rule_violation,1,pxeumoxia patiexts assessed axd givex ixfluexza vaccixatiox,pneumonia patients assessed and given influenza vaccination,none,No detector is close; would need a domain rule.
+hospital,measure_code,rule_violation,1,xax-1,cac-1,D6_typo,Edit distance = 2; missed by frequency threshold.

@@ -1,0 +1,5 @@
+table,candidate_calls,all_cells_calls,calls_ratio,candidate_precision,all_cells_precision,precision_drop,candidate_recall,all_cells_recall,recall_gain,decision
+beers,266,1000,3.76x,0.973,0.9896,-0.0166,0.3789,1.0,0.6211,widen
+hospital,323,1900,5.88x,0.8182,0.8333,-0.0151,0.8824,0.9804,0.098,widen
+flights,171,600,3.51x,0.9018,0.7343,0.1675,0.7101,0.9614,0.2513,do_not_widen
+overall,760,3500,4.61x,0.9041,0.8394,0.0647,0.5893,0.9799,0.3906,widen_beers_hospital_filter_flights
