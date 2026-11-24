@@ -1,0 +1,4 @@
+condition,classifier,n_train,n_test,roc_auc,f1,precision,recall,accuracy,gap_closed_pct,notes
+clean,hist_gb,120000,30000,0.871,0.3094,0.6261,0.2055,0.9387,100.0,Oracle upper bound trained on error-free features
+dirty,hist_gb,120000,30000,0.8659,0.2661,0.6243,0.1691,0.9377,0.0,Baseline trained on raw corrupted features (missing values & outliers)
+contextguard_cleaned,hist_gb,120000,30000,PENDING,PENDING,PENDING,PENDING,PENDING,PENDING,PENDING (awaiting final Credit predictions via --cleaned-csv)

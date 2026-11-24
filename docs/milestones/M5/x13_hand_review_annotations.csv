@@ -1,0 +1,61 @@
+table,row,column,dirty_value,pred_repair,clean_value,gate_decision,hand_label,review_note,review_method
+flights,270,act_dep_time,4:15 p.m.,4:37 p.m.,4:15 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (4:37 p.m. vs 4:15 p.m.); copied incorrect flight majority.,manual_hand_review
+hospital,120,score,empty,100%,empty,keep,wrong,Hallucination on clean missing cell: proposed '100%' when ground truth is unobserved.,manual_hand_review
+hospital,21,score,empty,100%,empty,flag for review,wrong,Hallucination on clean missing cell: proposed '100%' when ground truth is unobserved.,manual_hand_review
+flights,328,act_dep_time,11:40 a.m.,11:41 a.m.,11:40 a.m.,flag for review,wrong,"Strict M5 rule: 1-minute departure time difference (11:41 vs 11:40) is wrong, not a valid alternative.",manual_hand_review
+flights,111,act_arr_time,10:22 p.m.,10:23 p.m.,10:29 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (10:23 p.m. vs 10:29 p.m.); copied incorrect flight majority.,manual_hand_review
+flights,85,act_dep_time,5:56 a.m.,6:10 a.m.,5:56 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (6:10 a.m. vs 5:56 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,53,act_dep_time,,7:42 p.m.,7:14 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (7:42 p.m. vs 7:14 p.m.); copied incorrect flight majority.,manual_hand_review
+hospital,145,score,empty,100%,empty,flag for review,wrong,Hallucination on clean missing cell: proposed '100%' when ground truth is unobserved.,manual_hand_review
+beers,222,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+hospital,117,score,empty,100%,empty,flag for review,wrong,Hallucination on clean missing cell: proposed '100%' when ground truth is unobserved.,manual_hand_review
+flights,280,act_dep_time,4:15 p.m.,4:37 p.m.,4:15 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (4:37 p.m. vs 4:15 p.m.); copied incorrect flight majority.,manual_hand_review
+beers,194,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+flights,233,act_dep_time,,7:42 p.m.,7:14 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (7:42 p.m. vs 7:14 p.m.); copied incorrect flight majority.,manual_hand_review
+hospital,110,score,empty,100%,empty,flag for review,wrong,Hallucination on clean missing cell: proposed '100%' when ground truth is unobserved.,manual_hand_review
+flights,254,act_arr_time,,9:22 a.m.,9:32 a.m.,flag for review,unclear,Contested telemetry across duplicate flight sensor rows: flight AA-3859 has conflicting radar reports of 9:22 vs 9:32 in source data; local context cannot resolve ground truth.,manual_hand_review
+flights,180,act_arr_time,,9:22 a.m.,9:32 a.m.,flag for review,unclear,Contested telemetry across duplicate flight sensor rows: flight AA-3859 has conflicting radar reports of 9:22 vs 9:32 in source data; local context cannot resolve ground truth.,manual_hand_review
+hospital,30,score,empty,0%,empty,flag for review,wrong,Hallucination on clean missing cell: proposed '0%' when ground truth is unobserved.,manual_hand_review
+beers,346,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+beers,78,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+flights,47,act_dep_time,,1:48 p.m.,1:31 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (1:48 p.m. vs 1:31 p.m.); copied incorrect flight majority.,manual_hand_review
+flights,54,act_dep_time,8:48 a.m.,8:49 a.m.,8:29 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (8:49 a.m. vs 8:29 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,213,act_dep_time,7:28aDec 1,7:28 a.m.,8:04 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (7:28 a.m. vs 8:04 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,257,act_dep_time,,1:48 p.m.,1:31 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (1:48 p.m. vs 1:31 p.m.); copied incorrect flight majority.,manual_hand_review
+beers,70,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+flights,234,act_arr_time,11:30 a.m.,11:35 a.m.,11:58 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (11:35 a.m. vs 11:58 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,42,act_dep_time,,6:10 a.m.,5:56 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (6:10 a.m. vs 5:56 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,319,act_dep_time,10:33 a.m.,10:53 a.m.,10:33 a.m.,repair,wrong,Temporal discrepancy against clean ground truth (10:53 a.m. vs 10:33 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,274,act_dep_time,7:14 p.m.,7:42 p.m.,7:14 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (7:42 p.m. vs 7:14 p.m.); copied incorrect flight majority.,manual_hand_review
+flights,295,act_dep_time,4:15 p.m.,4:37 p.m.,4:15 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (4:37 p.m. vs 4:15 p.m.); copied incorrect flight majority.,manual_hand_review
+beers,107,beer_name,Orignal Blend,Original Blend,Orignal Blend,repair,valid_alternative,Valid spelling correction of unannotated ground-truth typo: Original Blend represents the exact same real-world cider product.,manual_hand_review
+flights,160,act_dep_time,1:47 p.m.,1:48 p.m.,1:31 p.m.,repair,wrong,Temporal discrepancy against clean ground truth (1:48 p.m. vs 1:31 p.m.); copied incorrect flight majority.,manual_hand_review
+beers,196,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+flights,188,act_dep_time,,7:42 p.m.,7:14 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (7:42 p.m. vs 7:14 p.m.); copied incorrect flight majority.,manual_hand_review
+beers,77,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+beers,198,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+hospital,3,score,empty,100%,empty,flag for review,wrong,Hallucination on clean missing cell: proposed '100%' when ground truth is unobserved.,manual_hand_review
+flights,10,act_dep_time,8:48 a.m.,8:49 a.m.,8:29 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (8:49 a.m. vs 8:29 a.m.); copied incorrect flight majority.,manual_hand_review
+beers,76,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+flights,130,act_dep_time,10:33 a.m.,10:53 a.m.,10:33 a.m.,repair,wrong,Temporal discrepancy against clean ground truth (10:53 a.m. vs 10:33 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,276,act_dep_time,10:33 a.m.,10:53 a.m.,10:33 a.m.,repair,wrong,Temporal discrepancy against clean ground truth (10:53 a.m. vs 10:33 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,9,act_dep_time,,7:42 p.m.,7:14 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (7:42 p.m. vs 7:14 p.m.); copied incorrect flight majority.,manual_hand_review
+beers,68,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+flights,269,act_dep_time,10:33 a.m.,10:53 a.m.,10:33 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (10:53 a.m. vs 10:33 a.m.); copied incorrect flight majority.,manual_hand_review
+beers,193,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+beers,69,abv,,0.05,,flag for review,wrong,Hallucination on clean missing cell: proposed '0.05' when ground truth is unobserved.,manual_hand_review
+flights,146,act_dep_time,,11:41 a.m.,11:40 a.m.,flag for review,wrong,"Strict M5 rule: 1-minute departure time difference (11:41 vs 11:40) is wrong, not a valid alternative.",manual_hand_review
+hospital,116,score,empty,0%,empty,flag for review,wrong,Hallucination on clean missing cell: proposed '0%' when ground truth is unobserved.,manual_hand_review
+flights,134,act_dep_time,4:15 p.m.,4:37 p.m.,4:15 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (4:37 p.m. vs 4:15 p.m.); copied incorrect flight majority.,manual_hand_review
+flights,131,act_dep_time,5:56 a.m.,6:10 a.m.,5:56 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (6:10 a.m. vs 5:56 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,90,act_dep_time,1:31 p.m.,1:48 p.m.,1:31 p.m.,keep,wrong,Temporal discrepancy against clean ground truth (1:48 p.m. vs 1:31 p.m.); copied incorrect flight majority.,manual_hand_review
+hospital,37,measure_name,pnxumonia patixnts whosx initial emxrgxncy room blood culturx was pxrformxd prior to thx administration of thx first hospital dosx of antibiotics,pneumonia patients whose initial emergency room blood cultures were performed prior to the administration of the first dose of antibiotics,pneumonia patients whose initial emergency room blood culture was performed prior to the administration of the first hospital dose of antibiotics,flag for review,valid_alternative,Valid clinical phrasing variation: pluralizes cultures and omits hospital qualifier while preserving the exact clinical concept.,manual_hand_review
+flights,189,act_dep_time,8:48 a.m.,8:49 a.m.,8:29 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (8:49 a.m. vs 8:29 a.m.); copied incorrect flight majority.,manual_hand_review
+hospital,142,score,empty,100%,empty,keep,wrong,Hallucination on clean missing cell: proposed '100%' when ground truth is unobserved.,manual_hand_review
+flights,249,act_dep_time,7:28aDec 1,7:28 a.m.,8:04 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (7:28 a.m. vs 8:04 a.m.); copied incorrect flight majority.,manual_hand_review
+hospital,103,measure_name,surgeryxpatientsxneedingxhairxremovedxfromxthexsurgicalxareaxbeforexsurgery& xwhoxhadxhairxremovedxusingxaxsaferxmethodx(electricxclippersxorxhairxremovalxcreamxï¿½cxnotxaxrazor),surgery patients needing hair removed from the surgical area before surgery,surgery patients needing hair removed from the surgical area before surgery who had hair removed using a safer method (electric clippers or hair removal cream c not a razor),repair,wrong,Incomplete repair / heavy truncation: drops the entire second clause specifying the safer hair removal method.,manual_hand_review
+flights,112,act_arr_time,11:30 a.m.,11:35 a.m.,11:58 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (11:35 a.m. vs 11:58 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,291,act_dep_time,5:56 a.m.,6:10 a.m.,5:56 a.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (6:10 a.m. vs 5:56 a.m.); copied incorrect flight majority.,manual_hand_review
+flights,119,act_dep_time,1:46 p.m.,1:48 p.m.,1:31 p.m.,flag for review,wrong,Temporal discrepancy against clean ground truth (1:48 p.m. vs 1:31 p.m.); copied incorrect flight majority.,manual_hand_review
+flights,118,act_dep_time,4:35 p.m.,4:37 p.m.,4:15 p.m.,repair,wrong,Temporal discrepancy against clean ground truth (4:37 p.m. vs 4:15 p.m.); copied incorrect flight majority.,manual_hand_review
+flights,184,act_dep_time,,11:41 a.m.,11:40 a.m.,flag for review,wrong,"Strict M5 rule: 1-minute departure time difference (11:41 vs 11:40) is wrong, not a valid alternative.",manual_hand_review

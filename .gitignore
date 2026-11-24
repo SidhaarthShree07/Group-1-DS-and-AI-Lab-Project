@@ -5,6 +5,9 @@ data/splits/*
 !data/splits/.gitkeep
 data/subsets/*
 !data/subsets/.gitkeep
+data/unseen/**
+!data/unseen/.gitkeep
+Jashan_M5_Files_For_Sid/
 external_data/
 raha-master/
 TableEG/
