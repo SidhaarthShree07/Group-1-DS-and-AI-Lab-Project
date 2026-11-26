@@ -1,0 +1,65 @@
+step,table,errors,candidates,pass_through_pct,recall_pct,added_cells,added_errors,growth_pct,passes_rule
+M4,hospital,79,478,16.44,91.14,0,0,0.0,
+M4,flights,723,635,29.4,78.98,0,0,0.0,
+M4,beers,679,1323,36.45,98.09,0,0,0.0,
+M4,rayyan,141,838,50.79,46.81,0,0,0.0,
+M4,movies,1054,9224,48.93,42.79,0,0,0.0,
+M4,tax,51,3290,7.31,90.2,0,0,0.0,
+M4,inpatient,695,1021,15.29,78.85,0,0,0.0,
+M4,facilities,1250,3796,31.48,94.32,0,0,0.0,
+"M5 (arm A), against M4",hospital,79,478,16.44,91.14,0,0,0.0,False
+"M5 (arm A), against M4",flights,723,635,29.4,78.98,0,0,0.0,False
+"M5 (arm A), against M4",beers,679,1008,27.77,100.0,13,13,-23.81,False
+"M5 (arm A), against M4",rayyan,141,441,26.73,97.16,76,72,-47.37,False
+"M5 (arm A), against M4",movies,1054,4636,24.59,97.34,600,597,-49.74,False
+"M5 (arm A), against M4",tax,51,4591,10.2,90.2,1301,0,39.54,False
+"M5 (arm A), against M4",inpatient,695,1021,15.29,78.85,0,0,0.0,False
+"M5 (arm A), against M4",facilities,1250,3796,31.48,94.32,0,0,0.0,False
+arm A + o1 composite key,hospital,79,478,16.44,91.14,0,0,0.0,False
+arm A + o1 composite key,flights,723,635,29.4,78.98,0,0,0.0,False
+arm A + o1 composite key,beers,679,1137,31.32,100.0,129,0,12.8,False
+arm A + o1 composite key,rayyan,141,441,26.73,97.16,0,0,0.0,False
+arm A + o1 composite key,movies,1054,4721,25.04,97.34,85,0,1.83,False
+arm A + o1 composite key,tax,51,8502,18.89,90.2,3911,0,85.19,False
+arm A + o1 composite key,inpatient,695,1303,19.51,88.78,282,69,27.62,False
+arm A + o1 composite key,facilities,1250,3839,31.83,96.08,43,22,1.13,False
+"arm A + o1b composite key, D5 thresholds",hospital,79,478,16.44,91.14,0,0,0.0,True
+"arm A + o1b composite key, D5 thresholds",flights,723,635,29.4,78.98,0,0,0.0,True
+"arm A + o1b composite key, D5 thresholds",beers,679,1008,27.77,100.0,0,0,0.0,True
+"arm A + o1b composite key, D5 thresholds",rayyan,141,441,26.73,97.16,0,0,0.0,True
+"arm A + o1b composite key, D5 thresholds",movies,1054,4690,24.88,97.34,54,0,1.16,True
+"arm A + o1b composite key, D5 thresholds",tax,51,4612,10.25,90.2,21,0,0.46,True
+"arm A + o1b composite key, D5 thresholds",inpatient,695,1029,15.41,79.86,8,7,0.78,True
+"arm A + o1b composite key, D5 thresholds",facilities,1250,3802,31.53,94.8,6,6,0.16,True
+arm A + o2 dominant value,hospital,79,478,16.44,91.14,0,0,0.0,False
+arm A + o2 dominant value,flights,723,635,29.4,78.98,0,0,0.0,False
+arm A + o2 dominant value,beers,679,1008,27.77,100.0,0,0,0.0,False
+arm A + o2 dominant value,rayyan,141,441,26.73,97.16,0,0,0.0,False
+arm A + o2 dominant value,movies,1054,4636,24.59,97.34,0,0,0.0,False
+arm A + o2 dominant value,tax,51,4591,10.2,90.2,0,0,0.0,False
+arm A + o2 dominant value,inpatient,695,1021,15.29,78.85,0,0,0.0,False
+arm A + o2 dominant value,facilities,1250,3796,31.48,94.32,0,0,0.0,False
+arm A + o3 abbreviation mix,hospital,79,478,16.44,91.14,0,0,0.0,False
+arm A + o3 abbreviation mix,flights,723,635,29.4,78.98,0,0,0.0,False
+arm A + o3 abbreviation mix,beers,679,1008,27.77,100.0,0,0,0.0,False
+arm A + o3 abbreviation mix,rayyan,141,441,26.73,97.16,0,0,0.0,False
+arm A + o3 abbreviation mix,movies,1054,4636,24.59,97.34,0,0,0.0,False
+arm A + o3 abbreviation mix,tax,51,4591,10.2,90.2,0,0,0.0,False
+arm A + o3 abbreviation mix,inpatient,695,1021,15.29,78.85,0,0,0.0,False
+arm A + o3 abbreviation mix,facilities,1250,3796,31.48,94.32,0,0,0.0,False
+arm A + o4 rare category,hospital,79,485,16.68,93.67,7,2,1.46,True
+arm A + o4 rare category,flights,723,643,29.77,79.25,8,2,1.26,True
+arm A + o4 rare category,beers,679,1016,27.99,100.0,8,0,0.79,True
+arm A + o4 rare category,rayyan,141,444,26.91,97.16,3,0,0.68,True
+arm A + o4 rare category,movies,1054,4636,24.59,97.34,0,0,0.0,True
+arm A + o4 rare category,tax,51,4591,10.2,90.2,0,0,0.0,True
+arm A + o4 rare category,inpatient,695,1030,15.43,79.42,9,4,0.88,True
+arm A + o4 rare category,facilities,1250,3796,31.48,94.32,0,0,0.0,True
+"arm A + o1b composite key, D5 thresholds + o4 rare category",hospital,79,485,16.68,93.67,7,2,1.46,True
+"arm A + o1b composite key, D5 thresholds + o4 rare category",flights,723,643,29.77,79.25,8,2,1.26,True
+"arm A + o1b composite key, D5 thresholds + o4 rare category",beers,679,1016,27.99,100.0,8,0,0.79,True
+"arm A + o1b composite key, D5 thresholds + o4 rare category",rayyan,141,444,26.91,97.16,3,0,0.68,True
+"arm A + o1b composite key, D5 thresholds + o4 rare category",movies,1054,4690,24.88,97.34,54,0,1.16,True
+"arm A + o1b composite key, D5 thresholds + o4 rare category",tax,51,4612,10.25,90.2,21,0,0.46,True
+"arm A + o1b composite key, D5 thresholds + o4 rare category",inpatient,695,1038,15.55,80.43,17,11,1.67,True
+"arm A + o1b composite key, D5 thresholds + o4 rare category",facilities,1250,3802,31.53,94.8,6,6,0.16,True
