@@ -63,7 +63,7 @@ def compare(table: str, preds: list, truth: dict, seconds: float) -> dict:
     review_new = sum(p["decision"].startswith("review") or p["decision"] == "flag for review" for p in preds)
     return {
         "table": table, "gate_repairs": len(gate),
-        "validated": outcome("validated"), "rejected": outcome("rejected"), "unvalidated": outcome("unvalidated"),
+        "validated": outcome("validated"), "rejected": outcome("rejected"), "unvalidated": outcome("unvalidated") + outcome("not covered"),
         "no_change": outcome("no change"),
         "existing_applied": len(applied_old), "existing_correct": right(applied_old), "existing_incorrect": wrong(applied_old),
         "enhanced_applied": len(applied_new), "enhanced_correct": right(applied_new), "enhanced_incorrect": wrong(applied_new),
@@ -83,6 +83,8 @@ def main() -> int:
     ap.add_argument("--source", default="data/subsets/m3")
     ap.add_argument("--split", default="val")
     ap.add_argument("--copy-to", default=None, help="also write the comparison table here")
+    ap.add_argument("--apply-unverified", action="store_true",
+                    help="apply gate repairs in columns no rule covers, marked 'not verified' (default: review)")
     args = ap.parse_args()
     root = Path(__file__).resolve().parents[1]
     run = Path(args.run)
@@ -100,7 +102,7 @@ def main() -> int:
                                             cells["error_type"]) if et != "format_artifact"}
         table_preds = [p for p in preds if p["table"] == table and (int(p["row"]), p["column"]) in truth]
         t0 = time.perf_counter()
-        results = validate_predictions(table, dirty, table_preds)
+        results = validate_predictions(table, dirty, table_preds, apply_unverified=args.apply_unverified)
         secs = time.perf_counter() - t0
         rows.append(compare(table, table_preds, truth, secs))
         by_key = {(r.row, r.column): r for r in results}
@@ -111,7 +113,7 @@ def main() -> int:
                             "final_decision": p["decision"], **r.as_dict()})
             if p["decision"] == "repair":
                 changes.append({"table": table, "row": p["row"], "column": p["column"], "old": r.old, "new": r.new,
-                                "p_error": round(p.get("p_error") or 0, 4), "validation": r.reason,
+                                "p_error": round(p.get("p_error") or 0, 4), "state": p["state"], "validation": r.reason,
                                 "evidence": p.get("evidence")})
             elif p["decision"].startswith("review") or p["decision"] == "flag for review":
                 review.append({"table": table, "row": p["row"], "column": p["column"],

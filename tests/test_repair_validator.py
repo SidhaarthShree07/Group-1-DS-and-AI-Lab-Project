@@ -1,7 +1,7 @@
 """Repair validation layer (src/validation/repair_validator.py) on small hand-made tables."""
 import pandas as pd
 
-from src.validation.repair_validator import RepairValidator, final_decision, load_rules, validate_predictions
+from src.validation.repair_validator import RepairValidator, final_decision, load_rules, repair_state, validate_predictions
 
 RULES = {
     "missing_tokens": ["empty"],
@@ -53,7 +53,7 @@ def test_rejected_when_it_disagrees_with_related_rows():
 
 def test_unvalidated_without_rule_or_without_evidence():
     v = RepairValidator("t", table(), RULES)
-    assert v.validate(0, "note", "x").outcome == "unvalidated"          # no rule covers the column
+    assert v.validate(0, "note", "x").outcome == "not covered"          # no rule covers the column
     assert v.validate(0, "score", "95%").outcome == "unvalidated"       # old value already satisfies every rule
 
 
@@ -68,6 +68,9 @@ def test_no_change_and_final_decision():
     assert final_decision("repair", "validated") == "repair"
     assert final_decision("repair", "rejected").startswith("review")
     assert final_decision("repair", "unvalidated").startswith("review")
+    assert final_decision("repair", "not covered").startswith("review")          # default: review
+    assert final_decision("repair", "not covered", apply_unverified=True) == "repair"
+    assert final_decision("repair", "unvalidated", apply_unverified=True).startswith("review")  # rules exist
     assert final_decision("repair", "no change") == "keep"
     assert final_decision("flag for review", None) == "flag for review"
 
@@ -93,3 +96,22 @@ def test_shipped_rule_files_load():
             assert spec.get("source")
         for rel in rules["relations"]:
             assert rel.get("source")
+
+
+def test_three_states_for_the_user():
+    assert repair_state("repair", "validated") == "verified"
+    assert repair_state("repair", "not covered") == "not verified"
+    assert repair_state("repair", None) == "not verified"            # layer not run: confidence only
+    assert repair_state("review (repair rejected by validation)", "rejected") == "needs review"
+    assert repair_state("flag for review") == "needs review"
+    assert repair_state("keep") == "unchanged"
+
+
+def test_table_without_rules_applies_unverified_only_when_asked():
+    dirty = pd.DataFrame({"a": ["x", "y"]})
+    preds = [{"row": 0, "column": "a", "repair": "z", "decision": "repair", "p_error": 0.99}]
+    default, unverified = [dict(preds[0])], [dict(preds[0])]
+    validate_predictions("t", dirty, default, rules={"columns": {}, "relations": []})
+    validate_predictions("t", dirty, unverified, rules={"columns": {}, "relations": []}, apply_unverified=True)
+    assert default[0]["decision"].startswith("review") and default[0]["state"] == "needs review"
+    assert unverified[0]["decision"] == "repair" and unverified[0]["state"] == "not verified"

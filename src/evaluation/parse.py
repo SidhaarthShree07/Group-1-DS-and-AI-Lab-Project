@@ -119,7 +119,12 @@ def parse_prediction(
             try:
                 obj = json.loads(candidate[brace_start : brace_end + 1])
             except Exception:
-                return _safe_invalid_dict()
+                # Thinking models (Qwen3.5) can repeat the answer after a closing </think> tag: keep the first
+                # complete JSON object.
+                try:
+                    obj, _ = json.JSONDecoder().raw_decode(candidate[brace_start:])
+                except Exception:
+                    return _safe_invalid_dict()
         else:
             return _safe_invalid_dict()
 

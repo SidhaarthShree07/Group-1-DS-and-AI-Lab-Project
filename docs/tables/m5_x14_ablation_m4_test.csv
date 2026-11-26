@@ -1,0 +1,9 @@
+variant,precision,recall,f1,applied_right,applied_wrong,false_repair_rate,to_review
+Final pipeline,0.9548,0.8699,0.9104,975,13,0.0132,236
+without D7 (format mix),0.933,0.5735,0.7104,573,13,0.0222,235
+without D5 consensus,0.9696,0.775,0.8615,944,9,0.0094,130
+without D7 and D5 consensus,0.9518,0.4787,0.637,542,9,0.0163,129
+without validation layer,0.9548,0.8699,0.9104,978,15,0.0151,231
+without repair-confidence gate and validation,0.9548,0.8699,0.9104,1027,59,0.0543,137
+without repair-confidence gate,0.9548,0.8699,0.9104,1024,35,0.0331,164
+final + contested-column rule (X3),0.9548,0.8699,0.9104,943,0,0.0,281
