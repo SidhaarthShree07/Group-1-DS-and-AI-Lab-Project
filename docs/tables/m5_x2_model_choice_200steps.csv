@@ -1,0 +1,4 @@
+variant,f1,precision,recall,gate_right,gate_wrong,gate_false_repair_rate,applied_right,applied_wrong,same_gate_decision,ece,pr_auc,peak_gpu_gib,model_calls,seconds_per_call
+"Gemma 4 E4B-it, 200 steps",0.7091,0.6103,0.846,262,8,0.0296,262,7,1.0,0.2199,0.9503,17.6,908,0.418
+"Qwen3.5-9B, 200 steps",0.883,0.908,0.8594,318,32,0.0914,318,31,0.6608,0.0746,0.989,20.3,908,0.523
+"Qwen3-4B-Instruct, 200 steps",0.8386,0.8251,0.8527,319,20,0.059,319,15,0.6784,0.0951,0.9835,10.5,908,0.302

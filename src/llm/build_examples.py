@@ -31,7 +31,8 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from src.profiling.context import ALL_BLOCKS, TableContext  # noqa: E402
+from src.detectors.d5_entity_consensus import contested_columns  # noqa: E402
+from src.profiling.context import ALL_BLOCKS, MISSING, TableContext  # noqa: E402
 
 CORE_TABLES = ["hospital", "flights", "beers", "rayyan", "movies"]
 EXTERNAL_TABLES = ["tax", "inpatient", "facilities"]  # training tables from the external sources
@@ -146,6 +147,38 @@ def make_response(is_error: bool, error_type: str, evidence: str, repair: Option
                       ensure_ascii=False)
 
 
+def plain(value) -> str:
+    """Lower case, letters and digits only: '12 oz.' and '12OZ' look the same."""
+    return "".join(ch for ch in str(value).lower() if ch.isalnum())
+
+
+def entity_majority(ctx: TableContext, entity_col: Optional[str], r: int, col: str) -> Optional[str]:
+    """The most common filled value of `col` among the other rows of row r's entity, or None."""
+    if entity_col is None:
+        return None
+    key = ctx.df.at[r, entity_col]
+    if key.lower() in MISSING:
+        return None
+    group = ctx.df[(ctx.df[entity_col] == key) & (ctx.df.index != r)][col]
+    values = [v for v in group if v.lower() not in MISSING]
+    return collections.Counter(values).most_common(1)[0][0] if values else None
+
+
+def should_abstain(ctx: TableContext, entity_col: Optional[str], contested: set, r: int, col: str, prompt: str,
+                   dirty_value: str, clean_value: str) -> bool:
+    """X4: an error cell whose correct value the prompt does not establish gets no repair in the training answer, so the
+    model learns to flag it without guessing. Two cases:
+      - the correct value appears nowhere in the prompt and is not a reformatting of the dirty value;
+      - the column is contested (its entity rows often disagree) and the correct value is not the entity majority,
+        so copying the majority would be wrong (the Flights failure in M4)."""
+    if not clean_value.strip():
+        return False  # "the value should be empty" is always established
+    reformatted = plain(clean_value) and (plain(clean_value) in plain(dirty_value) or plain(dirty_value) in plain(clean_value))
+    if clean_value.lower() not in prompt.lower() and not reformatted:
+        return True
+    return col in contested and entity_majority(ctx, entity_col, r, col) != clean_value
+
+
 def build_prompt_within_budget(ctx: TableContext, r: int, col: str, count: TokenCounter, budget: int, blocks):
     """Trim in a fixed order until the prompt fits: fewer similar rows, shorter values, no top-values line."""
     for level, (n_sim, chars, top) in enumerate([(3, 40, True), (1, 40, True), (0, 40, True), (0, 24, True), (0, 24, False)]):
@@ -175,6 +208,14 @@ def main():
     ap.add_argument("--tokenizer", default=None, help="Hugging Face name or path of the Gemma tokenizer")
     ap.add_argument("--blocks", nargs="*", default=list(ALL_BLOCKS), choices=ALL_BLOCKS)
     ap.add_argument("--full-test", action="store_true", help="also write test_full.jsonl with every test cell")
+    ap.add_argument("--evidence-threshold", type=float, default=0.9,
+                    help="X4: entity evidence as in the final pipeline (0.5); 0.9 rebuilds the M2 examples")
+    ap.add_argument("--skip-missing-keys", action="store_true", help="X4: never group rows by an empty value")
+    ap.add_argument("--weighted-majority", action="store_true", help="X4: group majority weighted by row reliability")
+    ap.add_argument("--blank-context", action="store_true", help="M5: extra profile lines for an empty cell")
+    ap.add_argument("--abstain", action="store_true",
+                    help="X4: no repair in the answer when the prompt does not establish the correct value")
+    ap.add_argument("--contested-threshold", type=float, default=0.7, help="with --abstain: see contested_columns")
     args = ap.parse_args()
 
     root = Path(args.root).resolve()
@@ -200,7 +241,10 @@ def main():
             if not (base / f"{split}.csv").exists():
                 continue  # synthetic tables have a train split only
             dirty, cells = load_split(root, args.splits, table, split)
-            ctx = TableContext(table, dirty)
+            ctx = TableContext(table, dirty, evidence_threshold=args.evidence_threshold,
+                               skip_missing_keys=args.skip_missing_keys, weighted_majority=args.weighted_majority, blank_context=args.blank_context)
+            entity_col = ctx.entity_key() if args.abstain else None
+            contested = contested_columns(dirty, args.contested_threshold, table) if args.abstain else set()
             for mode in (["sampled", "full"] if (split == "test" and args.full_test) else ["sampled"]):
                 chosen = sample_cells(ctx, cells, args.neg_ratio, args.hard_share, f"{args.seed}:{table}:{split}", mode == "full",
                                       quota.get(table, set()) if synthetic else None)
@@ -216,10 +260,16 @@ def main():
                     prompt, ntok, level = build_prompt_within_budget(ctx, r, col, count, args.max_prompt_tokens, args.blocks)
                     trimmed += level > 0
                     repair = truth["clean_value"] if is_error else None
-                    answer = make_response(is_error, etype, ctx.evidence_sentence(r, col, is_error, etype), repair)
+                    evidence = ctx.evidence_sentence(r, col, is_error, etype)
+                    abstain = is_error and args.abstain and should_abstain(
+                        ctx, entity_col, contested, r, col, prompt, truth["dirty_value"], truth["clean_value"])
+                    if abstain:
+                        repair = None
+                        evidence += " The evidence does not establish the correct value, so no repair is proposed."
+                    answer = make_response(is_error, etype, evidence, repair)
                     recs.append({"id": f"{table}:{split}:{r}:{col}", "table": table, "split": split, "row": int(r), "column": col,
                                  "source": "synthetic" if synthetic else "benchmark", "is_error": is_error, "error_type": etype,
-                                 "prompt": prompt, "response": answer})
+                                 "abstain": bool(abstain), "prompt": prompt, "response": answer})
                     tokens.append(ntok + count(answer))
                 if mode == "full":
                     full_test += recs

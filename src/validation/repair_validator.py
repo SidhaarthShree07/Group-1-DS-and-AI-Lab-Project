@@ -21,8 +21,14 @@ rule is applied (for example: which other rows share the provider number).
 Outcomes (the original value is always kept in the change log, so every repair can be reverted):
   validated      every applicable check passes and the record is not less consistent than before -> repair applied
   rejected       the proposed value fails a check, or it adds an inconsistency -> referred for review
-  unvalidated    no independent rule applies to the column -> cannot be validated -> referred for review
+  unvalidated    rules cover the column, but the old value breaks none of them, so the repair cannot be confirmed
+                 -> referred for review
+  not covered    no rule covers the column (or the table has no rule file) -> the layer cannot check it; by default
+                 referred for review, or applied on the gate's confidence alone with apply_unverified=True
   no change      the proposed value equals the old value -> not a repair; the cell is kept
+
+Every cell also gets a state for the user (repair_state): "verified" (applied and passed the rules), "not verified"
+(applied on model confidence alone), "needs review" (not applied) or "unchanged".
 
 Passing means the value is consistent with the rules we have. It is not proof that the value is correct.
 """
@@ -253,7 +259,7 @@ class RepairValidator:
         # evidence that the old value is wrong: it fails a value check, or the record breaks a rule through this cell
         evidence = old_ok is False or relation_violations_before > 0
         if not rule_checks:
-            res.outcome = "unvalidated"
+            res.outcome = "not covered"
             res.reason = f"no independent rule covers column {column!r}; the repair cannot be validated"
         elif failed:
             res.outcome = "rejected"
@@ -278,10 +284,12 @@ class RepairValidator:
         self.low.at[row, column] = clean(value).lower()
 
 
-def validate_predictions(table: str, dirty: pd.DataFrame, preds: List[dict], rules: Optional[dict] = None) -> List[Result]:
+def validate_predictions(table: str, dirty: pd.DataFrame, preds: List[dict], rules: Optional[dict] = None,
+                         apply_unverified: bool = False) -> List[Result]:
     """Validate every gate repair of one table, most confident first; validated repairs are applied as they pass, so
-    later repairs are judged on the repaired table. Adds `gate_decision`, `validation` and the final `decision` to
-    each prediction (in place) and returns the audit records."""
+    later repairs are judged on the repaired table. Adds `gate_decision`, `validation`, the final `decision` and the
+    user-facing `state` to each prediction (in place) and returns the audit records. With apply_unverified, a repair
+    in a column no rule covers keeps the gate's decision and is marked "not verified"."""
     validator = RepairValidator(table, dirty, rules)
     results = []
     gate_repairs = [p for p in preds if p.get("decision") == "repair"]
@@ -293,13 +301,27 @@ def validate_predictions(table: str, dirty: pd.DataFrame, preds: List[dict], rul
         results.append(result)
     for p in preds:
         p.setdefault("gate_decision", p.get("decision"))
-        p["decision"] = final_decision(p["gate_decision"], (p.get("validation") or {}).get("outcome"))
+        outcome = (p.get("validation") or {}).get("outcome")
+        p["decision"] = final_decision(p["gate_decision"], outcome, apply_unverified)
+        p["state"] = repair_state(p["decision"], outcome)
     return results
 
 
-def final_decision(gate_decision: str, outcome: Optional[str]) -> str:
+def final_decision(gate_decision: str, outcome: Optional[str], apply_unverified: bool = False) -> str:
     """The decision after the layer. Only gate repairs are validated; everything else passes through."""
     if gate_decision != "repair" or outcome is None:
         return gate_decision
+    if outcome == "not covered" and apply_unverified:
+        return "repair"
     return {"validated": "repair", "no change": "keep", "rejected": "review (repair rejected by validation)",
-            "unvalidated": "review (repair cannot be validated)"}[outcome]
+            "unvalidated": "review (repair cannot be validated)",
+            "not covered": "review (repair cannot be validated)"}[outcome]
+
+
+def repair_state(decision: str, outcome: Optional[str] = None) -> str:
+    """What the user is told about a cell: an applied repair is "verified" only if the rules checked it."""
+    if decision == "repair":
+        return "verified" if outcome == "validated" else "not verified"
+    if decision.startswith("review") or decision == "flag for review":
+        return "needs review"
+    return "unchanged"

@@ -72,7 +72,9 @@ class Generator:
     """Loads the model once; answers batches of prompts."""
 
     def __init__(self, model_path: str, adapter: Optional[str] = None, batch_size: int = 12, max_new_tokens: int = 160,
-                 memory_fraction: float = 0.5):
+                 memory_fraction: float = 0.5, quantize: Optional[str] = None):
+        """quantize: None (bfloat16), "8bit" or "4bit" (NF4), loaded with bitsandbytes. Quantise a merged model
+        (scripts/merge_adapter.py) rather than putting an adapter on a quantised base."""
         import torch
         import transformers
         from transformers import AutoTokenizer
@@ -82,13 +84,21 @@ class Generator:
             torch.cuda.set_per_process_memory_fraction(memory_fraction)  # leave room for other users of the GPU
         self.tok = AutoTokenizer.from_pretrained(model_path)
         self.tok.padding_side = "left"  # generation pads on the left (D13)
+        load_kwargs = {"dtype": torch.bfloat16, "device_map": "cuda" if torch.cuda.is_available() else "cpu"}
+        if quantize == "8bit":
+            load_kwargs["quantization_config"] = transformers.BitsAndBytesConfig(load_in_8bit=True)
+        elif quantize == "4bit":
+            load_kwargs["quantization_config"] = transformers.BitsAndBytesConfig(
+                load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=torch.bfloat16)
+        elif quantize:
+            raise ValueError(f"unknown quantize option {quantize!r}")
         model = None
         for name in ("AutoModelForCausalLM", "AutoModelForImageTextToText"):
             cls = getattr(transformers, name, None)
             if cls is None:
                 continue
             try:
-                model = cls.from_pretrained(model_path, dtype=torch.bfloat16, device_map="cuda" if torch.cuda.is_available() else "cpu")
+                model = cls.from_pretrained(model_path, **load_kwargs)
                 break
             except Exception as e:  # try the next model class
                 print(f"[infer] {name} failed: {type(e).__name__}: {str(e)[:160]}", flush=True)
@@ -125,9 +135,11 @@ class Generator:
             repair_confs = [repair_confidence(self.tok, new[i].tolist(), token_probs[i], out[i]) for i in range(len(out))]
         return out, p, repair_confs
 
-    def answer(self, prompts: List[str]) -> List[Dict]:
-        """Stage 3: the JSON answer and P(is_error) for each prompt, in the input order."""
+    def answer(self, prompts: List[str], label: str = "", every: int = 60) -> List[Dict]:
+        """Stage 3: the JSON answer and P(is_error) for each prompt, in the input order.
+        Prints a progress line (done / total, elapsed, estimated time left) about every `every` seconds."""
         texts = [chat_text(self.tok, p) + PREFIX for p in prompts]
+        start = last = time.time()
         order = sorted(range(len(texts)), key=lambda k: len(texts[k]))  # similar lengths in one batch
         res: List[Optional[Dict]] = [None] * len(texts)
         for b in range(0, len(order), self.batch_size):
@@ -139,6 +151,11 @@ class Generator:
                 res[k] = {"raw_text": PREFIX + o, "p_error": float(pk), "seconds": round(dt, 4),
                           "p_repair_min": None if conf is None else conf["min"],
                           "p_repair_gmean": None if conf is None else conf["gmean"]}
+            done, now = min(b + self.batch_size, len(order)), time.time()
+            if now - last >= every or done == len(order):
+                last, rate = now, (now - start) / done
+                print(f"progress {label} {done}/{len(order)} calls, {(now - start) / 60:.1f} min, "
+                      f"about {rate * (len(order) - done) / 60:.1f} min left", flush=True)
         return res  # type: ignore[return-value]
 
     def complete(self, prompts: List[str], max_new_tokens: int = 600) -> List[str]:

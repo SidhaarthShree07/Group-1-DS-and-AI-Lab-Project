@@ -73,11 +73,43 @@ def differ_only_in_format(a: str, b: str) -> bool:
     return bool(numbers_a) and [float(x) for x in numbers_a] == [float(x) for x in numbers_b] and a != b
 
 
+def edit_distance(a: str, b: str, limit: int = 2) -> int:
+    """Levenshtein distance, stopping early once it exceeds `limit` (returns limit + 1)."""
+    if abs(len(a) - len(b)) > limit:
+        return limit + 1
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        cur = [i]
+        for j, cb in enumerate(b, 1):
+            cur.append(min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (ca != cb)))
+        if min(cur) > limit:
+            return limit + 1
+        prev = cur
+    return prev[-1]
+
+
+def close_frequent_value(value: str, occurs: int, counts, top: int = 200):
+    """A much more frequent value of the column within two edits of `value`, as (value, count, distance), or None.
+    Typos such as 'Camp_Noju' for 'Camp_Nou' look like ordinary names to the model unless it is shown the neighbour.
+    Values with digits are skipped: '6:08' and '6:03' are one edit apart but are different times, not a misspelling."""
+    if len(value) < 4 or value.lower() in MISSING or any(ch.isdigit() for ch in value):
+        return None
+    best = None
+    for other, n in counts.head(top).items():
+        if other == value or n < max(3, 3 * occurs) or len(other) < 4 or any(ch.isdigit() for ch in str(other)):
+            continue
+        d = edit_distance(value.lower(), str(other).lower())
+        if d <= 2 and (best is None or (d, -n) < (best[2], -best[1])):
+            best = (other, int(n), d)
+    return best
+
+
 class TableContext:
     """Statistics of one dirty table (a split of it, or an uploaded file)."""
 
     def __init__(self, name: str, dirty: pd.DataFrame, key_share: float = 0.6, evidence_threshold: float = 0.9,
-                 skip_missing_keys: bool = False, weighted_majority: bool = False):
+                 skip_missing_keys: bool = False, weighted_majority: bool = False, close_values: bool = False,
+                 blank_context: bool = False):
         """With the defaults the prompts are exactly the ones the model was trained on. The three options were added
         in M4 for inference only:
           evidence_threshold  lowest dependency strength shown as evidence for the entity column (training: 0.9).
@@ -86,6 +118,8 @@ class TableContext:
           skip_missing_keys   rows that share an empty value are not related, so an empty key never forms a group.
           weighted_majority   the group majority counts each row by its reliability (see row_reliability), and
                               similar rows are listed most reliable first."""
+        self.close_values = close_values  # M5: name a frequent value one or two edits away (likely misspelling)
+        self.blank_context = blank_context  # M5: extra profile lines, only for a cell that is itself empty
         self.evidence_threshold = evidence_threshold
         self.skip_missing_keys = skip_missing_keys
         self.weighted_majority = weighted_majority
@@ -236,6 +270,21 @@ class TableContext:
         group_majority = {c: collections.Counter(self.df.at[r, c] for r in rows).most_common(1)[0][0] for c in cols}
         return {r: (sum(self.df.at[r, c] == group_majority[c] for c in cols) + 1) / (len(cols) + 2) for r in rows}
 
+    def blank_lines(self, i: int, col: str, prof: dict) -> List[str]:
+        """Extra facts about an empty cell, shown only for empty cells (every other prompt is unchanged): the whole
+        value set of the column when it has at most 5 distinct values, and how many other cells of the row are filled.
+        Both can be read back from the ordinary prompt, so the training prompts can be rewritten by
+        scripts/add_blank_context.py without the table."""
+        lines = []
+        filled = [k for k in prof["counts"].index if k.lower() not in MISSING]
+        if filled and prof["distinct"] <= 5:
+            lines.append(f"the {len(filled)} non-empty values of this column are all of: "
+                         + ", ".join(f"{self.short(k, 24)!r}" for k in filled) + "; an empty cell is not one of them")
+        others = [c for c in self.cols if c != col]
+        n_filled = sum(self.df.at[i, c].lower() not in MISSING for c in others)
+        lines.append(f"in this row {n_filled} of the other {len(others)} cells are filled")
+        return lines
+
     # ---- prompt -----------------------------------------------------------------------------
     def prompt(self, i: int, col: str, blocks: Sequence[str] = ALL_BLOCKS, max_chars: int = 40,
                n_similar: int = 3, top_values: bool = True) -> str:
@@ -259,6 +308,13 @@ class TableContext:
                 lines.append(f"median {prof['median']:g}, 1st-99th percentile {prof['p1']:g} to {prof['p99']:g}, "
                              f"min {prof['min']:g}, max {prof['max']:g}")
             lines.append(f"this value's pattern: {self.short(f['shape'], 60)}; occurs {f['occurs']} time(s) in the column")
+            if self.blank_context and val.lower() in MISSING:
+                lines += self.blank_lines(i, col, prof)
+            if self.close_values:
+                near = close_frequent_value(val, f["occurs"], prof["counts"])
+                if near:
+                    lines.append(f"similar spelling: {sh(near[0], 40)!r} occurs {near[1]} time(s) and differs by "
+                                 f"{near[2]} character(s)")
             text += "Column profile:\n" + "\n".join("- " + x for x in lines) + "\n\n"
         if "dependencies" in blocks:
             ev = [f"{d['col']}={sh(d['key'])!r} -> {col} is {sh(d['majority'])!r} in {d['k']} of {d['n']} rows "

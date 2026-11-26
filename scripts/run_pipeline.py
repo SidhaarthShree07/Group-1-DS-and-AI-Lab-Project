@@ -32,14 +32,15 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from src.detectors import build_candidates  # noqa: E402
+from src.detectors import build_candidates, d2_fire_gate, m5_detectors  # noqa: E402
 from src.detectors import d5_entity_consensus, d7_format_mix, llm_rules  # noqa: E402
 from src.detectors.candidates import DEFAULT_DETECTORS  # noqa: E402
 from src.evaluation.metrics import score  # noqa: E402
 from src.llm.build_examples import META_COLUMNS  # noqa: E402
 from src.llm.infer import Generator, to_prediction, write_jsonl  # noqa: E402
 from src.profiling.context import ALL_BLOCKS, TableContext  # noqa: E402
-from src.validation.repair_validator import validate_predictions  # noqa: E402
+from src.detectors.d5_entity_consensus import contested_columns  # noqa: E402
+from src.validation.repair_validator import repair_state, validate_predictions  # noqa: E402
 
 FLAG_THRESHOLD = 0.5    # on P(error); fixed before M3, kept in M4 (calibration is reported as a study only)
 REPAIR_THRESHOLD = 0.8
@@ -76,6 +77,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--model", required=True)
     ap.add_argument("--adapter", default=None)
+    ap.add_argument("--quantize", choices=["8bit", "4bit"], default=None, help="load the model in 8-bit or 4-bit (X1)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--source", default="data/subsets/m3")
     ap.add_argument("--split", default="val")
@@ -87,6 +89,8 @@ def main() -> int:
     ap.add_argument("--d7-format-mix", action="store_true", help="detector D7: numeric columns written in several formats")
     ap.add_argument("--d5-entity-consensus", action="store_true",
                     help="D5 extension: cells that disagree with the other rows of the same entity")
+    ap.add_argument("--m5-detectors", action="store_true", help="the M5 detector set (X7); replaces the two flags above")
+    ap.add_argument("--m5-composite-key", action="store_true", help="with --m5-detectors: add O1b (post-hoc, not the frozen set)")
     ap.add_argument("--evidence-threshold", type=float, default=0.9,
                     help="lowest dependency strength shown for the entity column (training used 0.9)")
     ap.add_argument("--skip-missing-keys", action="store_true", help="never group rows by an empty value")
@@ -94,7 +98,17 @@ def main() -> int:
     ap.add_argument("--repair-conf", type=float, default=0.0,
                     help="also require this minimum token probability of the repair value (0 = off)")
     ap.add_argument("--all-cells", action="store_true", help="send every cell to the model (no candidate filter, E3)")
+    ap.add_argument("--contested-threshold", type=float, default=0.0,
+                    help="send gate repairs to review in columns whose entity rows agree less than this (0 = off)")
+    ap.add_argument("--close-values", action="store_true",
+                    help="M5: show the model a frequent value within two edits of the cell (likely misspelling)")
+    ap.add_argument("--blank-context", action="store_true",
+                    help="M5: for an empty cell, add the closed value set of the column and the filled share of the row to the profile")
+    ap.add_argument("--d2-fire-gate", type=float, default=0.0,
+                    help="M5: do not send a cell flagged only by D2 when D2 flags more than this share of its column (0 = off)")
     ap.add_argument("--validate", action="store_true", help="stage 4b: validate every repair the gate accepts")
+    ap.add_argument("--apply-unverified", action="store_true",
+                    help="with --validate: apply gate repairs in columns no rule covers, marked 'not verified'")
     ap.add_argument("--flag-threshold", type=float, default=FLAG_THRESHOLD)
     ap.add_argument("--repair-threshold", type=float, default=REPAIR_THRESHOLD)
     ap.add_argument("--batch-size", type=int, default=12)
@@ -106,7 +120,7 @@ def main() -> int:
     out.mkdir(parents=True, exist_ok=True)
     timing, counts = {}, []
     t = time.time()
-    gen = Generator(args.model, args.adapter, args.batch_size, memory_fraction=args.memory_fraction)
+    gen = Generator(args.model, args.adapter, args.batch_size, memory_fraction=args.memory_fraction, quantize=args.quantize)
     timing["load model"] = time.time() - t
 
     all_cells, all_cands, preds, rules_out, changes, audit = [], [], [], {}, [], []
@@ -130,7 +144,11 @@ def main() -> int:
             detectors["d5c"] = lambda df, name=table: d5_entity_consensus.detect(df, name)
         if args.d7_format_mix:
             detectors["d7"] = d7_format_mix.detect
+        if args.m5_detectors:
+            detectors.update(m5_detectors(table, composite_key=args.m5_composite_key))
         cands = build_candidates(dirty, table=table, split=args.split, detectors=detectors)
+        if args.d2_fire_gate > 0:
+            cands = d2_fire_gate.apply(cands, args.d2_fire_gate)
         if args.all_cells:
             cands["is_candidate"] = True
         all_cands.append(cands)
@@ -143,12 +161,14 @@ def main() -> int:
 
         t = time.time()  # stage 2
         ctx = TableContext(table, dirty, evidence_threshold=args.evidence_threshold,
-                           skip_missing_keys=args.skip_missing_keys, weighted_majority=args.weighted_majority)
+                           skip_missing_keys=args.skip_missing_keys, weighted_majority=args.weighted_majority,
+                           close_values=args.close_values, blank_context=args.blank_context)
         prompts = [ctx.prompt(int(r), col, blocks=args.blocks) for r, col in chosen]
         timing[f"stage 2 {table}"] = time.time() - t
 
         t = time.time()  # stage 3
-        answers = gen.answer(prompts) if prompts else []
+        print(f"{table}: {len(prompts)} candidates sent to the model", flush=True)
+        answers = gen.answer(prompts, label=table) if prompts else []
         timing[f"stage 3 {table}"] = time.time() - t
         table_preds = []
         for (r, col), a in zip(chosen, answers):
@@ -157,16 +177,22 @@ def main() -> int:
             p["decision"] = gate_decision(p, args.flag_threshold, args.repair_threshold, args.repair_conf)  # stage 4
             p["old_value"] = dirty.at[int(r), col]
             table_preds.append(p)
+        if args.contested_threshold > 0:  # no automatic repair where the sources disagree (abstain, review instead)
+            contested = contested_columns(dirty, args.contested_threshold, table)
+            for p in table_preds:
+                if p["decision"] == "repair" and p["column"] in contested:
+                    p["decision"] = "review (contested column: sources disagree)"
         if args.validate:  # stage 4b
             t = time.time()
-            for res in validate_predictions(table, dirty, table_preds):
+            for res in validate_predictions(table, dirty, table_preds, apply_unverified=args.apply_unverified):
                 audit.append({"table": table, **res.as_dict()})
             timing[f"stage 4b {table}"] = time.time() - t
         for p in table_preds:  # the change log keeps the old value of every applied repair, so it can be reverted
+            p.setdefault("state", repair_state(p["decision"], (p.get("validation") or {}).get("outcome")))
             if p["decision"] == "repair" and str(p["repair"]).strip() != str(p["old_value"]).strip():
                 changes.append({"table": table, "row": p["row"], "column": p["column"], "old": p["old_value"],
                                 "new": p["repair"], "p_error": round(p["p_error"], 4), "evidence": p["evidence"],
-                                "validation": (p.get("validation") or {}).get("reason", "not validated")})
+                                "state": p["state"], "validation": (p.get("validation") or {}).get("reason", "not validated")})
         preds.extend(table_preds)
         c["model_calls"] = len(prompts)
         c["invalid_answers"] = sum(1 for p in preds if p["table"] == table and not p["valid_json"])
