@@ -1,0 +1,181 @@
+table,setting,status,train_precision,train_recall,train_f1
+hospital,histogram 0.1 0.1,completed,0.1733,0.5621,0.265
+hospital,histogram 0.1 0.3,completed,0.0659,0.7514,0.1212
+hospital,histogram 0.1 0.5,completed,0.0534,0.8164,0.1002
+hospital,histogram 0.1 0.7,completed,0.0501,0.8164,0.0944
+hospital,histogram 0.1 0.9,completed,0.0459,0.8164,0.0869
+hospital,histogram 0.3 0.1,completed,0.1733,0.5621,0.265
+hospital,histogram 0.3 0.3,completed,0.0659,0.7514,0.1212
+hospital,histogram 0.3 0.5,completed,0.0534,0.8164,0.1002
+hospital,histogram 0.3 0.7,completed,0.0501,0.8164,0.0944
+hospital,histogram 0.3 0.9,completed,0.0459,0.8164,0.0869
+hospital,histogram 0.5 0.1,completed,0.1733,0.5621,0.265
+hospital,histogram 0.5 0.3,completed,0.0659,0.7514,0.1212
+hospital,histogram 0.5 0.5,completed,0.0534,0.8164,0.1002
+hospital,histogram 0.5 0.7,completed,0.0501,0.8164,0.0944
+hospital,histogram 0.5 0.9,completed,0.0459,0.8164,0.0869
+hospital,histogram 0.7 0.1,completed,0.242,0.5311,0.3324
+hospital,histogram 0.7 0.3,completed,0.0738,0.6977,0.1335
+hospital,histogram 0.7 0.5,completed,0.0572,0.7627,0.1063
+hospital,histogram 0.7 0.7,completed,0.0532,0.7627,0.0994
+hospital,histogram 0.7 0.9,completed,0.0482,0.7627,0.0906
+hospital,histogram 0.9 0.1,completed,0.6723,0.4463,0.5365
+hospital,histogram 0.9 0.3,completed,0.1527,0.4463,0.2275
+hospital,histogram 0.9 0.5,completed,0.1231,0.4463,0.1929
+hospital,histogram 0.9 0.7,completed,0.0965,0.4463,0.1586
+hospital,histogram 0.9 0.9,completed,0.0729,0.4463,0.1254
+hospital,gaussian 1.0,completed,0.0634,0.4379,0.1108
+hospital,gaussian 1.3,completed,0.0729,0.3757,0.1221
+hospital,gaussian 1.5,completed,0.1041,0.2797,0.1517
+hospital,gaussian 1.7,completed,0.1369,0.2599,0.1793
+hospital,gaussian 2.0,completed,0.2519,0.1864,0.2143
+hospital,gaussian 2.3,completed,0.3693,0.1836,0.2453
+hospital,gaussian 2.5,completed,0.4247,0.1751,0.248
+hospital,gaussian 2.7,completed,0.5041,0.1723,0.2568
+hospital,gaussian 3.0,completed,1.0,0.1723,0.294
+hospital,histogram 0.2 0.2 s=0.2,completed,0.1128,0.6554,0.1925
+hospital,histogram 0.8 0.8 s=0.8,completed,0.0579,0.5791,0.1052
+flights,histogram 0.1 0.1,completed,0.2366,0.1014,0.142
+flights,histogram 0.1 0.3,completed,0.2742,0.3647,0.313
+flights,histogram 0.1 0.5,completed,0.3812,0.8362,0.5237
+flights,histogram 0.1 0.7,completed,0.3359,0.8362,0.4793
+flights,histogram 0.1 0.9,completed,0.3513,1.0,0.5199
+flights,histogram 0.3 0.1,completed,0.2366,0.1014,0.142
+flights,histogram 0.3 0.3,completed,0.2742,0.3647,0.313
+flights,histogram 0.3 0.5,completed,0.3812,0.8362,0.5237
+flights,histogram 0.3 0.7,completed,0.3359,0.8362,0.4793
+flights,histogram 0.3 0.9,completed,0.3513,1.0,0.5199
+flights,histogram 0.5 0.1,completed,0.8938,0.1112,0.1978
+flights,histogram 0.5 0.3,completed,0.4238,0.3647,0.392
+flights,histogram 0.5 0.5,completed,0.4851,0.8362,0.614
+flights,histogram 0.5 0.7,completed,0.414,0.8362,0.5538
+flights,histogram 0.5 0.9,completed,0.4207,1.0,0.5922
+flights,histogram 0.7 0.1,completed,0.8938,0.1112,0.1978
+flights,histogram 0.7 0.3,completed,0.4238,0.3647,0.392
+flights,histogram 0.7 0.5,completed,0.4851,0.8362,0.614
+flights,histogram 0.7 0.7,completed,0.414,0.8362,0.5538
+flights,histogram 0.7 0.9,completed,0.4207,1.0,0.5922
+flights,histogram 0.9 0.1,completed,0.8938,0.1112,0.1978
+flights,histogram 0.9 0.3,completed,0.4499,0.2618,0.331
+flights,histogram 0.9 0.5,completed,0.507,0.7293,0.5982
+flights,histogram 0.9 0.7,completed,0.507,0.7293,0.5982
+flights,histogram 0.9 0.9,completed,0.507,0.7293,0.5982
+flights,gaussian 1.0,completed,0.7628,0.5951,0.6686
+flights,gaussian 1.3,completed,0.8139,0.5842,0.6802
+flights,gaussian 1.5,completed,0.6774,0.2661,0.3821
+flights,gaussian 1.7,completed,0.6906,0.2629,0.3809
+flights,gaussian 2.0,completed,0.8688,0.2359,0.3711
+flights,gaussian 2.3,completed,0.7712,0.0523,0.098
+flights,gaussian 2.5,completed,0.9133,0.0514,0.0974
+flights,gaussian 2.7,completed,0.9091,0.0489,0.0927
+flights,gaussian 3.0,completed,0.8944,0.0414,0.0791
+flights,histogram 0.2 0.2 s=0.2,completed,0.2874,0.2897,0.2885
+flights,histogram 0.8 0.8 s=0.8,completed,0.4082,0.8164,0.5443
+beers,histogram 0.1 0.1,completed,0.4124,0.204,0.2729
+beers,histogram 0.1 0.3,completed,0.3293,0.569,0.4172
+beers,histogram 0.1 0.5,completed,0.4244,1.0,0.5959
+beers,histogram 0.1 0.7,completed,0.2706,1.0,0.4259
+beers,histogram 0.1 0.9,completed,0.221,1.0,0.362
+beers,histogram 0.3 0.1,completed,0.4124,0.204,0.2729
+beers,histogram 0.3 0.3,completed,0.3293,0.569,0.4172
+beers,histogram 0.3 0.5,completed,0.4244,1.0,0.5959
+beers,histogram 0.3 0.7,completed,0.2706,1.0,0.4259
+beers,histogram 0.3 0.9,completed,0.221,1.0,0.362
+beers,histogram 0.5 0.1,completed,0.6135,0.204,0.3061
+beers,histogram 0.5 0.3,completed,0.4726,0.569,0.5164
+beers,histogram 0.5 0.5,completed,0.5457,1.0,0.7061
+beers,histogram 0.5 0.7,completed,0.3153,1.0,0.4794
+beers,histogram 0.5 0.9,completed,0.2499,1.0,0.3999
+beers,histogram 0.7 0.1,completed,0.6135,0.204,0.3061
+beers,histogram 0.7 0.3,completed,0.4726,0.569,0.5164
+beers,histogram 0.7 0.5,completed,0.6116,1.0,0.759
+beers,histogram 0.7 0.7,completed,0.382,1.0,0.5529
+beers,histogram 0.7 0.9,completed,0.2901,1.0,0.4498
+beers,histogram 0.9 0.1,completed,0.5676,0.1687,0.2601
+beers,histogram 0.9 0.3,completed,0.5372,0.569,0.5526
+beers,histogram 0.9 0.5,completed,0.671,1.0,0.8031
+beers,histogram 0.9 0.7,completed,0.4044,1.0,0.5759
+beers,histogram 0.9 0.9,completed,0.3451,1.0,0.5131
+beers,gaussian 1.0,completed,0.2256,0.3918,0.2863
+beers,gaussian 1.3,completed,0.1616,0.1684,0.1649
+beers,gaussian 1.5,completed,0.2648,0.1684,0.2058
+beers,gaussian 1.7,completed,0.3674,0.1684,0.2309
+beers,gaussian 2.0,completed,0.4798,0.1684,0.2493
+beers,gaussian 2.3,completed,0.5214,0.1684,0.2545
+beers,gaussian 2.5,completed,0.529,0.1684,0.2554
+beers,gaussian 2.7,completed,0.5678,0.1684,0.2597
+beers,gaussian 3.0,completed,0.638,0.1684,0.2664
+beers,histogram 0.2 0.2 s=0.2,completed,0.2864,0.2952,0.2908
+beers,histogram 0.8 0.8 s=0.8,completed,0.3451,1.0,0.5131
+rayyan,histogram 0.1 0.1,completed,0.1909,0.1831,0.1869
+rayyan,histogram 0.1 0.3,completed,0.1155,0.2587,0.1597
+rayyan,histogram 0.1 0.5,completed,0.0629,0.2587,0.1012
+rayyan,histogram 0.1 0.7,completed,0.0415,0.2663,0.0717
+rayyan,histogram 0.1 0.9,completed,0.0932,0.9879,0.1703
+rayyan,histogram 0.3 0.1,completed,0.1909,0.1831,0.1869
+rayyan,histogram 0.3 0.3,completed,0.1155,0.2587,0.1597
+rayyan,histogram 0.3 0.5,completed,0.0629,0.2587,0.1012
+rayyan,histogram 0.3 0.7,completed,0.0415,0.2663,0.0717
+rayyan,histogram 0.3 0.9,completed,0.0932,0.9879,0.1703
+rayyan,histogram 0.5 0.1,completed,0.1909,0.1831,0.1869
+rayyan,histogram 0.5 0.3,completed,0.1155,0.2587,0.1597
+rayyan,histogram 0.5 0.5,completed,0.0629,0.2587,0.1012
+rayyan,histogram 0.5 0.7,completed,0.0415,0.2663,0.0717
+rayyan,histogram 0.5 0.9,completed,0.0932,0.9879,0.1703
+rayyan,histogram 0.7 0.1,completed,0.1909,0.1831,0.1869
+rayyan,histogram 0.7 0.3,completed,0.1181,0.2587,0.1622
+rayyan,histogram 0.7 0.5,completed,0.0878,0.2587,0.1311
+rayyan,histogram 0.7 0.7,completed,0.0713,0.2587,0.1118
+rayyan,histogram 0.7 0.9,completed,0.1035,0.9879,0.1873
+rayyan,histogram 0.9 0.1,completed,0.2051,0.1831,0.1934
+rayyan,histogram 0.9 0.3,completed,0.1205,0.1725,0.1419
+rayyan,histogram 0.9 0.5,completed,0.0722,0.1679,0.101
+rayyan,histogram 0.9 0.7,completed,0.0558,0.1679,0.0838
+rayyan,histogram 0.9 0.9,completed,0.1501,0.8472,0.255
+rayyan,gaussian 1.0,completed,0.0455,0.18,0.0726
+rayyan,gaussian 1.3,completed,0.0615,0.177,0.0913
+rayyan,gaussian 1.5,completed,0.0998,0.1755,0.1273
+rayyan,gaussian 1.7,completed,0.0682,0.1014,0.0815
+rayyan,gaussian 2.0,completed,0.0808,0.0968,0.0881
+rayyan,gaussian 2.3,completed,0.0921,0.0953,0.0937
+rayyan,gaussian 2.5,completed,0.0943,0.0953,0.0948
+rayyan,gaussian 2.7,completed,0.0966,0.0953,0.096
+rayyan,gaussian 3.0,completed,0.1247,0.0832,0.0998
+rayyan,histogram 0.2 0.2 s=0.2,completed,0.1221,0.3041,0.1743
+rayyan,histogram 0.8 0.8 s=0.8,completed,0.214,0.8593,0.3427
+movies,histogram 0.1 0.1,completed,0.1046,0.083,0.0925
+movies,histogram 0.1 0.3,completed,0.2248,0.5048,0.311
+movies,histogram 0.1 0.5,completed,0.1863,0.8167,0.3034
+movies,histogram 0.1 0.7,completed,0.1458,0.8183,0.2475
+movies,histogram 0.1 0.9,completed,0.1041,0.8183,0.1847
+movies,histogram 0.3 0.1,completed,0.1046,0.083,0.0925
+movies,histogram 0.3 0.3,completed,0.2248,0.5048,0.311
+movies,histogram 0.3 0.5,completed,0.1863,0.8167,0.3034
+movies,histogram 0.3 0.7,completed,0.1458,0.8183,0.2475
+movies,histogram 0.3 0.9,completed,0.1041,0.8183,0.1847
+movies,histogram 0.5 0.1,completed,0.1046,0.083,0.0925
+movies,histogram 0.5 0.3,completed,0.2248,0.5048,0.311
+movies,histogram 0.5 0.5,completed,0.1863,0.8167,0.3034
+movies,histogram 0.5 0.7,completed,0.1458,0.8183,0.2475
+movies,histogram 0.5 0.9,completed,0.1041,0.8183,0.1847
+movies,histogram 0.7 0.1,completed,0.1252,0.083,0.0998
+movies,histogram 0.7 0.3,completed,0.2248,0.5048,0.311
+movies,histogram 0.7 0.5,completed,0.2184,0.8158,0.3445
+movies,histogram 0.7 0.7,completed,0.2184,0.8158,0.3445
+movies,histogram 0.7 0.9,completed,0.1363,0.8158,0.2336
+movies,histogram 0.9 0.1,completed,0.1538,0.083,0.1078
+movies,histogram 0.9 0.3,completed,0.1107,0.083,0.0949
+movies,histogram 0.9 0.5,completed,0.0508,0.083,0.063
+movies,histogram 0.9 0.7,completed,0.0508,0.083,0.063
+movies,histogram 0.9 0.9,completed,0.2482,0.7897,0.3777
+movies,gaussian 1.0,completed,0.0943,0.3145,0.1451
+movies,gaussian 1.3,completed,0.0743,0.1749,0.1043
+movies,gaussian 1.5,completed,0.0906,0.167,0.1175
+movies,gaussian 1.7,completed,0.0992,0.165,0.1239
+movies,gaussian 2.0,completed,0.1226,0.1597,0.1387
+movies,gaussian 2.3,completed,0.1353,0.1511,0.1428
+movies,gaussian 2.5,completed,0.1872,0.1476,0.1651
+movies,gaussian 2.7,completed,0.1878,0.1192,0.1459
+movies,gaussian 3.0,completed,0.1917,0.1156,0.1442
+movies,histogram 0.2 0.2 s=0.2,completed,0.138,0.2414,0.1756
+movies,histogram 0.8 0.8 s=0.8,completed,0.2819,0.8158,0.419

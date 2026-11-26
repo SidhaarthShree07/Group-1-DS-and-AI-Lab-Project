@@ -1,0 +1,31 @@
+table,budget,labelling,worker_seed,left_out,rows_scored,status,seconds,n_scored_cells,total_true_errors,detected_cells,tp,fp,precision,recall,f1,executed_repairs,successful_repairs,incorrect_repairs,repair_accuracy,false_repair_rate
+restaurant,20,fixed,0,20 rows,11987,completed,113.7,131857,633,0,0,0,0.0,0.0,0.0,0,0,0,0.0,0.0
+restaurant,20,own,0,20 rows + own labelled rows,11967,completed,60.0,131637,631,1053,21,1032,0.0199,0.0333,0.0249,0,0,0,0.0,0.0
+restaurant,20,own,1,20 rows + own labelled rows,11968,completed,59.8,131648,631,1123,157,966,0.1398,0.2488,0.179,0,0,0,0.0,0.0
+restaurant,20,own,2,20 rows + own labelled rows,11967,completed,59.6,131637,633,0,0,0,0.0,0.0,0.0,0,0,0,0.0,0.0
+restaurant,20,own,3,20 rows + own labelled rows,11967,completed,59.9,131637,632,1071,3,1068,0.0028,0.0047,0.0035,0,0,0,0.0,0.0
+restaurant,20,own,4,20 rows + own labelled rows,11967,completed,59.7,131637,632,313,5,308,0.016,0.0079,0.0106,0,0,0,0.0,0.0
+marketing,20,fixed,0,20 rows,8973,completed,262.1,125622,26772,24318,9346,14972,0.3843,0.3491,0.3659,23741,5566,18175,0.2079,0.7656
+marketing,20,own,0,20 rows + own labelled rows,8953,completed,63.9,125342,26669,25189,8188,17001,0.3251,0.307,0.3158,0,0,0,0.0,0.0
+marketing,20,own,1,20 rows + own labelled rows,8953,completed,63.6,125342,26682,22555,7729,14826,0.3427,0.2897,0.314,0,0,0,0.0,0.0
+marketing,20,own,2,20 rows + own labelled rows,8953,completed,63.5,125342,26683,19431,7748,11683,0.3987,0.2904,0.336,0,0,0,0.0,0.0
+marketing,20,own,3,20 rows + own labelled rows,8953,completed,63.3,125342,26679,32776,11154,21622,0.3403,0.4181,0.3752,0,0,0,0.0,0.0
+marketing,20,own,4,20 rows + own labelled rows,8953,completed,63.8,125342,26696,10508,6596,3912,0.6277,0.2471,0.3546,0,0,0,0.0,0.0
+soccer,20,fixed,0,20 rows,1979,completed,47.9,19790,789,486,292,194,0.6008,0.3701,0.458,431,99,332,0.1255,0.7703
+soccer,20,own,0,20 rows + own labelled rows,1959,completed,7.8,19590,780,799,510,289,0.6383,0.6538,0.646,0,0,0,0.0,0.0
+soccer,20,own,1,20 rows + own labelled rows,1959,completed,7.0,19590,779,644,427,217,0.663,0.5481,0.6001,0,0,0,0.0,0.0
+soccer,20,own,2,20 rows + own labelled rows,1959,completed,7.1,19590,779,541,381,160,0.7043,0.4891,0.5773,0,0,0,0.0,0.0
+soccer,20,own,3,20 rows + own labelled rows,1959,completed,7.1,19590,780,726,503,223,0.6928,0.6449,0.668,0,0,0,0.0,0.0
+soccer,20,own,4,20 rows + own labelled rows,1960,completed,7.0,19600,779,696,466,230,0.6695,0.5982,0.6319,0,0,0,0.0,0.0
+billionaire,20,fixed,0,20 rows,2594,completed,194.6,57050,5131,3216,2386,830,0.7419,0.465,0.5717,2633,1404,1229,0.2736,0.4668
+billionaire,20,own,0,20 rows + own labelled rows,2574,completed,61.0,56610,5066,4168,3051,1117,0.732,0.6023,0.6608,0,0,0,0.0,0.0
+billionaire,20,own,1,20 rows + own labelled rows,2574,completed,60.7,56610,5055,3831,2965,866,0.7739,0.5865,0.6673,0,0,0,0.0,0.0
+billionaire,20,own,2,20 rows + own labelled rows,2574,completed,60.8,56610,5062,3461,2984,477,0.8622,0.5895,0.7002,0,0,0,0.0,0.0
+billionaire,20,own,3,20 rows + own labelled rows,2574,completed,61.0,56610,5061,3583,2873,710,0.8018,0.5677,0.6647,0,0,0,0.0,0.0
+billionaire,20,own,4,20 rows + own labelled rows,2574,completed,61.2,56610,5053,4045,2896,1149,0.7159,0.5731,0.6366,0,0,0,0.0,0.0
+german,20,fixed,0,20 rows,4980,completed,109.3,44817,18599,17687,15835,1852,0.8953,0.8514,0.8728,10450,8207,2243,0.4413,0.2146
+german,20,own,0,20 rows + own labelled rows,4960,completed,27.4,44637,18511,20734,16534,4200,0.7974,0.8932,0.8426,0,0,0,0.0,0.0
+german,20,own,1,20 rows + own labelled rows,4960,completed,27.0,44637,18525,17622,15952,1670,0.9052,0.8611,0.8826,0,0,0,0.0,0.0
+german,20,own,2,20 rows + own labelled rows,4960,completed,26.6,44637,18519,17797,15965,1832,0.8971,0.8621,0.8792,0,0,0,0.0,0.0
+german,20,own,3,20 rows + own labelled rows,4960,completed,26.9,44637,18524,16730,15248,1482,0.9114,0.8231,0.865,0,0,0,0.0,0.0
+german,20,own,4,20 rows + own labelled rows,4960,completed,26.6,44637,18526,16288,15588,700,0.957,0.8414,0.8955,0,0,0,0.0,0.0

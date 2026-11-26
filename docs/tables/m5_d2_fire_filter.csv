@@ -1,0 +1,25 @@
+table,detectors,candidates,pass_through_pct,recall_pct,errors_found,errors,recall_vs_arm_a,candidates_vs_arm_a_pct,within_rules_vs_m4
+hospital,M4,478,16.44,91.14,72,79,0.0,0.0,True
+hospital,arm A (M5),478,16.44,91.14,72,79,0.0,0.0,True
+hospital,arm A + D2 filter 0.5,478,16.44,91.14,72,79,0.0,0.0,True
+flights,M4,635,29.4,78.98,571,723,0.0,0.0,True
+flights,arm A (M5),635,29.4,78.98,571,723,0.0,0.0,True
+flights,arm A + D2 filter 0.5,635,29.4,78.98,571,723,0.0,0.0,True
+beers,M4,1323,36.45,98.09,666,679,-1.91,31.25,False
+beers,arm A (M5),1008,27.77,100.0,679,679,0.0,0.0,True
+beers,arm A + D2 filter 0.5,1008,27.77,100.0,679,679,0.0,0.0,True
+rayyan,M4,838,50.79,46.81,66,141,-50.35,90.02,False
+rayyan,arm A (M5),441,26.73,97.16,137,141,0.0,0.0,True
+rayyan,arm A + D2 filter 0.5,441,26.73,97.16,137,141,0.0,0.0,True
+movies,M4,9224,48.93,42.79,451,1054,-54.55,98.96,False
+movies,arm A (M5),4636,24.59,97.34,1026,1054,0.0,0.0,True
+movies,arm A + D2 filter 0.5,2585,13.71,95.83,1010,1054,-1.51,-44.24,True
+tax,M4,3290,7.31,90.2,46,51,0.0,-28.34,True
+tax,arm A (M5),4591,10.2,90.2,46,51,0.0,0.0,True
+tax,arm A + D2 filter 0.5,4591,10.2,90.2,46,51,0.0,0.0,True
+inpatient,M4,1021,15.29,78.85,548,695,0.0,0.0,True
+inpatient,arm A (M5),1021,15.29,78.85,548,695,0.0,0.0,True
+inpatient,arm A + D2 filter 0.5,1021,15.29,78.85,548,695,0.0,0.0,True
+facilities,M4,3796,31.48,94.32,1179,1250,0.0,0.0,True
+facilities,arm A (M5),3796,31.48,94.32,1179,1250,0.0,0.0,True
+facilities,arm A + D2 filter 0.5,1622,13.45,86.24,1078,1250,-8.08,-57.27,False

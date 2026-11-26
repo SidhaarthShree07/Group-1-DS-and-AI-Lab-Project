@@ -1,0 +1,21 @@
+table,left_out,configuration,precision,recall,f1
+hospital,20 rows,M4,0.8378,0.9394,0.8857
+hospital,50 rows,M4,0.8361,0.9273,0.8793
+hospital,20 rows,"M5, worst case (no new error flagged, every new non-error flagged)",0.8378,0.9394,0.8857
+hospital,20 rows,"M5, best case (every new error flagged, no new non-error flagged)",0.8378,0.9394,0.8857
+flights,20 rows,M4,0.9561,0.768,0.8518
+flights,50 rows,M4,0.9577,0.7612,0.8482
+flights,20 rows,"M5, worst case (no new error flagged, every new non-error flagged)",0.9561,0.768,0.8518
+flights,20 rows,"M5, best case (every new error flagged, no new non-error flagged)",0.9561,0.768,0.8518
+beers,20 rows,M4,0.9676,0.9755,0.9716
+beers,50 rows,M4,0.9681,0.975,0.9715
+beers,20 rows,"M5, worst case (no new error flagged, every new non-error flagged)",0.9708,0.9755,0.9731
+beers,20 rows,"M5, best case (every new error flagged, no new non-error flagged)",0.9714,0.9984,0.9847
+rayyan,20 rows,M4,0.65,0.3969,0.4929
+rayyan,50 rows,M4,0.6441,0.3878,0.4841
+rayyan,20 rows,"M5, worst case (no new error flagged, every new non-error flagged)",0.7027,0.3969,0.5073
+rayyan,20 rows,"M5, best case (every new error flagged, no new non-error flagged)",0.8643,0.9237,0.893
+movies,20 rows,M4,0.7575,0.3764,0.5029
+movies,50 rows,M4,0.7568,0.374,0.5006
+movies,20 rows,"M5, worst case (no new error flagged, every new non-error flagged)",0.836,0.3205,0.4634
+movies,20 rows,"M5, best case (every new error flagged, no new non-error flagged)",0.9379,0.91,0.9238
