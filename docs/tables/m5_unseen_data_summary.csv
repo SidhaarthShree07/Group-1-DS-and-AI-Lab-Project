@@ -1,0 +1,7 @@
+table,role,rows,columns,total_cells,error_cells,error_rate_pct,missing_errors,pattern_errors,rule_errors,outlier_errors,m1_audit_errors,audit_match
+restaurant,unseen_eval,12007,11,132077,633,0.4793,0,633,0,0,633,True
+marketing,unseen_eval,8993,14,125902,26815,21.2983,2694,24121,0,0,26815,True
+soccer,unseen_eval,1999,10,19990,796,3.982,0,597,0,199,796,True
+billionaire,unseen_eval,2614,22,57508,5195,9.0335,1386,3049,742,0,5195,True
+german,unseen_eval,5000,9,45000,18678,41.5067,12087,6292,295,0,18678,True
+credit,downstream_test,150000,11,1650000,38936,2.3598,33655,0,0,5281,38936,True
