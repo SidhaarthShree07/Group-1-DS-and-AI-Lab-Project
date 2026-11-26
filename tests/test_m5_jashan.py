@@ -5,7 +5,7 @@ Verifies:
   1. Unseen data preparation, file layout, and exact M1 audit count match across all 6 tables.
   2. Experiment X12: Credit downstream classification, leakage isolation, and gap closed metric.
   3. Experiment X13: Hand review sampling (58 applied repairs from final unseen runs),
-     3-way classification logic, valid alternative lift (+18.97%), and summary proportions.
+     3-way classification logic, valid alternative share (11 of 58, 18.97%), and summary proportions.
   4. Three-tier validation status policy: strict enforcement that unseen tables have zero rule files
      and all applied repairs carry status 'not verified: no rules for this table' (NEVER 'verified').
 """
@@ -30,6 +30,8 @@ from scripts.sample_wrong_repairs import draw_deterministic_sample, run_x13_pipe
 
 def test_m5_unseen_data_preparation_and_m1_audit_match():
     """Verify standardized files exist for all 6 tables and match M1 audit counts."""
+    if not (_REPO_ROOT / "data/unseen").exists():
+        pytest.skip("data/unseen is not in the repository (gitignored); run scripts/prepare_unseen_data.py first")
     summary_csv = _REPO_ROOT / "docs/tables/m5_unseen_data_summary.csv"
     assert summary_csv.exists(), f"Missing {summary_csv}"
 

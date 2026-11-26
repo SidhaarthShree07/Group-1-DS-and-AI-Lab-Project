@@ -162,7 +162,7 @@ def run_x13_pipeline(
     scope_notice = (
         "Sampled from final M5 unseen-table applied repairs (German, Soccer, Billionaire, Marketing). "
         "All repairs applied automatically with status 'not verified: no rules for this table'. "
-        "Valid alternatives increase effective repair accuracy by 18.97% over strict string match."
+        "11 of the 58 sampled wrong repairs (18.97%) are valid alternatives; weighting each table by its wrong applied repairs, applied-repair accuracy moves from 97.4% to about 98.0% (an estimate from a sample of 58)."
     )
 
     for cat in ("wrong", "valid_alternative", "unclear"):

@@ -433,7 +433,7 @@ def generate_markdown(examples: List[Dict[str, Any]], out_md: Path) -> None:
         "- **81.03% True Erroneous Repairs (47/58):** Blank survey imputations on unobserved data (15/15 on Marketing), compound entity truncations (`Allianz` vs `Allianz_Arena` on Soccer), and house number letter suffix drops on German address records.",
         "- **18.97% Valid Semantic Alternatives (11/58):** Semantically correct repairs penalized solely by strict string matching, including official state abbreviations (`NRW` vs `Nordrhein-Westfalen`), municipal designations (`Ingelheim` vs `Ingelheim am Rhein`), numeric precision (`0.0` vs `0.00`), and canonical taxonomy typo fixes (`investment management` vs `Investment`).",
         "- **0.00% Unclear Context (0/58):** All sampled records possessed unambiguous ground truth.",
-        "- **Impact:** Accounting for valid alternatives increases true repair accuracy on unseen applied repairs by **18.97%** over strict string match.",
+        "- **Impact:** 11 of the 58 sampled wrong repairs (18.97%) are valid alternatives; weighting each table by its number of wrong applied repairs, applied-repair accuracy moves from 97.4% to about 98.0% (an estimate from a sample of 58).",
     ])
 
     out_md.parent.mkdir(parents=True, exist_ok=True)
