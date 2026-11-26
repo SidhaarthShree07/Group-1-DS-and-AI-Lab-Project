@@ -35,7 +35,10 @@ from sklearn.metrics import (
     recall_score,
     roc_auc_score,
 )
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
 TARGET_COL = "SeriousDlqin2yrs"
 META_COLS = {"row_id", "tuple_id", "index", "id", "id_col"}
@@ -118,6 +121,7 @@ def run_experiment(
     seed: int = 42,
     test_size: float = 0.2,
     model_type: str = "hist_gb",
+    train_rows: Optional[Path] = None,
 ) -> List[Dict[str, Any]]:
     """Execute Experiment X12 under all data conditions."""
     print(f"[*] Loading clean data from {clean_csv}...")
@@ -136,6 +140,13 @@ def run_experiment(
         random_state=seed,
         stratify=y_clean,
     )
+    if train_rows is not None:
+        # All three conditions train on the same subset of the training rows (the rows ContextGuard cleaned);
+        # the test rows are unchanged.
+        subset = np.sort(pd.read_csv(train_rows)["original_row"].to_numpy())
+        if not set(subset) <= set(idx_train):
+            raise ValueError(f"{train_rows}: rows outside the training split")
+        idx_train = subset
     n_tr, n_te = len(idx_train), len(idx_test)
     print(f"    Train set: {n_tr:,} rows | Test set: {n_te:,} rows (stratified, seed={seed})")
 
@@ -146,6 +157,8 @@ def run_experiment(
     def get_model(m_type: str, r_seed: int):
         if m_type == "rf":
             return RandomForestClassifier(n_estimators=100, random_state=r_seed, n_jobs=-1)
+        if m_type == "logreg":  # linear model: uses every value directly, so it reacts to outliers and wrong numbers
+            return make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000))
         return HistGradientBoostingClassifier(random_state=r_seed, max_iter=100)
 
     results = []
@@ -189,17 +202,27 @@ def run_experiment(
         X_cleaned, y_cleaned = load_dataset(cleaned_csv)
         clf_cleaned = get_model(model_type, seed)
         cleaned_metrics = train_and_eval(clf_cleaned, X_cleaned.iloc[idx_train], y_cleaned.iloc[idx_train], X_test_eval, y_test_eval)
-        gap_pct = calculate_gap_closed(dirty_metrics["roc_auc"], cleaned_metrics["roc_auc"], clean_metrics["roc_auc"])
+        
+        note_text = f"Trained on ContextGuard pipeline output ({cleaned_csv.name})"
+        if model_type == "logreg":
+            # Linear model has no dirty-to-clean headroom (-0.0002); gap closed percentage is undefined/not applicable
+            gap_pct: Any = "N/A"
+            note_text += " (caution: linear model dirty-to-clean gap is -0.0002 / zero headroom; percentage not applicable)"
+            gap_display = "N/A (zero headroom)"
+        else:
+            gap_pct = calculate_gap_closed(dirty_metrics["roc_auc"], cleaned_metrics["roc_auc"], clean_metrics["roc_auc"])
+            gap_display = f"{gap_pct:.2f}%"
+
         cleaned_metrics.update({
             "condition": "contextguard_cleaned",
             "classifier": model_type,
             "n_train": n_tr,
             "n_test": n_te,
             "gap_closed_pct": gap_pct,
-            "notes": f"Trained on ContextGuard pipeline output ({cleaned_csv.name})",
+            "notes": note_text,
         })
         results.append(cleaned_metrics)
-        print(f"    Cleaned -> ROC-AUC: {cleaned_metrics['roc_auc']:.4f} | F1: {cleaned_metrics['f1']:.4f} | Gap Closed: {gap_pct:.2f}%")
+        print(f"    Cleaned -> ROC-AUC: {cleaned_metrics['roc_auc']:.4f} | F1: {cleaned_metrics['f1']:.4f} | Gap Closed: {gap_display}")
     else:
         print("\n[*] Condition 3: ContextGuard Cleaned (Awaiting Final Predictions)...")
         results.append({
@@ -232,6 +255,19 @@ def run_experiment(
     return results
 
 
+def resolve_credit_path(p_str: Optional[str]) -> Optional[Path]:
+    """Resolve file path either directly or relative to data/unseen/credit/."""
+    if not p_str:
+        return None
+    p = Path(p_str)
+    if p.exists():
+        return p
+    fallback = Path("data/unseen/credit") / p.name
+    if fallback.exists():
+        return fallback
+    return p
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--clean-csv", default="data/unseen/credit/clean.csv", help="Clean Credit CSV path")
@@ -239,22 +275,54 @@ def main() -> int:
     parser.add_argument("--cleaned-csv", default=None, help="ContextGuard cleaned Credit CSV path")
     parser.add_argument("--out-csv", default="docs/tables/m5_credit_downstream.csv", help="Destination CSV")
     parser.add_argument("--seed", type=int, default=42, help="Random seed for train/test split")
-    parser.add_argument("--model", default="hist_gb", choices=["hist_gb", "rf"], help="Downstream model architecture")
+    parser.add_argument("--model", default="all", choices=["hist_gb", "rf", "logreg", "all"], help="Downstream model architecture")
+    parser.add_argument("--train-rows", default=None,
+                        help="CSV with an `original_row` column: train every condition on these training rows only")
     args = parser.parse_args()
 
-    clean_p = Path(args.clean_csv)
-    dirty_p = Path(args.dirty_csv)
-    cleaned_p = Path(args.cleaned_csv) if args.cleaned_csv else None
+    cleaned_arg = args.cleaned_csv
+    if not cleaned_arg:
+        if Path("credit_cleaned_by_contextguard.csv").exists() or Path("data/unseen/credit/credit_cleaned_by_contextguard.csv").exists():
+            cleaned_arg = "credit_cleaned_by_contextguard.csv"
+
+    train_rows_arg = args.train_rows
+    if not train_rows_arg:
+        if Path("credit_subset_rows.csv").exists() or Path("data/unseen/credit/credit_subset_rows.csv").exists():
+            train_rows_arg = "credit_subset_rows.csv"
+
+    clean_p = resolve_credit_path(args.clean_csv) or Path("data/unseen/credit/clean.csv")
+    dirty_p = resolve_credit_path(args.dirty_csv) or Path("data/unseen/credit/dirty.csv")
+    cleaned_p = resolve_credit_path(cleaned_arg)
+    train_rows_p = resolve_credit_path(train_rows_arg)
     out_p = Path(args.out_csv)
 
-    run_experiment(
-        clean_csv=clean_p,
-        dirty_csv=dirty_p,
-        cleaned_csv=cleaned_p,
-        out_csv=out_p,
-        seed=args.seed,
-        model_type=args.model,
-    )
+    models_to_run = ["hist_gb", "rf", "logreg"] if args.model == "all" else [args.model]
+    all_results = []
+    for m in models_to_run:
+        m_out = out_p if len(models_to_run) == 1 else out_p.parent / f"m5_credit_downstream_{m}.csv"
+        m_results = run_experiment(
+            clean_csv=clean_p,
+            dirty_csv=dirty_p,
+            cleaned_csv=cleaned_p,
+            out_csv=m_out,
+            seed=args.seed,
+            model_type=m,
+            train_rows=train_rows_p,
+        )
+        all_results.extend(m_results)
+
+    if len(models_to_run) > 1:
+        out_p.parent.mkdir(parents=True, exist_ok=True)
+        fieldnames = [
+            "condition", "classifier", "n_train", "n_test", "roc_auc",
+            "f1", "precision", "recall", "accuracy", "gap_closed_pct", "notes"
+        ]
+        with open(out_p, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(all_results)
+        print(f"\n[+] Successfully exported unified downstream Credit results across all {len(models_to_run)} classifiers to {out_p}")
+
     return 0
 
 

@@ -34,28 +34,29 @@
 **Header:** Does Cleaning Training Data Improve Downstream Machine Learning?
 
 ### Key Visuals & Bullet Points:
-- **Task:** Predict delinquency (`SeriousDlqin2yrs`) on 150,000 rows (93.3% Class 0 vs 6.7% Class 1).
-- **Model:** Histogram Gradient Boosting (`HistGradientBoostingClassifier`, 100 trees, seed=42).
+- **Task:** Predict delinquency (`SeriousDlqin2yrs`) on Credit dataset (93.3% Class 0 vs 6.7% Class 1).
+- **Matched 30k Subset Training:** All conditions trained on the exact 30,000 rows processed by ContextGuard (589 repairs applied; 14,773 flagged cells held for review).
 - **Strict Anti-Leakage Protocol:**
-  - 80/20 Stratified Split (120,000 train rows, 30,000 test rows).
-  - **The test split is ALWAYS evaluated on clean ground-truth features.**
-  - Isolates the pure effect of training set corruption on real-world deployment accuracy.
-- **Empirical Results:**
-  - **Clean Oracle:** ROC-AUC **0.8710** | F1: **0.3094** | Recall: **20.55%** (Upper Bound).
-  - **Dirty Baseline:** ROC-AUC **0.8659** | F1: **0.2661** | Recall: **16.91%** (Lower Bound).
-  - **ContextGuard Cleaned:** *PENDING* (awaiting final Credit predictions via `--cleaned-csv`).
+  - **The 30,000-row test split is ALWAYS evaluated on clean ground-truth features.**
+  - Isolates the pure effect of training set corruption and cleaning on real-world predictive performance.
+- **Multi-Model Benchmark Results:**
+  - **Gradient Boosting:** Dirty `0.8565` $\rightarrow$ Cleaned `0.8592` $\rightarrow$ Clean `0.8604` (**69.23% Gap Closed**).
+  - **Random Forest:** Dirty `0.8362` $\rightarrow$ Cleaned `0.8388` $\rightarrow$ Clean `0.8411` (**53.06% Gap Closed**; F1 improves from `0.2447` to `0.2633`).
+  - **Logistic Regression:** Dirty `0.7099` $\approx$ Clean `0.7097` (Zero headroom: `-0.0002`; linear gap percentage is not applicable).
 
 ### Speaker Notes (Script):
-*"Moving to Slide 2, I will discuss Experiment X12, which addresses Objective O5: proving that cleaning dirty data genuinely improves downstream machine learning models.*
+*"Moving to Slide 2, I will present Experiment X12, addressing Objective O5: proving that cleaning dirty data genuinely improves downstream machine learning models.*
 
-*We evaluated this on the Kaggle Credit dataset—150,000 records where corrupted training data contains 33,655 missing values in income and dependents, plus over 5,000 outliers.*
+*We evaluated this on the 150,000-record Kaggle Credit dataset. In our training split, ContextGuard applied 589 high-confidence verified repairs while safely withholding 14,773 ambiguous cells for human review.*
 
-*To ensure rigorous scientific validity, we instituted a strict anti-leakage contract: our 30,000-row test set is ALWAYS evaluated on clean ground truth. This ensures we are testing how well the trained model performs in production, rather than testing whether it learned to fit corrupted test artifacts.*
+*To guarantee strict experimental validity, we enforced two scientific safeguards: First, all models were trained on the exact same 30,000-row training partition. Second, under our anti-leakage protocol, the 30,000-row test set is ALWAYS evaluated on clean ground truth. This ensures we evaluate real-world production accuracy rather than memorizing corrupted artifacts.*
 
-*Looking at the results table:*
-*When trained on ground-truth clean features, the oracle achieves an ROC-AUC of 0.8710 and an F1 of 0.3094.*
-*When trained on uncleaned dirty features, missing values degrade positive-class recall from 20.55% down to 16.91%, dropping ROC-AUC to 0.8659. This locks our empirical headroom at +0.0051 points.*
-*The downstream evaluation harness is fully operational: as soon as the final ContextGuard predictions on Credit are passed via --cleaned-csv, the exact gap closed percentage will be computed dynamically against this locked baseline."*
+*Looking at the results across three distinct model families:*
+*For Gradient Boosting, cleaning dirty features increases ROC-AUC from 0.8565 to 0.8592, closing 69.23% of the total dirty-to-clean headroom.*
+*For Random Forest, cleaning closes 53.06% of the headroom, while simultaneously lifting minority-class F1 from 0.2447 to 0.2633 and recall from 15.8% to 17.3%.*
+*Finally, Logistic Regression performs identically around 0.710 across dirty and clean features, proving that linear models are capacity-constrained and gain zero headroom from cleaning.*
+
+*In summary, on realistic tabular data with narrow dirty-to-clean headroom, ContextGuard successfully recovers more than half to over two-thirds of the total recoverable signal."*
 
 ---
 

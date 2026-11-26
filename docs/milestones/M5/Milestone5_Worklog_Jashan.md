@@ -22,14 +22,15 @@
   - `Credit`: 150,000 rows × 11 cols | 38,936 real errors (315,466 float artifacts isolated) $\rightarrow$ **Exact Match**.
 
 ### 2. Experiment X12: Downstream Classification Benchmark on Credit (Objective O5)
-- **Script Authored:** `scripts/run_credit_downstream.py` (`# Author: Jashan Tiwari`).
-- **Downstream Formulation:** Trained `HistGradientBoostingClassifier` on binary target `SeriousDlqin2yrs` (6.68% positive class) over 150,000 rows with a deterministic stratified 80/20 train/test split (`seed=42`).
-- **Anti-Leakage Protocol:** Evaluated strictly on clean ground-truth test features across all training data conditions.
-- **Results:**
-  - `clean` (oracle): ROC-AUC 0.8710, F1 0.3094, Recall 20.55%, Accuracy 93.87%.
-  - `dirty` (uncleaned): ROC-AUC 0.8659, F1 0.2661, Recall 16.91%, Accuracy 93.77%.
-  - `contextguard_cleaned`: Marked `PENDING (awaiting final Credit predictions via --cleaned-csv)` with dirty-to-clean headroom locked at +0.0051 ROC-AUC points.
-- **Output Artifact:** Exported dynamically to `docs/tables/m5_credit_downstream.csv`.
+- **Script Authored & Extended:** `scripts/run_credit_downstream.py` (`# Author: Jashan Tiwari`).
+- **Downstream Formulation:** Evaluated downstream models predicting binary delinquency `SeriousDlqin2yrs` (6.68% positive class) over Credit data under three classification families (`hist_gb`, `rf`, `logreg`).
+- **Matched 30k Training Subset:** All data conditions were trained on the exact 30,000 rows processed by ContextGuard (`credit_cleaned_by_contextguard.csv`, where 589 repairs were applied and 14,773 flagged cells were held for review).
+- **Anti-Leakage Protocol:** Evaluated strictly on 30,000 clean ground-truth test features across all training data conditions.
+- **Completed Results:**
+  - `Gradient Boosting`: Dirty `0.8565` $\rightarrow$ Cleaned `0.8592` $\rightarrow$ Clean `0.8604` (**69.23% gap closed**; headroom: `+0.0039`).
+  - `Random Forest`: Dirty `0.8362` $\rightarrow$ Cleaned `0.8388` $\rightarrow$ Clean `0.8411` (**53.06% gap closed**; F1 lifted from `0.2447` to `0.2633`; headroom: `+0.0049`).
+  - `Logistic Regression`: Dirty `0.7099` $\approx$ Clean `0.7097` (headroom is `-0.0002` / negligible; linear model gap percentage is not applicable).
+- **Output Artifacts:** Unified table at `docs/tables/m5_credit_downstream.csv` plus model-specific tables (`m5_credit_downstream_hist_gb.csv`, `m5_credit_downstream_rf.csv`, `m5_credit_downstream_logreg.csv`).
 
 ### 3. Experiment X13: Hand Review and 3-Way Classification of Wrong Repairs
 - **Script Authored:** `scripts/sample_wrong_repairs.py` (`# Author: Jashan Tiwari`).

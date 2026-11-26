@@ -1,4 +1,10 @@
 condition,classifier,n_train,n_test,roc_auc,f1,precision,recall,accuracy,gap_closed_pct,notes
-clean,hist_gb,120000,30000,0.871,0.3094,0.6261,0.2055,0.9387,100.0,Oracle upper bound trained on error-free features
-dirty,hist_gb,120000,30000,0.8659,0.2661,0.6243,0.1691,0.9377,0.0,Baseline trained on raw corrupted features (missing values & outliers)
-contextguard_cleaned,hist_gb,120000,30000,PENDING,PENDING,PENDING,PENDING,PENDING,PENDING,PENDING (awaiting final Credit predictions via --cleaned-csv)
+clean,hist_gb,30000,30000,0.8604,0.2852,0.5804,0.189,0.9367,100.0,Oracle upper bound trained on error-free features
+dirty,hist_gb,30000,30000,0.8565,0.2692,0.5935,0.1741,0.9368,0.0,Baseline trained on raw corrupted features (missing values & outliers)
+contextguard_cleaned,hist_gb,30000,30000,0.8592,0.2648,0.5801,0.1716,0.9363,69.23,Trained on ContextGuard pipeline output (credit_cleaned_by_contextguard.csv)
+clean,rf,30000,30000,0.8411,0.2874,0.5422,0.1955,0.9352,100.0,Oracle upper bound trained on error-free features
+dirty,rf,30000,30000,0.8362,0.2447,0.541,0.1581,0.9348,0.0,Baseline trained on raw corrupted features (missing values & outliers)
+contextguard_cleaned,rf,30000,30000,0.8388,0.2633,0.5554,0.1726,0.9355,53.06,Trained on ContextGuard pipeline output (credit_cleaned_by_contextguard.csv)
+clean,logreg,30000,30000,0.7097,0.0766,0.6074,0.0409,0.9341,100.0,Oracle upper bound trained on error-free features
+dirty,logreg,30000,30000,0.7099,0.0686,0.5984,0.0364,0.934,0.0,Baseline trained on raw corrupted features (missing values & outliers)
+contextguard_cleaned,logreg,30000,30000,0.7076,0.0138,0.5385,0.007,0.9332,N/A,Trained on ContextGuard pipeline output (credit_cleaned_by_contextguard.csv) (caution: linear model dirty-to-clean gap is -0.0002 / zero headroom; percentage not applicable)
