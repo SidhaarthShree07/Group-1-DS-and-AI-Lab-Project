@@ -1,0 +1,149 @@
+split,table,column,kind,m4,m5_candidate_stage,errors
+test,beers,abv,extra text,flagged,sent,94
+test,beers,abv,other,flagged,sent,9
+test,beers,city,extra text,flagged,sent,20
+test,beers,city,extra text,model said no error,sent,1
+test,beers,ibu,missing value,flagged,sent,142
+test,beers,ounces,extra text,flagged,sent,347
+test,beers,ounces,extra text,never sent,sent,14
+test,beers,state,missing value,flagged,sent,21
+test,flights,act_arr_time,missing value,flagged,sent,39
+test,flights,act_arr_time,other,flagged,sent,14
+test,flights,act_arr_time,"same format, different number or time",flagged,sent,82
+test,flights,act_arr_time,"same format, different number or time",model said no error,sent,31
+test,flights,act_arr_time,"same format, different number or time",never sent,never sent,15
+test,flights,act_dep_time,missing value,flagged,sent,42
+test,flights,act_dep_time,other,flagged,sent,15
+test,flights,act_dep_time,"same format, different number or time",flagged,sent,47
+test,flights,act_dep_time,"same format, different number or time",model said no error,sent,46
+test,flights,act_dep_time,"same format, different number or time",never sent,never sent,56
+test,flights,act_dep_time,"valid value, wrong for this row",flagged,sent,1
+test,flights,act_dep_time,"valid value, wrong for this row",never sent,never sent,11
+test,flights,sched_arr_time,extra text,flagged,sent,2
+test,flights,sched_arr_time,missing value,flagged,sent,127
+test,flights,sched_arr_time,other,flagged,sent,13
+test,flights,sched_arr_time,other,never sent,never sent,3
+test,flights,sched_arr_time,"same format, different number or time",flagged,sent,22
+test,flights,sched_dep_time,extra text,flagged,sent,2
+test,flights,sched_dep_time,missing value,flagged,sent,133
+test,flights,sched_dep_time,other,flagged,sent,13
+test,flights,sched_dep_time,other,never sent,never sent,3
+test,hospital,address_1,other,flagged,sent,1
+test,hospital,address_1,typo (1-3 edits),flagged,sent,6
+test,hospital,city,typo (1-3 edits),flagged,sent,7
+test,hospital,condition,typo (1-3 edits),flagged,sent,4
+test,hospital,county,typo (1-3 edits),flagged,sent,4
+test,hospital,emergency_service,typo (1-3 edits),flagged,sent,4
+test,hospital,emergency_service,typo (1-3 edits),never sent,never sent,1
+test,hospital,measure_code,typo (1-3 edits),flagged,sent,2
+test,hospital,measure_name,other,flagged,sent,4
+test,hospital,measure_name,typo (1-3 edits),flagged,sent,3
+test,hospital,name,other,flagged,sent,1
+test,hospital,name,typo (1-3 edits),flagged,sent,5
+test,hospital,owner,typo (1-3 edits),flagged,sent,2
+test,hospital,phone,other,flagged,sent,3
+test,hospital,phone,typo (1-3 edits),flagged,sent,4
+test,hospital,provider_number,typo (1-3 edits),flagged,sent,4
+test,hospital,sample,typo (1-3 edits),flagged,sent,1
+test,hospital,sample,typo (1-3 edits),never sent,never sent,2
+test,hospital,score,typo (1-3 edits),flagged,sent,1
+test,hospital,state,typo (1-3 edits),flagged,sent,4
+test,hospital,state_average,typo (1-3 edits),flagged,sent,2
+test,hospital,state_average,typo (1-3 edits),model said no error,sent,1
+test,hospital,type,typo (1-3 edits),flagged,sent,5
+test,hospital,zip,typo (1-3 edits),flagged,sent,5
+test,movies,creator,extra text,flagged,never sent,7
+test,movies,creator,extra text,flagged,sent,1
+test,movies,creator,missing value,flagged,sent,1
+test,movies,creator,other,flagged,never sent,10
+test,movies,creator,other,never sent,never sent,1
+test,movies,creator,truncated,flagged,never sent,1
+test,movies,creator,truncated,never sent,never sent,1
+test,movies,creator,typo (1-3 edits),flagged,never sent,1
+test,movies,description,other,flagged,never sent,15
+test,movies,description,other,flagged,sent,11
+test,movies,description,other,model said no error,sent,1
+test,movies,director,extra text,flagged,sent,4
+test,movies,director,other,flagged,sent,5
+test,movies,duration,missing value,flagged,sent,13
+test,movies,duration,other,flagged,sent,14
+test,movies,genre,extra text,flagged,sent,1
+test,movies,genre,other,flagged,sent,16
+test,movies,genre,"valid value, wrong for this row",never sent,never sent,8
+test,movies,id,other,flagged,sent,28
+test,movies,name,extra text,flagged,sent,1
+test,movies,name,truncated,flagged,never sent,1
+test,movies,name,typo (1-3 edits),flagged,never sent,1
+test,movies,rating_count,"same value, other format",flagged,sent,245
+test,movies,rating_count,"same value, other format",never sent,sent,593
+test,movies,rating_value,extra text,flagged,sent,1
+test,movies,rating_value,missing value,flagged,sent,5
+test,movies,rating_value,other,flagged,sent,21
+test,movies,rating_value,"same value, other format",flagged,sent,3
+test,movies,rating_value,"same value, other format",never sent,sent,95
+test,movies,release_date,other,flagged,never sent,28
+test,movies,year,extra text,never sent,never sent,28
+test,rayyan,article_jcreated_at,date order,flagged,sent,34
+test,rayyan,article_jcreated_at,date order,never sent,sent,75
+test,rayyan,article_jissue,missing value,flagged,sent,10
+test,rayyan,article_jvolumn,missing value,flagged,sent,4
+test,rayyan,article_pagination,other,never sent,never sent,6
+test,rayyan,article_title,typo (1-3 edits),flagged,sent,1
+test,rayyan,author_list,other,flagged,sent,3
+test,rayyan,author_list,other,model said no error,sent,2
+test,rayyan,author_list,typo (1-3 edits),flagged,sent,7
+test,rayyan,author_list,typo (1-3 edits),model said no error,sent,2
+test,rayyan,journal_title,other,flagged,sent,1
+test,rayyan,journal_title,typo (1-3 edits),flagged,sent,1
+val,beers,abv,extra text,flagged,sent,94
+val,beers,abv,other,flagged,sent,9
+val,beers,city,extra text,flagged,sent,14
+val,beers,ibu,missing value,flagged,sent,185
+val,beers,ounces,extra text,flagged,sent,350
+val,beers,ounces,extra text,never sent,sent,13
+val,beers,state,missing value,flagged,sent,14
+val,flights,act_arr_time,missing value,flagged,sent,40
+val,flights,act_arr_time,other,flagged,sent,12
+val,flights,act_arr_time,"same format, different number or time",flagged,sent,73
+val,flights,act_arr_time,"same format, different number or time",model said no error,sent,32
+val,flights,act_arr_time,"same format, different number or time",never sent,never sent,35
+val,flights,act_dep_time,extra text,flagged,sent,1
+val,flights,act_dep_time,missing value,flagged,sent,42
+val,flights,act_dep_time,other,flagged,sent,17
+val,flights,act_dep_time,other,never sent,never sent,5
+val,flights,act_dep_time,"same format, different number or time",flagged,sent,40
+val,flights,act_dep_time,"same format, different number or time",model said no error,sent,6
+val,flights,act_dep_time,"same format, different number or time",never sent,never sent,105
+val,flights,act_dep_time,"valid value, wrong for this row",flagged,sent,11
+val,flights,act_dep_time,"valid value, wrong for this row",model said no error,sent,2
+val,flights,sched_arr_time,extra text,flagged,sent,8
+val,flights,sched_arr_time,extra text,never sent,never sent,5
+val,flights,sched_arr_time,missing value,flagged,sent,124
+val,flights,sched_arr_time,other,flagged,sent,6
+val,flights,sched_arr_time,"same format, different number or time",flagged,sent,20
+val,flights,sched_dep_time,extra text,flagged,sent,2
+val,flights,sched_dep_time,missing value,flagged,sent,126
+val,flights,sched_dep_time,other,flagged,sent,7
+val,flights,sched_dep_time,other,never sent,never sent,2
+val,flights,sched_dep_time,"same format, different number or time",flagged,sent,2
+val,hospital,city,typo (1-3 edits),flagged,sent,7
+val,hospital,condition,typo (1-3 edits),flagged,sent,3
+val,hospital,county,typo (1-3 edits),flagged,sent,12
+val,hospital,emergency_service,typo (1-3 edits),flagged,sent,5
+val,hospital,measure_code,typo (1-3 edits),flagged,sent,4
+val,hospital,measure_code,typo (1-3 edits),never sent,never sent,1
+val,hospital,measure_name,other,flagged,sent,2
+val,hospital,measure_name,other,never sent,never sent,1
+val,hospital,measure_name,typo (1-3 edits),model said no error,sent,1
+val,hospital,name,typo (1-3 edits),flagged,sent,2
+val,hospital,owner,other,flagged,sent,1
+val,hospital,owner,typo (1-3 edits),flagged,sent,2
+val,hospital,phone,typo (1-3 edits),flagged,sent,4
+val,hospital,provider_number,typo (1-3 edits),flagged,sent,7
+val,hospital,sample,typo (1-3 edits),flagged,sent,3
+val,hospital,sample,typo (1-3 edits),never sent,never sent,5
+val,hospital,score,typo (1-3 edits),flagged,sent,1
+val,hospital,state,typo (1-3 edits),flagged,sent,4
+val,hospital,state_average,typo (1-3 edits),flagged,sent,4
+val,hospital,type,typo (1-3 edits),flagged,sent,6
+val,hospital,zip,typo (1-3 edits),flagged,sent,4

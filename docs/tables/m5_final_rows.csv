@@ -1,0 +1,37 @@
+runs,table,split,flag_rule,left_out,model_calls,n_scored_cells,total_true_errors,tp,fp,precision,recall,f1,executed_repairs,successful_repairs,incorrect_repairs,false_repair_rate
+final_pipeline,billionaire,test,is_error,20 labelled rows,6726,57050,5131,3315,230,0.9351,0.6461,0.7642,1418,1361,57,0.0402
+final_pipeline,billionaire,test,decision not keep,20 labelled rows,6726,57050,5131,3324,220,0.9379,0.6478,0.7663,1418,1361,57,0.0402
+final_pipeline,german,test,is_error,20 labelled rows,14645,44817,18599,12111,285,0.977,0.6512,0.7815,5451,5369,82,0.015
+final_pipeline,german,test,decision not keep,20 labelled rows,14645,44817,18599,12076,295,0.9762,0.6493,0.7799,5451,5369,82,0.015
+final_pipeline,marketing,test,is_error,20 labelled rows,8895,125622,26772,2606,6,0.9977,0.0973,0.1774,320,277,43,0.1344
+final_pipeline,marketing,test,decision not keep,20 labelled rows,8895,125622,26772,2598,6,0.9977,0.097,0.1769,320,277,43,0.1344
+final_pipeline,soccer,test,is_error,20 labelled rows,2222,19790,789,549,13,0.9769,0.6958,0.8127,215,202,13,0.0605
+final_pipeline,soccer,test,decision not keep,20 labelled rows,2222,19790,789,543,13,0.9766,0.6882,0.8074,215,202,13,0.0605
+final_pipeline,hospital,val,is_error,none,478,2907,79,72,6,0.9231,0.9114,0.9172,67,66,1,0.0149
+final_pipeline,hospital,val,decision not keep,none,478,2907,79,72,6,0.9231,0.9114,0.9172,67,66,1,0.0149
+final_pipeline,flights,val,is_error,none,635,2160,723,540,30,0.9474,0.7469,0.8353,282,282,0,0.0
+final_pipeline,flights,val,decision not keep,none,635,2160,723,538,29,0.9489,0.7441,0.8341,282,282,0,0.0
+final_pipeline,beers,val,is_error,none,1008,3630,679,679,8,0.9884,1.0,0.9941,678,676,2,0.0029
+final_pipeline,beers,val,decision not keep,none,1008,3630,679,679,8,0.9884,1.0,0.9941,678,676,2,0.0029
+final_pipeline,rayyan,val,is_error,none,441,1650,141,133,35,0.7917,0.9433,0.8608,68,59,9,0.1324
+final_pipeline,rayyan,val,decision not keep,none,441,1650,141,134,35,0.7929,0.9504,0.8645,68,59,9,0.1324
+final_pipeline,movies,val,is_error,none,2585,18853,1054,1010,34,0.9674,0.9583,0.9628,916,914,2,0.0022
+final_pipeline,movies,val,decision not keep,none,2585,18853,1054,1010,27,0.974,0.9583,0.966,916,914,2,0.0022
+as_run,billionaire,test,is_error,20 labelled rows,10433,57050,5131,3507,739,0.826,0.6835,0.748,1478,1391,87,0.0589
+as_run,billionaire,test,decision not keep,20 labelled rows,10433,57050,5131,3515,662,0.8415,0.6851,0.7553,1478,1391,87,0.0589
+as_run,german,test,is_error,20 labelled rows,21881,44817,18599,12874,908,0.9341,0.6922,0.7952,5466,5378,88,0.0161
+as_run,german,test,decision not keep,20 labelled rows,21881,44817,18599,12820,879,0.9358,0.6893,0.7939,5466,5378,88,0.0161
+as_run,marketing,test,is_error,20 labelled rows,8895,125622,26772,2606,6,0.9977,0.0973,0.1774,320,277,43,0.1344
+as_run,marketing,test,decision not keep,20 labelled rows,8895,125622,26772,2598,6,0.9977,0.097,0.1769,320,277,43,0.1344
+as_run,soccer,test,is_error,20 labelled rows,2222,19790,789,549,13,0.9769,0.6958,0.8127,215,202,13,0.0605
+as_run,soccer,test,decision not keep,20 labelled rows,2222,19790,789,543,13,0.9766,0.6882,0.8074,215,202,13,0.0605
+as_run,hospital,val,is_error,none,478,2907,79,72,6,0.9231,0.9114,0.9172,67,66,1,0.0149
+as_run,hospital,val,decision not keep,none,478,2907,79,72,6,0.9231,0.9114,0.9172,67,66,1,0.0149
+as_run,flights,val,is_error,none,635,2160,723,540,30,0.9474,0.7469,0.8353,282,282,0,0.0
+as_run,flights,val,decision not keep,none,635,2160,723,538,29,0.9489,0.7441,0.8341,282,282,0,0.0
+as_run,beers,val,is_error,none,1008,3630,679,679,8,0.9884,1.0,0.9941,678,676,2,0.0029
+as_run,beers,val,decision not keep,none,1008,3630,679,679,8,0.9884,1.0,0.9941,678,676,2,0.0029
+as_run,rayyan,val,is_error,none,441,1650,141,133,35,0.7917,0.9433,0.8608,68,59,9,0.1324
+as_run,rayyan,val,decision not keep,none,441,1650,141,134,35,0.7929,0.9504,0.8645,68,59,9,0.1324
+as_run,movies,val,is_error,none,4636,18853,1054,1026,50,0.9535,0.9734,0.9634,917,914,3,0.0033
+as_run,movies,val,decision not keep,none,4636,18853,1054,1026,42,0.9607,0.9734,0.967,917,914,3,0.0033

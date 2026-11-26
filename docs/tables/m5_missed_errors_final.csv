@@ -1,0 +1,407 @@
+table,split,column,stage,kind,errors
+beers,val,abv,flagged,extra text,94
+beers,val,abv,flagged,other,9
+beers,val,city,flagged,extra text,14
+beers,val,ibu,flagged,missing value,185
+beers,val,ounces,flagged,extra text,363
+beers,val,state,flagged,missing value,14
+billionaire,test,Company Founded,flagged,extra text,5
+billionaire,test,Company Founded,flagged,missing value,106
+billionaire,test,Company Founded,flagged,"same format, different number or time",6
+billionaire,test,Company Founded,flagged,typo (1-3 edits),28
+billionaire,test,Company Founded,model said no error,"same format, different number or time",14
+billionaire,test,Company Founded,model said no error,"valid value, wrong for this row",7
+billionaire,test,Company Founded,never a candidate,"valid value, wrong for this row",43
+billionaire,test,Company Name,flagged,extra text,1
+billionaire,test,Company Name,flagged,missing value,84
+billionaire,test,Company Name,flagged,typo (1-3 edits),3
+billionaire,test,Company Name,never a candidate,other,55
+billionaire,test,Company Name,never a candidate,truncated,11
+billionaire,test,Company Name,never a candidate,typo (1-3 edits),5
+billionaire,test,Company Name,never a candidate,"valid value, wrong for this row",10
+billionaire,test,Company Name,withheld by the D2 filter,extra text,1
+billionaire,test,Company Name,withheld by the D2 filter,other,57
+billionaire,test,Company Name,withheld by the D2 filter,typo (1-3 edits),48
+billionaire,test,Company Name,withheld by the D2 filter,"valid value, wrong for this row",30
+billionaire,test,Company Relationship,flagged,extra text,7
+billionaire,test,Company Relationship,flagged,missing value,99
+billionaire,test,Company Relationship,flagged,other,24
+billionaire,test,Company Relationship,flagged,typo (1-3 edits),39
+billionaire,test,Company Relationship,flagged,"valid value, wrong for this row",2
+billionaire,test,Company Relationship,model said no error,other,26
+billionaire,test,Company Relationship,model said no error,"valid value, wrong for this row",6
+billionaire,test,Company Relationship,never a candidate,other,43
+billionaire,test,Company Relationship,never a candidate,typo (1-3 edits),10
+billionaire,test,Company Relationship,never a candidate,"valid value, wrong for this row",19
+billionaire,test,Company Sector,flagged,extra text,5
+billionaire,test,Company Sector,flagged,missing value,72
+billionaire,test,Company Sector,flagged,other,70
+billionaire,test,Company Sector,flagged,typo (1-3 edits),18
+billionaire,test,Company Sector,flagged,"valid value, wrong for this row",5
+billionaire,test,Company Sector,model said no error,missing value,1
+billionaire,test,Company Sector,model said no error,"same value, other format",1
+billionaire,test,Company Sector,model said no error,"valid value, wrong for this row",7
+billionaire,test,Company Sector,never a candidate,other,23
+billionaire,test,Company Sector,never a candidate,typo (1-3 edits),9
+billionaire,test,Company Sector,never a candidate,"valid value, wrong for this row",31
+billionaire,test,Company Type,flagged,extra text,13
+billionaire,test,Company Type,flagged,missing value,75
+billionaire,test,Company Type,flagged,other,51
+billionaire,test,Company Type,flagged,typo (1-3 edits),164
+billionaire,test,Company Type,flagged,"valid value, wrong for this row",1
+billionaire,test,Company Type,model said no error,other,1
+billionaire,test,Company Type,never a candidate,other,4
+billionaire,test,Company Type,never a candidate,typo (1-3 edits),94
+billionaire,test,Company Type,never a candidate,"valid value, wrong for this row",6
+billionaire,test,Demographics Age,flagged,extra text,23
+billionaire,test,Demographics Age,flagged,missing value,60
+billionaire,test,Demographics Age,flagged,other,42
+billionaire,test,Demographics Age,flagged,typo (1-3 edits),19
+billionaire,test,Demographics Age,flagged,"valid value, wrong for this row",1
+billionaire,test,Demographics Age,model said no error,"valid value, wrong for this row",8
+billionaire,test,Demographics Age,never a candidate,"same format, different number or time",5
+billionaire,test,Demographics Age,never a candidate,"valid value, wrong for this row",47
+billionaire,test,Demographics Gender,flagged,extra text,10
+billionaire,test,Demographics Gender,flagged,missing value,86
+billionaire,test,Demographics Gender,flagged,other,45
+billionaire,test,Demographics Gender,flagged,typo (1-3 edits),31
+billionaire,test,Demographics Gender,never a candidate,other,15
+billionaire,test,Demographics Gender,never a candidate,typo (1-3 edits),16
+billionaire,test,Demographics Gender,never a candidate,"valid value, wrong for this row",7
+billionaire,test,Location Citizenship,flagged,extra text,5
+billionaire,test,Location Citizenship,flagged,missing value,36
+billionaire,test,Location Citizenship,flagged,other,89
+billionaire,test,Location Citizenship,flagged,typo (1-3 edits),50
+billionaire,test,Location Citizenship,flagged,"valid value, wrong for this row",34
+billionaire,test,Location Citizenship,model said no error,missing value,11
+billionaire,test,Location Citizenship,model said no error,"valid value, wrong for this row",5
+billionaire,test,Location Citizenship,never a candidate,other,6
+billionaire,test,Location Citizenship,never a candidate,typo (1-3 edits),3
+billionaire,test,Location Citizenship,never a candidate,"valid value, wrong for this row",6
+billionaire,test,Location Country Code,flagged,extra text,13
+billionaire,test,Location Country Code,flagged,missing value,56
+billionaire,test,Location Country Code,flagged,other,5
+billionaire,test,Location Country Code,flagged,typo (1-3 edits),115
+billionaire,test,Location Country Code,flagged,"valid value, wrong for this row",19
+billionaire,test,Location Country Code,model said no error,typo (1-3 edits),3
+billionaire,test,Location Country Code,model said no error,"valid value, wrong for this row",20
+billionaire,test,Location Country Code,never a candidate,typo (1-3 edits),16
+billionaire,test,Location Country Code,never a candidate,"valid value, wrong for this row",3
+billionaire,test,Location GDP,flagged,extra text,6
+billionaire,test,Location GDP,flagged,missing value,40
+billionaire,test,Location GDP,flagged,other,1
+billionaire,test,Location GDP,flagged,"same format, different number or time",6
+billionaire,test,Location GDP,flagged,typo (1-3 edits),27
+billionaire,test,Location GDP,model said no error,"valid value, wrong for this row",4
+billionaire,test,Location GDP,never a candidate,other,56
+billionaire,test,Location GDP,never a candidate,"valid value, wrong for this row",21
+billionaire,test,Location Region,flagged,extra text,4
+billionaire,test,Location Region,flagged,missing value,51
+billionaire,test,Location Region,flagged,other,103
+billionaire,test,Location Region,flagged,typo (1-3 edits),35
+billionaire,test,Location Region,flagged,"valid value, wrong for this row",26
+billionaire,test,Location Region,model said no error,"valid value, wrong for this row",5
+billionaire,test,Location Region,never a candidate,other,1
+billionaire,test,Location Region,never a candidate,"valid value, wrong for this row",1
+billionaire,test,Name,flagged,missing value,44
+billionaire,test,Name,never a candidate,other,14
+billionaire,test,Name,never a candidate,typo (1-3 edits),5
+billionaire,test,Name,never a candidate,"valid value, wrong for this row",18
+billionaire,test,Name,withheld by the D2 filter,extra text,1
+billionaire,test,Name,withheld by the D2 filter,other,100
+billionaire,test,Name,withheld by the D2 filter,typo (1-3 edits),27
+billionaire,test,Name,withheld by the D2 filter,"valid value, wrong for this row",40
+billionaire,test,Rank,flagged,extra text,19
+billionaire,test,Rank,flagged,missing value,52
+billionaire,test,Rank,flagged,other,47
+billionaire,test,Rank,flagged,"same format, different number or time",1
+billionaire,test,Rank,flagged,typo (1-3 edits),12
+billionaire,test,Rank,flagged,"valid value, wrong for this row",1
+billionaire,test,Rank,model said no error,"same format, different number or time",8
+billionaire,test,Rank,model said no error,"same value, other format",1
+billionaire,test,Rank,model said no error,typo (1-3 edits),6
+billionaire,test,Rank,model said no error,"valid value, wrong for this row",10
+billionaire,test,Rank,never a candidate,"same format, different number or time",4
+billionaire,test,Rank,never a candidate,"valid value, wrong for this row",50
+billionaire,test,Wealth How Category,flagged,extra text,2
+billionaire,test,Wealth How Category,flagged,missing value,44
+billionaire,test,Wealth How Category,flagged,other,108
+billionaire,test,Wealth How Category,flagged,typo (1-3 edits),38
+billionaire,test,Wealth How Category,flagged,"valid value, wrong for this row",7
+billionaire,test,Wealth How Category,model said no error,"valid value, wrong for this row",34
+billionaire,test,Wealth How Category,never a candidate,other,5
+billionaire,test,Wealth How Category,never a candidate,"valid value, wrong for this row",5
+billionaire,test,Wealth How From Emerging,flagged,extra text,6
+billionaire,test,Wealth How From Emerging,flagged,missing value,52
+billionaire,test,Wealth How From Emerging,flagged,other,43
+billionaire,test,Wealth How From Emerging,flagged,typo (1-3 edits),44
+billionaire,test,Wealth How From Emerging,never a candidate,other,21
+billionaire,test,Wealth How From Emerging,never a candidate,typo (1-3 edits),15
+billionaire,test,Wealth How Industry,flagged,extra text,4
+billionaire,test,Wealth How Industry,flagged,missing value,40
+billionaire,test,Wealth How Industry,flagged,other,24
+billionaire,test,Wealth How Industry,flagged,typo (1-3 edits),37
+billionaire,test,Wealth How Industry,model said no error,other,5
+billionaire,test,Wealth How Industry,model said no error,"valid value, wrong for this row",5
+billionaire,test,Wealth How Industry,never a candidate,other,101
+billionaire,test,Wealth How Industry,never a candidate,typo (1-3 edits),10
+billionaire,test,Wealth How Industry,never a candidate,"valid value, wrong for this row",44
+billionaire,test,Wealth How Inherited,flagged,extra text,2
+billionaire,test,Wealth How Inherited,flagged,missing value,24
+billionaire,test,Wealth How Inherited,flagged,other,38
+billionaire,test,Wealth How Inherited,flagged,typo (1-3 edits),29
+billionaire,test,Wealth How Inherited,flagged,"valid value, wrong for this row",1
+billionaire,test,Wealth How Inherited,model said no error,missing value,34
+billionaire,test,Wealth How Inherited,model said no error,other,17
+billionaire,test,Wealth How Inherited,model said no error,"valid value, wrong for this row",6
+billionaire,test,Wealth How Inherited,never a candidate,other,41
+billionaire,test,Wealth How Inherited,never a candidate,typo (1-3 edits),7
+billionaire,test,Wealth How Inherited,never a candidate,"valid value, wrong for this row",18
+billionaire,test,Wealth How Was Founder,flagged,extra text,4
+billionaire,test,Wealth How Was Founder,flagged,missing value,50
+billionaire,test,Wealth How Was Founder,flagged,other,49
+billionaire,test,Wealth How Was Founder,flagged,typo (1-3 edits),37
+billionaire,test,Wealth How Was Founder,never a candidate,other,18
+billionaire,test,Wealth How Was Founder,never a candidate,typo (1-3 edits),29
+billionaire,test,Wealth How Was Political,flagged,extra text,12
+billionaire,test,Wealth How Was Political,flagged,missing value,92
+billionaire,test,Wealth How Was Political,flagged,other,5
+billionaire,test,Wealth How Was Political,flagged,typo (1-3 edits),48
+billionaire,test,Wealth How Was Political,never a candidate,other,20
+billionaire,test,Wealth How Was Political,never a candidate,typo (1-3 edits),26
+billionaire,test,Wealth Type,flagged,extra text,2
+billionaire,test,Wealth Type,flagged,missing value,72
+billionaire,test,Wealth Type,flagged,other,18
+billionaire,test,Wealth Type,flagged,typo (1-3 edits),40
+billionaire,test,Wealth Type,flagged,"valid value, wrong for this row",1
+billionaire,test,Wealth Type,model said no error,"valid value, wrong for this row",2
+billionaire,test,Wealth Type,never a candidate,other,96
+billionaire,test,Wealth Type,never a candidate,typo (1-3 edits),1
+billionaire,test,Wealth Type,never a candidate,"valid value, wrong for this row",36
+billionaire,test,Wealth Worth In Billions,flagged,extra text,8
+billionaire,test,Wealth Worth In Billions,flagged,missing value,35
+billionaire,test,Wealth Worth In Billions,flagged,other,40
+billionaire,test,Wealth Worth In Billions,flagged,typo (1-3 edits),1
+billionaire,test,Wealth Worth In Billions,flagged,"valid value, wrong for this row",1
+billionaire,test,Wealth Worth In Billions,model said no error,"same format, different number or time",4
+billionaire,test,Wealth Worth In Billions,model said no error,typo (1-3 edits),23
+billionaire,test,Wealth Worth In Billions,model said no error,"valid value, wrong for this row",12
+billionaire,test,Wealth Worth In Billions,never a candidate,"valid value, wrong for this row",53
+billionaire,test,Year,flagged,extra text,6
+billionaire,test,Year,flagged,missing value,59
+billionaire,test,Year,flagged,other,48
+billionaire,test,Year,flagged,"same format, different number or time",17
+billionaire,test,Year,flagged,typo (1-3 edits),27
+billionaire,test,Year,flagged,"valid value, wrong for this row",8
+billionaire,test,Year,model said no error,"same format, different number or time",4
+billionaire,test,Year,model said no error,"valid value, wrong for this row",12
+billionaire,test,Year,never a candidate,other,5
+billionaire,test,Year,never a candidate,"same format, different number or time",1
+billionaire,test,Year,never a candidate,"valid value, wrong for this row",1
+flights,val,act_arr_time,flagged,missing value,40
+flights,val,act_arr_time,flagged,other,12
+flights,val,act_arr_time,flagged,"same format, different number or time",82
+flights,val,act_arr_time,model said no error,"same format, different number or time",23
+flights,val,act_arr_time,never a candidate,"same format, different number or time",35
+flights,val,act_dep_time,flagged,extra text,1
+flights,val,act_dep_time,flagged,missing value,42
+flights,val,act_dep_time,flagged,other,17
+flights,val,act_dep_time,flagged,"same format, different number or time",40
+flights,val,act_dep_time,flagged,"valid value, wrong for this row",11
+flights,val,act_dep_time,model said no error,"same format, different number or time",6
+flights,val,act_dep_time,model said no error,"valid value, wrong for this row",2
+flights,val,act_dep_time,never a candidate,other,5
+flights,val,act_dep_time,never a candidate,"same format, different number or time",105
+flights,val,sched_arr_time,flagged,extra text,8
+flights,val,sched_arr_time,flagged,missing value,124
+flights,val,sched_arr_time,flagged,other,6
+flights,val,sched_arr_time,flagged,"same format, different number or time",20
+flights,val,sched_arr_time,never a candidate,extra text,5
+flights,val,sched_dep_time,flagged,extra text,2
+flights,val,sched_dep_time,flagged,missing value,126
+flights,val,sched_dep_time,flagged,other,7
+flights,val,sched_dep_time,flagged,"same format, different number or time",2
+flights,val,sched_dep_time,never a candidate,other,2
+german,test,country,flagged,missing value,1987
+german,test,country,flagged,other,40
+german,test,country,model said no error,other,54
+german,test,country,never a candidate,other,1545
+german,test,country_code,flagged,missing value,3878
+german,test,country_code,model said no error,missing value,170
+german,test,house_number,flagged,extra text,1
+german,test,house_number,flagged,missing value,754
+german,test,house_number,flagged,"same value, other format",5
+german,test,house_number,flagged,typo (1-3 edits),103
+german,test,house_number,flagged,"valid value, wrong for this row",35
+german,test,house_number,model said no error,"same value, other format",1
+german,test,house_number,model said no error,truncated,1
+german,test,house_number,model said no error,typo (1-3 edits),23
+german,test,house_number,model said no error,"valid value, wrong for this row",16
+german,test,house_number,never a candidate,truncated,6
+german,test,house_number,never a candidate,"valid value, wrong for this row",64
+german,test,locality,flagged,extra text,51
+german,test,locality,flagged,missing value,257
+german,test,locality,flagged,other,65
+german,test,locality,flagged,"same value, other format",1
+german,test,locality,flagged,truncated,1
+german,test,locality,flagged,typo (1-3 edits),23
+german,test,locality,model said no error,extra text,104
+german,test,locality,model said no error,other,78
+german,test,locality,model said no error,truncated,14
+german,test,locality,model said no error,typo (1-3 edits),9
+german,test,locality,model said no error,"valid value, wrong for this row",1
+german,test,locality,never a candidate,other,173
+german,test,locality,never a candidate,truncated,225
+german,test,locality,never a candidate,typo (1-3 edits),16
+german,test,locality,never a candidate,"valid value, wrong for this row",59
+german,test,name,flagged,extra text,1
+german,test,name,flagged,typo (1-3 edits),3
+german,test,name,model said no error,truncated,1
+german,test,name,model said no error,typo (1-3 edits),5
+german,test,name,never a candidate,other,3
+german,test,name,never a candidate,truncated,82
+german,test,name,never a candidate,typo (1-3 edits),2
+german,test,name,never a candidate,"valid value, wrong for this row",10
+german,test,name,withheld by the D2 filter,extra text,100
+german,test,name,withheld by the D2 filter,other,381
+german,test,name,withheld by the D2 filter,"same value, other format",25
+german,test,name,withheld by the D2 filter,truncated,587
+german,test,name,withheld by the D2 filter,typo (1-3 edits),590
+german,test,name,withheld by the D2 filter,"valid value, wrong for this row",41
+german,test,postcode,flagged,extra text,2
+german,test,postcode,flagged,missing value,893
+german,test,postcode,flagged,"same format, different number or time",6
+german,test,postcode,model said no error,"same format, different number or time",6
+german,test,postcode,model said no error,"same value, other format",2
+german,test,postcode,model said no error,"valid value, wrong for this row",8
+german,test,postcode,never a candidate,"same format, different number or time",24
+german,test,postcode,never a candidate,"valid value, wrong for this row",45
+german,test,region,flagged,extra text,3
+german,test,region,flagged,missing value,3290
+german,test,region,flagged,other,37
+german,test,region,flagged,truncated,4
+german,test,region,flagged,typo (1-3 edits),24
+german,test,region,model said no error,extra text,3
+german,test,region,model said no error,missing value,177
+german,test,region,model said no error,other,101
+german,test,region,model said no error,truncated,15
+german,test,region,model said no error,typo (1-3 edits),13
+german,test,region,never a candidate,other,386
+german,test,region,never a candidate,typo (1-3 edits),25
+german,test,road,flagged,missing value,632
+german,test,road,flagged,typo (1-3 edits),15
+german,test,road,model said no error,typo (1-3 edits),17
+german,test,road,model said no error,"valid value, wrong for this row",2
+german,test,road,never a candidate,other,9
+german,test,road,never a candidate,truncated,8
+german,test,road,never a candidate,typo (1-3 edits),146
+german,test,road,never a candidate,"valid value, wrong for this row",9
+german,test,road,withheld by the D2 filter,extra text,4
+german,test,road,withheld by the D2 filter,other,43
+german,test,road,withheld by the D2 filter,truncated,6
+german,test,road,withheld by the D2 filter,typo (1-3 edits),1050
+german,test,road,withheld by the D2 filter,"valid value, wrong for this row",3
+hospital,val,city,flagged,typo (1-3 edits),7
+hospital,val,condition,flagged,typo (1-3 edits),3
+hospital,val,county,flagged,typo (1-3 edits),12
+hospital,val,emergency_service,flagged,typo (1-3 edits),5
+hospital,val,measure_code,flagged,typo (1-3 edits),4
+hospital,val,measure_code,never a candidate,typo (1-3 edits),1
+hospital,val,measure_name,flagged,other,2
+hospital,val,measure_name,flagged,typo (1-3 edits),1
+hospital,val,measure_name,never a candidate,other,1
+hospital,val,name,flagged,typo (1-3 edits),2
+hospital,val,owner,flagged,other,1
+hospital,val,owner,flagged,typo (1-3 edits),2
+hospital,val,phone,flagged,typo (1-3 edits),4
+hospital,val,provider_number,flagged,typo (1-3 edits),7
+hospital,val,sample,flagged,typo (1-3 edits),3
+hospital,val,sample,never a candidate,typo (1-3 edits),5
+hospital,val,score,flagged,typo (1-3 edits),1
+hospital,val,state,flagged,typo (1-3 edits),4
+hospital,val,state_average,flagged,typo (1-3 edits),4
+hospital,val,type,flagged,typo (1-3 edits),6
+hospital,val,zip,flagged,typo (1-3 edits),4
+marketing,test,Age,never a candidate,"valid value, wrong for this row",2224
+marketing,test,Dual,never a candidate,"valid value, wrong for this row",1477
+marketing,test,Education,flagged,missing value,84
+marketing,test,Education,never a candidate,"valid value, wrong for this row",2202
+marketing,test,Ethnic,flagged,missing value,67
+marketing,test,Ethnic,model said no error,missing value,1
+marketing,test,Ethnic,model said no error,"valid value, wrong for this row",269
+marketing,test,Ethnic,never a candidate,"valid value, wrong for this row",2365
+marketing,test,Hometype,flagged,missing value,357
+marketing,test,Hometype,model said no error,"valid value, wrong for this row",46
+marketing,test,Hometype,never a candidate,"valid value, wrong for this row",1424
+marketing,test,Householder,flagged,missing value,239
+marketing,test,Householder,never a candidate,"valid value, wrong for this row",1592
+marketing,test,Income,never a candidate,"valid value, wrong for this row",1201
+marketing,test,Language,flagged,missing value,277
+marketing,test,Language,model said no error,missing value,82
+marketing,test,Language,never a candidate,"valid value, wrong for this row",789
+marketing,test,Live,flagged,missing value,910
+marketing,test,Live,never a candidate,"valid value, wrong for this row",1339
+marketing,test,Marital,flagged,missing value,160
+marketing,test,Marital,never a candidate,"valid value, wrong for this row",1763
+marketing,test,Occupation,flagged,missing value,135
+marketing,test,Occupation,never a candidate,"valid value, wrong for this row",2283
+marketing,test,Person,flagged,missing value,375
+marketing,test,Person,flagged,"valid value, wrong for this row",2
+marketing,test,Person,model said no error,"valid value, wrong for this row",10
+marketing,test,Person,never a candidate,"valid value, wrong for this row",2156
+marketing,test,Person under 18,model said no error,missing value,601
+marketing,test,Person under 18,never a candidate,"valid value, wrong for this row",891
+marketing,test,Sex,never a candidate,"valid value, wrong for this row",1451
+movies,val,creator,never a candidate,extra text,1
+movies,val,creator,never a candidate,other,6
+movies,val,creator,never a candidate,truncated,6
+movies,val,description,flagged,other,11
+movies,val,description,never a candidate,other,9
+movies,val,director,withheld by the D2 filter,extra text,2
+movies,val,director,withheld by the D2 filter,other,1
+movies,val,duration,flagged,missing value,7
+movies,val,duration,flagged,other,13
+movies,val,genre,never a candidate,"valid value, wrong for this row",6
+movies,val,genre,withheld by the D2 filter,extra text,2
+movies,val,genre,withheld by the D2 filter,other,11
+movies,val,id,flagged,other,20
+movies,val,rating_count,flagged,"same value, other format",803
+movies,val,rating_value,flagged,extra text,1
+movies,val,rating_value,flagged,missing value,2
+movies,val,rating_value,flagged,other,17
+movies,val,rating_value,flagged,"same value, other format",96
+movies,val,release_date,flagged,other,20
+movies,val,year,flagged,extra text,20
+rayyan,val,article_jcreated_at,flagged,date order,98
+rayyan,val,article_jcreated_at,flagged,"valid value, wrong for this row",2
+rayyan,val,article_jcreated_at,model said no error,date order,1
+rayyan,val,article_jcreated_at,never a candidate,date order,2
+rayyan,val,article_jissue,flagged,missing value,9
+rayyan,val,article_jvolumn,flagged,missing value,4
+rayyan,val,article_pagination,never a candidate,other,2
+rayyan,val,article_title,flagged,other,1
+rayyan,val,article_title,flagged,typo (1-3 edits),3
+rayyan,val,article_title,model said no error,typo (1-3 edits),1
+rayyan,val,author_list,flagged,other,2
+rayyan,val,author_list,flagged,typo (1-3 edits),9
+rayyan,val,author_list,model said no error,typo (1-3 edits),2
+rayyan,val,journal_issn,flagged,other,3
+rayyan,val,journal_title,flagged,typo (1-3 edits),2
+soccer,test,birthplace,flagged,extra text,7
+soccer,test,birthplace,flagged,truncated,21
+soccer,test,birthplace,flagged,typo (1-3 edits),110
+soccer,test,birthplace,never a candidate,typo (1-3 edits),58
+soccer,test,birthyear (integer),flagged,"same format, different number or time",130
+soccer,test,birthyear (integer),model said no error,"same format, different number or time",9
+soccer,test,birthyear (integer),never a candidate,"same format, different number or time",17
+soccer,test,birthyear (integer),never a candidate,"valid value, wrong for this row",41
+soccer,test,stadium,flagged,extra text,7
+soccer,test,stadium,flagged,truncated,9
+soccer,test,stadium,flagged,typo (1-3 edits),125
+soccer,test,stadium,model said no error,typo (1-3 edits),51
+soccer,test,stadium,never a candidate,typo (1-3 edits),7
+soccer,test,team,flagged,extra text,6
+soccer,test,team,flagged,truncated,11
+soccer,test,team,flagged,typo (1-3 edits),123
+soccer,test,team,model said no error,typo (1-3 edits),45
+soccer,test,team,never a candidate,typo (1-3 edits),12

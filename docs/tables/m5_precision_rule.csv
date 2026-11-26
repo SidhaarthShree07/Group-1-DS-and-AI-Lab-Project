@@ -1,0 +1,9 @@
+table,m4_candidates,m5_candidates,removed_errors,removed_non_errors,added_errors,added_non_errors,added_format_artifacts,precision_rule
+hospital,478,478,0,0,0,0,0,pass: identical candidates
+flights,635,635,0,0,0,0,0,pass: identical candidates
+beers,1323,1008,0,328,13,0,0,"pass: only non-errors or artifacts change, errors only added"
+rayyan,838,441,1,472,72,4,0,not decided: needs the model
+movies,9224,4636,22,5166,597,3,0,not decided: needs the model
+tax,3290,4591,0,0,0,0,1301,"pass: only non-errors or artifacts change, errors only added"
+inpatient,1021,1021,0,0,0,0,0,pass: identical candidates
+facilities,3796,3796,0,0,0,0,0,pass: identical candidates

@@ -1,0 +1,46 @@
+table,column,kind,missed,sample_dirty,sample_clean
+flights,act_dep_time,"same format, different number or time",105,3:50 p.m.,3:27 p.m.
+inpatient,lst_nm,other,40,FALCONE,SWANSON
+facilities,Condition,"valid value, wrong for this row",36,Hip or femur fracture,All other conditions
+flights,act_arr_time,"same format, different number or time",35,5:52 a.m.,5:50 a.m.
+inpatient,frst_nm,other,30,KOWALCHUK,ROMAN
+inpatient,zip,"same format, different number or time",23,42101750,706015724
+facilities,City,other,14,CARLISLE,OPELIKA
+inpatient,org_pac_id,"same format, different number or time",10,941112346,5496659484
+movies,description,other,9,"The soldiers at Fort Apache may disagree with the tactics of their glory-seeking new commander. But to a man, they're duty-bound to obey - even when it means almost certain disaster. John Wayne, Henry Fonda and many familiar supporting players from master director John Ford's 'stock company' saddle up for the first film in the director's famed cavalry trilogy (She Wore a Yellow Ribbon and Rio Grande are the others). Roughhouse camaraderie, sentimental vignettes of frontier life, massive action,sequences staged in Monument Valley - all are part of Fort Apache. So is Ford's exploration of the West's darker side. Themes of justice, heroism and honor that Ford would revisit in later Westerns are given rein in this moving, thought-provoking film that, even as it salutes a legend, gives reasons to question it.","At Fort Apache, an honorable and veteran war captain finds conflict when his regime is placed under the command of a young, glory hungry lieutenant colonel with no respect for the local Indian tribe."
+inpatient,lst_nm,typo (1-3 edits),8,FSHER,FISHER
+movies,creator,other,6,"Akiva Goldsman,Jeff Vintar","Jeff Vintar,Akiva Goldsman"
+movies,creator,truncated,6,James Toback,"James Toback,Dean Jennings"
+movies,genre,"valid value, wrong for this row",6,Drama,"Biography,Crime,Drama"
+inpatient,adrs_id,typo (1-3 edits),5,O971327485NE1000XDRXX300,OR971327485NE1000XDRXX300
+facilities,ZipCode,"same format, different number or time",5,19963,81004
+tax,zip,"same format, different number or time",5,01907,89423
+inpatient,prvdr_id,"same format, different number or time",5,706015724,42101750
+facilities,PhoneNumber,"same format, different number or time",5,(216) 844-1421,(205) 868-2000
+hospital,sample,typo (1-3 edits),5,619 paxienxs,619 patients
+flights,act_dep_time,other,5,12:11 a.m.,11:55 p.m.
+flights,sched_arr_time,extra text,5,5:50 a.m. Dec 02,5:50 a.m.
+inpatient,cty,typo (1-3 edits),4,BNNOCKBURN,BANNOCKBURN
+inpatient,st,truncated,4,C,CO
+inpatient,cty,"valid value, wrong for this row",3,CHARLOTTESVILLE,CHERRY HILL
+inpatient,org_pac_id,"valid value, wrong for this row",3,6103725031,648188250
+inpatient,frst_nm,typo (1-3 edits),3,MRGRETA,MARGRETA
+facilities,City,"valid value, wrong for this row",3,WICHITA,GALION
+flights,sched_dep_time,other,2,8:35aDec 1,8:35 a.m.
+rayyan,article_jcreated_at,date order,2,4/1/01,1/1/04
+facilities,CCN,"same format, different number or time",2,11T024,37T236
+facilities,CCN,"valid value, wrong for this row",2,153048,103037
+rayyan,article_pagination,other,2,43-4,Apr-43
+inpatient,adrs_id,other,2,MI489121811LA1215XAVEX400,SC294145733CH2095XDRXX400
+inpatient,NPI,"same format, different number or time",2,1811009210,1801860002
+inpatient,cty,other,2,MANHASSET,BATON ROUGE
+hospital,measure_code,typo (1-3 edits),1,xax-1,cac-1
+hospital,measure_name,other,1,pxeumoxia patiexts assessed axd givex ixfluexza vaccixatiox,pneumonia patients assessed and given influenza vaccination
+inpatient,st,"valid value, wrong for this row",1,FL,MD
+movies,creator,extra text,1,"Scott Alexander,Larry Karaszewski,David Loucka,John Connolly","Scott Alexander,Larry Karaszewski"
+inpatient,frst_nm,"valid value, wrong for this row",1,NICHOLAS,MARA
+facilities,State,"valid value, wrong for this row",1,KS,AL
+inpatient,adr_ln_1,"valid value, wrong for this row",1,610 W HAYS ST,3480 HULL RD
+facilities,ZipCode,"valid value, wrong for this row",1,11215,81004
+facilities,PhoneNumber,"valid value, wrong for this row",1,(502) 596-6346,(337) 239-9041
+facilities,State,truncated,1,I,IA

@@ -1,0 +1,9 @@
+split,table,errors,m4_candidates,m5_candidates,m4_recall_candidates,m5_recall_candidates,m4_precision,m4_recall,m4_tp,m4_fp,fp_removed_by_m5,tp_lost_by_m5,new_errors,new_non_errors,m5_precision_worst_case,new_errors_needed_for_rule,m5_recall_if_all_new_errors_flagged,model_flag_rate_on_same_column_errors
+val,hospital,79,478,478,91.14,91.14,0.8256,0.8987,71,15,0,0,0,0,0.8256,0,0.8987,
+val,flights,723,635,635,78.98,78.98,0.955,0.7344,531,25,0,0,0,0,0.955,0,0.7344,
+val,beers,679,1323,1008,98.09,100.0,0.9867,0.9809,666,9,0,0,13,0,0.9867,0,1.0,ounces 350/350
+test,hospital,76,551,551,96.05,96.05,0.8372,0.9474,72,14,0,0,0,0,0.8372,0,0.9474,
+test,flights,717,688,688,87.73,87.73,0.955,0.7699,552,26,0,0,0,0,0.955,0,0.7699,
+test,beers,648,1421,1110,97.84,100.0,0.9664,0.9769,633,22,2,0,14,0,0.9694,0,0.9985,ounces 347/347
+test,rayyan,146,856,471,44.52,95.89,0.663,0.4178,61,31,11,0,75,3,0.7262,0,0.9315,article_jcreated_at 34/34
+test,movies,1161,9148,4666,37.47,91.21,0.7548,0.3738,434,141,69,64,688,3,0.8315,0,0.9113,rating_count 245/245; rating_value 30/30

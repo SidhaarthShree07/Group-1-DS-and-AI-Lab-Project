@@ -18,9 +18,14 @@ import argparse
 from collections import Counter, defaultdict
 from pathlib import Path
 import re
+import sys
+
 import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT))
+from src.llm.build_examples import TYPE_MAP  # noqa: E402  (pattern_violation -> pattern, ...)
+
 DEFAULT_RUN = REPO_ROOT / "outputs" / "runs" / "m4_final2_val_all"
 
 MISSING_TOKENS = {"", "nan", "null", "none", "n/a", "na", "-", "?", "not available", "undefined", "empty"}
@@ -84,7 +89,8 @@ def determine_closest_detector_math(
     except Exception:
         pass
 
-    # Check error_type semantic mapping
+    # Check error_type semantic mapping (cell files say pattern_violation, the checks below say pattern)
+    error_type = TYPE_MAP.get(error_type, error_type)
     if error_type == "rule":
         return "D5_fd", "Multi-tuple dependency conflict below g3 discovery threshold or high-noise determinant."
     elif error_type == "pattern":
@@ -106,10 +112,13 @@ def main():
     if not cells_path.exists() or not cands_path.exists():
         raise FileNotFoundError(f"Missing run files in {run_dir}")
 
-    cells_df = pd.read_csv(cells_path)
-    cands_df = pd.read_csv(cands_path)
+    cells_df = pd.read_csv(cells_path, dtype=str, keep_default_na=False)
+    cands_df = pd.read_csv(cands_path, keep_default_na=False)
 
     # Join on table, row, column
+    cells_df = cells_df[cells_df["error_type"] != "format_artifact"].copy()
+    cells_df["row"] = cells_df["row"].astype(int)
+    cells_df["is_error"] = cells_df["is_error"].eq("True")
     merged = pd.merge(cells_df, cands_df, on=["table", "row", "column"])
 
     # Filter to true errors that were missed by candidate generation

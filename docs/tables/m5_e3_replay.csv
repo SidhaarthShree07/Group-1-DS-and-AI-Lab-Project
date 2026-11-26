@@ -1,0 +1,10 @@
+table,detectors,candidates,flagged,tp,fp,precision,recall
+hospital,M4,325,57,47,10,0.8246,0.9216
+hospital,M5,325,57,47,10,0.8246,0.9216
+hospital,every cell,1900,60,50,10,0.8333,0.9804
+flights,M4,199,187,157,30,0.8396,0.7585
+flights,M5,199,187,157,30,0.8396,0.7585
+flights,every cell,600,271,199,72,0.7343,0.9614
+beers,M4,384,192,190,2,0.9896,1.0
+beers,M5,300,192,190,2,0.9896,1.0
+beers,every cell,1000,192,190,2,0.9896,1.0

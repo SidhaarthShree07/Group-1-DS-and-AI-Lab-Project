@@ -1,0 +1,26 @@
+baseline,table,rows,rows_scored,status,seconds,notes,n_scored_cells,total_true_errors,detected_cells,tp,fp,precision,recall,f1,executed_repairs,successful_repairs,incorrect_repairs,repair_accuracy,false_repair_rate
+B1_HoloClean,hospital,159,139,completed,7.9,67 constraints mined on the dirty test table,2641,66,32,32,0,1.0,0.4848,0.6531,32,32,0,0.4848,0.0
+B1_HoloClean_noisy_cells,hospital,159,139,completed,7.9,67 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy,2641,66,1463,56,1407,0.0383,0.8485,0.0733,0,0,0,0.0,0.0
+B2_dBoost,hospital,159,139,completed,0.4,"setting histogram 0.9 0.1, train F1 0.5365, best of 34",2641,66,42,28,14,0.6667,0.4242,0.5185,0,0,0,0.0,0.0
+B2_dBoost_union36,hospital,159,139,completed,0.3,"setting histogram 0.9 0.1, train F1 0.5365, best of 36",2641,66,42,28,14,0.6667,0.4242,0.5185,0,0,0,0.0,0.0
+B3_Raha_Baran,hospital,159,139,completed,13.6,"strategies run/with output: KBVD 1/1, OD 34/34, PVD 324/324, RVD 342/306",2641,66,30,30,0,1.0,0.4545,0.625,29,23,6,0.3485,0.2069
+B1_HoloClean,flights,365,345,completed,3.4,7 constraints mined on the dirty test table,2070,681,316,316,0,1.0,0.464,0.6339,316,223,93,0.3275,0.2943
+B1_HoloClean_noisy_cells,flights,365,345,completed,3.4,7 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy,2070,681,1064,371,693,0.3487,0.5448,0.4252,0,0,0,0.0,0.0
+B2_dBoost,flights,365,345,completed,0.1,"setting gaussian 1.3, train F1 0.6802, best of 34",2070,681,455,353,102,0.7758,0.5184,0.6215,0,0,0,0.0,0.0
+B2_dBoost_union36,flights,365,345,completed,0.1,"setting gaussian 1.3, train F1 0.6802, best of 36",2070,681,455,353,102,0.7758,0.5184,0.6215,0,0,0,0.0,0.0
+B3_Raha_Baran,flights,365,345,completed,28.1,"strategies run/with output: KBVD 1/0, OD 34/34, PVD 163/163, RVD 30/28",2070,681,561,513,48,0.9144,0.7533,0.8261,561,485,76,0.7122,0.1355
+B1_HoloClean,beers,361,341,completed,6.1,9 constraints mined on the dirty test table,3410,613,163,154,9,0.9448,0.2512,0.3969,163,21,142,0.0343,0.8712
+B1_HoloClean_noisy_cells,beers,361,341,completed,6.1,9 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy,3410,613,853,175,678,0.2052,0.2855,0.2387,0,0,0,0.0,0.0
+B2_dBoost,beers,361,341,completed,0.3,"setting histogram 0.9 0.5, train F1 0.8031, best of 34",3410,613,848,613,235,0.7229,1.0,0.8392,0,0,0,0.0,0.0
+B2_dBoost_union36,beers,361,341,completed,0.2,"setting histogram 0.9 0.5, train F1 0.8031, best of 36",3410,613,848,613,235,0.7229,1.0,0.8392,0,0,0,0.0,0.0
+B3_Raha_Baran,beers,361,341,completed,11.3,"strategies run/with output: KBVD 1/1, OD 34/34, PVD 322/322, RVD 90/75",3410,613,584,571,13,0.9777,0.9315,0.9541,551,518,33,0.845,0.0599
+B1_HoloClean,rayyan,150,130,completed,3.5,0 constraints mined on the dirty test table,1430,131,227,7,220,0.0308,0.0534,0.0391,227,0,227,0.0,1.0
+B1_HoloClean_noisy_cells,rayyan,150,130,completed,3.5,0 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy,1430,131,239,14,225,0.0586,0.1069,0.0757,0,0,0,0.0,0.0
+B2_dBoost,rayyan,150,130,completed,0.2,"setting histogram 0.9 0.9, train F1 0.2550, best of 34",1430,131,570,110,460,0.193,0.8397,0.3138,0,0,0,0.0,0.0
+B2_dBoost_union36,rayyan,150,130,completed,0.1,"setting histogram 0.8 0.8 s=0.8, train F1 0.3427, best of 36",1430,131,605,110,495,0.1818,0.8397,0.2989,0,0,0,0.0,0.0
+B3_Raha_Baran,rayyan,150,130,completed,6.6,"strategies run/with output: KBVD 1/0, OD 34/34, PVD 424/424, RVD 110/45",1430,131,91,74,17,0.8132,0.5649,0.6667,13,4,9,0.0305,0.6923
+B1_HoloClean,movies,1109,1089,completed,617.8,1 constraints mined on the dirty test table,18513,1145,370,13,357,0.0351,0.0114,0.0172,370,0,370,0.0,1.0
+B1_HoloClean_noisy_cells,movies,1109,1089,completed,617.8,1 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy,18513,1145,969,19,950,0.0196,0.0166,0.018,0,0,0,0.0,0.0
+B2_dBoost,movies,1109,1089,completed,1.8,"setting histogram 0.9 0.9, train F1 0.3777, best of 34",18513,1145,3520,910,2610,0.2585,0.7948,0.3901,0,0,0,0.0,0.0
+B2_dBoost_union36,movies,1109,1089,completed,1.8,"setting histogram 0.8 0.8 s=0.8, train F1 0.4190, best of 36",18513,1145,3301,938,2363,0.2842,0.8192,0.422,0,0,0,0.0,0.0
+B3_Raha_Baran,movies,1109,1089,completed,17.9,"strategies run/with output: KBVD 1/0, OD 34/34, PVD 818/818, RVD 272/239",18513,1145,901,901,0,1.0,0.7869,0.8807,711,676,35,0.5904,0.0492

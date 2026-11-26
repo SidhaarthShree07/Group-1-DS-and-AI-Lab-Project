@@ -1,0 +1,22 @@
+baseline,table,rows,rows_scored,status,seconds,notes,n_scored_cells,total_true_errors,detected_cells,tp,fp,precision,recall,f1,executed_repairs,successful_repairs,incorrect_repairs,repair_accuracy,false_repair_rate
+B1_HoloClean,restaurant,12007,11987,completed,226.5,5 constraints mined on the dirty test table,131857.0,633.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+B1_HoloClean_noisy_cells,restaurant,12007,11987,completed,226.5,5 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy,131857.0,633.0,2919.0,4.0,2915.0,0.0014,0.0063,0.0023,0.0,0.0,0.0,0.0,0.0
+B2_dBoost,restaurant,12007,11987,completed,9.1,"setting histogram 0.7 0.5, fixed in advance",131857.0,633.0,39682.0,33.0,39649.0,0.0008,0.0521,0.0016,0.0,0.0,0.0,0.0,0.0
+B3_Raha_Baran,restaurant,12007,11987,completed,113.7,"strategies run/with output: KBVD 1/1, OD 34/34, PVD 416/416, RVD 110/108",131857.0,633.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+B1_HoloClean,marketing,8993,8973,completed,201.2,0 constraints mined on the dirty test table,125622.0,26772.0,359.0,359.0,0.0,1.0,0.0134,0.0265,359.0,348.0,11.0,0.013,0.0306
+B1_HoloClean_noisy_cells,marketing,8993,8973,completed,201.2,0 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy,125622.0,26772.0,2687.0,2687.0,0.0,1.0,0.1004,0.1824,0.0,0.0,0.0,0.0,0.0
+B2_dBoost,marketing,8993,8973,completed,10.6,"setting histogram 0.7 0.5, fixed in advance",125622.0,26772.0,50968.0,16039.0,34929.0,0.3147,0.5991,0.4126,0.0,0.0,0.0,0.0,0.0
+B3_Raha_Baran,marketing,8993,8973,completed,262.1,"strategies run/with output: KBVD 1/0, OD 34/34, PVD 215/215, RVD 182/182",125622.0,26772.0,24318.0,9346.0,14972.0,0.3843,0.3491,0.3659,23741.0,5566.0,18175.0,0.2079,0.7656
+B1_HoloClean,soccer,1999,1979,completed,96.3,103 constraints mined on the dirty test table,19790.0,789.0,9.0,9.0,0.0,1.0,0.0114,0.0226,9.0,9.0,0.0,0.0114,0.0
+B1_HoloClean_noisy_cells,soccer,1999,1979,completed,96.3,103 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy,19790.0,789.0,14224.0,789.0,13435.0,0.0555,1.0,0.1051,0.0,0.0,0.0,0.0,0.0
+B2_dBoost,soccer,1999,1979,completed,1.2,"setting histogram 0.7 0.5, fixed in advance",19790.0,789.0,1326.0,114.0,1212.0,0.086,0.1445,0.1078,0.0,0.0,0.0,0.0,0.0
+B3_Raha_Baran,soccer,1999,1979,completed,47.9,"strategies run/with output: KBVD 1/1, OD 34/34, PVD 378/378, RVD 90/89",19790.0,789.0,486.0,292.0,194.0,0.6008,0.3701,0.458,431.0,99.0,332.0,0.1255,0.7703
+B1_HoloClean,billionaire,2614,2594,failed: RuntimeError: $ Torch: not enough memory: you tried to allocate 23GB. Buy new RAM! at /pytorch/aten/src/TH/THGeneral.cpp:201,504.7,"attempt 1, 120 GB limit: 41 constraints mined on the dirty test table",,,,,,,,,,,,,
+B1_HoloClean,billionaire,2614,2594,completed,498.9,"attempt 2, 280 GB limit (attempt 1 ran out of memory): 41 constraints mined on the dirty test table",57050.0,5131.0,1378.0,1378.0,0.0,1.0,0.2686,0.4234,1378.0,791.0,587.0,0.1542,0.426
+B1_HoloClean_noisy_cells,billionaire,2614,2594,completed,498.9,"attempt 2, 280 GB limit (attempt 1 ran out of memory): 41 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy",57050.0,5131.0,34894.0,3349.0,31545.0,0.096,0.6527,0.1673,0.0,0.0,0.0,0.0,0.0
+B2_dBoost,billionaire,2614,2594,completed,5.9,"setting histogram 0.7 0.5, fixed in advance",57050.0,5131.0,15754.0,3687.0,12067.0,0.234,0.7186,0.3531,0.0,0.0,0.0,0.0,0.0
+B3_Raha_Baran,billionaire,2614,2594,completed,194.6,"strategies run/with output: KBVD 1/1, OD 34/34, PVD 978/978, RVD 462/462",57050.0,5131.0,3216.0,2386.0,830.0,0.7419,0.465,0.5717,2633.0,1404.0,1229.0,0.2736,0.4668
+B1_HoloClean,german,5000,4980,completed,196.5,29 constraints mined on the dirty test table,44817.0,18599.0,9470.0,9470.0,0.0,1.0,0.5092,0.6748,9470.0,4236.0,5234.0,0.2278,0.5527
+B1_HoloClean_noisy_cells,german,5000,4980,completed,196.5,29 constraints mined on the dirty test table; detection only: every cell HoloClean marked noisy,44817.0,18599.0,26804.0,15101.0,11703.0,0.5634,0.8119,0.6652,0.0,0.0,0.0,0.0,0.0
+B2_dBoost,german,5000,4980,completed,2.5,"setting histogram 0.7 0.5, fixed in advance",44817.0,18599.0,16736.0,7651.0,9085.0,0.4572,0.4114,0.4331,0.0,0.0,0.0,0.0,0.0
+B3_Raha_Baran,german,5000,4980,completed,109.3,"strategies run/with output: KBVD 1/1, OD 34/34, PVD 609/609, RVD 72/63",44817.0,18599.0,17687.0,15835.0,1852.0,0.8953,0.8514,0.8728,10450.0,8207.0,2243.0,0.4413,0.2146
