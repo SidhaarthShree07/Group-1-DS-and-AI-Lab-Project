@@ -150,8 +150,9 @@ def test_m5_wrong_repairs_sampling_and_classification():
 
     # Verify population scope documented in summary notes
     for notes in df_sum["notes"]:
-        assert "not verified: no rules for this table" in str(notes)
-        assert "18.97%" in str(notes)
+        assert "applied, not verified (no rule covers the table)" in str(notes)
+        assert "98%" in str(notes)
+        assert "not uniform" in str(notes)
 
     df_rev = pd.read_csv(review_csv)
     assert len(df_rev) == 58
@@ -209,10 +210,15 @@ def test_m5_unseen_non_verification_policy_enforcement():
         action = str(row["action"]).strip().lower()
 
         # STRICT M5 POLICY ASSERTIONS
-        assert v_status == "not verified: no rules for this table", (
-            f"Policy violation: Unseen table '{tbl}' has invalid validation_status '{v_status}'! "
-            f"Must be strictly 'not verified: no rules for this table'."
-        )
+        if action == "applied":
+            assert v_status == "applied, not verified (no rule covers the table)", (
+                f"Policy violation: Unseen table '{tbl}' applied repair has invalid validation_status '{v_status}'! "
+                f"Must be strictly 'applied, not verified (no rule covers the table)'."
+            )
+        else:
+            assert v_status == "needs review", (
+                f"Policy violation: Unseen table '{tbl}' withheld repair must have status 'needs review', got '{v_status}'"
+            )
         assert v_status != "verified", (
             f"Policy violation: Unseen table '{tbl}' has validation_status='verified'! "
             f"Unseen table repairs must NEVER be marked verified because no rule files exist."
@@ -225,6 +231,6 @@ def test_m5_unseen_non_verification_policy_enforcement():
     with open(qual_md, "r", encoding="utf-8") as f:
         md_text = f.read()
 
-    assert "not verified: no rules for this table" in md_text
+    assert "applied, not verified (no rule covers the table)" in md_text
     assert "verified" in md_text
     assert "needs review" in md_text

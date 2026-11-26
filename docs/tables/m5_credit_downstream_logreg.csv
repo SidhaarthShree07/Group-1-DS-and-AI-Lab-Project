@@ -1,4 +1,4 @@
 condition,classifier,n_train,n_test,roc_auc,f1,precision,recall,accuracy,gap_closed_pct,notes
 clean,logreg,30000,30000,0.7097,0.0766,0.6074,0.0409,0.9341,100.0,Oracle upper bound trained on error-free features
 dirty,logreg,30000,30000,0.7099,0.0686,0.5984,0.0364,0.934,0.0,Baseline trained on raw corrupted features (missing values & outliers)
-contextguard_cleaned,logreg,30000,30000,0.7076,0.0138,0.5385,0.007,0.9332,N/A,Trained on ContextGuard pipeline output (credit_cleaned_by_contextguard.csv) (caution: linear model dirty-to-clean gap is -0.0002 / zero headroom; percentage not applicable)
+contextguard_cleaned,logreg,30000,30000,0.7076,0.0138,0.5385,0.007,0.9332,N/A,"Trained on ContextGuard pipeline output (credit_cleaned_by_contextguard.csv; 589 repairs applied, not verified (no rule covers the table)) (caution: linear model dirty-to-clean gap is -0.0002 / zero headroom; percentage not applicable)"

@@ -24,8 +24,8 @@
 ### 2. Experiment X12: Downstream Classification Benchmark on Credit (Objective O5)
 - **Script Authored & Extended:** `scripts/run_credit_downstream.py` (`# Author: Jashan Tiwari`).
 - **Downstream Formulation:** Evaluated downstream models predicting binary delinquency `SeriousDlqin2yrs` (6.68% positive class) over Credit data under three classification families (`hist_gb`, `rf`, `logreg`).
-- **Matched 30k Training Subset:** All data conditions were trained on the exact 30,000 rows processed by ContextGuard (`credit_cleaned_by_contextguard.csv`, where 589 repairs were applied automatically and 14,773 low-confidence cells were held for review).
-- **Zero Rules / Pure Model Attribution:** Emphasized that zero validation rules and zero human edits were used on Credit; all 589 repairs carry status `'not verified: no rules for this table'`. Consequently, 100% of the downstream performance gains come from the model and pipeline.
+- **Matched 30k Training Subset:** All data conditions were trained on the exact 30,000 rows processed by ContextGuard (`credit_cleaned_by_contextguard.csv`, where 589 repairs were applied, not verified (no rule covers the table) and 14,773 low-confidence cells were held for review).
+- **Zero Rules / Pure Model Attribution:** Emphasized that zero validation rules and zero human edits were used on Credit; all 589 repairs carry status `'applied, not verified (no rule covers the table)'`. Consequently, 100% of the downstream performance gains come from the model and pipeline.
 - **Anti-Leakage Protocol:** Evaluated strictly on 30,000 clean ground-truth test features across all training data conditions.
 - **Completed Results:**
   - `Gradient Boosting`: Dirty `0.8565` $\rightarrow$ Cleaned `0.8592` $\rightarrow$ Clean `0.8604` (**69.23% gap closed**; headroom: `+0.0039`).
@@ -35,20 +35,20 @@
 
 ### 3. Experiment X13: Hand Review and 3-Way Classification of Wrong Applied Repairs
 - **Script Authored:** `scripts/sample_wrong_repairs.py` (`# Author: Jashan Tiwari`).
-- **Sample Audit:** Evaluated 58 deterministic samples (`seed=42`) directly from the final unseen-table applied repairs (`final_unseen_billionaire`, `final_unseen_german`, `final_unseen_soccer`, `final_unseen_marketing`):
+- **Sample Audit:** Evaluated 58 deterministic samples (`seed=42`, up to 15 rows per table, non-uniform: Billionaire 9/15 valid, German 2/15 valid, Soccer [13 sampled] 0 valid, Marketing [15 sampled] 0 valid) directly from the final unseen-table applied repairs (`final_unseen_billionaire`, `final_unseen_german`, `final_unseen_soccer`, `final_unseen_marketing`):
   - Human review ground-truth stored in `docs/milestones/M5/x13_hand_review_annotations.csv` with `review_method = "manual_hand_review"`.
   - Strict rule applied: Any time discrepancy (including 1-minute shifts like `11:41` vs `11:40`) is classified as `wrong`.
   - `wrong` (81.03% / 47 cases): True errors, primarily hallucinations on unobserved survey blanks (15/15 on Marketing), compound entity truncations (`Allianz` vs `Allianz_Arena` on Soccer), and house number letter suffix drops on German address records.
   - `valid_alternative` (18.97% / 11 cases): Valid semantic variations (official abbreviations like `NRW` for `Nordrhein-Westfalen`, municipal designations like `Ingelheim` for `Ingelheim am Rhein`, numeric zero formatting `0.0` vs `0.00`, taxonomy typo fixes `investment management` vs `Investment`) penalized solely by rigid string matching.
   - `unclear` (0.00% / 0 cases): All sampled records had unambiguous ground truth context.
-  - **Key Finding:** Valid alternatives lift effective repair accuracy on unseen applied repairs by **18.97%** over strict string match.
+  - **Key Finding:** About 19% of the sampled wrong repairs are valid alternatives (roughly 23% of all wrong applied repairs after weighting by table), which lifts applied-repair accuracy from 97.4% to about 98%. The X13 sample is up to 15 rows per table, not uniform (Billionaire: 9 of 15 valid, German: 2 of 15 valid, Soccer [13 sampled]: 0 valid, Marketing [15 sampled]: 0 valid).
 - **Output Artifacts:** `docs/tables/m5_wrong_repair_review.csv` and `docs/tables/m5_wrong_repair_summary.csv`.
 
 ### 4. Qualitative Results Collector & Three-Tier Validation Status Policy
 - **Script Authored:** `scripts/collect_m5_qualitative.py` (`# Author: Jashan Tiwari`).
 - **Policy Enforced:** Implemented the three-tier validation status architecture:
   1. `verified`: Only when confirmed by independent rule files (benchmark tables with rules only).
-  2. `not verified: no rules for this table`: Applied automatically by pipeline where no rule files exist (all unseen tables and Credit).
+  2. `applied, not verified (no rule covers the table)`: Applied automatically by pipeline where no rule files exist (all unseen tables and Credit).
   3. `needs review`: Withheld due to low model confidence.
 - **Output Artifacts:** `docs/milestones/M5/qualitative_examples.md` and `docs/tables/m5_qualitative_examples.csv`.
 
@@ -56,3 +56,14 @@
 - **Test File Authored:** `tests/test_m5_jashan.py` (`# Author: Jashan Tiwari`).
 - **Verification:** Unit tests updated and verified against 58-row X13 sample and automated unseen status policy.
 - **Privacy & Hygiene:** Zero absolute local paths, zero personal email addresses, zero personal surnames in report text, and zero git push calls.
+
+### 6. Team Merge Sequence & Step 4 Merge Status
+ContextGuard adheres to the team's planned 6-step Milestone 5 merge order:
+1. **Aaradhya first:** M5 detector set (X7).
+2. **Sidhaarth second:** Pipeline, retraining, blend, D2 filter, tests, tables, and changelog.
+3. **Aaradhya again:** Baselines, protocol, and his report sections.
+4. **Jashan (Step 4):** Unseen data, Credit downstream (X12), X13 hand review, and qualitative examples (using Sidhaarth's final runs).
+5. **Sahilpreet:** Metrics, thresholds, priors, and plots, plus his report sections.
+6. **Sidhaarth last:** Final report, slides, README, and changelog once everything else is merged.
+
+**Current Branch Status:** Jashan's branch (`m5/jashan-unseen-credit-analysis`) is completely verified and ready locally at **Step 4**. In accordance with team coordination, no Pull Request has been opened and no git push has been executed. The branch will be rebased onto `main` and merged directly as Step 4 once Steps 1–3 are merged into `main`.

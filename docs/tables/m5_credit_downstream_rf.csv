@@ -1,4 +1,4 @@
 condition,classifier,n_train,n_test,roc_auc,f1,precision,recall,accuracy,gap_closed_pct,notes
 clean,rf,30000,30000,0.8411,0.2874,0.5422,0.1955,0.9352,100.0,Oracle upper bound trained on error-free features
 dirty,rf,30000,30000,0.8362,0.2447,0.541,0.1581,0.9348,0.0,Baseline trained on raw corrupted features (missing values & outliers)
-contextguard_cleaned,rf,30000,30000,0.8388,0.2633,0.5554,0.1726,0.9355,53.06,Trained on ContextGuard pipeline output (credit_cleaned_by_contextguard.csv)
+contextguard_cleaned,rf,30000,30000,0.8388,0.2633,0.5554,0.1726,0.9355,53.06,"Trained on ContextGuard pipeline output (credit_cleaned_by_contextguard.csv; 589 repairs applied, not verified (no rule covers the table))"
