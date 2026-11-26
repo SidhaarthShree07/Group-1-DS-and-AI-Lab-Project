@@ -13,7 +13,7 @@ automatically by the pipeline with status 'not verified: no rules for this table
 METHODOLOGY:
 No heuristic auto-classification rules are applied. Instead, this script:
   1. Loads confirmed manual human review annotations from a dedicated ground-truth
-     file (docs/milestones/M5/x13_hand_review_annotations.csv).
+     file (docs/tables/m5_x13_hand_review_annotations.csv).
   2. Validates that every audited case carries review_method='manual_hand_review'.
   3. Exports the itemized review (docs/tables/m5_wrong_repair_review.csv) and
      computes the confirmed summary (docs/tables/m5_wrong_repair_summary.csv).
@@ -212,7 +212,7 @@ def run_x13_pipeline(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-dir", default=None, help="Run directory to audit (optional)")
-    parser.add_argument("--annotations-csv", default="docs/milestones/M5/x13_hand_review_annotations.csv", help="Ground truth annotations")
+    parser.add_argument("--annotations-csv", default="docs/tables/m5_x13_hand_review_annotations.csv", help="Ground truth annotations")
     parser.add_argument("--review-csv", default="docs/tables/m5_wrong_repair_review.csv", help="Review detail destination")
     parser.add_argument("--summary-csv", default="docs/tables/m5_wrong_repair_summary.csv", help="Summary destination")
     parser.add_argument("--sample-size", type=int, default=60, help="Number of wrong repairs to audit")

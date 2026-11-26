@@ -17,6 +17,8 @@ final_pipeline,rayyan,val,is_error,none,441,1650,141,133,35,0.7917,0.9433,0.8608
 final_pipeline,rayyan,val,decision not keep,none,441,1650,141,134,35,0.7929,0.9504,0.8645,68,59,9,0.1324
 final_pipeline,movies,val,is_error,none,2585,18853,1054,1010,34,0.9674,0.9583,0.9628,916,914,2,0.0022
 final_pipeline,movies,val,decision not keep,none,2585,18853,1054,1010,27,0.974,0.9583,0.966,916,914,2,0.0022
+final_pipeline,restaurant,test,is_error,20 labelled rows,1887,131857,633,3,332,0.009,0.0047,0.0062,59,1,58,0.9831
+final_pipeline,restaurant,test,decision not keep,20 labelled rows,1887,131857,633,3,324,0.0092,0.0047,0.0063,59,1,58,0.9831
 as_run,billionaire,test,is_error,20 labelled rows,10433,57050,5131,3507,739,0.826,0.6835,0.748,1478,1391,87,0.0589
 as_run,billionaire,test,decision not keep,20 labelled rows,10433,57050,5131,3515,662,0.8415,0.6851,0.7553,1478,1391,87,0.0589
 as_run,german,test,is_error,20 labelled rows,21881,44817,18599,12874,908,0.9341,0.6922,0.7952,5466,5378,88,0.0161
@@ -35,3 +37,5 @@ as_run,rayyan,val,is_error,none,441,1650,141,133,35,0.7917,0.9433,0.8608,68,59,9
 as_run,rayyan,val,decision not keep,none,441,1650,141,134,35,0.7929,0.9504,0.8645,68,59,9,0.1324
 as_run,movies,val,is_error,none,4636,18853,1054,1026,50,0.9535,0.9734,0.9634,917,914,3,0.0033
 as_run,movies,val,decision not keep,none,4636,18853,1054,1026,42,0.9607,0.9734,0.967,917,914,3,0.0033
+as_run,restaurant,test,is_error,20 labelled rows,46092,131857,633,61,5270,0.0114,0.0964,0.0205,134,2,132,0.9851
+as_run,restaurant,test,decision not keep,20 labelled rows,46092,131857,633,57,4812,0.0117,0.09,0.0207,134,2,132,0.9851

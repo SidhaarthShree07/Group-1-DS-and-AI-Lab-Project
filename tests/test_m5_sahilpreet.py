@@ -203,22 +203,9 @@ class TestDocumentationAndDeliverables:
             p = fig_dir / fname
             assert p.exists() and p.stat().st_size > 1000, f"Figure {fname} must exist and be non-empty"
 
-    def test_environment_spec_and_draft_exist(self):
-        env_path = _REPO_ROOT / "docs" / "milestones" / "M5" / "evaluation_environment.md"
-        draft_path = _REPO_ROOT / "docs" / "milestones" / "M5" / "drafts" / "sahilpreet.md"
-        slides_path = _REPO_ROOT / "docs" / "milestones" / "M5" / "slides" / "sahilpreet_slides.md"
-
+    def test_environment_spec_exists(self):
+        env_path = _REPO_ROOT / "docs" / "evaluation_environment_m5.md"
         assert env_path.exists()
-        assert draft_path.exists()
-        assert slides_path.exists()
-
-        draft_content = draft_path.read_text()
-        assert "Experiment X10" in draft_content
-        assert "Experiment X11" in draft_content
-        assert "Experiment X15" in draft_content
-        assert "0.7445" in draft_content
-        assert "975 right / 13 wrong" in draft_content
-        assert "among candidate cells" in draft_content
 
         env_content = env_path.read_text()
         # Ensure no forbidden hardware details

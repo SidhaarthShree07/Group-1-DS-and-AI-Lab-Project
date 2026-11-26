@@ -124,7 +124,7 @@ def test_m5_wrong_repairs_sampling_and_classification():
     """Verify Experiment X13 hand review audit on final unseen applied repairs."""
     summary_csv = _REPO_ROOT / "docs/tables/m5_wrong_repair_summary.csv"
     review_csv = _REPO_ROOT / "docs/tables/m5_wrong_repair_review.csv"
-    annotations_csv = _REPO_ROOT / "docs/milestones/M5/x13_hand_review_annotations.csv"
+    annotations_csv = _REPO_ROOT / "docs/tables/m5_x13_hand_review_annotations.csv"
 
     assert summary_csv.exists(), f"Missing {summary_csv}"
     assert review_csv.exists(), f"Missing {review_csv}"
@@ -195,7 +195,7 @@ def test_m5_wrong_repairs_sampling_and_classification():
 def test_m5_unseen_non_verification_policy_enforcement():
     """Verify three-tier validation status policy: unseen applied repairs carry 'not verified: no rules for this table'."""
     qual_csv = _REPO_ROOT / "docs/tables/m5_qualitative_examples.csv"
-    qual_md = _REPO_ROOT / "docs/milestones/M5/qualitative_examples.md"
+    qual_md = _REPO_ROOT / "docs/examples/m5_qualitative_examples.md"
 
     assert qual_csv.exists(), f"Missing {qual_csv}"
     assert qual_md.exists(), f"Missing {qual_md}"

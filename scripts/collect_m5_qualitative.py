@@ -16,7 +16,7 @@ Exact 3 status definitions:
      (e.g., 14,773 low-confidence cells on Credit).
 
 Outputs:
-  - docs/milestones/M5/qualitative_examples.md: Detailed markdown narrative with formatted tables.
+  - docs/examples/m5_qualitative_examples.md: Detailed markdown narrative with formatted tables.
   - docs/tables/m5_qualitative_examples.csv:    Structured CSV for auditability and unit tests.
 """
 from __future__ import annotations
@@ -448,7 +448,7 @@ def main() -> int:
     parser.add_argument("--run-dir", default="outputs/runs/m4_final2_test_hfb", help="In-domain run directory")
     parser.add_argument("--unseen-runs-dir", default=None, help="Directory containing final_unseen_* runs")
     parser.add_argument("--x13-csv", default="docs/tables/m5_wrong_repair_review.csv", help="X13 hand review CSV")
-    parser.add_argument("--out-md", default="docs/milestones/M5/qualitative_examples.md", help="Output Markdown report")
+    parser.add_argument("--out-md", default="docs/examples/m5_qualitative_examples.md", help="Output Markdown report")
     parser.add_argument("--out-csv", default="docs/tables/m5_qualitative_examples.csv", help="Output summary CSV")
     args = parser.parse_args()
 

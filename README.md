@@ -9,8 +9,8 @@ A small language model that runs locally, fine-tuned for cell-level data cleanin
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/python-3.12-3776AB.svg)
 ![Model](https://img.shields.io/badge/model-Gemma%204%20E4B--it%20%2B%20LoRA-orange.svg)
-![Tests](https://img.shields.io/badge/tests-145%20passing-brightgreen.svg)
-![Stage](https://img.shields.io/badge/stage-Milestone%204-informational.svg)
+![Tests](https://img.shields.io/badge/tests-162%20passing-brightgreen.svg)
+![Stage](https://img.shields.io/badge/stage-Milestone%205-informational.svg)
 
 [Overview](#overview) ·
 [Architecture](#architecture) ·

@@ -2,7 +2,7 @@
 
 **Author:** Sahilpreet  
 **Role:** Evaluation & Gating Lead  
-**Component:** `docs/milestones/M5/evaluation_environment.md`  
+**Component:** `docs/evaluation_environment_m5.md`  
 **Milestone:** 5 (Final Evaluation, Analysis, Calibration & Reporting)
 
 ---

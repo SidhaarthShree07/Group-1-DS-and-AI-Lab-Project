@@ -3,7 +3,7 @@
 All notable changes to this project are recorded here, one section per milestone.
 
 ## [Unreleased] — Milestone 5 (final pipeline and unseen tables)
-- Added `docs/milestones/M5/Milestone5_Report.md`. Sections by other owners are added by them.
+- Report, slides and work log of Milestone 5: `docs/milestones/M5/Milestone5_Report.md` (and PDF), `slides/ContextGuard_M5_Slides.pptx` and `.pdf`, `Milestone5_Worklog.md`; the EM prior in the gate (`scripts/em_prior_gate_replay.py`, `docs/tables/m5_x11_gate_prior.csv`); the Restaurant rows in the final-run tables.
 - Retraining: `src/data/augment_m5.py` injects four error families (realistic typos, abbreviations and initials, scrambled categories, high-rate empty cells) into the clean train splits of the core tables only. `src/profiling/context.py` gains `blank_context` (for an empty cell: the closed value set of a small column and the filled share of the row; prompts of other cells are unchanged) with `tests/test_blank_context.py`. `scripts/add_blank_context.py` rewrites saved prompts, `scripts/blank_negatives.py` builds examples of genuinely empty cells, `scripts/mix_m5_examples.py` mixes the three sources, `scripts/merge_adapter.py` merges an adapter into its base.
 - Final model: `scripts/blend_models.py` averages the weights of the M4 model and the two retrains (one model at inference). `scripts/run_m5_final.sh` shows the final run commands.
 - Stage 1: `src/detectors/d2_fire_gate.py` drops a cell that only D2 flagged in a column where D2 flags most cells (`run_pipeline.py --d2-fire-gate 0.5`, `scripts/d2_fire_gate_check.py` replays it on a finished run, `tests/test_d2_fire_gate.py`). `close_frequent_value` in `src/profiling/context.py` skips values with digits and is off by default (`--close-values`).

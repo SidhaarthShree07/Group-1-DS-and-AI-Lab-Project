@@ -405,3 +405,21 @@ soccer,test,team,flagged,truncated,11
 soccer,test,team,flagged,typo (1-3 edits),123
 soccer,test,team,model said no error,typo (1-3 edits),45
 soccer,test,team,never a candidate,typo (1-3 edits),12
+restaurant,test,categories,withheld by the D2 filter,other,395
+restaurant,test,city,flagged,typo (1-3 edits),1
+restaurant,test,name,flagged,typo (1-3 edits),1
+restaurant,test,name,model said no error,typo (1-3 edits),5
+restaurant,test,name,withheld by the D2 filter,extra text,9
+restaurant,test,name,withheld by the D2 filter,other,25
+restaurant,test,name,withheld by the D2 filter,"same value, other format",18
+restaurant,test,name,withheld by the D2 filter,truncated,2
+restaurant,test,name,withheld by the D2 filter,typo (1-3 edits),61
+restaurant,test,neighborhood,withheld by the D2 filter,extra text,18
+restaurant,test,neighborhood,withheld by the D2 filter,other,58
+restaurant,test,neighborhood,withheld by the D2 filter,typo (1-3 edits),5
+restaurant,test,streetAddress,flagged,typo (1-3 edits),1
+restaurant,test,streetAddress,never a candidate,"same format, different number or time",3
+restaurant,test,streetAddress,withheld by the D2 filter,extra text,9
+restaurant,test,streetAddress,withheld by the D2 filter,"same format, different number or time",3
+restaurant,test,streetAddress,withheld by the D2 filter,"same value, other format",3
+restaurant,test,streetAddress,withheld by the D2 filter,typo (1-3 edits),16
