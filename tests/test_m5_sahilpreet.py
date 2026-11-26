@@ -31,6 +31,8 @@ class TestExperimentX10:
     """Verifies Experiment X10 threshold grid and predetermined pass rules."""
 
     def test_pass_rules_logic(self):
+        if not (_REPO_ROOT / "M4_run_outputs").exists():
+            pytest.skip("the M4 test run folders (M4_run_outputs) are not in the repository")
         grid_rows, eval_rules = compute_grid()
 
         # Rule 1: Flag threshold t1=0.378 must fail on test data (mean F1 drops from 0.7445 to 0.7357)
@@ -55,6 +57,8 @@ class TestExperimentX10:
         assert temp_rule["recommendation"].startswith("ADOPT")
 
     def test_grid_evaluation_structure_and_conservation(self):
+        if not (_REPO_ROOT / "M4_run_outputs").exists():
+            pytest.skip("the M4 test run folders (M4_run_outputs) are not in the repository")
         grid_rows, eval_rules = compute_grid()
         # 8 combinations * (5 tables + 1 mean row) = 48 rows
         assert len(grid_rows) == 48
