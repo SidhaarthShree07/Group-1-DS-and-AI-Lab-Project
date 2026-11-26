@@ -1,0 +1,6 @@
+table,n_candidates,true_candidate_error_rate,default_prior,em_estimated_prior,error_em_vs_true,error_default_vs_true,em_iterations,em_converged,proposed_repairs,proposed_right,proposed_repair_accuracy,applied_not_verified,applied_not_verified_right,applied_not_verified_accuracy,needs_review,rule_validation_status
+German,14645,0.8869,0.5,0.9187,0.0318,0.3869,11,True,12399,8956,0.7223,5476,5394,0.985,6951,Unverified (applied without rules)
+Soccer,2222,0.297,0.5,0.2183,0.0788,0.203,10,True,561,397,0.7077,217,204,0.9401,344,Unverified (applied without rules)
+Billionaire,6726,0.5455,0.5,0.5665,0.021,0.0455,8,True,3565,2048,0.5745,1435,1368,0.9533,2160,Unverified (applied without rules)
+Marketing,8895,0.4073,0.5,0.2815,0.1258,0.0927,7,True,2611,1287,0.4929,320,277,0.8656,2291,Unverified (applied without rules)
+Restaurant,1887,0.0042,0.5,0.0494,0.0451,0.4958,30,True,325,32,0.0985,59,1,0.0169,268,Unverified (applied without rules)

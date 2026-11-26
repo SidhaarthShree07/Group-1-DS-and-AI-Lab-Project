@@ -1,0 +1,4 @@
+parameter,tested_value,baseline_value,passed,recommendation,reason
+Flag threshold t1,0.378,0.5,False,KEEP BASELINE (t1=0.500),"Mean F1 drops from 0.7445 to 0.7357, and F1 decreases on 3 tables (Hospital, Movies, Rayyan)."
+Repair confidence threshold t2,0.648,0.9,False,KEEP BASELINE (t2=0.900),"Gate-level FRR rises to 6.51% (from 3.40% baseline), failing the rule that FRR must not be higher than the baseline."
+Temperature T,0.826,1.0,True,ADOPT (T=0.826),"ECE falls on 5 of 5 test tables (Beers, Flights, Hospital, Movies, Rayyan) while preserving cell ranking."
