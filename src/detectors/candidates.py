@@ -1,6 +1,8 @@
+from functools import partial
 from typing import Dict, Any, Optional, Callable
 import pandas as pd
-from . import d1_missing, d2_pattern, d3_robust_z, d4_multivariate, d5_fd, d6_typo
+from . import (d1_missing, d2_pattern, d3_robust_z, d4_multivariate, d5_entity_consensus, d5_fd, d6_typo,
+               d7_format_mix)
 
 DEFAULT_DETECTORS = {
     "d1": d1_missing.detect,
@@ -10,6 +12,24 @@ DEFAULT_DETECTORS = {
     "d5": d5_fd.detect,
     "d6": d6_typo.detect,
 }
+
+# M5 (X7): settings chosen on the validation splits; see scripts/evaluate_m5_candidates.py
+M5_D2 = {"min_unique_share": 0.9, "fallback": "rare_char", "rare_char_share": 0.02}
+
+
+def m5_detectors(table: str = "table", composite_key: bool = False) -> Dict[str, Callable[[pd.DataFrame], pd.DataFrame]]:
+    """M5 detector set: D1-D6 with the D2 free-text gate, the extended D7 and the D5 entity consensus.
+
+    `composite_key` adds O1b (x7_options). It is off in the frozen set: the idea came from errors of unseen tables.
+    """
+    detectors = {**DEFAULT_DETECTORS, "d2": partial(d2_pattern.detect, **M5_D2),
+                 "d7": partial(d7_format_mix.detect, extended=True),
+                 "d5c": partial(d5_entity_consensus.detect, name=table)}
+    if composite_key:
+        from .x7_options import STRICT, composite_consensus
+        detectors["o1b"] = partial(composite_consensus, name=table, min_dependency=STRICT[0], min_support=STRICT[1])
+    return detectors
+
 
 def build_candidates(
     dirty_df: pd.DataFrame,

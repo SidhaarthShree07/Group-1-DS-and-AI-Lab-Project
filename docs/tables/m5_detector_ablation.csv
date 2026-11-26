@@ -1,0 +1,65 @@
+detectors,table,candidates,pass_through_pct,errors_found,errors,recall_pct
+D1-D6,hospital,471,16.2,65,79,82.28
+D1-D6,flights,434,20.09,429,723,59.34
+D1-D6,beers,909,25.04,252,679,37.11
+D1-D6,rayyan,838,50.79,66,141,46.81
+D1-D6,movies,9224,48.93,451,1054,42.79
+D1-D6,tax,3290,7.31,46,51,90.2
+D1-D6,inpatient,1021,15.29,548,695,78.85
+D1-D6,facilities,3796,31.48,1179,1250,94.32
+D1-D6 + D5 consensus,hospital,478,16.44,72,79,91.14
+D1-D6 + D5 consensus,flights,635,29.4,571,723,78.98
+D1-D6 + D5 consensus,beers,909,25.04,252,679,37.11
+D1-D6 + D5 consensus,rayyan,838,50.79,66,141,46.81
+D1-D6 + D5 consensus,movies,9224,48.93,451,1054,42.79
+D1-D6 + D5 consensus,tax,3290,7.31,46,51,90.2
+D1-D6 + D5 consensus,inpatient,1021,15.29,548,695,78.85
+D1-D6 + D5 consensus,facilities,3796,31.48,1179,1250,94.32
+D1-D6 + D7,hospital,471,16.2,65,79,82.28
+D1-D6 + D7,flights,434,20.09,429,723,59.34
+D1-D6 + D7,beers,1323,36.45,666,679,98.09
+D1-D6 + D7,rayyan,838,50.79,66,141,46.81
+D1-D6 + D7,movies,9224,48.93,451,1054,42.79
+D1-D6 + D7,tax,3290,7.31,46,51,90.2
+D1-D6 + D7,inpatient,1021,15.29,548,695,78.85
+D1-D6 + D7,facilities,3796,31.48,1179,1250,94.32
+"M4 (D1-D6, D7, D5 consensus)",hospital,478,16.44,72,79,91.14
+"M4 (D1-D6, D7, D5 consensus)",flights,635,29.4,571,723,78.98
+"M4 (D1-D6, D7, D5 consensus)",beers,1323,36.45,666,679,98.09
+"M4 (D1-D6, D7, D5 consensus)",rayyan,838,50.79,66,141,46.81
+"M4 (D1-D6, D7, D5 consensus)",movies,9224,48.93,451,1054,42.79
+"M4 (D1-D6, D7, D5 consensus)",tax,3290,7.31,46,51,90.2
+"M4 (D1-D6, D7, D5 consensus)",inpatient,1021,15.29,548,695,78.85
+"M4 (D1-D6, D7, D5 consensus)",facilities,3796,31.48,1179,1250,94.32
+"M4 + D7 extension, no D2 gate",hospital,478,16.44,72,79,91.14
+"M4 + D7 extension, no D2 gate",flights,635,29.4,571,723,78.98
+"M4 + D7 extension, no D2 gate",beers,1336,36.8,679,679,100.0
+"M4 + D7 extension, no D2 gate",rayyan,909,55.09,135,141,95.74
+"M4 + D7 extension, no D2 gate",movies,9821,52.09,1048,1054,99.43
+"M4 + D7 extension, no D2 gate",tax,4591,10.2,46,51,90.2
+"M4 + D7 extension, no D2 gate",inpatient,1021,15.29,548,695,78.85
+"M4 + D7 extension, no D2 gate",facilities,3796,31.48,1179,1250,94.32
+"M4 + D2 gate, no D7 extension",hospital,478,16.44,72,79,91.14
+"M4 + D2 gate, no D7 extension",flights,635,29.4,571,723,78.98
+"M4 + D2 gate, no D7 extension",beers,995,27.41,666,679,98.09
+"M4 + D2 gate, no D7 extension",rayyan,370,22.42,68,141,48.23
+"M4 + D2 gate, no D7 extension",movies,4039,21.42,429,1054,40.7
+"M4 + D2 gate, no D7 extension",tax,3290,7.31,46,51,90.2
+"M4 + D2 gate, no D7 extension",inpatient,1021,15.29,548,695,78.85
+"M4 + D2 gate, no D7 extension",facilities,3796,31.48,1179,1250,94.32
+M5,hospital,478,16.44,72,79,91.14
+M5,flights,635,29.4,571,723,78.98
+M5,beers,1008,27.77,679,679,100.0
+M5,rayyan,441,26.73,137,141,97.16
+M5,movies,4636,24.59,1026,1054,97.34
+M5,tax,4591,10.2,46,51,90.2
+M5,inpatient,1021,15.29,548,695,78.85
+M5,facilities,3796,31.48,1179,1250,94.32
+"M5, D3/D4 without column names",hospital,549,18.89,72,79,91.14
+"M5, D3/D4 without column names",flights,635,29.4,571,723,78.98
+"M5, D3/D4 without column names",beers,1041,28.68,679,679,100.0
+"M5, D3/D4 without column names",rayyan,450,27.27,137,141,97.16
+"M5, D3/D4 without column names",movies,4636,24.59,1026,1054,97.34
+"M5, D3/D4 without column names",tax,4891,10.87,47,51,92.16
+"M5, D3/D4 without column names",inpatient,1146,17.16,562,695,80.86
+"M5, D3/D4 without column names",facilities,3817,31.65,1182,1250,94.56

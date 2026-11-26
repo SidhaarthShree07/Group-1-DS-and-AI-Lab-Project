@@ -19,6 +19,13 @@ For each column:
 In a numeric column with mixed formats or mixed units, every decorated or placeholder cell is flagged. The model
 and the gate still decide each flagged cell.
 
+M5 (X7, `extended=True`, by Aaradhya): also flags, in columns found from the data alone,
+  - numbers with thousands separators ("3,341") in a numeric column that also holds numbers without one;
+  - trailing zeros ("7.0") in a numeric column that also holds other numbers;
+  - dates with a two-digit year whose last two parts can be swapped into another valid date ("1/1/15" or "1/15/01");
+  - decorated numbers whose unit text has a hyphen ("12.0 oz. Alumi-Tek").
+These values need not be inconsistent within the dirty column, so the flag means "check this", not "wrong".
+
 This replaced the stage 0 rules (the first D7), which added almost no recall in E6.
 """
 from __future__ import annotations
@@ -36,6 +43,10 @@ PLAIN_NUMBER = re.compile(r"^[-+]?(\d+(\.\d*)?|\.\d+)$")
 DECORATED_NUMBER = re.compile(
     r"^[^\d\-+.]{0,3}\s*[-+]?(\d+(\.\d*)?|\.\d+)\s*[%a-zA-Z.$€£ ]{1,20}$|^[$€£]\s*[-+]?\d+(\.\d+)?$")
 ANY_NUMBER = re.compile(r"[-+]?(\d+(\.\d*)?|\.\d+)")
+DECORATED_HYPHEN = re.compile(r"^[^\d\-+.]{0,3}\s*[-+]?(\d+(\.\d*)?|\.\d+)\s*[%a-zA-Z.$€£ ][%a-zA-Z.$€£ \-]{0,19}$")
+THOUSANDS = re.compile(r"^[-+]?\d{1,3}(,\d{3})+(\.\d+)?$")
+TRAILING_ZERO = re.compile(r"^[-+]?\d+\.0+$")
+SHORT_DATE = re.compile(r"^(\d{1,2})([/.\-])(\d{1,2})\2(\d{2})$")
 PLACEHOLDERS = {"n/a", "na", "null", "none", "nan", "-", "--", "?", "not available", "unknown", "missing"}
 
 
@@ -75,13 +86,51 @@ def column_needs_flags(values: list, formats: list) -> bool:
     return mixed_formats or mixed_units
 
 
-def detect(dirty_df: pd.DataFrame) -> pd.DataFrame:
+def swappable_date(value: str) -> bool:
+    """'1/1/15': the day and the two-digit year can trade places and still be a (different) valid date."""
+    m = SHORT_DATE.match(value.strip())
+    if not m:
+        return False
+    day, year = int(m.group(3)), int(m.group(4))
+    return 1 <= year <= 31 and 1 <= day <= 31 and day != year
+
+
+def extended_rows(values: list) -> list:
+    """Rows of one column flagged by the M5 format rules."""
+    stripped = [v.strip() for v in values]
+    filled = [i for i, v in enumerate(stripped) if v and v.lower() not in PLACEHOLDERS]
+    n = len(filled)
+    if n == 0:
+        return []
+    rows = []
+    thousands = [i for i in filled if THOUSANDS.match(stripped[i])]
+    numbers = [i for i in filled if PLAIN_NUMBER.match(stripped[i])]
+    if (len(thousands) + len(numbers)) / n >= MIN_NUMERIC_SHARE:
+        zeros = [i for i in numbers if TRAILING_ZERO.match(stripped[i])]
+        for part in (thousands, zeros):
+            rest = len(thousands) + len(numbers) - len(part)
+            if len(part) / n >= MIN_FORMAT_SHARE and rest / n >= MIN_FORMAT_SHARE:
+                rows += part
+    dates = [i for i in filled if SHORT_DATE.match(stripped[i])]
+    if len(dates) / n >= MIN_NUMERIC_SHARE:
+        rows += [i for i in dates if swappable_date(stripped[i])]
+    return rows
+
+
+def detect(dirty_df: pd.DataFrame, extended: bool = False) -> pd.DataFrame:
     flags = []
     for col in dirty_df.columns:
         values = [str(v) for v in dirty_df[col]]
         formats = [value_format(v) for v in values]
+        if extended:  # a hyphen inside the unit text does not stop a value from being a decorated number
+            formats = ["decorated" if f == "other" and "-" in v and DECORATED_HYPHEN.match(v.strip()) else f
+                       for f, v in zip(formats, values)]
+        rows = set()
         if column_needs_flags(values, formats):
-            flags += [(row, col) for row, f in enumerate(formats) if f in ("decorated", "placeholder")]
+            rows = {row for row, f in enumerate(formats) if f in ("decorated", "placeholder")}
+        if extended:
+            rows |= set(extended_rows(values))
+        flags += [(row, col) for row in sorted(rows)]
     out = pd.DataFrame(flags, columns=["row", "column"])
     out["detector"] = "d7"
     out["score"] = 1.0
