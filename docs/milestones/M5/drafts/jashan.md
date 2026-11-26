@@ -105,7 +105,7 @@ Milestone 1 established that exact-string equality against ground-truth clean ta
 
 ### 4.1 Methodology & Strict Review Protocol
 Every sampled row was evaluated in full table context (`review_method="manual_hand_review"`) against `dirty.csv` and `clean.csv`:
-1. **`valid_alternative` (18.97%):** The applied repair represents the exact same underlying real-world entity under equivalent spelling, official abbreviation, numeric precision, or taxonomy correction.
+1. **`valid_alternative` (11/58, 18.97% of sample):** The applied repair represents the exact same underlying real-world entity under equivalent spelling, official abbreviation, numeric precision, or taxonomy correction.
 2. **`wrong` (81.03%):** Genuine model errors where the repair corrupts data integrity.
    - **Strict 1-Minute Rule:** Any time discrepancy—even a 1-minute shift (e.g. `11:41` vs `11:40` or `8:07 a.m.` vs `8:06 a.m.`)—is strictly classified as **`wrong`**, never as a valid alternative.
 3. **`unclear` (0.00%):** Disputed or ambiguous source data. In this final unseen sample, zero records were unclear.
@@ -126,6 +126,6 @@ The X13 sample was drawn with up to 15 rows per table (not uniform):
 - **`Marketing` (N=15 sampled):** **0 Valid Alternatives (0.00%)**, 15 Wrong (100.00%). All 15 wrong cases stem from the model attempting to impute blank demographic survey values where ground truth was unobserved.
 
 ### 4.3 Key Insights for Production Deployment
-- **Quantitative Impact on Applied Repairs:** About 19% of the sampled wrong repairs are valid alternatives (roughly 23% of all wrong applied repairs after weighting by table), which lifts applied-repair accuracy from 97.4% to about 98%.
+- **Quantitative Impact on Applied Repairs:** 11 of 58 sampled wrong repairs are valid alternatives; weighting by each table's wrong repairs moves applied-repair accuracy from 97.4% to about 98.0% (estimate from a sample of 58).
 - **The Danger of Over-Imputing Survey Missingness:** 100% of errors in Marketing arose from attempting to predict unobserved demographics (marital status, dwelling type). This reinforces ContextGuard's confidence gate policy: columns with high unobserved missingness must have strict confidence thresholds to prevent unwarranted imputation.
 - **Autonomous Generalization:** ContextGuard successfully applied 1,435 repairs on Billionaire, 5,476 on German, 320 on Marketing, and 217 on Soccer with high accuracy (>86% to 98%), operating purely through model generalization without human rules.

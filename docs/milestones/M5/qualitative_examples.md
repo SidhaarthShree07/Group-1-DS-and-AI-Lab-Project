@@ -5,9 +5,9 @@
 > **Core Safety Contract & Terminology Rules:**
 > 1. **`verified` (automatically applied):** Applies **only** when an independent deterministic rule file
 >    confirms the proposed repair (in-domain benchmark tables with rule files only: `Hospital`, `Flights`, `Beers`).
-> 2. **`applied, not verified (no rule covers the table)`:** Applied **automatically by the pipeline**
+> 2. **`not verified: no rules for this table` (automatically applied):** Applied **automatically by the pipeline**
 >    in any column where no rule file exists. All applied repairs on unseen tables (`Restaurant`, `Marketing`, `Soccer`,
->    `Billionaire`, `German`) and `Credit` (all 589 applied repairs) carry this exact status. **Zero human rules and zero human edits** were used.
+>    `Billionaire`, `German`) and `Credit` (all 589 applied repairs) carry this status. **Zero human rules and zero human edits** were used.
 > 3. **`needs review` (withheld):** Withheld due to low model confidence (e.g. 14,773 low-confidence cells on Credit).
 >
 > Because zero rules or human edits were used on Credit and unseen tables, **100% of the downstream performance gains**
@@ -49,8 +49,7 @@ is driven entirely by model generalization.
 ### C. Hand Review of Applied Wrong Repairs (Experiment X13)
 Rigorous manual hand review of 58 wrong repairs sampled deterministically (`seed=42`) from the final unseen-table applied repairs
 (`Billionaire`, `German`, `Soccer`, `Marketing`) reveals:
-- **Up to 15 Rows per Table (Non-Uniform Sampling):** `Billionaire`: 9 of 15 valid, `German`: 2 of 15 valid, `Soccer` (13 sampled): 0 valid, `Marketing` (15 sampled): 0 valid.
 - **81.03% True Erroneous Repairs (47/58):** Blank survey imputations on unobserved data (15/15 on Marketing), compound entity truncations (`Allianz` vs `Allianz_Arena` on Soccer), and house number letter suffix drops on German address records.
-- **18.97% Valid Semantic Alternatives (11/58):** Semantically correct repairs penalized solely by strict string matching, including official state abbreviations (`NRW` vs `Nordrhein-Westfalen`), municipal designations (`Ingelheim` vs `Ingelheim am Rhein`), numeric zero precision (`0.0` vs `0.00`), and canonical taxonomy typo fixes (`investment management` vs `Investment`).
+- **Valid Semantic Alternatives (11/58, 18.97% of sample):** Semantically correct repairs penalized solely by strict string matching, including official state abbreviations (`NRW` vs `Nordrhein-Westfalen`), municipal designations (`Ingelheim` vs `Ingelheim am Rhein`), numeric precision (`0.0` vs `0.00`), and canonical taxonomy typo fixes (`investment management` vs `Investment`).
 - **0.00% Unclear Context (0/58):** All sampled records possessed unambiguous ground truth.
-- **Summary & Impact:** About 19% of the sampled wrong repairs are valid alternatives (roughly 23% of all wrong applied repairs after weighting by table), which lifts applied-repair accuracy from 97.4% to about 98%.
+- **Summary & Impact:** 11 of 58 sampled wrong repairs are valid alternatives; weighting by each table's wrong repairs moves applied-repair accuracy from 97.4% to about 98.0% (estimate from a sample of 58).

@@ -160,9 +160,10 @@ def run_x13_pipeline(
 
     summary_rows = []
     scope_notice = (
-        "Sampled from final M5 unseen-table applied repairs (German, Soccer, Billionaire, Marketing). "
-        "All repairs applied automatically with status 'not verified: no rules for this table'. "
-        "11 of the 58 sampled wrong repairs (18.97%) are valid alternatives; weighting each table by its wrong applied repairs, applied-repair accuracy moves from 97.4% to about 98% (an estimate from a sample of 58)."
+        "Sampled from final M5 unseen-table applied repairs (German, Soccer, Billionaire, Marketing; up to 15 rows per table, not uniform: "
+        "Billionaire 9/15 valid, German 2/15 valid, Soccer 0/13 valid, Marketing 0/15 valid). "
+        "All repairs applied automatically with status 'applied, not verified (no rule covers the table)'. "
+        "11 of 58 sampled wrong repairs are valid alternatives; weighting by each table's wrong repairs moves applied-repair accuracy from 97.4% to about 98.0% (estimate from a sample of 58)."
     )
 
     for cat in ("wrong", "valid_alternative", "unclear"):

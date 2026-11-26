@@ -10,7 +10,7 @@ on unseen tables and Credit.
 Exact 3 status definitions:
   1. 'verified' (automatically applied): Only when an independent rule file confirms
      (benchmark tables with rules only).
-  2. 'not verified: no rules for this table' (automatically applied): Applied automatically
+  2. 'applied, not verified (no rule covers the table)' (automatically applied): Applied automatically
      by the pipeline in a column no rule covers (all applied repairs on unseen tables and Credit).
   3. 'needs review' (withheld): Withheld due to low model confidence
      (e.g., 14,773 low-confidence cells on Credit).
@@ -157,8 +157,8 @@ def load_unseen_examples(repo_root: Path, unseen_runs_dir: Optional[Path]) -> Li
     """Extract representative examples from unseen table runs.
     
     Status Policy:
-    Applied repairs carry validation_status='not verified: no rules for this table' and action='applied'.
-    Low-confidence withheld cells carry validation_status='not verified: no rules for this table' and action='needs_review'.
+    Applied repairs carry validation_status='applied, not verified (no rule covers the table)' and action='applied'.
+    Low-confidence withheld cells carry validation_status='needs review' and action='needs_review'.
     """
     examples = []
 
@@ -184,7 +184,7 @@ def load_unseen_examples(repo_root: Path, unseen_runs_dir: Optional[Path]) -> Li
                         "clean_value": str(r["clean_value"]),
                         "p_error": round(float(r.get("p_error", 0.95)), 4),
                         "gate_decision": "repair",
-                        "validation_status": "not verified: no rules for this table",
+                        "validation_status": "applied, not verified (no rule covers the table)",
                         "action": "applied",
                         "rationale": rationale_applied,
                     }
@@ -209,7 +209,7 @@ def load_unseen_examples(repo_root: Path, unseen_runs_dir: Optional[Path]) -> Li
             "clean_value": "Microsoft",
             "p_error": 0.9707,
             "gate_decision": "repair",
-            "validation_status": "not verified: no rules for this table",
+            "validation_status": "applied, not verified (no rule covers the table)",
             "action": "applied",
             "rationale": "Applied automatically by pipeline without validation rules: restored missing Company Name from Bill Gates entity context.",
         })
@@ -232,7 +232,7 @@ def load_unseen_examples(repo_root: Path, unseen_runs_dir: Optional[Path]) -> Li
             "clean_value": "Baden-Württemberg",
             "p_error": 0.9990,
             "gate_decision": "repair",
-            "validation_status": "not verified: no rules for this table",
+            "validation_status": "applied, not verified (no rule covers the table)",
             "action": "applied",
             "rationale": "Applied automatically by pipeline without validation rules: recovered missing German state from city context.",
         })
@@ -255,7 +255,7 @@ def load_unseen_examples(repo_root: Path, unseen_runs_dir: Optional[Path]) -> Li
             "clean_value": "1980",
             "p_error": 0.9890,
             "gate_decision": "repair",
-            "validation_status": "not verified: no rules for this table",
+            "validation_status": "applied, not verified (no rule covers the table)",
             "action": "applied",
             "rationale": "Applied automatically by pipeline without validation rules: corrected impossible future birthyear (2034) to 1980.",
         })
@@ -278,7 +278,7 @@ def load_unseen_examples(repo_root: Path, unseen_runs_dir: Optional[Path]) -> Li
             "clean_value": "english",
             "p_error": 0.9420,
             "gate_decision": "repair",
-            "validation_status": "not verified: no rules for this table",
+            "validation_status": "applied, not verified (no rule covers the table)",
             "action": "applied",
             "rationale": "Applied automatically by pipeline without validation rules: recovered missing demographic language attribute.",
         })
@@ -300,7 +300,7 @@ def load_unseen_examples(repo_root: Path, unseen_runs_dir: Optional[Path]) -> Li
                 "clean_value": r["clean_value"],
                 "p_error": 0.9650,
                 "gate_decision": "repair",
-                "validation_status": "not verified: no rules for this table",
+                "validation_status": "applied, not verified (no rule covers the table)",
                 "action": "applied",
                 "rationale": "Applied automatically by pipeline without validation rules: standardized category name formatting.",
             })
@@ -316,7 +316,7 @@ def load_unseen_examples(repo_root: Path, unseen_runs_dir: Optional[Path]) -> Li
         "clean_value": "1",
         "p_error": 0.5622,
         "gate_decision": "flag for review",
-        "validation_status": "not verified: no rules for this table",
+        "validation_status": "needs review",
         "action": "needs_review",
         "rationale": "Withheld by confidence gate due to ambiguous rank pattern; routed to human review without modifying cell.",
     })
@@ -348,7 +348,7 @@ def load_x13_hand_review_examples(x13_csv: Path) -> List[Dict[str, Any]]:
             "clean_value": r["clean_value"],
             "p_error": 0.9990,
             "gate_decision": r.get("gate_decision", "repair"),
-            "validation_status": "not verified: no rules for this table",
+            "validation_status": "applied, not verified (no rule covers the table)",
             "action": "applied",
             "rationale": f"X13 Hand Review: {r['review_rationale']}",
         })
@@ -368,7 +368,7 @@ def load_x13_hand_review_examples(x13_csv: Path) -> List[Dict[str, Any]]:
             "clean_value": r["clean_value"],
             "p_error": 0.9850,
             "gate_decision": r.get("gate_decision", "repair"),
-            "validation_status": "not verified: no rules for this table",
+            "validation_status": "applied, not verified (no rule covers the table)",
             "action": "applied",
             "rationale": f"X13 Hand Review: {r['review_rationale']}",
         })
@@ -423,7 +423,7 @@ def generate_markdown(examples: List[Dict[str, Any]], out_md: Path) -> None:
         "On unseen tables and Credit, ContextGuard's fine-tuned adapter demonstrates zero-shot domain transfer by identifying pattern violations,",
         "recovering missing demographics in `Marketing`, and detecting future-year birth outliers in `Soccer`.",
         "Repairs exceeding calibrated confidence thresholds are applied **automatically** by the pipeline with the status",
-        "`not verified: no rules for this table`, while low-confidence cells are safely withheld as `needs review`.",
+        "`applied, not verified (no rule covers the table)`, while low-confidence cells are safely withheld as `needs review`.",
         "Critically, **zero human edits and zero rule files** were utilized, proving that downstream classification recovery",
         "is driven entirely by model generalization.",
         "",
@@ -431,9 +431,9 @@ def generate_markdown(examples: List[Dict[str, Any]], out_md: Path) -> None:
         "Rigorous manual hand review of 58 wrong repairs sampled deterministically (`seed=42`) from the final unseen-table applied repairs",
         "(`Billionaire`, `German`, `Soccer`, `Marketing`) reveals:",
         "- **81.03% True Erroneous Repairs (47/58):** Blank survey imputations on unobserved data (15/15 on Marketing), compound entity truncations (`Allianz` vs `Allianz_Arena` on Soccer), and house number letter suffix drops on German address records.",
-        "- **18.97% Valid Semantic Alternatives (11/58):** Semantically correct repairs penalized solely by strict string matching, including official state abbreviations (`NRW` vs `Nordrhein-Westfalen`), municipal designations (`Ingelheim` vs `Ingelheim am Rhein`), numeric precision (`0.0` vs `0.00`), and canonical taxonomy typo fixes (`investment management` vs `Investment`).",
+        "- **Valid Semantic Alternatives (11/58, 18.97% of sample):** Semantically correct repairs penalized solely by strict string matching, including official state abbreviations (`NRW` vs `Nordrhein-Westfalen`), municipal designations (`Ingelheim` vs `Ingelheim am Rhein`), numeric precision (`0.0` vs `0.00`), and canonical taxonomy typo fixes (`investment management` vs `Investment`).",
         "- **0.00% Unclear Context (0/58):** All sampled records possessed unambiguous ground truth.",
-        "- **Impact:** 11 of the 58 sampled wrong repairs (18.97%) are valid alternatives; weighting each table by its number of wrong applied repairs, applied-repair accuracy moves from 97.4% to about 98% (an estimate from a sample of 58).",
+        "- **Summary & Impact:** 11 of 58 sampled wrong repairs are valid alternatives; weighting by each table's wrong repairs moves applied-repair accuracy from 97.4% to about 98.0% (estimate from a sample of 58).",
     ])
 
     out_md.parent.mkdir(parents=True, exist_ok=True)
@@ -508,13 +508,18 @@ def main() -> int:
 
     # Enforce M5 policy checks:
     # 1. For unseen tables, validation_status must NEVER be 'verified'
-    # 2. validation_status must be 'not verified: no rules for this table'
+    # 2. validation_status must be 'applied, not verified (no rule covers the table)' (if applied) or 'needs review' (if withheld)
     # 3. action must be 'applied' or 'needs_review'
     for ex in all_examples:
         if ex["table"] in ("restaurant", "marketing", "soccer", "billionaire", "german", "credit"):
-            assert ex["validation_status"] == "not verified: no rules for this table", (
-                f"Policy violation: Unseen table {ex['table']} has status {ex['validation_status']}"
-            )
+            if ex["action"] == "applied":
+                assert ex["validation_status"] == "applied, not verified (no rule covers the table)", (
+                    f"Policy violation: Unseen table {ex['table']} has status {ex['validation_status']}"
+                )
+            else:
+                assert ex["validation_status"] == "needs review", (
+                    f"Policy violation: Unseen table {ex['table']} has status {ex['validation_status']}"
+                )
             assert ex["validation_status"] != "verified", f"Policy violation: Unseen repair marked verified on {ex['table']}"
             assert ex["action"] in ("applied", "needs_review"), f"Unexpected action {ex['action']} on {ex['table']}"
 

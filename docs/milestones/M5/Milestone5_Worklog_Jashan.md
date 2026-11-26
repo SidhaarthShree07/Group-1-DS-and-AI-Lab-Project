@@ -41,7 +41,7 @@
   - `wrong` (81.03% / 47 cases): True errors, primarily hallucinations on unobserved survey blanks (15/15 on Marketing), compound entity truncations (`Allianz` vs `Allianz_Arena` on Soccer), and house number letter suffix drops on German address records.
   - `valid_alternative` (18.97% / 11 cases): Valid semantic variations (official abbreviations like `NRW` for `Nordrhein-Westfalen`, municipal designations like `Ingelheim` for `Ingelheim am Rhein`, numeric zero formatting `0.0` vs `0.00`, taxonomy typo fixes `investment management` vs `Investment`) penalized solely by rigid string matching.
   - `unclear` (0.00% / 0 cases): All sampled records had unambiguous ground truth context.
-  - **Key Finding:** About 19% of the sampled wrong repairs are valid alternatives (roughly 23% of all wrong applied repairs after weighting by table), which lifts applied-repair accuracy from 97.4% to about 98%. The X13 sample is up to 15 rows per table, not uniform (Billionaire: 9 of 15 valid, German: 2 of 15 valid, Soccer [13 sampled]: 0 valid, Marketing [15 sampled]: 0 valid).
+  - **Key Finding:** 11 of 58 sampled wrong repairs are valid alternatives; weighting by each table's wrong repairs moves applied-repair accuracy from 97.4% to about 98.0% (estimate from a sample of 58). The X13 sample is up to 15 rows per table, not uniform (Billionaire: 9 of 15 valid, German: 2 of 15 valid, Soccer [13 sampled]: 0 valid, Marketing [15 sampled]: 0 valid).
 - **Output Artifacts:** `docs/tables/m5_wrong_repair_review.csv` and `docs/tables/m5_wrong_repair_summary.csv`.
 
 ### 4. Qualitative Results Collector & Three-Tier Validation Status Policy
