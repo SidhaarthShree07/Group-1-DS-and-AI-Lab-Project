@@ -30,7 +30,7 @@ from scripts.sample_wrong_repairs import draw_deterministic_sample, run_x13_pipe
 
 def test_m5_unseen_data_preparation_and_m1_audit_match():
     """Verify standardized files exist for all 6 tables and match M1 audit counts."""
-    if not (_REPO_ROOT / "data/unseen").exists():
+    if not (_REPO_ROOT / "data/unseen/restaurant/dirty.csv").exists():
         pytest.skip("data/unseen is not in the repository (gitignored); run scripts/prepare_unseen_data.py first")
     summary_csv = _REPO_ROOT / "docs/tables/m5_unseen_data_summary.csv"
     assert summary_csv.exists(), f"Missing {summary_csv}"
